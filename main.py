@@ -1,5 +1,4 @@
 # PARÇA 1/5 — Importlar, Ortam Değişkenleri ve Temel Fonksiyonlar
-
 # -- coding: utf-8 --
 import os, re, logging, requests, datetime
 import matplotlib.pyplot as plt
@@ -13,24 +12,26 @@ izinli_raw = os.getenv("IZINLI_ID_LIST", "")
 IZINLI_ID_LIST = [int(id.strip()) for id in izinli_raw.split(",") if id.strip().isdigit()]
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
-TXT_DIR = "/home/hissecibaba/txt_dosyalar"
-AL_DIR = "/home/hissecibaba/al_listeleri"
-SAT_DIR = "/home/hissecibaba/sat_listeleri"
-TAVAN_DIR = "/home/hissecibaba/tavan_listeleri"
-ONERI_DIR = "/home/hissecibaba/öneri"
-MATRIX_DIR = "/home/hissecibaba/matriks"
-AL_NEW_DIR = "/home/hissecibaba/al"
-SAT_NEW_DIR = "/home/hissecibaba/sat"
-BALLI_KAYMAK_DIR = "/home/hissecibaba/ballikaymak"
-BISTTUM_DIR = "/home/hissecibaba/bisttum"
-PERFORMANS_DIR = "/home/hissecibaba/performans"
-CACHE_DIR = "/home/hissecibaba/gorsel_cache"
+# 🔹 Klasör yolları (göreceli hale getirildi)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
+AL_DIR = os.path.join(BASE_DIR, "al_listeleri")
+SAT_DIR = os.path.join(BASE_DIR, "sat_listeleri")
+TAVAN_DIR = os.path.join(BASE_DIR, "tavan_listeleri")
+ONERI_DIR = os.path.join(BASE_DIR, "öneri")
+MATRIX_DIR = os.path.join(BASE_DIR, "matriks")
+AL_NEW_DIR = os.path.join(BASE_DIR, "al")
+SAT_NEW_DIR = os.path.join(BASE_DIR, "sat")
+BALLI_KAYMAK_DIR = os.path.join(BASE_DIR, "ballikaymak")
+BISTTUM_DIR = os.path.join(BASE_DIR, "bisttum")
+PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
+CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
 
 # 🔹 Onaylayanlar klasörü sabiti
-ONAYLAYANLAR_DIR = "/home/hissecibaba/onaylayanlar"
+ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
 
 # 🔹 Mobil izinliler klasörü sabiti (abonelik kontrolü için)
-MOBIL_IZINLILER_DIR = "/home/hissecibaba/mobil_izinliler"
+MOBIL_IZINLILER_DIR = os.path.join(BASE_DIR, "mobil_izinliler")
 
 flask_app = Flask(__name__)
 
@@ -59,6 +60,21 @@ def send_photo(chat_id: int, file_path: str, caption: str = None):
         logging.error(f"send_photo failed: {e}")
         send_message(chat_id, "❌ Görsel gönderimi başarısız.")
 
+# 🔹 Yeni Upload Endpoint
+@flask_app.route("/upload", methods=["POST"])
+def upload_file():
+    try:
+        f = request.files["file"]
+        folder = request.form.get("folder", "")
+        save_dir = os.path.join(BASE_DIR, folder)
+        os.makedirs(save_dir, exist_ok=True)
+        save_path = os.path.join(save_dir, f.filename)
+        f.save(save_path)
+        return "Dosya yüklendi", 200
+    except Exception as e:
+        logging.error(f"Upload failed: {e}")
+        return f"Hata: {e}", 500
+
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
@@ -73,6 +89,7 @@ def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode:
                 data["caption"] = caption
             requests.post(f"{TELEGRAM_API}/sendDocument", data=data, files=files, timeout=30)
     except Exception as e:
+        logging.error(f"send_document failed: {e}")
         send_message(chat_id, "❌ Dosya gönderimi başarısız.", mobil_mode)
 
 def find_latest_file(folder_path: str) -> str:
@@ -93,7 +110,8 @@ def find_latest_file(folder_path: str) -> str:
                     files.append((datetime.datetime.min, full_path))
         files.sort(reverse=True)
         return files[0][1] if files else None
-    except Exception:
+    except Exception as e:
+        logging.error(f"find_latest_file failed: {e}")
         return None
 
 def txt_to_images(file_path, tag, chunk_size=40):
@@ -139,9 +157,10 @@ def find_latest_matrix_file(keyword: str) -> str:
                 if keyword.lower() in file.lower():
                     return os.path.join(latest_folder, file)
         return None
-    except Exception:
+    except Exception as e:
+        logging.error(f"find_latest_matrix_file failed: {e}")
         return None
-
+        
 # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
 
 @flask_app.route("/upload", methods=["POST"])
@@ -154,14 +173,19 @@ def upload_file():
     file = request.files["file"]
     if file.filename == "":
         return "No selected file", 400
+
     target = request.form.get("target", "txt_dosyalar")
-    base_dir = "/home/hissecibaba"
-    save_dir = os.path.join(base_dir, target)
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
+    save_dir = os.path.join(BASE_DIR, target)   # 🔹 Göreceli hale getirildi
+    os.makedirs(save_dir, exist_ok=True)
+
     save_path = os.path.join(save_dir, file.filename)
-    file.save(save_path)
-    return f"✅ File uploaded to {target}", 200
+    try:
+        file.save(save_path)
+        logging.info(f"✅ File uploaded to {target}: {file.filename}")
+        return f"✅ File uploaded to {target}", 200
+    except Exception as e:
+        logging.error(f"Upload failed: {e}")
+        return f"Hata: {e}", 500
 
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -215,10 +239,7 @@ def telegram_webhook():
         if text_low.strip() == "acik_riza":
             try:
                 data = update.get("consent_data", {})
-                user_id = data.get("user_id")
-                if not user_id or str(user_id).strip() == "":
-                    user_id = chat_id
-
+                user_id = data.get("user_id") or chat_id
                 consent_text = data.get("consent_text", "")
                 consent_time = data.get("consent_time")
                 device_id = data.get("device_id", "unknown_device")
@@ -226,10 +247,8 @@ def telegram_webhook():
 
                 timestamp = consent_time or (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%d.%m.%Y %H:%M")
 
-                if not os.path.exists(ONAYLAYANLAR_DIR):
-                    os.makedirs(ONAYLAYANLAR_DIR)
-                if not os.path.exists(MOBIL_IZINLILER_DIR):
-                    os.makedirs(MOBIL_IZINLILER_DIR)
+                os.makedirs(ONAYLAYANLAR_DIR, exist_ok=True)
+                os.makedirs(MOBIL_IZINLILER_DIR, exist_ok=True)
 
                 safe_time = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M")
 
@@ -248,9 +267,9 @@ def telegram_webhook():
                 with open(filepath_onay, "w", encoding="utf-8") as f:
                     f.write(content_onay)
 
-                # 🔹 Mobil izinliler dosyası (subscription_data desteği)
+                # 🔹 Mobil izinliler dosyası
                 subscription_data = update.get("subscription_data", {})
-                logging.info(f"Subscription data: {subscription_data}")  # 🔹 log ekledik
+                logging.info(f"Subscription data: {subscription_data}")
 
                 id_no = subscription_data.get("id_no", user_id)
                 start_date = subscription_data.get("start_date", timestamp)
@@ -325,7 +344,8 @@ def telegram_webhook():
                             continue
                 folders.sort(reverse=True)
                 return folders[0][1] if folders else None
-            except Exception:
+            except Exception as e:
+                logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
         # ÖNERİ komutu
@@ -447,10 +467,9 @@ def telegram_webhook():
             send_message(chat_id, content, mobil_mode)
             return content, 200
 
-        # ... (diğer komutlar korunuyor)
-
-        send_message(chat_id, "⚠️ Geçersiz komut girdiniz.", mobil_mode)
-        return "⚠️ Geçersiz komut girdiniz.", 200
+        # Eğer hiçbir komuta uymadıysa, serbest mesajı yakala
+        send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
+        return "Unhandled message", 200
 
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
@@ -509,5 +528,7 @@ scheduler.add_job(
 )
 scheduler.start()
 
+# 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
     flask_app.run(host="0.0.0.0", port=8020)
+
