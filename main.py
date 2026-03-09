@@ -511,3 +511,8 @@ scheduler.start()
 
 if __name__ == "__main__":
     flask_app.run(host="0.0.0.0", port=8020)
+# 🔹 Fallback ekleme (serbest mesajlar için)
+# Bu satır PARÇA 4/5'in sonunda "Geçersiz komut" yerine eklendi.
+# Eğer hiçbir komuta uymadıysa, serbest mesajı yakala
+send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
+return "Unhandled message", 200
