@@ -60,21 +60,6 @@ def send_photo(chat_id: int, file_path: str, caption: str = None):
         logging.error(f"send_photo failed: {e}")
         send_message(chat_id, "❌ Görsel gönderimi başarısız.")
 
-# 🔹 Yeni Upload Endpoint
-@flask_app.route("/upload", methods=["POST"])
-def upload_file():
-    try:
-        f = request.files["file"]
-        folder = request.form.get("folder", "")
-        save_dir = os.path.join(BASE_DIR, folder)
-        os.makedirs(save_dir, exist_ok=True)
-        save_path = os.path.join(save_dir, f.filename)
-        f.save(save_path)
-        return "Dosya yüklendi", 200
-    except Exception as e:
-        logging.error(f"Upload failed: {e}")
-        return f"Hata: {e}", 500
-
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
