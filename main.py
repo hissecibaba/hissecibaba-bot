@@ -223,54 +223,7 @@ def telegram_webhook():
         # ✅ Açık Rıza komutu entegrasyonu
         if text_low.strip() == "acik_riza":
             try:
-                data = update.get("consent_data", {})
-                user_id = data.get("user_id") or chat_id
-                consent_text = data.get("consent_text", "")
-                consent_time = data.get("consent_time")
-                device_id = data.get("device_id", "unknown_device")
-                uuid = data.get("uuid", "unknown_uuid")
-
-                timestamp = consent_time or (datetime.datetime.utcnow() + datetime.timedelta(hours=3)).strftime("%d.%m.%Y %H:%M")
-
-                os.makedirs(ONAYLAYANLAR_DIR, exist_ok=True)
-                os.makedirs(MOBIL_IZINLILER_DIR, exist_ok=True)
-
-                safe_time = datetime.datetime.utcnow().strftime("%Y%m%d_%H%M")
-
-                # 🔹 Onaylayanlar dosyası
-                filename_onay = f"{user_id}_{safe_time}_onay.txt"
-                filepath_onay = os.path.join(ONAYLAYANLAR_DIR, filename_onay)
-                content_onay = (
-                    "Bu dosya Açık Rıza Metninin onaylanması ile otomatik oluşturulmuştur.\n\n"
-                    f"ID NO: {user_id}\n"
-                    f"CIHAZ ID: {device_id}\n"
-                    f"UUID: {uuid}\n"
-                    f"ONAY TARİHİ VE SAATİ: {timestamp}\n\n"
-                    "--- AÇIK RIZA METNİ ---\n"
-                    f"{consent_text}\n"
-                )
-                with open(filepath_onay, "w", encoding="utf-8") as f:
-                    f.write(content_onay)
-
-                # 🔹 Mobil izinliler dosyası
-                subscription_data = update.get("subscription_data", {})
-                logging.info(f"Subscription data: {subscription_data}")
-
-                id_no = subscription_data.get("id_no", user_id)
-                start_date = subscription_data.get("start_date", timestamp)
-                end_date = subscription_data.get("end_date") or (datetime.datetime.utcnow() + datetime.timedelta(days=7)).strftime("%d.%m.%Y %H:%M")
-
-                filename_izin = f"{id_no}_{safe_time}_izin.txt"
-                filepath_izin = os.path.join(MOBIL_IZINLILER_DIR, filename_izin)
-                content_izin = (
-                    f"ID NO: {id_no}\n"
-                    f"START_DATE: {start_date}\n"
-                    f"END_DATE: {end_date}\n"
-                )
-                with open(filepath_izin, "w", encoding="utf-8") as f:
-                    f.write(content_izin)
-
-                logging.info("✅ Onay ve mobil izin dosyaları başarıyla yazıldı.")
+                ...
                 send_message(chat_id, "✅ Açık Rıza ve abonelik kaydedildi.", mobil_mode)
                 return "Açık Rıza ve abonelik kaydedildi", 200
             except Exception as e:
@@ -279,8 +232,10 @@ def telegram_webhook():
 
         # AL komutu
         if text_low == "al":
+            logging.info("➡️ AL komutu çalıştı, dosya aranıyor...")
             fp = find_latest_file(AL_NEW_DIR if mobil_mode else AL_DIR)
             if fp:
+                logging.info(f"📂 AL dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -288,17 +243,21 @@ def telegram_webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "al_listesi")
+                    logging.info(f"🖼 AL listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
                     return "OK", 200
             else:
+                logging.warning("❌ AL listesi bulunamadı.")
                 send_message(chat_id, "❌ AL listesi bulunamadı.")
                 return "❌ AL listesi bulunamadı.", 200
 
         # SAT komutu
         if text_low == "sat":
+            logging.info("➡️ SAT komutu çalıştı, dosya aranıyor...")
             fp = find_latest_file(SAT_NEW_DIR if mobil_mode else SAT_DIR)
             if fp:
+                logging.info(f"📂 SAT dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -306,10 +265,12 @@ def telegram_webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "sat_listesi")
+                    logging.info(f"🖼 SAT listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
                     return "OK", 200
             else:
+                logging.warning("❌ SAT listesi bulunamadı.")
                 send_message(chat_id, "❌ SAT listesi bulunamadı.")
                 return "❌ SAT listesi bulunamadı.", 200
 
