@@ -449,8 +449,8 @@ def telegram_webhook():
 
         # ... (diğer komutlar korunuyor)
 
-        send_message(chat_id, "⚠️ Geçersiz komut girdiniz.", mobil_mode)
-        return "⚠️ Geçersiz komut girdiniz.", 200
+        send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
+        return "Unhandled message", 200
 
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
