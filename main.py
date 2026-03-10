@@ -2,7 +2,7 @@
 # -- coding: utf-8 --
 import os, re, logging, requests, datetime
 import matplotlib.pyplot as plt
-from flask import Flask, request
+from flask import Flask, request, jsonify   # ✅ jsonify eklendi
 from apscheduler.schedulers.background import BackgroundScheduler
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
@@ -60,6 +60,24 @@ def send_photo(chat_id: int, file_path: str, caption: str = None):
         logging.error(f"send_photo failed: {e}")
         send_message(chat_id, "❌ Görsel gönderimi başarısız.")
 
+# ✅ Yardımcı fonksiyon: cihaz ID → ID NO eşleştirmesi
+def find_id_no_by_device(device_id: str):
+    """
+    Onaylayanlar klasöründe cihaz ID'yi arar ve karşılık gelen ID NO'yu döndürür.
+    """
+    try:
+        for filename in os.listdir(ONAYLAYANLAR_DIR):
+            file_path = os.path.join(ONAYLAYANLAR_DIR, filename)
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+                if f"CIHAZ ID: {device_id}" in content:
+                    for line in content.splitlines():
+                        if line.startswith("ID NO:"):
+                            return line.replace("ID NO:", "").strip()
+        return None
+    except Exception as e:
+        logging.error(f"find_id_no_by_device failed: {e}")
+        return None
 
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
@@ -158,7 +176,44 @@ def find_latest_matrix_file(keyword: str) -> str:
     except Exception as e:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
+        
  # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
+
+# ✅ Yeni eklenen /check route
+@flask_app.route("/check", methods=["POST"])
+def check_consent():
+    try:
+        data = request.get_json(silent=True) or {}
+        device_id = data.get("device_id")
+
+        if not device_id:
+            return jsonify({"authorized": False, "error": "device_id eksik"}), 400
+
+        # 1. cihaz ID → ID NO eşleştirmesi
+        id_no = find_id_no_by_device(device_id)
+        if not id_no:
+            return jsonify({"authorized": False, "error": "ID NO bulunamadı"}), 200
+
+        # 2. mobil_izinliler klasöründe ID NO dosyasını ara
+        izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
+        if not os.path.exists(izin_file):
+            return jsonify({"authorized": False, "error": "izin dosyası yok"}), 200
+
+        with open(izin_file, "r", encoding="utf-8") as f:
+            lines = f.read().splitlines()
+            end_date_line = [l for l in lines if l.startswith("END_DATE:")][0]
+            end_date_str = end_date_line.replace("END_DATE:", "").strip()
+            end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
+
+        if datetime.datetime.now() > end_date:
+            return jsonify({"expired": True, "end_date": end_date_str}), 200
+        else:
+            return jsonify({"authorized": True, "end_date": end_date_str}), 200
+
+    except Exception as e:
+        logging.error(f"/check route hatası: {e}")
+        return jsonify({"authorized": False, "error": str(e)}), 500
+
 
 @flask_app.route("/upload", methods=["POST"])
 def upload_file():
@@ -182,111 +237,7 @@ def upload_file():
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
-        return f"Hata: {e}", 500
-
-
-@flask_app.route("/webhook", methods=["POST"])
-def telegram_webhook():
-    try:
-        update = request.get_json(silent=True) or {}
-        logging.info(f"Gelen JSON: {update}")
-
-        if not update:
-            logging.warning("Boş JSON geldi, işlem yapılmadı.")
-            return "Empty JSON", 200
-
-        message = update.get("message")
-        keyword = update.get("keyword", "").lower()
-
-        if keyword == "" and "consent_data" in update:
-            keyword = "acik_riza"
-
-        if not message and not keyword:
-            return "No message", 200
-
-        chat_id = None
-        text_low = ""
-        mobil_mode = False
-        user_id = None
-
-        if message:
-            chat_id = message.get("chat", {}).get("id")
-            text = (message.get("text") or "").strip()
-            if text.startswith("MOBIL:"):
-                text = text.replace("MOBIL:", "").strip()
-                text_low = text.lower()
-                mobil_mode = True
-                user_id = str(chat_id)
-                # 🔹 Abonelik kontrolü
-                if not check_subscription(user_id):
-                    send_message(chat_id, "⛔ Abonelik süreniz doldu.", mobil_mode)
-                    return "⛔ Abonelik süreniz doldu.", 200
-            else:
-                text_low = text.lower()
-                mobil_mode = False
-                if chat_id not in IZINLI_ID_LIST:
-                    send_message(chat_id, "⛔ Bu botu kullanma izniniz yok.")
-                    return "Unauthorized", 200
-        else:
-            chat_id = update.get("consent_data", {}).get("user_id", 0)
-            text_low = keyword
-            mobil_mode = False
-
-        # ✅ Açık Rıza komutu entegrasyonu
-        if text_low.strip() == "acik_riza":
-            try:
-                ...
-                send_message(chat_id, "✅ Açık Rıza ve abonelik kaydedildi.", mobil_mode)
-                return "Açık Rıza ve abonelik kaydedildi", 200
-            except Exception as e:
-                logging.error(f"Açık Rıza kaydı hatası: {e}")
-                return "Açık Rıza kaydı hatası", 500
-
-        # AL komutu
-        if text_low == "al":
-            logging.info("➡️ AL komutu çalıştı, dosya aranıyor...")
-            logging.info(f"📂 AL klasörü içeriği: {os.listdir(AL_NEW_DIR if mobil_mode else AL_DIR)}")
-            fp = find_latest_file(AL_NEW_DIR if mobil_mode else AL_DIR)
-            if fp:
-                logging.info(f"📂 AL dosyası bulundu: {fp}")
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    images = txt_to_images(fp, "al_listesi")
-                    logging.info(f"🖼 AL listesi görsellere dönüştürüldü, {len(images)} parça")
-                    for idx, img in enumerate(images, start=1):
-                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                    return "OK", 200
-            else:
-                logging.warning("❌ AL listesi bulunamadı.")
-                send_message(chat_id, "❌ AL listesi bulunamadı.")
-                return "❌ AL listesi bulunamadı.", 200
-
-        # SAT komutu
-        if text_low == "sat":
-            logging.info("➡️ SAT komutu çalıştı, dosya aranıyor...")
-            logging.info(f"📂 SAT klasörü içeriği: {os.listdir(SAT_NEW_DIR if mobil_mode else SAT_DIR)}")
-            fp = find_latest_file(SAT_NEW_DIR if mobil_mode else SAT_DIR)
-            if fp:
-                logging.info(f"📂 SAT dosyası bulundu: {fp}")
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    images = txt_to_images(fp, "sat_listesi")
-                    logging.info(f"🖼 SAT listesi görsellere dönüştürüldü, {len(images)} parça")
-                    for idx, img in enumerate(images, start=1):
-                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return "OK", 200
-            else:
-                logging.warning("❌ SAT listesi bulunamadı.")
-                send_message(chat_id, "❌ SAT listesi bulunamadı.")
-                return "❌ SAT listesi bulunamadı.", 200       
+        return f"Hata: {e}", 500  
 
 # PARÇA 4/5 — Diğer Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
 
@@ -467,6 +418,7 @@ def telegram_webhook():
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
+
 # PARÇA 5/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 def otomatik_mesaj_telegram():
