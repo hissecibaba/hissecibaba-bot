@@ -1,0 +1,46 @@
+===SASA T===
+Analiz Tarihi: 10.03.2026
+===GÜNLÜK TEKNİK VERİ===
+ACILIS:nan
+KAPANIS:nan
+GUN.F%:0,00
+G.DUSUK:nan
+G.YUKSEK:nan
+G.HACIM:nan
+PGC8:0,00
+===NADARAYA WATSON===
+SINYAL:BELİRSİZ
+KAPANIS:nan
+UST BANT:nan
+ALT BANT:nan
+FIYAT/BANT ORANI:nan
+TREND YONU:Yatay
+SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
+===WAVETREND===
+SINYAL:SAT
+KAPANIS:nan
+WT1:nan
+WT2:nan
+WT1-WT2:nan
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Veri yetersiz, pozisyon korunuyor.
+===PİVOT NOKTALARI===
+Hata: [Errno 2] No such file or directory: 'C:\\HB\\veri\\pivot verisi\\SASA T.txt'
+===FİBO NOKTALARI===
+Hata: [Errno 2] No such file or directory: 'C:\\HB\\veri\\fibo verisi\\SASA T.txt'
+===PARA GİRİŞ ÇIKIŞI===
+SINYAL:TUT
+PGC AYLIK:0.0
+PGC HAFTALIK:0.0
+PGC GUNLUK:0,00
+SINYAL ACIKLAMA:GÜNLÜK:Tut.
+==TEMEL ANALİZ VERİSİ==
+Dönem		: Eksik Veri
+Karlılık 	: ROE=0.0, ROA=0.0, Net Marj=0.0 → Zayıf
+Büyüme		: Net Satış Değ%=0.0, Net Kar Değ%=0.0 → Düşük
+Borçluluk	: KV.Borç/Top.Borç=0.0 → Düşük risk
+Nakit Durumu	: Cari Oran=0.0 → Borç durumu riskli
+Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
+Ucuz mu?	: PEG hesaplanamadı
+Karar   	: İzlemeye al.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG hesaplanamadı, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
