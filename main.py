@@ -177,7 +177,7 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
- # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
+# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
 
 # ✅ Yeni eklenen /check route
 @flask_app.route("/check", methods=["POST"])
@@ -217,6 +217,34 @@ def check_consent():
 
 @flask_app.route("/upload", methods=["POST"])
 def upload_file():
+    # 🔹 JSON desteği eklendi
+    if request.is_json:
+        data = request.get_json(silent=True) or {}
+        keyword = data.get("keyword")
+        target = data.get("target", "txt_dosyalar")
+        payload = data.get("data", {})
+
+        try:
+            id_no = payload.get("subscription", {}).get("id_no")
+            start_date = payload.get("subscription", {}).get("start_date")
+            end_date = payload.get("subscription", {}).get("end_date")
+
+            if id_no:
+                izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
+                with open(izin_file, "w", encoding="utf-8") as f:
+                    f.write(f"ID NO: {id_no}\n")
+                    f.write(f"START_DATE: {start_date}\n")
+                    f.write(f"END_DATE: {end_date}\n")
+
+                logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
+                return "✅ Consent & Subscription saved", 200
+            else:
+                return "❌ ID NO eksik", 400
+        except Exception as e:
+            logging.error(f"Upload JSON failed: {e}")
+            return f"Hata: {e}", 500
+
+    # 🔹 Eski form-data mantığı da korundu
     key = request.form.get("key")
     if key != os.getenv("UPLOAD_KEY"):
         return "Unauthorized", 403
@@ -237,7 +265,7 @@ def upload_file():
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
-        return f"Hata: {e}", 500  
+        return f"Hata: {e}", 500
 
 # PARÇA 4/5 — Diğer Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
 
