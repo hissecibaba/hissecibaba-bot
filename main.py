@@ -60,6 +60,7 @@ def send_photo(chat_id: int, file_path: str, caption: str = None):
         logging.error(f"send_photo failed: {e}")
         send_message(chat_id, "❌ Görsel gönderimi başarısız.")
 
+
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
@@ -79,12 +80,13 @@ def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode:
 
 def find_latest_file(folder_path: str) -> str:
     try:
+        logging.info(f"📂 Klasör içeriği kontrol ediliyor: {folder_path}")
+        logging.info(f"📂 Dosyalar: {os.listdir(folder_path)}")
         files = []
         for fn in os.listdir(folder_path):
             if fn.lower().endswith(".txt"):
                 full_path = os.path.join(folder_path, fn)
                 try:
-                    # 🔹 Dosya adında IDNO_TARIHSAAT formatı varsa (ör: 5e196e7e_20260213_0354.txt)
                     parts = fn[:-4].split("_")
                     if len(parts) >= 3:
                         dt = datetime.datetime.strptime(parts[-2] + parts[-1], "%Y%m%d%H%M")
@@ -94,6 +96,10 @@ def find_latest_file(folder_path: str) -> str:
                 except Exception:
                     files.append((datetime.datetime.min, full_path))
         files.sort(reverse=True)
+        if files:
+            logging.info(f"✅ Seçilen dosya: {files[0][1]}")
+        else:
+            logging.warning("❌ Hiç dosya bulunamadı.")
         return files[0][1] if files else None
     except Exception as e:
         logging.error(f"find_latest_file failed: {e}")
@@ -101,8 +107,10 @@ def find_latest_file(folder_path: str) -> str:
 
 def txt_to_images(file_path, tag, chunk_size=40):
     try:
+        logging.info(f"🖼 txt_to_images başladı: {file_path}")
         with open(file_path, "r", encoding="utf-8") as f:
             lines = [ln.strip() for ln in f if ln.strip()]
+        logging.info(f"🖼 Dosyadan okunan satır sayısı: {len(lines)}")
         chunks = [lines[i:i+chunk_size] for i in range(0, len(lines), chunk_size)]
         image_paths = []
         for idx, chunk in enumerate(chunks, start=1):
@@ -119,6 +127,7 @@ def txt_to_images(file_path, tag, chunk_size=40):
             fig.savefig(img_path, bbox_inches="tight")
             plt.close(fig)
             image_paths.append(img_path)
+        logging.info(f"🖼 Üretilen görsel sayısı: {len(image_paths)}")
         return image_paths
     except Exception as e:
         logging.error(f"txt_to_images failed: {e}")
@@ -126,6 +135,7 @@ def txt_to_images(file_path, tag, chunk_size=40):
 
 def find_latest_matrix_file(keyword: str) -> str:
     try:
+        logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
         folders = []
         for fn in os.listdir(MATRIX_DIR):
             full_path = os.path.join(MATRIX_DIR, fn)
@@ -138,15 +148,17 @@ def find_latest_matrix_file(keyword: str) -> str:
         folders.sort(reverse=True)
         if folders:
             latest_folder = folders[0][1]
+            logging.info(f"✅ Seçilen MATRİKS klasörü: {latest_folder}")
             for file in os.listdir(latest_folder):
                 if keyword.lower() in file.lower():
+                    logging.info(f"✅ MATRİKS dosyası bulundu: {file}")
                     return os.path.join(latest_folder, file)
+        logging.warning("❌ MATRİKS dosyası bulunamadı.")
         return None
     except Exception as e:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
-        
-# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
+ # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
 
 @flask_app.route("/upload", methods=["POST"])
 def upload_file():
@@ -233,6 +245,7 @@ def telegram_webhook():
         # AL komutu
         if text_low == "al":
             logging.info("➡️ AL komutu çalıştı, dosya aranıyor...")
+            logging.info(f"📂 AL klasörü içeriği: {os.listdir(AL_NEW_DIR if mobil_mode else AL_DIR)}")
             fp = find_latest_file(AL_NEW_DIR if mobil_mode else AL_DIR)
             if fp:
                 logging.info(f"📂 AL dosyası bulundu: {fp}")
@@ -255,6 +268,7 @@ def telegram_webhook():
         # SAT komutu
         if text_low == "sat":
             logging.info("➡️ SAT komutu çalıştı, dosya aranıyor...")
+            logging.info(f"📂 SAT klasörü içeriği: {os.listdir(SAT_NEW_DIR if mobil_mode else SAT_DIR)}")
             fp = find_latest_file(SAT_NEW_DIR if mobil_mode else SAT_DIR)
             if fp:
                 logging.info(f"📂 SAT dosyası bulundu: {fp}")
@@ -272,13 +286,14 @@ def telegram_webhook():
             else:
                 logging.warning("❌ SAT listesi bulunamadı.")
                 send_message(chat_id, "❌ SAT listesi bulunamadı.")
-                return "❌ SAT listesi bulunamadı.", 200
+                return "❌ SAT listesi bulunamadı.", 200       
 
 # PARÇA 4/5 — Diğer Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
 
         # En güncel matriks klasörünü bul
         def find_latest_matrix_folder():
             try:
+                logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
                 folders = []
                 for fn in os.listdir(MATRIX_DIR):
                     full_path = os.path.join(MATRIX_DIR, fn)
@@ -289,6 +304,10 @@ def telegram_webhook():
                         except Exception:
                             continue
                 folders.sort(reverse=True)
+                if folders:
+                    logging.info(f"✅ Seçilen MATRİKS klasörü: {folders[0][1]}")
+                else:
+                    logging.warning("❌ MATRİKS klasörü bulunamadı.")
                 return folders[0][1] if folders else None
             except Exception as e:
                 logging.error(f"find_latest_matrix_folder failed: {e}")
@@ -296,8 +315,10 @@ def telegram_webhook():
 
         # ÖNERİ komutu
         if any(x in text_low for x in ["öneri", "oneri", "önerı", "onerı"]):
+            logging.info(f"📂 ÖNERİ klasörü içeriği: {os.listdir(ONERI_DIR)}")
             fp = find_latest_file(ONERI_DIR)
             if fp:
+                logging.info(f"✅ ÖNERİ dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -305,17 +326,21 @@ def telegram_webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "öneri_listesi")
+                    logging.info(f"🖼 ÖNERİ listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
                     return "OK", 200
             else:
+                logging.warning("❌ ÖNERİ listesi bulunamadı.")
                 send_message(chat_id, "❌ ÖNERİ listesi bulunamadı.", mobil_mode)
                 return "❌ ÖNERİ listesi bulunamadı.", 200
 
         # TAVAN komutu
         if text_low == "tavan":
+            logging.info(f"📂 TAVAN klasörü içeriği: {os.listdir(TAVAN_DIR)}")
             fp = find_latest_file(TAVAN_DIR)
             if fp:
+                logging.info(f"✅ TAVAN dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -323,10 +348,12 @@ def telegram_webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "tavan_listesi")
+                    logging.info(f"🖼 TAVAN listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
                     return "OK", 200
             else:
+                logging.warning("❌ TAVAN listesi bulunamadı.")
                 send_message(chat_id, "❌ TAVAN listesi bulunamadı.", mobil_mode)
                 return "❌ TAVAN listesi bulunamadı.", 200
 
@@ -334,21 +361,26 @@ def telegram_webhook():
         if text_low == "temel":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
+                logging.info(f"📂 TEMEL klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
+                    logging.info(f"✅ TEMEL dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
                     return "OK", 200
+            logging.warning("❌ Temp.xlsx bulunamadı.")
             send_message(chat_id, "❌ Temp.xlsx bulunamadı.", mobil_mode)
             return "❌ Temp.xlsx bulunamadı.", 200
-
         # TEKNİK komutu → gunluk_veri.xlsx
         if text_low == "teknik":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
+                logging.info(f"📂 TEKNİK klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                 if os.path.exists(fp):
+                    logging.info(f"✅ TEKNİK dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
                     return "OK", 200
+            logging.warning("❌ gunluk_veri.xlsx bulunamadı.")
             send_message(chat_id, "❌ gunluk_veri.xlsx bulunamadı.", mobil_mode)
             return "❌ gunluk_veri.xlsx bulunamadı.", 200
 
@@ -356,17 +388,22 @@ def telegram_webhook():
         if text_low == "bofa":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
+                logging.info(f"📂 BOFA klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                 if os.path.exists(fp):
+                    logging.info(f"✅ BOFA dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
                     return "OK", 200
+            logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
         # BALLI KAYMAK komutu
         if text_low in ["balli_kaymak", "ballıkaymak", "balli", "kaymak"]:
+            logging.info(f"📂 BALLI KAYMAK klasörü içeriği: {os.listdir(BALLI_KAYMAK_DIR)}")
             fp = find_latest_file(BALLI_KAYMAK_DIR)
             if fp:
+                logging.info(f"✅ BALLI KAYMAK dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -374,57 +411,68 @@ def telegram_webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "balli_kaymak_listesi")
+                    logging.info(f"🖼 BALLI KAYMAK listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return "OK", 200
             else:
+                logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
                 send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
                 return "❌ Ballı Kaymak listesi bulunamadı.", 200
 
         # DÜNKÜ PERFORMANS komutu
         if text_low in ["performans", "dünküperformans", "dunku", "dünkü"]:
+            logging.info(f"📂 PERFORMANS klasörü içeriği: {os.listdir(PERFORMANS_DIR)}")
             fp = find_latest_file(PERFORMANS_DIR)
             if fp:
+                logging.info(f"✅ PERFORMANS dosyası bulundu: {fp}")
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
+                logging.warning("❌ Performans dosyası bulunamadı.")
                 send_message(chat_id, "❌ Performans dosyası bulunamadı.", mobil_mode)
                 return "❌ Performans dosyası bulunamadı.", 200
 
         # TÜM HİSSELER komutu
         if text_low in ["tum_hisseler", "tümhisseler", "tum", "tüm"]:
+            logging.info(f"📂 BISTTUM klasörü içeriği: {os.listdir(BISTTUM_DIR)}")
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
+                logging.info(f"✅ TÜM HİSSELER dosyası bulundu: {fp}")
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
+                logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
                 send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
                 return "❌ Tüm hisseler dosyası bulunamadı.", 200
 
         # 🔹 Yeni ekleme: Sembol isimleri ile dosya gönderme (fallback)
         symbol_file = os.path.join(TXT_DIR, f"{text_low.upper()}.txt")
         if os.path.exists(symbol_file):
+            logging.info(f"✅ Sembol dosyası bulundu: {symbol_file}")
             with open(symbol_file, "r", encoding="utf-8") as f:
                 content = f.read()
             send_message(chat_id, content, mobil_mode)
             return content, 200
 
         # Eğer hiçbir komuta uymadıysa, serbest mesajı yakala
+        logging.info(f"⚠️ Hiçbir komuta uymadı, serbest mesaj: {text_low}")
         send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
         return "Unhandled message", 200
 
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
-
 # PARÇA 5/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 def otomatik_mesaj_telegram():
+    logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
     for chat_id in IZINLI_ID_LIST:
+        logging.info(f"📢 Otomatik mesaj gönderiliyor → Chat ID: {chat_id}")
         send_message(
             chat_id,
             "📢 Otomatik Mesaj\n\n"
@@ -443,19 +491,24 @@ def otomatik_mesaj_telegram():
 # 🔹 Mobil komut kontrolü (abonelik süresi)
 def check_subscription(user_id: str) -> bool:
     try:
+        logging.info(f"📂 Mobil izinliler klasörü içeriği: {os.listdir(MOBIL_IZINLILER_DIR)}")
         files = [fn for fn in os.listdir(MOBIL_IZINLILER_DIR) if fn.startswith(user_id)]
         if not files:
+            logging.warning(f"❌ Abonelik dosyası bulunamadı → User ID: {user_id}")
             return False
         files.sort(reverse=True)
         filepath = os.path.join(MOBIL_IZINLILER_DIR, files[0])
+        logging.info(f"✅ Abonelik dosyası bulundu: {filepath}")
         with open(filepath, "r", encoding="utf-8") as f:
             lines = f.readlines()
         end_line = [ln for ln in lines if ln.startswith("END_DATE")]
         if not end_line:
+            logging.warning(f"❌ END_DATE satırı bulunamadı → User ID: {user_id}")
             return False
         end_date_str = end_line[0].split(":", 1)[1].strip()
         end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
         now = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
+        logging.info(f"⏳ Abonelik kontrolü → Şimdi: {now}, Bitiş: {end_date}")
         return now <= end_date
     except Exception as e:
         logging.error(f"check_subscription failed: {e}")
@@ -476,5 +529,5 @@ scheduler.start()
 
 # 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
+    logging.info("🚀 Flask uygulaması başlatılıyor...")
     flask_app.run(host="0.0.0.0", port=8020)
-
