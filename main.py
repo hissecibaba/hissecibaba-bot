@@ -305,12 +305,17 @@ def upload_file():
 def webhook():
     try:
         data = request.get_json(silent=True) or {}
+
+        # Mesaj içeriğini güvenli şekilde al
         msg = data.get("message", "")
         if isinstance(msg, dict):
-            msg = msg.get("text", "")
-        text_low = str(msg).lower()
+            msg_text = msg.get("text", "")
+            chat_id = msg.get("chat", {}).get("id", 0)
+        else:
+            msg_text = msg
+            chat_id = data.get("chat_id", 0)
 
-        chat_id = data.get("chat_id", 0)
+        text_low = str(msg_text).lower()
         mobil_mode = data.get("mobil_mode", False)
 
         # En güncel matriks klasörünü bul
