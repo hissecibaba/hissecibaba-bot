@@ -618,7 +618,101 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-# PARÇA 5/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
+# PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
+
+import os
+import datetime
+import logging
+from PIL import Image, ImageDraw, ImageFont
+
+def get_latest_file_content_as_image(target_dir):
+    """
+    Belirtilen klasördeki en güncel tarihli dosyayı bulur,
+    içeriğini okur ve görsel haline getirir.
+    Görsel 'gorsel_cache' klasörüne kaydedilir.
+    """
+    try:
+        dir_path = os.path.join(BASE_DIR, target_dir)
+        if not os.path.exists(dir_path):
+            logging.warning(f"❌ Klasör bulunamadı: {dir_path}")
+            return None
+
+        files = [f for f in os.listdir(dir_path) if os.path.isfile(os.path.join(dir_path, f))]
+        if not files:
+            logging.warning(f"❌ Klasörde dosya yok: {dir_path}")
+            return None
+
+        # En güncel dosya (isimlere göre sıralama)
+        latest_file = sorted(files)[-1]
+        latest_path = os.path.join(dir_path, latest_file)
+
+        with open(latest_path, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        cache_dir = os.path.join(BASE_DIR, "gorsel_cache")
+        os.makedirs(cache_dir, exist_ok=True)
+
+        font = ImageFont.load_default()
+        lines = content.splitlines()
+        width = 1200
+        height = 20 * (len(lines) + 2)
+
+        img = Image.new("RGB", (width, height), color="white")
+        draw = ImageDraw.Draw(img)
+
+        y = 10
+        for line in lines:
+            draw.text((10, y), line, font=font, fill="black")
+            y += 20
+
+        img_name = f"{target_dir}_{latest_file}.png"
+        img_path = os.path.join(cache_dir, img_name)
+        img.save(img_path)
+
+        logging.info(f"✅ Görsel üretildi: {img_path}")
+        return img_path
+
+    except Exception as e:
+        logging.error(f"❌ Görsel üretim hatası: {e}")
+        return None
+
+# PARÇA 5b — Telegram komut entegrasyonu (al/sat → görsel gönder)
+
+import os
+from telegram import Update
+from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
+
+def handle_message(update: Update, context: CallbackContext):
+    text = update.message.text.strip().lower()
+
+    if text == "al":
+        img_path = get_latest_file_content_as_image("al_listeleri")
+        if img_path:
+            update.message.reply_photo(open(img_path, "rb"))
+        else:
+            update.message.reply_text("❌ AL listesi bulunamadı veya görsel üretilemedi.")
+
+    elif text == "sat":
+        img_path = get_latest_file_content_as_image("sat_listeleri")
+        if img_path:
+            update.message.reply_photo(open(img_path, "rb"))
+        else:
+            update.message.reply_text("❌ SAT listesi bulunamadı veya görsel üretilemedi.")
+
+    else:
+        update.message.reply_text(f"Mesajını aldım: {text}")
+
+def start_bot():
+    token = os.getenv("TELEGRAM_BOT_TOKEN")
+    updater = Updater(token, use_context=True)
+    dp = updater.dispatcher
+
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+
+    updater.start_polling()
+    updater.idle()
+
+# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 def otomatik_mesaj_telegram():
     logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
