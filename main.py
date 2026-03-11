@@ -179,7 +179,6 @@ def find_latest_matrix_file(keyword: str) -> str:
         
 # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
 
-# ✅ Yeni eklenen /check route
 @flask_app.route("/check", methods=["POST"])
 def check_consent():
     try:
@@ -189,12 +188,10 @@ def check_consent():
         if not device_id:
             return jsonify({"authorized": "false", "error": "device_id eksik"}), 400
 
-        # 1. cihaz ID → ID NO eşleştirmesi
         id_no = find_id_no_by_device(device_id)
         if not id_no:
             return jsonify({"authorized": "false", "error": "ID NO bulunamadı"}), 200
 
-        # 2. mobil_izinliler klasöründe ID NO dosyasını ara
         izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
         if not os.path.exists(izin_file):
             return jsonify({"authorized": "false", "error": "izin dosyası yok"}), 200
@@ -217,25 +214,28 @@ def check_consent():
 
 @flask_app.route("/upload", methods=["POST"])
 def upload_file():
-    # 🔹 JSON desteği eklendi
     if request.is_json:
         data = request.get_json(silent=True) or {}
         payload = data.get("data", {})
 
         try:
             subscription = payload.get("subscription", {})
-            id_no = subscription.get("id_no")
-            start_date = subscription.get("start_date")
-            uuid_val = subscription.get("uuid")
             device_id = subscription.get("device_id")
             user_name = subscription.get("user_name", "UNKNOWN")
 
-            if id_no and uuid_val and device_id and start_date:
-                # 🔹 END_DATE otomatik hesaplanıyor (START_DATE + 7 gün)
-                start_dt = datetime.datetime.strptime(start_date, "%d.%m.%Y %H:%M")
-                end_dt = start_dt + datetime.timedelta(days=7)
-                end_date = end_dt.strftime("%d.%m.%Y %H:%M")
+            # Benzersiz UUID üret
+            uuid_val = str(uuid.uuid4())
+            id_no = uuid_val[:8]
 
+            # Onay tarihi (Türkiye saati, AM/PM formatı)
+            start_dt = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=3)))
+            start_date = start_dt.strftime("%d.%m.%Y %I:%M %p")
+
+            # END_DATE = START_DATE + 7 gün
+            end_dt = start_dt + datetime.timedelta(days=7)
+            end_date = end_dt.strftime("%d.%m.%Y %I:%M %p")
+
+            if device_id and uuid_val and id_no:
                 # 1️⃣ mobil_izinliler dosyası
                 izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
                 with open(izin_file, "w", encoding="utf-8") as f:
@@ -244,22 +244,27 @@ def upload_file():
                     f.write(f"END_DATE: {end_date}\n")
 
                 # 2️⃣ onaylayanlar dosyası
-                onay_file = os.path.join(ONAYLAYANLAR_DIR, f"{uuid_val}_onay.txt")
+                onay_file = os.path.join(ONAYLAYANLAR_DIR, f"{uuid_val}.txt")
                 with open(onay_file, "w", encoding="utf-8") as f:
                     f.write("Bu dosya Açık Rıza Metninin onaylanması ile otomatik oluşturulmuştur.\n\n")
                     f.write(f"ID NO: {id_no}\n")
                     f.write(f"CIHAZ ID: {device_id}\n")
                     f.write(f"UUID: {uuid_val}\n")
-                    f.write(f"ONAY TARİHİ VE SAATİ: {start_date}\n")
-                    f.write(f"{user_name}\n")
+                    f.write(f"ONAY TARİHİ VE SAATİ: {start_date}\n\n")
                     f.write("--- AÇIK RIZA METNİ ---\n")
-                    f.write("Kişisel verilerin işlenmesi, SPK uyarıları ve yasal çekince metni burada yer alacaktır.\n")
+                    # Açık rıza metnini assets klasöründen oku
+                    try:
+                        with open(r"C:\hb_mobile\hb_mobile_project\assets\AÇIK RIZA METNİ.txt", "r", encoding="utf-8") as consent_file:
+                            f.write(consent_file.read())
+                    except Exception as e:
+                        f.write("Açık rıza metni yüklenemedi.\n")
+                        logging.error(f"Açık rıza metni okunamadı: {e}")
 
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
                 logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
                 return "✅ Consent & Subscription saved", 200
             else:
-                return "❌ ID NO veya UUID eksik", 400
+                return "❌ device_id veya UUID eksik", 400
         except Exception as e:
             logging.error(f"Upload JSON failed: {e}")
             return f"Hata: {e}", 500
@@ -275,7 +280,7 @@ def upload_file():
         return "No selected file", 400
 
     target = request.form.get("target", "txt_dosyalar")
-    save_dir = os.path.join(BASE_DIR, target)   # 🔹 Göreceli hale getirildi
+    save_dir = os.path.join(BASE_DIR, target)
     os.makedirs(save_dir, exist_ok=True)
 
     save_path = os.path.join(save_dir, file.filename)
