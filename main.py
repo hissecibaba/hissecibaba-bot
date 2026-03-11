@@ -182,7 +182,7 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Optimize Sync + Empty Commit Fix)
+# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Optimize Sync + Empty Commit Fix + Rsync Filter)
 
 import os
 import logging
@@ -227,12 +227,19 @@ def sync_to_github():
             )
             logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
 
-            # rsync çıktısından dosya isimlerini ayıkla
+            # rsync çıktısından sadece dosya isimlerini ayıkla
             for line in result.stdout.splitlines():
-                if line and not line.startswith("sending") and not line.startswith("sent") and not line.startswith("./"):
-                    changed_files.append(os.path.join(d, line.strip()))
+                line = line.strip()
+                if not line:
+                    continue
+                # log satırlarını filtrele
+                if any(skip in line for skip in ["sending", "sent", "total size", "speedup"]):
+                    continue
+                if line.startswith("./"):
+                    continue
+                changed_files.append(os.path.join(d, line))
 
-        # Git kimlik bilgisi ayarları (global + repo bazında)
+        # Git kimlik bilgisi ayarları
         subprocess.run(["git", "config", "--global", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "config", "--global", "user.email", "render@hissecibaba.com"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
@@ -251,7 +258,6 @@ def sync_to_github():
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
-
 @flask_app.route("/check", methods=["POST"])
 def check_consent():
     try:
@@ -371,6 +377,7 @@ def upload_file():
     except Exception as e:
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
+
 
 # PARÇA 4A/5 — Webhook Route ve Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
 
