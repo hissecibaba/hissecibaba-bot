@@ -182,7 +182,8 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Optimize Sync + Empty Commit Fix + Rsync Filter)
+
+# PARÇA 3/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter)
 
 import os
 import logging
@@ -232,10 +233,11 @@ def sync_to_github():
                 line = line.strip()
                 if not line:
                     continue
-                # log satırlarını filtrele
                 if any(skip in line for skip in ["sending", "sent", "total size", "speedup"]):
                     continue
                 if line.startswith("./"):
+                    continue
+                if line.endswith("/"):   # 🔹 klasörleri atla
                     continue
                 changed_files.append(os.path.join(d, line))
 
@@ -249,7 +251,7 @@ def sync_to_github():
         if changed_files:
             for f in changed_files:
                 subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
-            commit_msg = f"Auto sync {datetime.date.today()} — {', '.join(changed_files)}"
+            commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
             subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
             subprocess.run(["git", "-C", repo_dir, "push"], check=True)
             logging.info("✅ GitHub push tamamlandı.")
@@ -377,7 +379,6 @@ def upload_file():
     except Exception as e:
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
-
 
 # PARÇA 4A/5 — Webhook Route ve Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
 
