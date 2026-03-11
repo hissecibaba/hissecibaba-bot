@@ -179,6 +179,13 @@ def find_latest_matrix_file(keyword: str) -> str:
         
 # PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
 
+import os
+import logging
+import datetime
+import uuid   # 🔹 eksik olan satır eklendi
+
+from flask import Flask, request, jsonify
+
 @flask_app.route("/check", methods=["POST"])
 def check_consent():
     try:
@@ -200,7 +207,7 @@ def check_consent():
             lines = f.read().splitlines()
             end_date_line = [l for l in lines if l.startswith("END_DATE:")][0]
             end_date_str = end_date_line.replace("END_DATE:", "").strip()
-            end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
+            end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %I:%M %p")
 
         if datetime.datetime.now() > end_date:
             return jsonify({"expired": "true", "end_date": end_date_str}), 200
