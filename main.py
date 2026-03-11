@@ -220,26 +220,46 @@ def upload_file():
     # 🔹 JSON desteği eklendi
     if request.is_json:
         data = request.get_json(silent=True) or {}
-        keyword = data.get("keyword")
-        target = data.get("target", "txt_dosyalar")
         payload = data.get("data", {})
 
         try:
-            id_no = payload.get("subscription", {}).get("id_no")
-            start_date = payload.get("subscription", {}).get("start_date")
-            end_date = payload.get("subscription", {}).get("end_date")
+            subscription = payload.get("subscription", {})
+            id_no = subscription.get("id_no")
+            start_date = subscription.get("start_date")
+            uuid_val = subscription.get("uuid")
+            device_id = subscription.get("device_id")
+            user_name = subscription.get("user_name", "UNKNOWN")
 
-            if id_no:
+            if id_no and uuid_val and device_id and start_date:
+                # 🔹 END_DATE otomatik hesaplanıyor (START_DATE + 7 gün)
+                start_dt = datetime.datetime.strptime(start_date, "%d.%m.%Y %H:%M")
+                end_dt = start_dt + datetime.timedelta(days=7)
+                end_date = end_dt.strftime("%d.%m.%Y %H:%M")
+
+                # 1️⃣ mobil_izinliler dosyası
                 izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
                 with open(izin_file, "w", encoding="utf-8") as f:
                     f.write(f"ID NO: {id_no}\n")
                     f.write(f"START_DATE: {start_date}\n")
                     f.write(f"END_DATE: {end_date}\n")
 
+                # 2️⃣ onaylayanlar dosyası
+                onay_file = os.path.join(ONAYLAYANLAR_DIR, f"{uuid_val}_onay.txt")
+                with open(onay_file, "w", encoding="utf-8") as f:
+                    f.write("Bu dosya Açık Rıza Metninin onaylanması ile otomatik oluşturulmuştur.\n\n")
+                    f.write(f"ID NO: {id_no}\n")
+                    f.write(f"CIHAZ ID: {device_id}\n")
+                    f.write(f"UUID: {uuid_val}\n")
+                    f.write(f"ONAY TARİHİ VE SAATİ: {start_date}\n")
+                    f.write(f"{user_name}\n")
+                    f.write("--- AÇIK RIZA METNİ ---\n")
+                    f.write("Kişisel verilerin işlenmesi, SPK uyarıları ve yasal çekince metni burada yer alacaktır.\n")
+
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
+                logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
                 return "✅ Consent & Subscription saved", 200
             else:
-                return "❌ ID NO eksik", 400
+                return "❌ ID NO veya UUID eksik", 400
         except Exception as e:
             logging.error(f"Upload JSON failed: {e}")
             return f"Hata: {e}", 500
