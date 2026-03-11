@@ -12,7 +12,6 @@ izinli_raw = os.getenv("IZINLI_ID_LIST", "")
 IZINLI_ID_LIST = [int(id.strip()) for id in izinli_raw.split(",") if id.strip().isdigit()]
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
-
 # 🔹 Klasör yolları (göreceli hale getirildi)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
@@ -306,7 +305,11 @@ def upload_file():
 def webhook():
     try:
         data = request.get_json(silent=True) or {}
-        text_low = (data.get("message", "")).lower()
+        msg = data.get("message", "")
+        if isinstance(msg, dict):
+            msg = msg.get("text", "")
+        text_low = str(msg).lower()
+
         chat_id = data.get("chat_id", 0)
         mobil_mode = data.get("mobil_mode", False)
 
