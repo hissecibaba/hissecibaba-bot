@@ -187,17 +187,17 @@ def check_consent():
         device_id = data.get("device_id")
 
         if not device_id:
-            return jsonify({"authorized": False, "error": "device_id eksik"}), 400
+            return jsonify({"authorized": "false", "error": "device_id eksik"}), 400
 
         # 1. cihaz ID → ID NO eşleştirmesi
         id_no = find_id_no_by_device(device_id)
         if not id_no:
-            return jsonify({"authorized": False, "error": "ID NO bulunamadı"}), 200
+            return jsonify({"authorized": "false", "error": "ID NO bulunamadı"}), 200
 
         # 2. mobil_izinliler klasöründe ID NO dosyasını ara
         izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
         if not os.path.exists(izin_file):
-            return jsonify({"authorized": False, "error": "izin dosyası yok"}), 200
+            return jsonify({"authorized": "false", "error": "izin dosyası yok"}), 200
 
         with open(izin_file, "r", encoding="utf-8") as f:
             lines = f.read().splitlines()
@@ -206,13 +206,13 @@ def check_consent():
             end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
 
         if datetime.datetime.now() > end_date:
-            return jsonify({"expired": True, "end_date": end_date_str}), 200
+            return jsonify({"expired": "true", "end_date": end_date_str}), 200
         else:
-            return jsonify({"authorized": True, "end_date": end_date_str}), 200
+            return jsonify({"authorized": "true", "end_date": end_date_str}), 200
 
     except Exception as e:
         logging.error(f"/check route hatası: {e}")
-        return jsonify({"authorized": False, "error": str(e)}), 500
+        return jsonify({"authorized": "false", "error": str(e)}), 500
 
 
 @flask_app.route("/upload", methods=["POST"])
