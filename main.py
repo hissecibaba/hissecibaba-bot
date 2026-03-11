@@ -220,10 +220,13 @@ def sync_to_github():
             subprocess.run(["rsync", "-av", src + "/", dst + "/"], check=True)
             logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
 
-        # Commit + Push (önce git config ayarları)
+        # Git kimlik bilgisi ayarları (global + repo bazında)
+        subprocess.run(["git", "config", "--global", "user.name", "RenderBot"], check=True)
+        subprocess.run(["git", "config", "--global", "user.email", "render@hissecibaba.com"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
 
+        # Commit + Push
         subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
         subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Auto sync {datetime.date.today()}"], check=True)
         subprocess.run(["git", "-C", repo_dir, "push"], check=True)
