@@ -182,8 +182,7 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-
-# PARÇA 3/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter)
+# PARÇA 3/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
 
 import os
 import logging
@@ -251,10 +250,20 @@ def sync_to_github():
         if changed_files:
             for f in changed_files:
                 subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
-            commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
-            subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
-            subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-            logging.info("✅ GitHub push tamamlandı.")
+
+            # 🔹 gerçekten değişiklik var mı kontrol et
+            status = subprocess.run(
+                ["git", "-C", repo_dir, "status", "--porcelain"],
+                capture_output=True, text=True
+            )
+
+            if status.stdout.strip():
+                commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
+                subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
+                subprocess.run(["git", "-C", repo_dir, "push"], check=True)
+                logging.info("✅ GitHub push tamamlandı.")
+            else:
+                logging.info("ℹ️ No staged changes, commit skipped.")
         else:
             logging.info("ℹ️ No changes detected, commit skipped.")
 
