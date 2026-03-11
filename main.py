@@ -299,7 +299,15 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-# PARÇA 4/5 — Diğer Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
+# PARÇA 4A/5 — Webhook Route ve Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
+
+@flask_app.route("/webhook", methods=["POST"])
+def webhook():
+    try:
+        data = request.get_json(silent=True) or {}
+        text_low = (data.get("message", "")).lower()
+        chat_id = data.get("chat_id", 0)
+        mobil_mode = data.get("mobil_mode", False)
 
         # En güncel matriks klasörünü bul
         def find_latest_matrix_folder():
@@ -348,10 +356,8 @@ def upload_file():
 
         # TAVAN komutu
         if text_low == "tavan":
-            logging.info(f"📂 TAVAN klasörü içeriği: {os.listdir(TAVAN_DIR)}")
             fp = find_latest_file(TAVAN_DIR)
             if fp:
-                logging.info(f"✅ TAVAN dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -359,12 +365,10 @@ def upload_file():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "tavan_listesi")
-                    logging.info(f"🖼 TAVAN listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
                     return "OK", 200
             else:
-                logging.warning("❌ TAVAN listesi bulunamadı.")
                 send_message(chat_id, "❌ TAVAN listesi bulunamadı.", mobil_mode)
                 return "❌ TAVAN listesi bulunamadı.", 200
 
@@ -372,26 +376,21 @@ def upload_file():
         if text_low == "temel":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
-                logging.info(f"📂 TEMEL klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
-                    logging.info(f"✅ TEMEL dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
                     return "OK", 200
-            logging.warning("❌ Temp.xlsx bulunamadı.")
             send_message(chat_id, "❌ Temp.xlsx bulunamadı.", mobil_mode)
             return "❌ Temp.xlsx bulunamadı.", 200
+
         # TEKNİK komutu → gunluk_veri.xlsx
         if text_low == "teknik":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
-                logging.info(f"📂 TEKNİK klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                 if os.path.exists(fp):
-                    logging.info(f"✅ TEKNİK dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
                     return "OK", 200
-            logging.warning("❌ gunluk_veri.xlsx bulunamadı.")
             send_message(chat_id, "❌ gunluk_veri.xlsx bulunamadı.", mobil_mode)
             return "❌ gunluk_veri.xlsx bulunamadı.", 200
 
@@ -399,22 +398,17 @@ def upload_file():
         if text_low == "bofa":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
-                logging.info(f"📂 BOFA klasörü içeriği: {os.listdir(latest_folder)}")
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                 if os.path.exists(fp):
-                    logging.info(f"✅ BOFA dosyası bulundu: {fp}")
                     send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
                     return "OK", 200
-            logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
         # BALLI KAYMAK komutu
         if text_low in ["balli_kaymak", "ballıkaymak", "balli", "kaymak"]:
-            logging.info(f"📂 BALLI KAYMAK klasörü içeriği: {os.listdir(BALLI_KAYMAK_DIR)}")
             fp = find_latest_file(BALLI_KAYMAK_DIR)
             if fp:
-                logging.info(f"✅ BALLI KAYMAK dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -422,62 +416,114 @@ def upload_file():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "balli_kaymak_listesi")
-                    logging.info(f"🖼 BALLI KAYMAK listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return "OK", 200
             else:
-                logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
                 send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
                 return "❌ Ballı Kaymak listesi bulunamadı.", 200
 
         # DÜNKÜ PERFORMANS komutu
         if text_low in ["performans", "dünküperformans", "dunku", "dünkü"]:
-            logging.info(f"📂 PERFORMANS klasörü içeriği: {os.listdir(PERFORMANS_DIR)}")
             fp = find_latest_file(PERFORMANS_DIR)
             if fp:
-                logging.info(f"✅ PERFORMANS dosyası bulundu: {fp}")
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                logging.warning("❌ Performans dosyası bulunamadı.")
                 send_message(chat_id, "❌ Performans dosyası bulunamadı.", mobil_mode)
                 return "❌ Performans dosyası bulunamadı.", 200
 
         # TÜM HİSSELER komutu
         if text_low in ["tum_hisseler", "tümhisseler", "tum", "tüm"]:
-            logging.info(f"📂 BISTTUM klasörü içeriği: {os.listdir(BISTTUM_DIR)}")
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
-                logging.info(f"✅ TÜM HİSSELER dosyası bulundu: {fp}")
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
                 send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
                 return "❌ Tüm hisseler dosyası bulunamadı.", 200
 
         # 🔹 Yeni ekleme: Sembol isimleri ile dosya gönderme (fallback)
         symbol_file = os.path.join(TXT_DIR, f"{text_low.upper()}.txt")
         if os.path.exists(symbol_file):
-            logging.info(f"✅ Sembol dosyası bulundu: {symbol_file}")
             with open(symbol_file, "r", encoding="utf-8") as f:
                 content = f.read()
             send_message(chat_id, content, mobil_mode)
             return content, 200
 
         # Eğer hiçbir komuta uymadıysa, serbest mesajı yakala
-        logging.info(f"⚠️ Hiçbir komuta uymadı, serbest mesaj: {text_low}")
         send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
         return "Unhandled message", 200
 
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
+
+# PARÇA 4B/5 — AL ve SAT Komutları (Mobil + Telegram)
+
+        # 📌 Mobil tarafı: Bugün AL listesi
+        if text_low in ["bugün al", "bugunal", "al_github"]:
+            fp = find_latest_file(os.path.join(BASE_DIR, "github-al"))
+            if fp:
+                with open(fp, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
+            else:
+                send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün AL listesi bulunamadı.", 200
+
+        # 📌 Mobil tarafı: Bugün SAT listesi
+        if text_low in ["bugün sat", "bugunsat", "sat_github"]:
+            fp = find_latest_file(os.path.join(BASE_DIR, "github-sat"))
+            if fp:
+                with open(fp, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
+            else:
+                send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün SAT listesi bulunamadı.", 200
+
+        # 📌 Telegram tarafı: AL komutu
+        if text_low == "al":
+            fp = find_latest_file(AL_DIR)  # github-al_listeleri klasörü
+            if fp:
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    send_message(chat_id, content, mobil_mode)
+                    return content, 200
+                else:
+                    images = txt_to_images(fp, "al_listesi")
+                    for idx, img in enumerate(images, start=1):
+                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+                    return "OK", 200
+            else:
+                send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
+                return "❌ AL listesi bulunamadı.", 200
+
+        # 📌 Telegram tarafı: SAT komutu
+        if text_low == "sat":
+            fp = find_latest_file(SAT_DIR)  # github-sat_listeleri klasörü
+            if fp:
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    send_message(chat_id, content, mobil_mode)
+                    return content, 200
+                else:
+                    images = txt_to_images(fp, "sat_listesi")
+                    for idx, img in enumerate(images, start=1):
+                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+                    return "OK", 200
+            else:
+                send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
+                return "❌ SAT listesi bulunamadı.", 200
 
 # PARÇA 5/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
@@ -525,7 +571,6 @@ def check_subscription(user_id: str) -> bool:
     except Exception as e:
         logging.error(f"check_subscription failed: {e}")
         return False
-
 
 scheduler = BackgroundScheduler()
 scheduler.add_job(
