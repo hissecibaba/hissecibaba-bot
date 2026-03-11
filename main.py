@@ -182,7 +182,7 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama + Optimize Sync)
+# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Optimize Sync + Empty Commit Fix)
 
 import os
 import logging
@@ -238,19 +238,17 @@ def sync_to_github():
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
 
-        # Sadece değişen dosyaları add et
+        # Sadece değişen dosyaları add et ve commit et
         if changed_files:
             for f in changed_files:
                 subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
             commit_msg = f"Auto sync {datetime.date.today()} — {', '.join(changed_files)}"
+            subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
+            subprocess.run(["git", "-C", repo_dir, "push"], check=True)
+            logging.info("✅ GitHub push tamamlandı.")
         else:
-            commit_msg = f"Auto sync {datetime.date.today()} — no changes"
+            logging.info("ℹ️ No changes detected, commit skipped.")
 
-        # Commit + Push
-        subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
-        subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-
-        logging.info("✅ GitHub push tamamlandı.")
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
 
