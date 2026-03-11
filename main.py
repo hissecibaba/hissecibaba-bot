@@ -228,7 +228,6 @@ def upload_file():
         try:
             subscription = payload.get("subscription", {})
             device_id = subscription.get("device_id")
-            user_name = subscription.get("user_name", "UNKNOWN")
 
             # Benzersiz UUID üret
             uuid_val = str(uuid.uuid4())
@@ -259,9 +258,10 @@ def upload_file():
                     f.write(f"UUID: {uuid_val}\n")
                     f.write(f"ONAY TARİHİ VE SAATİ: {start_date}\n\n")
                     f.write("--- AÇIK RIZA METNİ ---\n")
-                    # Açık rıza metnini assets klasöründen oku
+                    # Açık rıza metnini assets klasöründen oku (platform bağımsız path)
                     try:
-                        with open(r"C:\hb_mobile\hb_mobile_project\assets\AÇIK RIZA METNİ.txt", "r", encoding="utf-8") as consent_file:
+                        consent_path = os.path.join(BASE_DIR, "assets", "AÇIK RIZA METNİ.txt")
+                        with open(consent_path, "r", encoding="utf-8") as consent_file:
                             f.write(consent_file.read())
                     except Exception as e:
                         f.write("Açık rıza metni yüklenemedi.\n")
