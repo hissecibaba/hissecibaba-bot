@@ -12,6 +12,7 @@ izinli_raw = os.getenv("IZINLI_ID_LIST", "")
 IZINLI_ID_LIST = [int(id.strip()) for id in izinli_raw.split(",") if id.strip().isdigit()]
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
+
 # 🔹 Klasör yolları (göreceli hale getirildi)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
