@@ -182,18 +182,18 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama)
+# PARÇA 3/5 — Upload Route ve Webhook Başlangıcı (Telegram + Flutter JSON Desteği + Loglama + Optimize Sync)
 
 import os
 import logging
 import datetime
-import uuid   # 🔹 eksik olan satır eklendi
-import subprocess   # 🔹 GitHub senkronizasyon için eklendi
+import uuid
+import subprocess
 
 from flask import Flask, request, jsonify
 
 def sync_to_github():
-    """Render içindeki klasörleri GitHub repo ile senkronize eder."""
+    """Render içindeki klasörleri GitHub repo ile senkronize eder (optimize edilmiş)."""
     try:
         repo_url = os.getenv("GITHUB_REPO")
         token = os.getenv("GITHUB_TOKEN")
@@ -211,14 +211,26 @@ def sync_to_github():
                 repo_dir
             ], check=True)
 
+        changed_files = []
+
         # Senkronize edilecek klasörler
         target_dirs = ["al", "sat", "al_listeleri", "sat_listeleri", "matriks"]
         for d in target_dirs:
             src = os.path.join(BASE_DIR, d)
             dst = os.path.join(repo_dir, d)
             os.makedirs(dst, exist_ok=True)
-            subprocess.run(["rsync", "-av", src + "/", dst + "/"], check=True)
+
+            # rsync çıktısını yakala
+            result = subprocess.run(
+                ["rsync", "-av", src + "/", dst + "/"],
+                capture_output=True, text=True, check=True
+            )
             logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
+
+            # rsync çıktısından dosya isimlerini ayıkla
+            for line in result.stdout.splitlines():
+                if line and not line.startswith("sending") and not line.startswith("sent") and not line.startswith("./"):
+                    changed_files.append(os.path.join(d, line.strip()))
 
         # Git kimlik bilgisi ayarları (global + repo bazında)
         subprocess.run(["git", "config", "--global", "user.name", "RenderBot"], check=True)
@@ -226,9 +238,16 @@ def sync_to_github():
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
 
+        # Sadece değişen dosyaları add et
+        if changed_files:
+            for f in changed_files:
+                subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
+            commit_msg = f"Auto sync {datetime.date.today()} — {', '.join(changed_files)}"
+        else:
+            commit_msg = f"Auto sync {datetime.date.today()} — no changes"
+
         # Commit + Push
-        subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
-        subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Auto sync {datetime.date.today()}"], check=True)
+        subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
         subprocess.run(["git", "-C", repo_dir, "push"], check=True)
 
         logging.info("✅ GitHub push tamamlandı.")
