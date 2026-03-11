@@ -15,13 +15,18 @@ TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 # 🔹 Klasör yolları (göreceli hale getirildi)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
+
+# ✅ Telegram tarafı: al_listeleri / sat_listeleri
 AL_DIR = os.path.join(BASE_DIR, "al_listeleri")
 SAT_DIR = os.path.join(BASE_DIR, "sat_listeleri")
+
+# ✅ Mobil tarafı: al / sat
+AL_MOBIL_DIR = os.path.join(BASE_DIR, "al")
+SAT_MOBIL_DIR = os.path.join(BASE_DIR, "sat")
+
 TAVAN_DIR = os.path.join(BASE_DIR, "tavan_listeleri")
 ONERI_DIR = os.path.join(BASE_DIR, "öneri")
 MATRIX_DIR = os.path.join(BASE_DIR, "matriks")
-AL_NEW_DIR = os.path.join(BASE_DIR, "al")
-SAT_NEW_DIR = os.path.join(BASE_DIR, "sat")
 BALLI_KAYMAK_DIR = os.path.join(BASE_DIR, "ballikaymak")
 BISTTUM_DIR = os.path.join(BASE_DIR, "bisttum")
 PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
@@ -183,8 +188,46 @@ import os
 import logging
 import datetime
 import uuid   # 🔹 eksik olan satır eklendi
+import subprocess   # 🔹 GitHub senkronizasyon için eklendi
 
 from flask import Flask, request, jsonify
+
+def sync_to_github():
+    """Render içindeki klasörleri GitHub repo ile senkronize eder."""
+    try:
+        repo_url = os.getenv("GITHUB_REPO")
+        token = os.getenv("GITHUB_TOKEN")
+        repo_dir = "/tmp/hissecibaba_sync"
+
+        if not repo_url or not token:
+            logging.error("❌ GITHUB_REPO veya GITHUB_TOKEN tanımlı değil.")
+            return
+
+        # Repo yoksa klonla
+        if not os.path.exists(repo_dir):
+            subprocess.run([
+                "git", "clone",
+                f"https://{token}@{repo_url}",
+                repo_dir
+            ], check=True)
+
+        # Senkronize edilecek klasörler
+        target_dirs = ["al", "sat", "al_listeleri", "sat_listeleri", "matriks"]
+        for d in target_dirs:
+            src = os.path.join(BASE_DIR, d)
+            dst = os.path.join(repo_dir, d)
+            os.makedirs(dst, exist_ok=True)
+            subprocess.run(["rsync", "-av", src + "/", dst + "/"], check=True)
+            logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
+
+        # Commit + Push
+        subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
+        subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Auto sync {datetime.date.today()}"], check=True)
+        subprocess.run(["git", "-C", repo_dir, "push"], check=True)
+
+        logging.info("✅ GitHub push tamamlandı.")
+    except Exception as e:
+        logging.error(f"❌ Sync failed: {e}")
 
 @flask_app.route("/check", methods=["POST"])
 def check_consent():
@@ -258,7 +301,6 @@ def upload_file():
                     f.write(f"UUID: {uuid_val}\n")
                     f.write(f"ONAY TARİHİ VE SAATİ: {start_date}\n\n")
                     f.write("--- AÇIK RIZA METNİ ---\n")
-                    # Açık rıza metnini assets klasöründen oku (platform bağımsız path)
                     try:
                         consent_path = os.path.join(BASE_DIR, "assets", "AÇIK RIZA METNİ.txt")
                         with open(consent_path, "r", encoding="utf-8") as consent_file:
@@ -269,6 +311,10 @@ def upload_file():
 
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
                 logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
+
+                # 🔹 Dosya kaydedildikten sonra GitHub senkronizasyonu tetikle
+                sync_to_github()
+
                 return "✅ Consent & Subscription saved", 200
             else:
                 return "❌ device_id veya UUID eksik", 400
@@ -294,6 +340,10 @@ def upload_file():
     try:
         file.save(save_path)
         logging.info(f"✅ File uploaded to {target}: {file.filename}")
+
+        # 🔹 Dosya kaydedildikten sonra GitHub senkronizasyonu tetikle
+        sync_to_github()
+
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
@@ -343,10 +393,8 @@ def webhook():
 
         # ÖNERİ komutu
         if any(x in text_low for x in ["öneri", "oneri", "önerı", "onerı"]):
-            logging.info(f"📂 ÖNERİ klasörü içeriği: {os.listdir(ONERI_DIR)}")
             fp = find_latest_file(ONERI_DIR)
             if fp:
-                logging.info(f"✅ ÖNERİ dosyası bulundu: {fp}")
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
@@ -354,12 +402,10 @@ def webhook():
                     return content, 200
                 else:
                     images = txt_to_images(fp, "öneri_listesi")
-                    logging.info(f"🖼 ÖNERİ listesi görsellere dönüştürüldü, {len(images)} parça")
                     for idx, img in enumerate(images, start=1):
                         send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
                     return "OK", 200
             else:
-                logging.warning("❌ ÖNERİ listesi bulunamadı.")
                 send_message(chat_id, "❌ ÖNERİ listesi bulunamadı.", mobil_mode)
                 return "❌ ÖNERİ listesi bulunamadı.", 200
 
@@ -472,67 +518,65 @@ def webhook():
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
 
-# PARÇA 4B/5 — AL ve SAT Komutları (Mobil + Telegram)
+    # 📌 Mobil tarafı: Bugün AL listesi
+    if text_low in ["bugün al", "bugunal", "al_github"]:
+        fp = find_latest_file(os.path.join(BASE_DIR, "github-al"))
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            send_message(chat_id, content, mobil_mode)
+            return content, 200
+        else:
+            send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
+            return "❌ Bugün AL listesi bulunamadı.", 200
 
-        # 📌 Mobil tarafı: Bugün AL listesi
-        if text_low in ["bugün al", "bugunal", "al_github"]:
-            fp = find_latest_file(os.path.join(BASE_DIR, "github-al"))
-            if fp:
+    # 📌 Mobil tarafı: Bugün SAT listesi
+    if text_low in ["bugün sat", "bugunsat", "sat_github"]:
+        fp = find_latest_file(os.path.join(BASE_DIR, "github-sat"))
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            send_message(chat_id, content, mobil_mode)
+            return content, 200
+        else:
+            send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
+            return "❌ Bugün SAT listesi bulunamadı.", 200
+
+    # 📌 Telegram tarafı: AL komutu
+    if text_low == "al":
+        fp = find_latest_file(AL_DIR)  # github-al_listeleri klasörü
+        if fp:
+            if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
-                return "❌ Bugün AL listesi bulunamadı.", 200
+                images = txt_to_images(fp, "al_listesi")
+                for idx, img in enumerate(images, start=1):
+                    send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+                return "OK", 200
+        else:
+            send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
+            return "❌ AL listesi bulunamadı.", 200
 
-        # 📌 Mobil tarafı: Bugün SAT listesi
-        if text_low in ["bugün sat", "bugunsat", "sat_github"]:
-            fp = find_latest_file(os.path.join(BASE_DIR, "github-sat"))
-            if fp:
+    # 📌 Telegram tarafı: SAT komutu
+    if text_low == "sat":
+        fp = find_latest_file(SAT_DIR)  # github-sat_listeleri klasörü
+        if fp:
+            if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
-                return "❌ Bugün SAT listesi bulunamadı.", 200
-
-        # 📌 Telegram tarafı: AL komutu
-        if text_low == "al":
-            fp = find_latest_file(AL_DIR)  # github-al_listeleri klasörü
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    images = txt_to_images(fp, "al_listesi")
-                    for idx, img in enumerate(images, start=1):
-                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                    return "OK", 200
-            else:
-                send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
-                return "❌ AL listesi bulunamadı.", 200
-
-        # 📌 Telegram tarafı: SAT komutu
-        if text_low == "sat":
-            fp = find_latest_file(SAT_DIR)  # github-sat_listeleri klasörü
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    images = txt_to_images(fp, "sat_listesi")
-                    for idx, img in enumerate(images, start=1):
-                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return "OK", 200
-            else:
-                send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
-                return "❌ SAT listesi bulunamadı.", 200
+                images = txt_to_images(fp, "sat_listesi")
+                for idx, img in enumerate(images, start=1):
+                    send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+                return "OK", 200
+        else:
+            send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
+            return "❌ SAT listesi bulunamadı.", 200
 
 # PARÇA 5/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
