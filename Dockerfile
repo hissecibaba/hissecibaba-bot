@@ -4,8 +4,8 @@ FROM python:3.10.12-slim
 # Çalışma dizini ayarla
 WORKDIR /app
 
-# Git'i yükle
-RUN apt-get update && apt-get install -y git
+# Git ve rsync'i yükle
+RUN apt-get update && apt-get install -y git rsync
 
 # Gereksinimleri kopyala ve yükle
 COPY requirements.txt .
