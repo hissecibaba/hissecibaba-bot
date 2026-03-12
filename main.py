@@ -182,7 +182,7 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
         
-# PARÇA 3/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
+# PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
 
 import os
 import logging
@@ -213,8 +213,14 @@ def sync_to_github():
 
         changed_files = []
 
-        # Senkronize edilecek klasörler
-        target_dirs = ["al", "sat", "al_listeleri", "sat_listeleri", "matriks"]
+        # ✅ Senkronize edilecek klasörler (tam liste, kök dizindeki gerçek klasörler)
+        target_dirs = [
+            "al", "sat", "al_listeleri", "sat_listeleri", "matriks",
+            "tavan_listeleri", "txt_dosyalar", "öneri", "performans",
+            "ballikaymak", "bisttum", "gorsel_cache",
+            "mobil_izinliler", "onaylayanlar", "assets"
+        ]
+
         for d in target_dirs:
             src = os.path.join(BASE_DIR, d)
             dst = os.path.join(repo_dir, d)
@@ -269,6 +275,9 @@ def sync_to_github():
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
+
+# PARÇA 3B/5 — Bölüm B 
+
 @flask_app.route("/check", methods=["POST"])
 def check_consent():
     try:
