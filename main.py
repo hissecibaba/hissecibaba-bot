@@ -714,6 +714,8 @@ def start_bot():
 
 # PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
+import pytz
+
 def otomatik_mesaj_telegram():
     logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
     for chat_id in IZINLI_ID_LIST:
@@ -759,7 +761,9 @@ def check_subscription(user_id: str) -> bool:
         logging.error(f"check_subscription failed: {e}")
         return False
 
+# 🔹 Scheduler ayarı (pytz ile timezone eklenmiş)
 scheduler = BackgroundScheduler()
+istanbul_tz = pytz.timezone("Europe/Istanbul")
 scheduler.add_job(
     otomatik_mesaj_telegram,
     "cron",
@@ -767,7 +771,8 @@ scheduler.add_job(
     hour=17,
     minute=30,
     id="otomatik_mesaj",
-    replace_existing=True
+    replace_existing=True,
+    timezone=istanbul_tz
 )
 scheduler.start()
 
