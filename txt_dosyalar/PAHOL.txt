@@ -1,16 +1,16 @@
 ===PAHOL===
-Analiz Tarihi: 10.03.2026
+Analiz Tarihi: 12.03.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,48
-KAPANIS:1,48
-GUN.F%:2,07
+KAPANIS:1,50
+GUN.F%:1,35
 G.DUSUK:1,47
-G.YUKSEK:1,50
-G.HACIM:504.163.476,00
-PGC8:-17.506.000,00
+G.YUKSEK:1,51
+G.HACIM:359.935.088,00
+PGC8:11.707.000,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:1.48
+KAPANIS:1.50
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -18,42 +18,42 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:1.48
-WT1:-35.53
-WT2:-28.66
-WT1-WT2:-6.86
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:1.5
+WT1:-35.71
+WT2:-35.14
+WT1-WT2:-0.57
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.47
+SINYAL:SAT
+S5:1.48
 S4:1.45
 S3:1.44
-S2:1.41
-S1:1.38
-P:1.48
-R1:1.50
-R2:1.51
-R3:1.53
-R4:1.56
-R5:1.59
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+S2:1.40
+S1:1.36
+P:1.49
+R1:1.52
+R2:1.53
+R3:1.56
+R4:1.60
+R5:1.64
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
-0,0(TEPE):1.50
-0,236:1.49
+SINYAL:AL
+0,0(TEPE):1.51
+0,236:1.50
 0,382:1.49
-0,500:1.48
-0,618:1.48
+0,500:1.49
+0,618:1.49
 0,786:1.48
 1,0(DIP):1.47
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-175,789,000.0
-PGC HAFTALIK:-71,819,000.0
-PGC GUNLUK:-17.506.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-75,976,000.0
+PGC HAFTALIK:-72,690,000.0
+PGC GUNLUK:11.707.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.11, ROA=0.1, Net Marj=0.61 → Zayıf
