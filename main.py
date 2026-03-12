@@ -732,6 +732,7 @@ def start_bot():
 # PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 import pytz
+import requests
 
 def otomatik_mesaj_telegram():
     logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
@@ -778,9 +779,19 @@ def check_subscription(user_id: str) -> bool:
         logging.error(f"check_subscription failed: {e}")
         return False
 
+# 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
+def keep_alive():
+    try:
+        requests.get("https://<senin-render-url>.onrender.com/check")
+        logging.info("🔄 Keep-alive ping gönderildi.")
+    except Exception as e:
+        logging.error(f"Keep-alive ping failed: {e}")
+
 # 🔹 Scheduler ayarı (pytz ile timezone eklenmiş)
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
+
+# Otomatik mesaj job'u
 scheduler.add_job(
     otomatik_mesaj_telegram,
     "cron",
@@ -791,6 +802,17 @@ scheduler.add_job(
     replace_existing=True,
     timezone=istanbul_tz
 )
+
+# Keep-alive job'u
+scheduler.add_job(
+    keep_alive,
+    "interval",
+    minutes=5,
+    id="keep_alive_ping",
+    replace_existing=True,
+    timezone=istanbul_tz
+)
+
 scheduler.start()
 
 # 🔹 Flask uygulaması çalıştırma
