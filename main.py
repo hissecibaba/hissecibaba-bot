@@ -389,7 +389,7 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-# PARÇA 4A/5 — Webhook Route ve Komutlar (ÖNERİ, TAVAN, TEMEL, TEKNİK, BOFA, BALLI KAYMAK, PERFORMANS, TÜM HİSSELER)
+# PARÇA 4A/5 — Webhook Route ve Komutlar (??????????????/)
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -557,6 +557,8 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
+
+# PARÇA 4B/5 ????????
 
     # 📌 Mobil tarafı: Bugün AL listesi
     if text_low in ["bugün al", "bugunal", "al_github"]:
