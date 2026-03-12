@@ -266,7 +266,13 @@ def sync_to_github():
             if status.stdout.strip():
                 commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
                 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
+
+                # 🔹 Push öncesi remote ile senkronizasyon
+                subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
+
+                # 🔹 Ardından push
                 subprocess.run(["git", "-C", repo_dir, "push"], check=True)
+
                 logging.info("✅ GitHub push tamamlandı.")
             else:
                 logging.info("ℹ️ No staged changes, commit skipped.")
