@@ -782,7 +782,7 @@ def check_subscription(user_id: str) -> bool:
 # 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
 def keep_alive():
     try:
-        requests.get("https://<senin-render-url>.onrender.com/check")
+        requests.get("https://hissecibaba-bot.onrender.com/check")
         logging.info("🔄 Keep-alive ping gönderildi.")
     except Exception as e:
         logging.error(f"Keep-alive ping failed: {e}")
