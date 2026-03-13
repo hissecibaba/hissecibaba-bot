@@ -408,14 +408,13 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-# PARÇA 4A/5 — Webhook Route ve Komutlar (??????????????/)
+# PARÇA 4A/5 — Webhook Route ve Komutlar
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
     try:
         data = request.get_json(silent=True) or {}
 
-        # Mesaj içeriğini güvenli şekilde al
         msg = data.get("message", "")
         if isinstance(msg, dict):
             msg_text = msg.get("text", "")
@@ -577,67 +576,65 @@ def webhook():
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
 
-# PARÇA 4B/5 — Telegram ve Mobil AL/SAT Komutları
-
-    # 📌 Mobil tarafı: Bugün AL listesi
-    if text_low in ["bugün al", "bugunal", "al_mobil"]:
-        fp = find_latest_file(AL_MOBIL_DIR)
-        if fp:
-            with open(fp, "r", encoding="utf-8") as f:
-                content = f.read()
-            send_message(chat_id, content, mobil_mode)
-            return content, 200
-        else:
-            send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
-            return "❌ Bugün AL listesi bulunamadı.", 200
-
-    # 📌 Mobil tarafı: Bugün SAT listesi
-    if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
-        fp = find_latest_file(SAT_MOBIL_DIR)
-        if fp:
-            with open(fp, "r", encoding="utf-8") as f:
-                content = f.read()
-            send_message(chat_id, content, mobil_mode)
-            return content, 200
-        else:
-            send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
-            return "❌ Bugün SAT listesi bulunamadı.", 200
-
-    # 📌 Telegram tarafı: AL komutu
-    if text_low == "al":
-        fp = find_latest_file(AL_DIR)
-        if fp:
-            if mobil_mode:
+        # 📌 Mobil tarafı: Bugün AL listesi
+        if text_low in ["bugün al", "bugunal", "al_mobil"]:
+            fp = find_latest_file(AL_MOBIL_DIR)
+            if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                images = txt_to_images(fp, "al_listesi")
-                for idx, img in enumerate(images, start=1):
-                    send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                return "OK", 200
-        else:
-            send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
-            return "❌ AL listesi bulunamadı.", 200
+                send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün AL listesi bulunamadı.", 200
 
-    # 📌 Telegram tarafı: SAT komutu
-    if text_low == "sat":
-        fp = find_latest_file(SAT_DIR)
-        if fp:
-            if mobil_mode:
+        # 📌 Mobil tarafı: Bugün SAT listesi
+        if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
+            fp = find_latest_file(SAT_MOBIL_DIR)
+            if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             else:
-                images = txt_to_images(fp, "sat_listesi")
-                for idx, img in enumerate(images, start=1):
-                    send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                return "OK", 200
-        else:
-            send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
-            return "❌ SAT listesi bulunamadı.", 200
+                send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün SAT listesi bulunamadı.", 200
+
+        # 📌 Telegram tarafı: AL komutu
+        if text_low == "al":
+            fp = find_latest_file(AL_DIR)
+            if fp:
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    send_message(chat_id, content, mobil_mode)
+                    return content, 200
+                else:
+                    images = txt_to_images(fp, "al_listesi")
+                    for idx, img in enumerate(images, start=1):
+                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+                    return "OK", 200
+            else:
+                send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
+                return "❌ AL listesi bulunamadı.", 200
+
+        # 📌 Telegram tarafı: SAT komutu
+        if text_low == "sat":
+            fp = find_latest_file(SAT_DIR)
+            if fp:
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    send_message(chat_id, content, mobil_mode)
+                    return content, 200
+                else:
+                    images = txt_to_images(fp, "sat_listesi")
+                    for idx, img in enumerate(images, start=1):
+                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+                    return "OK", 200
+            else:
+                send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
+                return "❌ SAT listesi bulunamadı.", 200
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 
