@@ -577,11 +577,11 @@ def webhook():
         logging.error(f"/webhook failed: {e}")
         return "Sunucu hatası", 500
 
-# PARÇA 4B/5 ????????
+# PARÇA 4B/5 — Telegram ve Mobil AL/SAT Komutları
 
     # 📌 Mobil tarafı: Bugün AL listesi
-    if text_low in ["bugün al", "bugunal", "al_github"]:
-        fp = find_latest_file(os.path.join(BASE_DIR, "github-al"))
+    if text_low in ["bugün al", "bugunal", "al_mobil"]:
+        fp = find_latest_file(AL_MOBIL_DIR)
         if fp:
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -592,8 +592,8 @@ def webhook():
             return "❌ Bugün AL listesi bulunamadı.", 200
 
     # 📌 Mobil tarafı: Bugün SAT listesi
-    if text_low in ["bugün sat", "bugunsat", "sat_github"]:
-        fp = find_latest_file(os.path.join(BASE_DIR, "github-sat"))
+    if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
+        fp = find_latest_file(SAT_MOBIL_DIR)
         if fp:
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -605,7 +605,7 @@ def webhook():
 
     # 📌 Telegram tarafı: AL komutu
     if text_low == "al":
-        fp = find_latest_file(AL_DIR)  # github-al_listeleri klasörü
+        fp = find_latest_file(AL_DIR)
         if fp:
             if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -623,7 +623,7 @@ def webhook():
 
     # 📌 Telegram tarafı: SAT komutu
     if text_low == "sat":
-        fp = find_latest_file(SAT_DIR)  # github-sat_listeleri klasörü
+        fp = find_latest_file(SAT_DIR)
         if fp:
             if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -707,18 +707,28 @@ def handle_message(update: Update, context: CallbackContext):
     text = update.message.text.strip().lower()
 
     if text == "al":
-        img_path = get_latest_file_content_as_image("al_listeleri")
-        if img_path:
-            update.message.reply_photo(open(img_path, "rb"))
+        fp = find_latest_file(AL_DIR)
+        if fp:
+            images = txt_to_images(fp, "al_listesi")
+            if images:
+                for idx, img in enumerate(images, start=1):
+                    update.message.reply_photo(open(img, "rb"), caption=f"📈 Günlük AL listesi (parça {idx})")
+            else:
+                update.message.reply_text("❌ AL listesi görsel üretilemedi.")
         else:
-            update.message.reply_text("❌ AL listesi bulunamadı veya görsel üretilemedi.")
+            update.message.reply_text("❌ AL listesi bulunamadı.")
 
     elif text == "sat":
-        img_path = get_latest_file_content_as_image("sat_listeleri")
-        if img_path:
-            update.message.reply_photo(open(img_path, "rb"))
+        fp = find_latest_file(SAT_DIR)
+        if fp:
+            images = txt_to_images(fp, "sat_listesi")
+            if images:
+                for idx, img in enumerate(images, start=1):
+                    update.message.reply_photo(open(img, "rb"), caption=f"📉 Günlük SAT listesi (parça {idx})")
+            else:
+                update.message.reply_text("❌ SAT listesi görsel üretilemedi.")
         else:
-            update.message.reply_text("❌ SAT listesi bulunamadı veya görsel üretilemedi.")
+            update.message.reply_text("❌ SAT listesi bulunamadı.")
 
     else:
         update.message.reply_text(f"Mesajını aldım: {text}")
@@ -786,7 +796,8 @@ def check_subscription(user_id: str) -> bool:
 # 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
 def keep_alive():
     try:
-        requests.get("https://hissecibaba-bot.onrender.com/check")
+        # ✅ Artık POST isteği atıyoruz, 405 hatası çözüldü
+        requests.post("https://hissecibaba-bot.onrender.com/check", json={})
         logging.info("🔄 Keep-alive ping gönderildi.")
     except Exception as e:
         logging.error(f"Keep-alive ping failed: {e}")
