@@ -808,7 +808,7 @@ scheduler.add_job(
     otomatik_mesaj_telegram,
     "cron",
     day_of_week="mon-fri",
-    hour=17,
+    hour=20,
     minute=30,
     id="otomatik_mesaj",
     replace_existing=True,
