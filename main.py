@@ -282,11 +282,15 @@ def sync_to_github():
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
 
-# PARÇA 3B/5 — Bölüm B 
+# PARÇA 3B/5 — Bölüm B (Consent ve Upload Route)
 
-@flask_app.route("/check", methods=["POST"])
+@flask_app.route("/check", methods=["GET", "POST"])   # ✅ GET eklendi
 def check_consent():
     try:
+        if request.method == "GET":
+            # ✅ Keep-alive ping için basit cevap
+            return jsonify({"status": "ok"}), 200
+
         data = request.get_json(silent=True) or {}
         device_id = data.get("device_id")
 
