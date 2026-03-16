@@ -1,16 +1,16 @@
 ===VAKFA===
-Analiz Tarihi: 16.03.2026
+Analiz Tarihi: 12.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:12,27
-KAPANIS:12,13
-GUN.F%:-0,98
-G.DUSUK:12,12
-G.YUKSEK:12,34
-G.HACIM:78.649.991,00
-PGC8:-1.255.000,00
+ACILIS:12,30
+KAPANIS:12,38
+GUN.F%:-0,16
+G.DUSUK:12,30
+G.YUKSEK:12,63
+G.HACIM:201.431.461,00
+PGC8:-761.000,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:12.13
+KAPANIS:12.38
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -18,42 +18,42 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:12.13
-WT1:-60.22
-WT2:-64.2
-WT1-WT2:3.98
+KAPANIS:12.38
+WT1:-64.15
+WT2:-70.53
+WT1-WT2:6.38
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:12.05
-S4:11.98
-S3:11.83
-S2:11.61
-S1:11.39
-P:12.20
-R1:12.27
-R2:12.42
-R3:12.49
-R4:12.71
-R5:12.93
+S5:12.24
+S4:12.11
+S3:11.91
+S2:11.58
+S1:11.25
+P:12.44
+R1:12.57
+R2:12.77
+R3:12.90
+R4:13.23
+R5:13.56
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):12.34
-0,236:12.29
-0,382:12.26
-0,500:12.23
-0,618:12.20
-0,786:12.17
-1,0(DIP):12.12
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+0,0(TEPE):12.63
+0,236:12.55
+0,382:12.50
+0,500:12.46
+0,618:12.43
+0,786:12.37
+1,0(DIP):12.30
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:23,554,000.0
-PGC HAFTALIK:-1,254,000.0
-PGC GUNLUK:-1.255.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+PGC AYLIK:27,743,000.0
+PGC HAFTALIK:11,164,000.0
+PGC GUNLUK:-761.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.27, ROA=0.05, Net Marj=0.0 → Güçlü
@@ -61,6 +61,6 @@ Büyüme		: Net Satış Değ%=0.0, Net Kar Değ%=12.75 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.0 → Düşük risk
 Nakit Durumu	: Cari Oran=0.0 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
-Ucuz mu?	: PEG=0.44 → Çok ucuz
+Ucuz mu?	: PEG=0.45 → Çok ucuz
 Karar   	: Yatırım yapılabilir.
-Temel Veri Özeti: Karlılık güçlü, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=0.44 → Çok ucuz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
+Temel Veri Özeti: Karlılık güçlü, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=0.45 → Çok ucuz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
