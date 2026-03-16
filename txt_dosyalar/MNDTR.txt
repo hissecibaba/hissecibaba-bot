@@ -1,59 +1,59 @@
 ===MNDTR===
-Analiz Tarihi: 13.03.2026
+Analiz Tarihi: 16.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,82
-KAPANIS:5,82
-GUN.F%:-0,68
+ACILIS:5,90
+KAPANIS:5,76
+GUN.F%:-1,03
 G.DUSUK:5,69
-G.YUKSEK:5,92
-G.HACIM:9.620.840,00
-PGC8:322.000,00
+G.YUKSEK:5,90
+G.HACIM:12.872.741,00
+PGC8:-796.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:5.82
-UST BANT:5.9360
-ALT BANT:5.7110
-FIYAT/BANT ORANI:48.43
+KAPANIS:5.76
+UST BANT:5.9275
+ALT BANT:5.7025
+FIYAT/BANT ORANI:25.56
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:5.82
-WT1:-52.48
-WT2:-56.07
-WT1-WT2:3.6
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:5.76
+WT1:-51.4
+WT2:-53.8
+WT1-WT2:2.4
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:5.70
-S4:5.58
-S3:5.47
-S2:5.24
-S1:5.01
-P:5.81
-R1:5.93
-R2:6.04
-R3:6.16
-R4:6.39
-R5:6.62
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:5.67
+S4:5.57
+S3:5.46
+S2:5.25
+S1:5.04
+P:5.78
+R1:5.88
+R2:5.99
+R3:6.09
+R4:6.30
+R5:6.51
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):5.92
-0,236:5.87
-0,382:5.83
-0,500:5.80
-0,618:5.78
-0,786:5.74
+SINYAL:SAT
+0,0(TEPE):5.90
+0,236:5.85
+0,382:5.82
+0,500:5.79
+0,618:5.77
+0,786:5.73
 1,0(DIP):5.69
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-12,911,000.0
-PGC HAFTALIK:-233,000.0
-PGC GUNLUK:322.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-13,624,000.0
+PGC HAFTALIK:-1,009,000.0
+PGC GUNLUK:-796.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/09
 Karlılık 	: ROE=-0.12, ROA=-0.08, Net Marj=-0.06 → Zayıf
