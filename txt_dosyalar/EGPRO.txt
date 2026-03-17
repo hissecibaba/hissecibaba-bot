@@ -1,16 +1,16 @@
 ===EGPRO===
-Analiz Tarihi: 16.03.2026
+Analiz Tarihi: 17.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:28,44
-KAPANIS:28,54
-GUN.F%:0,56
-G.DUSUK:28,14
-G.YUKSEK:30,34
-G.HACIM:79.867.257,00
-PGC8:3.458.000,00
+ACILIS:28,54
+KAPANIS:29,86
+GUN.F%:4,63
+G.DUSUK:28,48
+G.YUKSEK:30,40
+G.HACIM:61.187.476,00
+PGC8:1.977.000,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:28.54
+KAPANIS:29.86
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -18,41 +18,41 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:28.54
-WT1:3.68
-WT2:-12.88
-WT1-WT2:16.56
+KAPANIS:29.86
+WT1:13.65
+WT2:-3.65
+WT1-WT2:17.29
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:27.67
-S4:26.81
-S3:25.47
-S2:23.27
-S1:21.07
-P:29.01
-R1:29.87
-R2:31.21
-R3:32.07
-R4:34.27
-R5:36.47
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):30.34
-0,236:29.82
-0,382:29.50
-0,500:29.24
-0,618:28.98
-0,786:28.61
-1,0(DIP):28.14
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+S5:28.76
+S4:27.66
+S3:26.84
+S2:24.92
+S1:23.00
+P:29.58
+R1:30.68
+R2:31.50
+R3:32.60
+R4:34.52
+R5:36.44
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):30.40
+0,236:29.95
+0,382:29.67
+0,500:29.44
+0,618:29.21
+0,786:28.89
+1,0(DIP):28.48
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:18,538,000.0
-PGC HAFTALIK:7,742,000.0
-PGC GUNLUK:3.458.000,00
+PGC AYLIK:21,012,000.0
+PGC HAFTALIK:9,408,000.0
+PGC GUNLUK:1.977.000,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
@@ -61,6 +61,6 @@ Büyüme		: Net Satış Değ%=-11.03, Net Kar Değ%=-2.93 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.83 → Orta risk
 Nakit Durumu	: Cari Oran=1.4 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
-Ucuz mu?	: PEG=-4.72 → Belirsiz
+Ucuz mu?	: PEG=-4.94 → Belirsiz
 Karar   	: Uzak dur.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-4.72 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-4.94 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
