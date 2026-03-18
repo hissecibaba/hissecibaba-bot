@@ -1,58 +1,58 @@
 ===OBASE===
-Analiz Tarihi: 18.03.2026
+Analiz Tarihi: 17.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:34,62
-KAPANIS:33,98
-GUN.F%:-1,74
-G.DUSUK:33,40
-G.YUKSEK:34,84
-G.HACIM:15.714.514,00
-PGC8:-167.000,00
+ACILIS:34,30
+KAPANIS:34,58
+GUN.F%:0,58
+G.DUSUK:34,30
+G.YUKSEK:34,82
+G.HACIM:9.063.250,00
+PGC8:-121.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:33.98
-UST BANT:35.1615
-ALT BANT:33.6315
-FIYAT/BANT ORANI:22.78
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:34.58
+UST BANT:35.2696
+ALT BANT:33.6596
+FIYAT/BANT ORANI:57.17
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:33.98
-WT1:-25.78
-WT2:-25.44
-WT1-WT2:-0.34
+KAPANIS:34.58
+WT1:-23.65
+WT2:-25.5
+WT1-WT2:1.86
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:33.31
-S4:32.63
-S3:31.87
-S2:30.43
-S1:28.99
-P:34.07
-R1:34.75
-R2:35.51
-R3:36.19
-R4:37.63
-R5:39.07
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):34.84
-0,236:34.50
-0,382:34.29
-0,500:34.12
-0,618:33.95
-0,786:33.71
-1,0(DIP):33.40
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+S5:34.31
+S4:34.05
+S3:33.79
+S2:33.27
+S1:32.75
+P:34.57
+R1:34.83
+R2:35.09
+R3:35.35
+R4:35.87
+R5:36.39
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):34.82
+0,236:34.70
+0,382:34.62
+0,500:34.56
+0,618:34.50
+0,786:34.41
+1,0(DIP):34.30
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-15,401,000.0
-PGC HAFTALIK:-1,676,000.0
-PGC GUNLUK:-167.000,00
+PGC AYLIK:-15,935,000.0
+PGC HAFTALIK:-1,654,000.0
+PGC GUNLUK:-121.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
@@ -61,6 +61,6 @@ Büyüme		: Net Satış Değ%=-11.65, Net Kar Değ%=110.33 → Çok yüksek
 Borçluluk	: KV.Borç/Top.Borç=0.92 → Orta risk
 Nakit Durumu	: Cari Oran=0.95 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=2.11 → Çok pahalı
+Ucuz mu?	: PEG=2.15 → Çok pahalı
 Karar   	: Uzak dur.
-Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=2.11 → Çok pahalı, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=2.15 → Çok pahalı, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
