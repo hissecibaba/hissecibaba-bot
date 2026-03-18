@@ -1,32 +1,33 @@
 ===ISBTR===
-Analiz Tarihi: 18.03.2026
+Analiz Tarihi: 16.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:425.000,00
-KAPANIS:425.000,00
-GUN.F%:3,66
-G.DUSUK:425.000,00
-G.YUKSEK:425.000,00
-G.HACIM:2.125.000,00
+ACILIS:400.000,00
+KAPANIS:401.000,00
+GUN.F%:-2,32
+G.DUSUK:400.000,00
+G.YUKSEK:401.000,00
+G.HACIM:6.001.023,00
 PGC8:0,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:425000.00
-UST BANT:428123.8637 400896.5912 88.53
-ALT BANT:Yükseliş
-FIYAT/BANT ORANI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+KAPANIS:401000.00
+UST BANT:427118.7500 402066.0971 -4.26
+ALT BANT:Düşüş
+FIYAT/BANT ORANI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:425000.0
-WT1:-41.56
-WT2:-48.99
-WT1-WT2:7.43
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:401000.0
+WT1:-54.64
+WT2:-47.05
+WT1-WT2:-7.59
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:425000.00425000.00425000.00425000.00425000.00425000.00425000.00425000.00425000.00425000.00425000.00Pivot analizi tutarlı bir sonuç vermemektedir.
+SINYAL:SAT
+S5:400333.33399666.67399333.33398333.33397333.33400666.67401333.33401666.67402333.33403333.33404333.33Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:TUT
-0,0(TEPE):425000.00 425000.00 425000.00 425000.00 425000.00 425000.00 425000.00 Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
+SINYAL:SAT
+0,0(TEPE):401000.00 400764.00 400618.00 400500.00 400382.00 400214.00 400000.00 Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
@@ -40,6 +41,6 @@ Büyüme		: Net Satış Değ%=0.0, Net Kar Değ%=5.76 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.0 → Düşük risk
 Nakit Durumu	: Cari Oran=0.0 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
-Ucuz mu?	: PEG=27432.78 → Çok pahalı
+Ucuz mu?	: PEG=26498.45 → Çok pahalı
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık güçlü, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=27432.78 → Çok pahalı, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
+Temel Veri Özeti: Karlılık güçlü, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=26498.45 → Çok pahalı, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
