@@ -1,58 +1,58 @@
 ===SMRTG===
-Analiz Tarihi: 18.03.2026
+Analiz Tarihi: 19.03.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:7,22
-KAPANIS:7,19
-GUN.F%:-0,14
-G.DUSUK:7,13
-G.YUKSEK:7,29
-G.HACIM:51.831.788,00
-PGC8:133.000,00
+KAPANIS:7,54
+GUN.F%:4,87
+G.DUSUK:7,12
+G.YUKSEK:7,54
+G.HACIM:95.809.867,00
+PGC8:2.381.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:7.19
-UST BANT:7.5190
-ALT BANT:6.9440
-FIYAT/BANT ORANI:42.78
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:7.54
+UST BANT:7.5520
+ALT BANT:7.0370
+FIYAT/BANT ORANI:97.68
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:7.19
-WT1:-21.83
-WT2:-21.78
-WT1-WT2:-0.05
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:7.54
+WT1:-16.3
+WT2:-20.6
+WT1-WT2:4.3
+KESİSİM YONU:Yükseliş
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:7.12
-S4:7.04
-S3:6.96
-S2:6.80
-S1:6.64
-P:7.20
-R1:7.28
-R2:7.36
-R3:7.44
-R4:7.60
-R5:7.76
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:SAT
+S5:7.26
+S4:6.98
+S3:6.84
+S2:6.42
+S1:6.00
+P:7.40
+R1:7.68
+R2:7.82
+R3:8.10
+R4:8.52
+R5:8.94
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):7.29
-0,236:7.25
-0,382:7.23
-0,500:7.21
-0,618:7.19
-0,786:7.16
-1,0(DIP):7.13
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+0,0(TEPE):7.54
+0,236:7.44
+0,382:7.38
+0,500:7.33
+0,618:7.28
+0,786:7.21
+1,0(DIP):7.12
+SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-3,013,000.0
-PGC HAFTALIK:843,000.0
-PGC GUNLUK:133.000,00
+PGC AYLIK:-1,267,000.0
+PGC HAFTALIK:3,670,000.0
+PGC GUNLUK:2.381.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
