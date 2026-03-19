@@ -1,66 +1,66 @@
 ===DCTTR===
-Analiz Tarihi: 19.03.2026
+Analiz Tarihi: 18.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,31
-KAPANIS:8,42
-GUN.F%:0,72
-G.DUSUK:8,26
-G.YUKSEK:8,74
-G.HACIM:53.907.917,00
-PGC8:1.014.000,00
+ACILIS:8,40
+KAPANIS:8,36
+GUN.F%:-0,48
+G.DUSUK:8,33
+G.YUKSEK:8,51
+G.HACIM:55.407.500,00
+PGC8:107.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:8.42
-UST BANT:8.7376
-ALT BANT:8.1726
-FIYAT/BANT ORANI:43.79
+KAPANIS:8.36
+UST BANT:8.8119
+ALT BANT:8.1169
+FIYAT/BANT ORANI:34.98
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:8.42
-WT1:10.48
-WT2:9.95
-WT1-WT2:0.52
+KAPANIS:8.36
+WT1:8.44
+WT2:10.29
+WT1-WT2:-1.84
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:8.21
-S4:7.99
-S3:7.73
-S2:7.25
-S1:6.77
-P:8.47
-R1:8.69
-R2:8.95
-R3:9.17
-R4:9.65
-R5:10.13
+S5:8.29
+S4:8.22
+S3:8.11
+S2:7.93
+S1:7.75
+P:8.40
+R1:8.47
+R2:8.58
+R3:8.65
+R4:8.83
+R5:9.01
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):8.74
-0,236:8.63
-0,382:8.56
-0,500:8.50
-0,618:8.44
-0,786:8.36
-1,0(DIP):8.26
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+0,0(TEPE):8.51
+0,236:8.47
+0,382:8.44
+0,500:8.42
+0,618:8.40
+0,786:8.37
+1,0(DIP):8.33
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:11,834,000.0
-PGC HAFTALIK:-1,467,000.0
-PGC GUNLUK:1.014.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+PGC AYLIK:10,956,000.0
+PGC HAFTALIK:2,035,000.0
+PGC GUNLUK:107.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
-Dönem		: 25/12
-Karlılık 	: ROE=-0.12, ROA=-0.06, Net Marj=-0.04 → Zayıf
-Büyüme		: Net Satış Değ%=-17.51, Net Kar Değ%=-112.36 → Düşük
-Borçluluk	: KV.Borç/Top.Borç=0.49 → Düşük risk
-Nakit Durumu	: Cari Oran=2.71 → Borç oranı uygun
-Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=-0.00 → Belirsiz
-Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-0.00 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Dönem		: 25/09
+Karlılık 	: ROE=-0.05, ROA=-0.03, Net Marj=-0.02 → Zayıf
+Büyüme		: Net Satış Değ%=17.23, Net Kar Değ%=41.71 → Çok yüksek
+Borçluluk	: KV.Borç/Top.Borç=0.33 → Düşük risk
+Nakit Durumu	: Cari Oran=5.03 → Borç oranı uygun
+Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
+Ucuz mu?	: PEG=0.00 → Belirsiz
+Karar   	: Yatırım yapılabilir.
+Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=0.00 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
