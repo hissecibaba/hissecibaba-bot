@@ -1,16 +1,16 @@
 ===EGSER===
-Analiz Tarihi: 19.03.2026
+Analiz Tarihi: 18.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,88
-KAPANIS:2,92
-GUN.F%:1,39
-G.DUSUK:2,86
-G.YUKSEK:2,92
-G.HACIM:3.416.137,00
-PGC8:118.000,00
+ACILIS:2,93
+KAPANIS:2,88
+GUN.F%:-1,37
+G.DUSUK:2,87
+G.YUKSEK:2,94
+G.HACIM:6.016.798,00
+PGC8:-239.000,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:2.92
+KAPANIS:2.88
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -18,42 +18,42 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:2.92
-WT1:-28.24
-WT2:-29.32
-WT1-WT2:1.08
+KAPANIS:2.88
+WT1:-28.98
+WT2:-30.58
+WT1-WT2:1.6
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:2.88
-S4:2.84
-S3:2.82
-S2:2.76
-S1:2.70
+SINYAL:AL
+S5:2.85
+S4:2.83
+S3:2.78
+S2:2.71
+S1:2.64
 P:2.90
-R1:2.94
-R2:2.96
-R3:3.00
+R1:2.92
+R2:2.97
+R3:2.99
 R4:3.06
-R5:3.12
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+R5:3.13
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):2.92
-0,236:2.91
-0,382:2.90
-0,500:2.89
-0,618:2.88
-0,786:2.87
-1,0(DIP):2.86
-SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+0,0(TEPE):2.94
+0,236:2.92
+0,382:2.91
+0,500:2.91
+0,618:2.90
+0,786:2.88
+1,0(DIP):2.87
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-1,708,000.0
-PGC HAFTALIK:-333,000.0
-PGC GUNLUK:118.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-572,000.0
+PGC HAFTALIK:-561,000.0
+PGC GUNLUK:-239.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.59, ROA=-0.17, Net Marj=-0.26 → Zayıf
