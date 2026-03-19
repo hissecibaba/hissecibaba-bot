@@ -1,50 +1,50 @@
 ===RPTEKF2===
-Analiz Tarihi: 16.03.2026
+Analiz Tarihi: 19.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:4,78
-KAPANIS:4,78
-GUN.F%:-0,21
-G.DUSUK:4,51
-G.YUKSEK:4,78
-G.HACIM:621,00
+ACILIS:4,87
+KAPANIS:4,87
+GUN.F%:-0,20
+G.DUSUK:4,87
+G.YUKSEK:4,87
+G.HACIM:1.266,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:4.78
-UST BANT:5.3616
-ALT BANT:4.6648
-FIYAT/BANT ORANI:16.53
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:4.87
+UST BANT:nan
+ALT BANT:nan
+FIYAT/BANT ORANI:nan
+TREND YONU:Yatay
+SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
-SINYAL:4.78
-KAPANIS:-44.29
-WT1:-41.31
-WT2:-2.98
-WT1-WT2:Düşüş
-KESİSİM YONU:Fiyat düşüş yönlü. Düşüş teyit edildi.
+SINYAL:4.87
+KAPANIS:-43.27
+WT1:-44.15
+WT2:0.88
+WT1-WT2:Yatay
+KESİSİM YONU:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:4.60
-S5:4.42
-S4:4.33
-S3:4.06
-S2:3.79
-S1:4.69
+SINYAL:4.87
+S5:4.87
+S4:4.87
+S3:4.87
+S2:4.87
+S1:4.87
 P:4.87
-R1:4.96
-R2:5.14
-R3:5.41
-R4:5.68
-R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+R1:4.87
+R2:4.87
+R3:4.87
+R4:4.87
+R5:Pivot analizi tutarlı bir sonuç vermemektedir.
 ===FİBO NOKTALARI===
-SINYAL:4.78
-0,0(TEPE):4.72
-0,236:4.68
-0,382:4.64
-0,500:4.61
-0,618:4.57
-0,786:4.51
-1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+SINYAL:4.87
+0,0(TEPE):4.87
+0,236:4.87
+0,382:4.87
+0,500:4.87
+0,618:4.87
+0,786:4.87
+1,0(DIP):Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
