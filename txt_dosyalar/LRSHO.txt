@@ -1,66 +1,66 @@
 ===LRSHO===
-Analiz Tarihi: 17.03.2026
+Analiz Tarihi: 19.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,37
-KAPANIS:3,40
-GUN.F%:1,49
-G.DUSUK:3,33
-G.YUKSEK:3,44
-G.HACIM:48.028.910,00
-PGC8:1.366.000,00
+ACILIS:3,36
+KAPANIS:3,35
+GUN.F%:-0,30
+G.DUSUK:3,32
+G.YUKSEK:3,39
+G.HACIM:18.945.807,00
+PGC8:574.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:3.40
-UST BANT:3.5396
-ALT BANT:3.3299
-FIYAT/BANT ORANI:33.43
+KAPANIS:3.35
+UST BANT:3.5250
+ALT BANT:3.2749
+FIYAT/BANT ORANI:30.02
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:3.4
-WT1:-57.2
-WT2:-57.62
-WT1-WT2:0.42
+KAPANIS:3.35
+WT1:-56.14
+WT2:-56.98
+WT1-WT2:0.84
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:3.34
-S4:3.28
-S3:3.23
-S2:3.12
-S1:3.01
-P:3.39
-R1:3.45
-R2:3.50
-R3:3.56
-R4:3.67
-R5:3.78
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):3.44
-0,236:3.41
-0,382:3.40
-0,500:3.38
-0,618:3.37
-0,786:3.35
-1,0(DIP):3.33
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+S5:3.32
+S4:3.28
+S3:3.25
+S2:3.18
+S1:3.11
+P:3.35
+R1:3.39
+R2:3.42
+R3:3.46
+R4:3.53
+R5:3.60
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):3.39
+0,236:3.37
+0,382:3.36
+0,500:3.35
+0,618:3.35
+0,786:3.33
+1,0(DIP):3.32
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-16,924,000.0
-PGC HAFTALIK:7,146,000.0
-PGC GUNLUK:1.366.000,00
+PGC AYLIK:-12,486,000.0
+PGC HAFTALIK:3,572,000.0
+PGC GUNLUK:574.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
-Dönem		: 25/09
-Karlılık 	: ROE=0.02, ROA=0.0, Net Marj=0.02 → Zayıf
-Büyüme		: Net Satış Değ%=-22.07, Net Kar Değ%=120.38 → Çok yüksek
-Borçluluk	: KV.Borç/Top.Borç=0.46 → Düşük risk
-Nakit Durumu	: Cari Oran=2.23 → Borç oranı uygun
+Dönem		: 25/12
+Karlılık 	: ROE=-0.06, ROA=-0.01, Net Marj=-0.06 → Zayıf
+Büyüme		: Net Satış Değ%=2.77, Net Kar Değ%=-149.22 → Düşük
+Borçluluk	: KV.Borç/Top.Borç=0.47 → Düşük risk
+Nakit Durumu	: Cari Oran=2.36 → Borç oranı uygun
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=0.00 → Belirsiz
+Ucuz mu?	: PEG=-0.00 → Belirsiz
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=0.00 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-0.00 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
