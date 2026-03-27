@@ -1,59 +1,59 @@
 ===IHYAY===
-Analiz Tarihi: 26.03.2026
+Analiz Tarihi: 27.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,72
+ACILIS:1,69
 KAPANIS:1,68
-GUN.F%:-2,33
-G.DUSUK:1,68
-G.YUKSEK:1,73
-G.HACIM:8.652.800,00
-PGC8:-264.000,00
+GUN.F%:0,00
+G.DUSUK:1,65
+G.YUKSEK:1,70
+G.HACIM:6.210.785,00
+PGC8:-111.000,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
+SINYAL:SAT
 KAPANIS:1.68
-UST BANT:1.7757
-ALT BANT:1.6871
-FIYAT/BANT ORANI:-8.04
+UST BANT:1.7825
+ALT BANT:1.6559
+FIYAT/BANT ORANI:19.00
 TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
 KAPANIS:1.68
-WT1:-37.63
-WT2:-29.82
-WT1-WT2:-7.81
+WT1:-45.08
+WT2:-34.43
+WT1-WT2:-10.65
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.66
-S4:1.65
-S3:1.61
-S2:1.56
-S1:1.51
-P:1.70
-R1:1.71
-R2:1.75
-R3:1.76
-R4:1.81
-R5:1.86
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.73
-0,236:1.72
-0,382:1.71
-0,500:1.71
-0,618:1.70
-0,786:1.69
-1,0(DIP):1.68
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+S5:1.65
+S4:1.63
+S3:1.60
+S2:1.55
+S1:1.50
+P:1.68
+R1:1.70
+R2:1.73
+R3:1.75
+R4:1.80
+R5:1.85
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):1.70
+0,236:1.69
+0,382:1.68
+0,500:1.67
+0,618:1.67
+0,786:1.66
+1,0(DIP):1.65
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-51,000.0
-PGC HAFTALIK:470,000.0
-PGC GUNLUK:-264.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+PGC AYLIK:273,000.0
+PGC HAFTALIK:-61,000.0
+PGC GUNLUK:-111.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.48, ROA=-0.06, Net Marj=-0.1 → Zayıf
