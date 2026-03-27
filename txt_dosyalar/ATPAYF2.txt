@@ -1,50 +1,50 @@
 ===ATPAYF2===
-Analiz Tarihi: 26.03.2026
+Analiz Tarihi: 27.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,20
-KAPANIS:1,25
-GUN.F%:4,17
+ACILIS:1,26
+KAPANIS:1,32
+GUN.F%:5,60
 G.DUSUK:1,19
-G.YUKSEK:1,28
-G.HACIM:1.493.861,00
+G.YUKSEK:1,32
+G.HACIM:4.187.889,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:1.25
-UST BANT:1.4953
-ALT BANT:1.1460
-FIYAT/BANT ORANI:29.77
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:1.32
+UST BANT:1.4494
+ALT BANT:1.1681
+FIYAT/BANT ORANI:54.00
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
-SINYAL:1.25
-KAPANIS:-51.16
-WT1:-45.38
-WT2:-5.78
+SINYAL:1.32
+KAPANIS:-51.1
+WT1:-48.26
+WT2:-2.84
 WT1-WT2:Düşüş
 KESİSİM YONU:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:1.20
+SINYAL:1.23
 S5:1.15
-S4:1.11
-S3:1.02
-S2:0.93
-S1:1.24
-P:1.29
-R1:1.33
-R2:1.38
-R3:1.47
-R4:1.56
+S4:1.10
+S3:0.97
+S2:0.84
+S1:1.28
+P:1.36
+R1:1.41
+R2:1.49
+R3:1.62
+R4:1.75
 R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:1.28
-0,0(TEPE):1.26
-0,236:1.25
-0,382:1.23
-0,500:1.22
-0,618:1.21
+SINYAL:1.32
+0,0(TEPE):1.29
+0,236:1.27
+0,382:1.25
+0,500:1.24
+0,618:1.22
 0,786:1.19
-1,0(DIP):Güçlü direnç aşıldı. Pozisyonunu koru.
+1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
