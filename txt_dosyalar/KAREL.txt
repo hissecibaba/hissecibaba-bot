@@ -1,58 +1,58 @@
 ===KAREL===
-Analiz Tarihi: 30.03.2026
+Analiz Tarihi: 31.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,41
-KAPANIS:8,42
-GUN.F%:0,12
-G.DUSUK:8,25
-G.YUKSEK:8,44
-G.HACIM:64.900.928,00
-PGC8:-1.928.000,00
+ACILIS:8,42
+KAPANIS:8,52
+GUN.F%:1,19
+G.DUSUK:8,41
+G.YUKSEK:8,83
+G.HACIM:84.289.641,00
+PGC8:-269.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:8.42
-UST BANT:8.5914
-ALT BANT:8.3041
-FIYAT/BANT ORANI:40.34
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:8.52
+UST BANT:8.5535
+ALT BANT:8.3504
+FIYAT/BANT ORANI:83.53
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:8.42
-WT1:-48.44
-WT2:-47.83
-WT1-WT2:-0.62
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:8.52
+WT1:-43.26
+WT2:-46.61
+WT1-WT2:3.35
+KESİSİM YONU:Yükseliş
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:8.30
-S4:8.18
-S3:8.11
-S2:7.92
-S1:7.73
-P:8.37
-R1:8.49
-R2:8.56
-R3:8.68
-R4:8.87
-R5:9.06
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):8.44
-0,236:8.40
-0,382:8.37
-0,500:8.34
-0,618:8.32
-0,786:8.29
-1,0(DIP):8.25
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+S5:8.34
+S4:8.17
+S3:7.92
+S2:7.50
+S1:7.08
+P:8.59
+R1:8.76
+R2:9.01
+R3:9.18
+R4:9.60
+R5:10.02
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):8.83
+0,236:8.73
+0,382:8.67
+0,500:8.62
+0,618:8.57
+0,786:8.50
+1,0(DIP):8.41
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-569,000.0
-PGC HAFTALIK:-2,722,000.0
-PGC GUNLUK:-1.928.000,00
+PGC AYLIK:-6,866,000.0
+PGC HAFTALIK:-131,000.0
+PGC GUNLUK:-269.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
