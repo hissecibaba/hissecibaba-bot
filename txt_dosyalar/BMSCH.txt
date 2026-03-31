@@ -1,27 +1,27 @@
 ===BMSCH===
-Analiz Tarihi: 30.03.2026
+Analiz Tarihi: 31.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:17,54
-KAPANIS:17,07
-GUN.F%:-2,46
-G.DUSUK:17,07
-G.YUKSEK:17,88
-G.HACIM:37.805.950,00
-PGC8:4.000,00
+ACILIS:nan
+KAPANIS:nan
+GUN.F%:0,00
+G.DUSUK:nan
+G.YUKSEK:nan
+G.HACIM:nan
+PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:17.07
-UST BANT:17.9181
-ALT BANT:16.5581
-FIYAT/BANT ORANI:37.64
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:nan
+UST BANT:nan
+ALT BANT:nan
+FIYAT/BANT ORANI:nan
+TREND YONU:Yatay
+SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:17.07
+KAPANIS:nan
 WT1:-19.39
-WT2:-16.5
-WT1-WT2:-2.89
+WT2:-18.44
+WT1-WT2:-0.95
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
@@ -49,11 +49,11 @@ SINYAL:SAT
 1,0(DIP):17.07
 SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:2,327,000.0
-PGC HAFTALIK:249,000.0
-PGC GUNLUK:4.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:TUT
+PGC AYLIK:2,580,000.0
+PGC HAFTALIK:360,000.0
+PGC GUNLUK:0,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Tut.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.07, ROA=-0.04, Net Marj=-0.03 → Zayıf
