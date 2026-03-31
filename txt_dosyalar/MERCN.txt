@@ -1,27 +1,27 @@
 ===MERCN===
-Analiz Tarihi: 30.03.2026
+Analiz Tarihi: 31.03.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:16,21
-KAPANIS:16,05
-GUN.F%:-0,93
-G.DUSUK:15,80
-G.YUKSEK:16,24
-G.HACIM:34.902.986,00
-PGC8:152.000,00
+ACILIS:nan
+KAPANIS:nan
+GUN.F%:0,00
+G.DUSUK:nan
+G.YUKSEK:nan
+G.HACIM:nan
+PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:16.05
-UST BANT:17.1113
-ALT BANT:15.6839
-FIYAT/BANT ORANI:25.65
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:nan
+UST BANT:nan
+ALT BANT:nan
+FIYAT/BANT ORANI:nan
+TREND YONU:Yatay
+SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:16.05
+KAPANIS:nan
 WT1:-37.64
-WT2:-30.63
-WT1-WT2:-7.02
+WT2:-34.27
+WT1-WT2:-3.37
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
@@ -49,11 +49,11 @@ SINYAL:AL
 1,0(DIP):15.80
 SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-6,296,000.0
-PGC HAFTALIK:-270,000.0
-PGC GUNLUK:152.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:TUT
+PGC AYLIK:-5,223,000.0
+PGC HAFTALIK:-233,000.0
+PGC GUNLUK:0,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Tut.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.06, ROA=0.04, Net Marj=0.05 → Zayıf
