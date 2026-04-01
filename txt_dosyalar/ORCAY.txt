@@ -1,58 +1,58 @@
 ===ORCAY===
-Analiz Tarihi: 31.03.2026
+Analiz Tarihi: 01.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,18
-KAPANIS:3,23
-GUN.F%:1,89
-G.DUSUK:3,14
+ACILIS:3,23
+KAPANIS:3,26
+GUN.F%:0,93
+G.DUSUK:3,23
 G.YUKSEK:3,30
-G.HACIM:5.641.918,00
-PGC8:67.000,00
+G.HACIM:2.929.073,00
+PGC8:175.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:3.23
-UST BANT:3.4134
-ALT BANT:3.1103
-FIYAT/BANT ORANI:39.50
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:3.26
+UST BANT:3.3733
+ALT BANT:3.1298
+FIYAT/BANT ORANI:53.49
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:3.23
-WT1:-49.34
-WT2:-43.14
-WT1-WT2:-6.2
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:3.26
+WT1:-47.26
+WT2:-46.48
+WT1-WT2:-0.79
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:3.15
-S4:3.06
-S3:2.99
-S2:2.83
-S1:2.67
-P:3.22
-R1:3.31
-R2:3.38
-R3:3.47
-R4:3.63
-R5:3.79
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
+S5:3.23
+S4:3.19
+S3:3.16
+S2:3.09
+S1:3.02
+P:3.26
+R1:3.30
+R2:3.33
+R3:3.37
+R4:3.44
+R5:3.51
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
 0,0(TEPE):3.30
-0,236:3.26
-0,382:3.24
-0,500:3.22
-0,618:3.20
-0,786:3.17
-1,0(DIP):3.14
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+0,236:3.28
+0,382:3.27
+0,500:3.26
+0,618:3.26
+0,786:3.24
+1,0(DIP):3.23
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-1,317,000.0
-PGC HAFTALIK:57,000.0
-PGC GUNLUK:67.000,00
+PGC AYLIK:-1,278,000.0
+PGC HAFTALIK:235,000.0
+PGC GUNLUK:175.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
