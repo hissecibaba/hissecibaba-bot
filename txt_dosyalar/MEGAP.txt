@@ -1,59 +1,59 @@
 ===MEGAP===
-Analiz Tarihi: 01.04.2026
+Analiz Tarihi: 02.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,30
-KAPANIS:2,35
-GUN.F%:2,17
-G.DUSUK:2,30
-G.YUKSEK:2,35
-G.HACIM:3.654.882,00
-PGC8:-117.000,00
+ACILIS:2,35
+KAPANIS:2,42
+GUN.F%:2,98
+G.DUSUK:2,35
+G.YUKSEK:2,42
+G.HACIM:4.854.899,00
+PGC8:68.000,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:2.35
-UST BANT:2.3939
-ALT BANT:2.2718
-FIYAT/BANT ORANI:64.02
+SINYAL:TUT
+KAPANIS:2.42
+UST BANT:2.4168
+ALT BANT:2.2803
+FIYAT/BANT ORANI:102.37
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.35
-WT1:-53.66
-WT2:-55.47
-WT1-WT2:1.8
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:2.42
+WT1:-48.35
+WT2:-53.7
+WT1-WT2:5.35
+KESİSİM YONU:Yükseliş
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:2.32
-S4:2.28
-S3:2.27
-S2:2.22
-S1:2.17
-P:2.33
-R1:2.37
-R2:2.38
-R3:2.42
-R4:2.47
-R5:2.52
+S5:2.37
+S4:2.33
+S3:2.30
+S2:2.23
+S1:2.16
+P:2.40
+R1:2.44
+R2:2.47
+R3:2.51
+R4:2.58
+R5:2.65
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):2.35
-0,236:2.34
-0,382:2.33
-0,500:2.33
-0,618:2.32
-0,786:2.31
-1,0(DIP):2.30
+0,0(TEPE):2.42
+0,236:2.40
+0,382:2.39
+0,500:2.38
+0,618:2.38
+0,786:2.36
+1,0(DIP):2.35
 SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-5,341,000.0
-PGC HAFTALIK:-223,000.0
-PGC GUNLUK:-117.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-5,449,000.0
+PGC HAFTALIK:-390,000.0
+PGC GUNLUK:68.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/09
 Karlılık 	: ROE=0.04, ROA=0.02, Net Marj=0.01 → Zayıf
