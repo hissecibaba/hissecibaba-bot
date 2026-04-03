@@ -1,58 +1,58 @@
 ===VESBE===
-Analiz Tarihi: 02.04.2026
+Analiz Tarihi: 03.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:7,01
-KAPANIS:6,99
-GUN.F%:-0,99
+ACILIS:6,99
+KAPANIS:7,04
+GUN.F%:0,72
 G.DUSUK:6,95
-G.YUKSEK:7,02
-G.HACIM:58.155.920,00
-PGC8:-1.288.000,00
+G.YUKSEK:7,27
+G.HACIM:116.183.642,00
+PGC8:-2.470.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:6.99
-UST BANT:7.1003
-ALT BANT:6.9153
-FIYAT/BANT ORANI:40.38
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:7.04
+UST BANT:7.0878
+ALT BANT:6.9328
+FIYAT/BANT ORANI:69.19
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:6.99
-WT1:-48.14
-WT2:-49.49
-WT1-WT2:1.36
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:7.04
+WT1:-43.35
+WT2:-47.75
+WT1-WT2:4.39
+KESİSİM YONU:Yükseliş
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:6.95
-S4:6.92
-S3:6.88
-S2:6.81
-S1:6.74
-P:6.99
-R1:7.02
-R2:7.06
-R3:7.09
-R4:7.16
-R5:7.23
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):7.02
-0,236:7.00
-0,382:6.99
-0,500:6.98
-0,618:6.98
-0,786:6.96
+S5:6.90
+S4:6.77
+S3:6.58
+S2:6.26
+S1:5.94
+P:7.09
+R1:7.22
+R2:7.41
+R3:7.54
+R4:7.86
+R5:8.18
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):7.27
+0,236:7.19
+0,382:7.15
+0,500:7.11
+0,618:7.07
+0,786:7.02
 1,0(DIP):6.95
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-13,731,000.0
-PGC HAFTALIK:-874,000.0
-PGC GUNLUK:-1.288.000,00
+PGC AYLIK:-14,824,000.0
+PGC HAFTALIK:-2,541,000.0
+PGC GUNLUK:-2.470.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
