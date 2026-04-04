@@ -743,7 +743,6 @@ def start_bot():
 
     updater.start_polling()
     updater.idle()
-
 # PARÇA 5C/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 import pytz
@@ -758,47 +757,12 @@ def otomatik_mesaj_telegram():
             chat_id,
             "📢 Otomatik Mesaj\n\n"
             "Hissecibaba program verileri güncellenmiştir.\n"
-            "Hisse bilgileri için hissenin adını,\n"
-            "Günlük AL sinyali verenler için 'AL',\n"
-            "Günlük SAT sinyali verenler için 'SAT',\n"
-            "Günlük muhtemel TAVAN listesi için 'TAVAN',\n"
-            "Günlük ÖNERİ için 'ÖNERİ',\n"
-            "Temel veri dosyası için 'TEMEL',\n"
-            "Teknik veri dosyası için 'TEKNİK',\n"
-            "ve Bank Off Alınan/Satılan için 'BOFA',\n"
-            "yazınız. (Yazımlarınızda büyük/küçük harf farketmez)"
+            "Komutlar: AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA"
         )
-
-# 🔹 Mobil komut kontrolü (abonelik süresi)
-def check_subscription(user_id: str) -> bool:
-    try:
-        logging.info(f"📂 Mobil izinliler klasörü içeriği: {os.listdir(MOBIL_IZINLILER_DIR)}")
-        files = [fn for fn in os.listdir(MOBIL_IZINLILER_DIR) if fn.startswith(user_id)]
-        if not files:
-            logging.warning(f"❌ Abonelik dosyası bulunamadı → User ID: {user_id}")
-            return False
-        files.sort(reverse=True)
-        filepath = os.path.join(MOBIL_IZINLILER_DIR, files[0])
-        logging.info(f"✅ Abonelik dosyası bulundu: {filepath}")
-        with open(filepath, "r", encoding="utf-8") as f:
-            lines = f.readlines()
-        end_line = [ln for ln in lines if ln.startswith("END_DATE")]
-        if not end_line:
-            logging.warning(f"❌ END_DATE satırı bulunamadı → User ID: {user_id}")
-            return False
-        end_date_str = end_line[0].split(":", 1)[1].strip()
-        end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
-        now = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
-        logging.info(f"⏳ Abonelik kontrolü → Şimdi: {now}, Bitiş: {end_date}")
-        return now <= end_date
-    except Exception as e:
-        logging.error(f"check_subscription failed: {e}")
-        return False
 
 # 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
 def keep_alive():
     try:
-        # ✅ Artık POST isteği atıyoruz, 405 hatası çözüldü
         requests.post("https://hissecibaba-bot.onrender.com/check", json={})
         logging.info("🔄 Keep-alive ping gönderildi.")
     except Exception as e:
@@ -829,7 +793,7 @@ def monthly_cleanup():
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
-# Otomatik mesaj job'u
+# Otomatik mesaj job'u (her iş günü 20:30)
 scheduler.add_job(
     otomatik_mesaj_telegram,
     "cron",
@@ -841,11 +805,11 @@ scheduler.add_job(
     timezone=istanbul_tz
 )
 
-# Keep-alive job'u
+# Keep-alive job'u (her 30 dakikada bir)
 scheduler.add_job(
     keep_alive,
     "interval",
-    minutes=5,
+    minutes=30,
     id="keep_alive_ping",
     replace_existing=True,
     timezone=istanbul_tz
@@ -882,3 +846,4 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
     flask_app.run(host="0.0.0.0", port=port)
+
