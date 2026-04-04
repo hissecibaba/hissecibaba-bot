@@ -411,189 +411,7 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-
-# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback)
-
-@flask_app.route("/webhook", methods=["POST"])
-def webhook():
-    try:
-        data = request.get_json(silent=True) or {}
-
-        msg = data.get("message", "")
-        if isinstance(msg, dict):
-            msg_text = msg.get("text", "")
-            chat_id = msg.get("chat", {}).get("id", 0)
-        else:
-            msg_text = msg
-            chat_id = data.get("chat_id", 0)
-
-        text_low = str(msg_text).lower()
-        mobil_mode = data.get("mobil_mode", False)
-
-        # MATRİKS klasörü bulucu
-        def find_latest_matrix_folder():
-            try:
-                folders = []
-                for fn in os.listdir(MATRIX_DIR):
-                    full_path = os.path.join(MATRIX_DIR, fn)
-                    if os.path.isdir(full_path):
-                        try:
-                            dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
-                            folders.append((dt, full_path))
-                        except Exception:
-                            continue
-                folders.sort(reverse=True)
-                return folders[0][1] if folders else None
-            except Exception as e:
-                logging.error(f"find_latest_matrix_folder failed: {e}")
-                return None
-
-        # --- Komutlar ---
-        if any(x in text_low for x in ["öneri", "oneri", "önerı", "onerı"]):
-            fp = find_latest_file(ONERI_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
-                    return "OK", 200
-            send_message(chat_id, "❌ ÖNERİ listesi bulunamadı.", mobil_mode)
-            return "❌ ÖNERİ listesi bulunamadı.", 200
-
-        if text_low == "tavan":
-            fp = find_latest_file(TAVAN_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
-                    return "OK", 200
-            send_message(chat_id, "❌ TAVAN listesi bulunamadı.", mobil_mode)
-            return "❌ TAVAN listesi bulunamadı.", 200
-
-        if text_low == "temel":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "Temp.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
-                    return "OK", 200
-            send_message(chat_id, "❌ Temp.xlsx bulunamadı.", mobil_mode)
-            return "❌ Temp.xlsx bulunamadı.", 200
-
-        if text_low == "teknik":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
-                    return "OK", 200
-            send_message(chat_id, "❌ gunluk_veri.xlsx bulunamadı.", mobil_mode)
-            return "❌ gunluk_veri.xlsx bulunamadı.", 200
-
-        if text_low == "bofa":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
-                    return "OK", 200
-            send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
-            return "❌ AlinanSatilan.xlsx bulunamadı.", 200
-
-        # 📌 Ballı Kaymak
-        if "balli" in text_low or "kaymak" in text_low:
-            fp = find_latest_file(BALLI_KAYMAK_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
-                    return "OK", 200
-            send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
-            return "❌ Ballı Kaymak listesi bulunamadı.", 200
-
-        # 📌 Dünkü Performans
-        if "dünkü" in text_low and "performans" in text_low:
-            fp = find_latest_file(PERFORMANS_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-            send_message(chat_id, "❌ Performans dosyası bulunamadı.", mobil_mode)
-            return "❌ Performans dosyası bulunamadı.", 200
-
-        # 📌 Tüm Hisseler
-        if "tüm" in text_low and "hisse" in text_low:
-            fp = find_latest_file(BISTTUM_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-            send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
-            return "❌ Tüm hisseler dosyası bulunamadı.", 200
-
-        # 📌 Mobil: Bugün AL
-        if text_low in ["bugün al", "bugunal", "al_mobil"]:
-            fp = find_latest_file(AL_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-            send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
-            return "❌ Bugün AL listesi bulunamadı.", 200
-
-        # 📌 Mobil: Bugün SAT
-        if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
-            fp = find_latest_file(SAT_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-            send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
-            return "❌ Bugün SAT listesi bulunamadı.", 200
-
-        # 📌 Telegram: AL
-        if text_low == "al":
-            fp = find_latest_file(AL_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                    return "OK", 200
-            send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
-            return "❌ AL listesi bulunamadı.", 200
-
-        # 📌 Telegram: SAT
-        if text_low == "sat":
-            fp = find_latest_file(SAT_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    send_message(chat_id, content, mobil_mode)
-                    return content, 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return "OKAdil, işte sana **tam ve düzeltilmiş PARÇA 4/5**. Bu versiyonda “Tüm Hisseler”, “Dünkü Performans” ve “Ballı Kaymak” komutları boşluklu yazımları da yakalayacak şekilde güncellendi. Her komutun sonunda `return` var, en sonunda da fallback ile garanti bir response dönüyor.  
-
----
-
-```python
-# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback)
+# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 1
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -688,12 +506,15 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
+# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
+
         # 📌 Ballı Kaymak
         if "balli" in text_low or "kaymak" in text_low:
             fp = find_latest_file(BALLI_KAYMAK_DIR)
             if fp:
                 if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                    with open(fp, "r", encoding="utf-8") as f: 
+                        content = f.read()
                     send_message(chat_id, content, mobil_mode)
                     return content, 200
                 else:
@@ -707,7 +528,8 @@ def webhook():
         if "dünkü" in text_low and "performans" in text_low:
             fp = find_latest_file(PERFORMANS_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                with open(fp, "r", encoding="utf-8") as f: 
+                    content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             send_message(chat_id, "❌ Performans dosyası bulunamadı.", mobil_mode)
@@ -717,7 +539,8 @@ def webhook():
         if "tüm" in text_low and "hisse" in text_low:
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                with open(fp, "r", encoding="utf-8") as f: 
+                    content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
@@ -727,7 +550,8 @@ def webhook():
         if text_low in ["bugün al", "bugunal", "al_mobil"]:
             fp = find_latest_file(AL_MOBIL_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                with open(fp, "r", encoding="utf-8") as f: 
+                    content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
@@ -737,7 +561,8 @@ def webhook():
         if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
             fp = find_latest_file(SAT_MOBIL_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                with open(fp, "r", encoding="utf-8") as f: 
+                    content = f.read()
                 send_message(chat_id, content, mobil_mode)
                 return content, 200
             send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
@@ -748,7 +573,8 @@ def webhook():
             fp = find_latest_file(AL_DIR)
             if fp:
                 if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                    with open(fp, "r", encoding="utf-8") as f: 
+                        content = f.read()
                     send_message(chat_id, content, mobil_mode)
                     return content, 200
                 else:
@@ -757,6 +583,7 @@ def webhook():
                     return "OK", 200
             send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
             return "❌ AL listesi bulunamadı.", 200
+
         # 📌 Telegram: SAT
         if text_low == "sat":
             fp = find_latest_file(SAT_DIR)
@@ -780,7 +607,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
