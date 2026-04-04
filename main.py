@@ -110,20 +110,20 @@ def find_latest_file(folder_path: str) -> str:
             if fn.lower().endswith(".txt"):
                 full_path = os.path.join(folder_path, fn)
                 try:
-                    parts = fn[:-4].split("_")
-                    if len(parts) >= 3:
-                        dt = datetime.datetime.strptime(parts[-2] + parts[-1], "%Y%m%d%H%M")
-                        files.append((dt, full_path))
-                    else:
-                        files.append((datetime.datetime.min, full_path))
+                    # 🔹 Dosya adındaki tarihi yakala (örn: 03.04.2026.txt)
+                    date_str = fn.replace(".txt", "")
+                    dt = datetime.datetime.strptime(date_str, "%d.%m.%Y")
+                    files.append((dt, full_path))
                 except Exception:
-                    files.append((datetime.datetime.min, full_path))
-        files.sort(reverse=True)
+                    logging.warning(f"❌ Tarih parse edilemedi: {fn}")
+                    continue
+        files.sort(reverse=True, key=lambda x: x[0])
         if files:
             logging.info(f"✅ Seçilen dosya: {files[0][1]}")
+            return files[0][1]
         else:
             logging.warning("❌ Hiç dosya bulunamadı.")
-        return files[0][1] if files else None
+            return None
     except Exception as e:
         logging.error(f"find_latest_file failed: {e}")
         return None
@@ -181,6 +181,7 @@ def find_latest_matrix_file(keyword: str) -> str:
     except Exception as e:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
+
         
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
 
