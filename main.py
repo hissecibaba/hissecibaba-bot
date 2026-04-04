@@ -834,7 +834,12 @@ scheduler.add_job(
 
 scheduler.start()
 
-# 🔹 Flask uygulaması çalıştırma
+# 🔹 Flask uygulaması çalıştırma (Render uyumlu)
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
-    flask_app.run(host="0.0.0.0", port=8020)
+    port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
+    flask_app.run(host="0.0.0.0", port=port)
+
+
+
+
