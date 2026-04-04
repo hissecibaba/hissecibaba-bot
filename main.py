@@ -506,8 +506,9 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
-
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
+
+        logging.info(f"Gelen text_low: {text_low}")  # 📌 Mobil stringi görmek için
 
         # 📌 Ballı Kaymak
         if ("balli" in text_low or "kaymak" in text_low) or "mobil:balli_kaymak" in text_low:
@@ -612,6 +613,7 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
+
 
 
 
