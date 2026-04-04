@@ -1,6 +1,6 @@
 flask
 requests
-python-telegram-bot
+python-telegram-bot==13.15
 gunicorn
 matplotlib
 numpy
