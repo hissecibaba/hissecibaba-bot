@@ -86,6 +86,8 @@ def find_id_no_by_device(device_id: str):
 
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
+import datetime
+
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
     try:
         if not os.path.exists(file_path):
@@ -110,9 +112,12 @@ def find_latest_file(folder_path: str) -> str:
             if fn.lower().endswith(".txt"):
                 full_path = os.path.join(folder_path, fn)
                 try:
-                    # 🔹 Dosya adındaki tarihi yakala (örn: 03.04.2026.txt)
                     date_str = fn.replace(".txt", "")
-                    dt = datetime.datetime.strptime(date_str, "%d.%m.%Y")
+                    # 🔹 Hem sadece tarih hem de tarih+saat formatını dene
+                    try:
+                        dt = datetime.datetime.strptime(date_str, "%d.%m.%Y")
+                    except ValueError:
+                        dt = datetime.datetime.strptime(date_str, "%d.%m.%Y_%H%M")
                     files.append((dt, full_path))
                 except Exception:
                     logging.warning(f"❌ Tarih parse edilemedi: {fn}")
@@ -181,6 +186,7 @@ def find_latest_matrix_file(keyword: str) -> str:
     except Exception as e:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
+
 
         
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
