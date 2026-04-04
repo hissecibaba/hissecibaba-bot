@@ -17,5 +17,5 @@ ENV PORT=8020
 # Flask uygulamasının dinleyeceği portu expose et
 EXPOSE 8020
 
-# Uygulamayı başlat
-CMD ["python", "main.py"]
+# Uygulamayı production-ready şekilde başlat
+CMD ["gunicorn", "-b", "0.0.0.0:8020", "main:flask_app"]
