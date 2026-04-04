@@ -411,6 +411,7 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
+
 # PARÇA 4A/5 — Webhook Route (Temel fonksiyonlar ve dosya komutları)
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -568,7 +569,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
-
 # PARÇA 4B/5 — Webhook Route (AL/SAT komutları, mobil varyantlar ve fallback)
 
         # 📌 Mobil tarafı: Bugün AL listesi
