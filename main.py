@@ -378,9 +378,7 @@ def upload_file():
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
                 logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
 
-                # 🔹 Dosya kaydedildikten sonra GitHub senkronizasyonu tetikle
-                sync_to_github()
-
+                # ❌ Artık burada sync_to_github çağrısı yok, sadece dosya kaydı yapılıyor
                 return "✅ Consent & Subscription saved", 200
             else:
                 return "❌ device_id veya UUID eksik", 400
@@ -407,9 +405,7 @@ def upload_file():
         file.save(save_path)
         logging.info(f"✅ File uploaded to {target}: {file.filename}")
 
-        # 🔹 Dosya kaydedildikten sonra GitHub senkronizasyonu tetikle
-        sync_to_github()
-
+        # ❌ Artık burada sync_to_github çağrısı yok, sadece dosya kaydı yapılıyor
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
@@ -747,10 +743,11 @@ def start_bot():
     updater.start_polling()
     updater.idle()
 
-# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
+# PARÇA 5C/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 import pytz
 import requests
+import shutil
 
 def otomatik_mesaj_telegram():
     logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
@@ -806,6 +803,27 @@ def keep_alive():
     except Exception as e:
         logging.error(f"Keep-alive ping failed: {e}")
 
+# 🔹 Aylık temizlik fonksiyonu
+def monthly_cleanup():
+    try:
+        keep_list = [
+            "runtime.txt", "requirements.txt", "render.yaml", "main.py", "Dockerfile",
+            "onaylayanlar", "mobil_izinliler", "assets"
+        ]
+        for item in os.listdir(BASE_DIR):
+            if item in keep_list:
+                continue
+            path = os.path.join(BASE_DIR, item)
+            if os.path.isfile(path):
+                os.remove(path)
+                logging.info(f"🗑 Dosya silindi: {path}")
+            elif os.path.isdir(path):
+                shutil.rmtree(path)
+                logging.info(f"🗑 Klasör silindi: {path}")
+        logging.info("✅ Aylık temizlik tamamlandı.")
+    except Exception as e:
+        logging.error(f"monthly_cleanup failed: {e}")
+
 # 🔹 Scheduler ayarı (pytz ile timezone eklenmiş)
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
@@ -832,6 +850,30 @@ scheduler.add_job(
     timezone=istanbul_tz
 )
 
+# Günlük tek deploy job'u (20:30)
+scheduler.add_job(
+    sync_to_github,
+    "cron",
+    day_of_week="mon-fri",
+    hour=20,
+    minute=30,
+    id="daily_sync",
+    replace_existing=True,
+    timezone=istanbul_tz
+)
+
+# Aylık temizlik job'u (her ayın 1. günü 00:01)
+scheduler.add_job(
+    monthly_cleanup,
+    "cron",
+    day=1,
+    hour=0,
+    minute=1,
+    id="monthly_cleanup",
+    replace_existing=True,
+    timezone=istanbul_tz
+)
+
 scheduler.start()
 
 # 🔹 Flask uygulaması çalıştırma (Render uyumlu)
@@ -839,7 +881,3 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
     flask_app.run(host="0.0.0.0", port=port)
-
-
-
-
