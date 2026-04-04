@@ -411,7 +411,8 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-# PARÇA 4/5 — Webhook Route ve Komutlar
+# PARÇA 4A/5 — Webhook Route (Temel fonksiyonlar ve dosya komutları)
+
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
     try:
@@ -562,6 +563,14 @@ def webhook():
                 send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
                 return "❌ Tüm hisseler dosyası bulunamadı.", 200
 
+        # 📌 Buradan sonrası 4B/5'te devam edecek (AL/SAT komutları, mobil varyantlar, fallback)
+
+    except Exception as e:
+        logging.error(f"/webhook route hatası: {e}")
+        return f"Hata: {e}", 500
+
+# PARÇA 4B/5 — Webhook Route (AL/SAT komutları, mobil varyantlar ve fallback)
+
         # 📌 Mobil tarafı: Bugün AL listesi
         if text_low in ["bugün al", "bugunal", "al_mobil"]:
             fp = find_latest_file(AL_MOBIL_DIR)
@@ -622,21 +631,13 @@ def webhook():
                 send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
                 return "❌ SAT listesi bulunamadı.", 200
 
-        # 🔹 Yeni ekleme: Sembol isimleri ile dosya gönderme (fallback)
-        symbol_file = os.path.join(TXT_DIR, f"{text_low.upper()}.txt")
-        if os.path.exists(symbol_file):
-            with open(symbol_file, "r", encoding="utf-8") as f:
-                content = f.read()
-            send_message(chat_id, content, mobil_mode)
-            return content, 200
-
-        # Eğer hiçbir komuta uymadıysa, serbest mesajı yakala
-        send_message(chat_id, f"Mesajını aldım: {text_low}", mobil_mode)
-        return "Unhandled message", 200
+        # 📌 Fallback: Diğer mesajlar
+        send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
+        return f"Mesajını aldım: {msg_text}", 200
 
     except Exception as e:
-        logging.error(f"/webhook failed: {e}")
-        return "Sunucu hatası", 500
+        logging.error(f"/webhook route hatası: {e}")
+        return f"Hata: {e}", 500
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
