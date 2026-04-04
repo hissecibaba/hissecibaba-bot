@@ -11,5 +11,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Tüm kodu kopyala
 COPY . .
 
+# Render'ın verdiği PORT'u environment variable olarak ayarla
+ENV PORT=8020
+
+# Flask uygulamasının dinleyeceği portu expose et
+EXPOSE 8020
+
 # Uygulamayı başlat
 CMD ["python", "main.py"]
