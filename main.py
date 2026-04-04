@@ -506,10 +506,11 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
+
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
 
         # 📌 Ballı Kaymak
-        if "balli" in text_low or "kaymak" in text_low:
+        if ("balli" in text_low or "kaymak" in text_low) or "mobil:balli_kaymak" in text_low:
             fp = find_latest_file(BALLI_KAYMAK_DIR)
             if fp:
                 if mobil_mode:
@@ -525,7 +526,7 @@ def webhook():
             return "❌ Ballı Kaymak listesi bulunamadı.", 200
 
         # 📌 Dünkü Performans
-        if "dünkü" in text_low and "performans" in text_low:
+        if ("dünkü" in text_low and "performans" in text_low) or "mobil:dunku_performans" in text_low:
             fp = find_latest_file(PERFORMANS_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
@@ -536,7 +537,7 @@ def webhook():
             return "❌ Performans dosyası bulunamadı.", 200
 
         # 📌 Tüm Hisseler
-        if "tüm" in text_low and "hisse" in text_low:
+        if ("tüm" in text_low and "hisse" in text_low) or "mobil:tum_hisseler" in text_low:
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
