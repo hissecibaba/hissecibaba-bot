@@ -87,6 +87,23 @@ def find_id_no_by_device(device_id: str):
         logging.error(f"find_id_no_by_device failed: {e}")
         return None
 
+# ✅ Yeni fonksiyon: Mobil tarafında sembol bazlı dosya okuma
+def get_symbol_file_content(symbol: str) -> str:
+    """
+    txt_dosyalar klasöründen sembol.txt dosyasını okur ve içeriğini döndürür.
+    Örn: get_symbol_file_content("KCHOL") → kchol.txt içeriği
+    """
+    try:
+        fp = os.path.join(TXT_DIR, f"{symbol.lower()}.txt")
+        if os.path.exists(fp):
+            with open(fp, "r", encoding="utf-8") as f:
+                return f.read()
+        return None
+    except Exception as e:
+        logging.error(f"get_symbol_file_content failed: {e}")
+        return None
+
+
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları
 
 import datetime
@@ -190,20 +207,16 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
 
-
-        
-# PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check)
+# PARÇA 3A/5 — Bölüm A (Optimize Sync + Local Rsync Only, No GitHub Push)
 
 import os
 import logging
-import datetime
-import uuid
 import subprocess
 
 from flask import Flask, request, jsonify
 
 def sync_to_github():
-    """Render içindeki klasörleri GitHub repo ile senkronize eder (optimize edilmiş)."""
+    """Render içindeki klasörleri lokal repo ile senkronize eder (push işlemleri iptal edildi)."""
     try:
         repo_url = os.getenv("GITHUB_REPO")
         token = os.getenv("GITHUB_TOKEN")
@@ -220,8 +233,6 @@ def sync_to_github():
                 f"https://{token}@{repo_url}",
                 repo_dir
             ], check=True)
-
-        changed_files = []
 
         # ✅ Senkronize edilecek klasörler (tam liste, kök dizindeki gerçek klasörler)
         target_dirs = [
@@ -244,54 +255,12 @@ def sync_to_github():
             )
             logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
 
-            # rsync çıktısından sadece dosya isimlerini ayıkla
-            for line in result.stdout.splitlines():
-                line = line.strip()
-                if not line:
-                    continue
-                if any(skip in line for skip in ["sending", "sent", "total size", "speedup"]):
-                    continue
-                if line.startswith("./"):
-                    continue
-                if line.endswith("/"):   # 🔹 klasörleri atla
-                    continue
-                changed_files.append(os.path.join(d, line))
-
-        # Git kimlik bilgisi ayarları
-        subprocess.run(["git", "config", "--global", "user.name", "RenderBot"], check=True)
-        subprocess.run(["git", "config", "--global", "user.email", "render@hissecibaba.com"], check=True)
-        subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
-        subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
-
-        # Sadece değişen dosyaları add et ve commit et
-        if changed_files:
-            for f in changed_files:
-                subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
-
-            # 🔹 gerçekten değişiklik var mı kontrol et
-            status = subprocess.run(
-                ["git", "-C", repo_dir, "status", "--porcelain"],
-                capture_output=True, text=True
-            )
-
-            if status.stdout.strip():
-                commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
-                subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
-
-                # 🔹 Push öncesi remote ile senkronizasyon
-                subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
-
-                # 🔹 Ardından push
-                subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-
-                logging.info("✅ GitHub push tamamlandı.")
-            else:
-                logging.info("ℹ️ No staged changes, commit skipped.")
-        else:
-            logging.info("ℹ️ No changes detected, commit skipped.")
+        # ❌ Git commit/push adımları kaldırıldı
+        logging.info("ℹ️ Lokal senkronizasyon tamamlandı, GitHub push yapılmadı.")
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
+
 
 # PARÇA 3B/5 — Bölüm B (Consent ve Upload Route)
 
@@ -417,7 +386,6 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 1
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -524,6 +492,14 @@ def webhook():
             send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
             return "❌ Destek/Direnç dosyası bulunamadı.", 200
 
+        # 📌 Sembol bazlı komutlar (örneğin KCHOL → txt_dosyalar/kchol.txt)
+        fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
+        if os.path.exists(fp_symbol):
+            with open(fp_symbol, "r", encoding="utf-8") as f:
+                content = f.read()
+            send_message(chat_id, content, mobil_mode)
+            return content, 200
+
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
 
         logging.info(f"Gelen text_low: {text_low}")  # 📌 Mobil stringi görmek için
@@ -619,6 +595,14 @@ def webhook():
                     return "OK", 200
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
+
+        # 📌 Sembol bazlı komutlar (örneğin KCHOL → txt_dosyalar/kchol.txt)
+        fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
+        if os.path.exists(fp_symbol):
+            with open(fp_symbol, "r", encoding="utf-8") as f:
+                content = f.read()
+            send_message(chat_id, content, mobil_mode)
+            return content, 200
 
         # 📌 Fallback: Diğer mesajlar
         send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
