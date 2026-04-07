@@ -833,7 +833,6 @@ scheduler.add_job(
 scheduler.start()
 
 # 🔹 Deploy sonrası otomatik GitHub push
-@flask_app.before_first_request
 def initial_sync():
     try:
         logging.info("🚀 Deploy sonrası otomatik GitHub push başlatılıyor...")
@@ -844,6 +843,7 @@ def initial_sync():
 # 🔹 Flask uygulaması çalıştırma (Render uyumlu)
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
+    # Deploy sırasında initial_sync çağrısı
+    initial_sync()
     port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
     flask_app.run(host="0.0.0.0", port=port)
-
