@@ -32,6 +32,9 @@ BISTTUM_DIR = os.path.join(BASE_DIR, "bisttum")
 PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
 CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
 
+# 🔹 Yeni eklenen klasör sabiti (destek/direnç verileri için)
+DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destek_direnc")
+
 # 🔹 Onaylayanlar klasörü sabiti
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
 
@@ -225,7 +228,8 @@ def sync_to_github():
             "al", "sat", "al_listeleri", "sat_listeleri", "matriks",
             "tavan_listeleri", "txt_dosyalar", "öneri", "performans",
             "ballikaymak", "bisttum", "gorsel_cache",
-            "mobil_izinliler", "onaylayanlar", "assets"
+            "mobil_izinliler", "onaylayanlar", "assets",
+            "destek_direnc"   # 🔹 Yeni eklendi
         ]
 
         for d in target_dirs:
@@ -378,7 +382,9 @@ def upload_file():
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
                 logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
 
-                # ❌ Artık burada sync_to_github çağrısı yok, sadece dosya kaydı yapılıyor
+                # 🔹 Manuel deploy sırasında da GitHub push yapılabilmesi için
+                sync_to_github()
+
                 return "✅ Consent & Subscription saved", 200
             else:
                 return "❌ device_id veya UUID eksik", 400
@@ -405,7 +411,9 @@ def upload_file():
         file.save(save_path)
         logging.info(f"✅ File uploaded to {target}: {file.filename}")
 
-        # ❌ Artık burada sync_to_github çağrısı yok, sadece dosya kaydı yapılıyor
+        # 🔹 Manuel deploy sırasında da GitHub push yapılabilmesi için
+        sync_to_github()
+
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
@@ -505,6 +513,17 @@ def webhook():
                     return "OK", 200
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
+
+        # 📌 Destek/Direnç
+        if "destek" in text_low or "direnc" in text_low or "destek_direnc" in text_low:
+            fp = find_latest_file(DESTEK_DIRENC_DIR)
+            if fp:
+                with open(fp, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
+            send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
+            return "❌ Destek/Direnç dosyası bulunamadı.", 200
 
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
 
