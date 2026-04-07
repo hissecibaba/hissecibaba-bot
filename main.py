@@ -801,6 +801,10 @@ def sync_to_github():
             f"{BASE_DIR}/", repo_dir
         ], check=True)
 
+        # Git config (kimlik ayarı → commit için gerekli)
+        subprocess.run(["git", "-C", repo_dir, "config", "user.name", "hissecibaba-bot"], check=True)
+        subprocess.run(["git", "-C", repo_dir, "config", "user.email", "bot@hissecibaba.local"], check=True)
+
         # Git add
         subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
 
@@ -849,4 +853,3 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     port = int(os.getenv("PORT", 8020))
     flask_app.run(host="0.0.0.0", port=port)
-
