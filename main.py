@@ -842,18 +842,6 @@ scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0, minute=1,
 
 scheduler.start()
 
-# 🔹 Deploy sonrası otomatik GitHub push
-def initial_sync():
-    try:
-        logging.info("🚀 Deploy sonrası otomatik GitHub push başlatılıyor...")
-        sync_to_github()
-        logging.info("✅ Deploy sonrası GitHub push tamamlandı.")
-    except Exception as e:
-        logging.error(f"Deploy sonrası sync_to_github hatası: {e}")
-
-# ✅ Flask app oluşturulduktan hemen sonra çağır
-initial_sync()
-
 # 🔹 Flask uygulaması çalıştırma (Render uyumlu)
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
