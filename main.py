@@ -782,9 +782,15 @@ def monthly_cleanup():
 def sync_to_github():
     try:
         repo_url = os.getenv("GITHUB_REPO") or os.getenv("GITHUB_REPO_URL")
+        token = os.getenv("GITHUB_TOKEN")
+
         if not repo_url:
-            logging.error("❌ GITHUB_REPO_URL environment variable yok")
+            logging.error("❌ GITHUB_REPO environment variable yok")
             return
+
+        # Token varsa URL’ye ekle
+        if token and repo_url.startswith("https://"):
+            repo_url = repo_url.replace("https://", f"https://{token}@")
 
         repo_dir = "/tmp/hissecibaba_sync"
 
