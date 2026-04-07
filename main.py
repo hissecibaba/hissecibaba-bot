@@ -382,8 +382,7 @@ def upload_file():
                 logging.info(f"✅ JSON abonelik kaydı oluşturuldu: {izin_file}")
                 logging.info(f"✅ Onay dosyası oluşturuldu: {onay_file}")
 
-                # 🔹 Manuel deploy sırasında da GitHub push yapılabilmesi için
-                sync_to_github()
+                # ❌ Burada sync_to_github() kaldırıldı → her dosya yüklemede push olmayacak
 
                 return "✅ Consent & Subscription saved", 200
             else:
@@ -411,13 +410,13 @@ def upload_file():
         file.save(save_path)
         logging.info(f"✅ File uploaded to {target}: {file.filename}")
 
-        # 🔹 Manuel deploy sırasında da GitHub push yapılabilmesi için
-        sync_to_github()
+        # ❌ Burada da sync_to_github() kaldırıldı → her dosya yüklemede push olmayacak
 
         return f"✅ File uploaded to {target}", 200
     except Exception as e:
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
+
 
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 1
 
