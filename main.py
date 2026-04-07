@@ -780,7 +780,7 @@ scheduler.add_job(
 scheduler.add_job(
     keep_alive,
     "interval",
-    minutes=30,
+    minutes=10,
     id="keep_alive_ping",
     replace_existing=True,
     timezone=istanbul_tz
