@@ -1,8 +1,8 @@
 # Python 3.10.12 tabanlı resmi imajı kullan
 FROM python:3.10.12-slim
 
-# Sistem paketlerini güncelle ve git kur
-RUN apt-get update && apt-get install -y git && rm -rf /var/lib/apt/lists/*
+# Sistem paketlerini güncelle ve git + rsync kur
+RUN apt-get update && apt-get install -y git rsync && rm -rf /var/lib/apt/lists/*
 
 # Çalışma dizini ayarla
 WORKDIR /app
@@ -22,4 +22,3 @@ EXPOSE 8020
 
 # Uygulamayı production-ready şekilde başlat
 CMD ["gunicorn", "-b", "0.0.0.0:8020", "main:flask_app"]
-
