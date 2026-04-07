@@ -734,7 +734,8 @@ def otomatik_mesaj_telegram():
             chat_id,
             "📢 Otomatik Mesaj\n\n"
             "Hissecibaba program verileri güncellenmiştir.\n"
-            "Komutlar: AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA, DESTEK/DİRENÇ"
+            "Komutlar: HİSSE DURUMU İÇİN HİSSENİN SEMBOLÜ (ÖRN:KCHOL) \n"
+            "AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA"
         )
 
 def keep_alive():
