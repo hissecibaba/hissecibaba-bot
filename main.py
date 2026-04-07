@@ -751,7 +751,6 @@ def otomatik_mesaj_telegram():
             "Komutlar: AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA, DESTEK/DİRENÇ"
         )
 
-# 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
 def keep_alive():
     try:
         requests.post("https://hissecibaba-bot.onrender.com/check", json={})
@@ -759,7 +758,6 @@ def keep_alive():
     except Exception as e:
         logging.error(f"Keep-alive ping failed: {e}")
 
-# 🔹 Aylık temizlik fonksiyonu
 def monthly_cleanup():
     try:
         keep_list = [
@@ -780,55 +778,17 @@ def monthly_cleanup():
     except Exception as e:
         logging.error(f"monthly_cleanup failed: {e}")
 
-# 🔹 Scheduler ayarı (pytz ile timezone eklenmiş)
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
-# Otomatik mesaj job'u (her iş günü 20:30)
-scheduler.add_job(
-    otomatik_mesaj_telegram,
-    "cron",
-    day_of_week="mon-fri",
-    hour=20,
-    minute=30,
-    id="otomatik_mesaj",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
-
-# Keep-alive job'u (her 10 dakikada bir)
-scheduler.add_job(
-    keep_alive,
-    "interval",
-    minutes=10,
-    id="keep_alive_ping",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
-
-# Günlük GitHub sync job'u (her iş günü 20:30)
-scheduler.add_job(
-    sync_to_github,
-    "cron",
-    day_of_week="mon-fri",
-    hour=20,
-    minute=30,
-    id="daily_sync",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
-
-# Aylık temizlik job'u (her ayın 1. günü 00:01)
-scheduler.add_job(
-    monthly_cleanup,
-    "cron",
-    day=1,
-    hour=0,
-    minute=1,
-    id="monthly_cleanup",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
+scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=20, minute=30,
+                  id="otomatik_mesaj", replace_existing=True, timezone=istanbul_tz)
+scheduler.add_job(keep_alive, "interval", minutes=10,
+                  id="keep_alive_ping", replace_existing=True, timezone=istanbul_tz)
+scheduler.add_job(sync_to_github, "cron", day_of_week="mon-fri", hour=20, minute=30,
+                  id="daily_sync", replace_existing=True, timezone=istanbul_tz)
+scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0, minute=1,
+                  id="monthly_cleanup", replace_existing=True, timezone=istanbul_tz)
 
 scheduler.start()
 
@@ -846,5 +806,5 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     # Deploy sırasında initial_sync çağrısı
     initial_sync()
-    port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
+    port = int(os.getenv("PORT", 8020))
     flask_app.run(host="0.0.0.0", port=port)
