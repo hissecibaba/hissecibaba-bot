@@ -801,10 +801,11 @@ def initial_sync():
     except Exception as e:
         logging.error(f"Deploy sonrası sync_to_github hatası: {e}")
 
+# ✅ Flask app oluşturulduktan hemen sonra çağır
+initial_sync()
+
 # 🔹 Flask uygulaması çalıştırma (Render uyumlu)
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
-    # Deploy sırasında initial_sync çağrısı
-    initial_sync()
     port = int(os.getenv("PORT", 8020))
     flask_app.run(host="0.0.0.0", port=port)
