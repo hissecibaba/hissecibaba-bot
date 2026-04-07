@@ -781,7 +781,7 @@ def monthly_cleanup():
 # 🔹 GitHub senkronizasyon fonksiyonu
 def sync_to_github():
     try:
-        repo_url = os.getenv("GITHUB_REPO_URL")
+        repo_url = os.getenv("GITHUB_REPO") or os.getenv("GITHUB_REPO_URL")
         if not repo_url:
             logging.error("❌ GITHUB_REPO_URL environment variable yok")
             return
