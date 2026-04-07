@@ -837,6 +837,7 @@ def initial_sync():
     try:
         logging.info("🚀 Deploy sonrası otomatik GitHub push başlatılıyor...")
         sync_to_github()
+        logging.info("✅ Deploy sonrası GitHub push tamamlandı.")
     except Exception as e:
         logging.error(f"Deploy sonrası sync_to_github hatası: {e}")
 
@@ -847,3 +848,4 @@ if __name__ == "__main__":
     initial_sync()
     port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
     flask_app.run(host="0.0.0.0", port=port)
+
