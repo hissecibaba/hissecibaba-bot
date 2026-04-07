@@ -738,6 +738,7 @@ def start_bot():
 import pytz
 import requests
 import shutil
+import subprocess
 
 def otomatik_mesaj_telegram():
     logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
@@ -777,6 +778,46 @@ def monthly_cleanup():
     except Exception as e:
         logging.error(f"monthly_cleanup failed: {e}")
 
+# 🔹 GitHub senkronizasyon fonksiyonu
+def sync_to_github():
+    try:
+        repo_url = os.getenv("GITHUB_REPO_URL")
+        if not repo_url:
+            logging.error("❌ GITHUB_REPO_URL environment variable yok")
+            return
+
+        repo_dir = "/tmp/hissecibaba_sync"
+
+        # Eski repo varsa sil
+        if os.path.exists(repo_dir):
+            shutil.rmtree(repo_dir)
+
+        # Repo clone
+        subprocess.run(["git", "clone", repo_url, repo_dir], check=True)
+
+        # Rsync ile dosyaları kopyala (ignore-times → her zaman overwrite)
+        subprocess.run([
+            "rsync", "-a", "--ignore-times", "--inplace",
+            f"{BASE_DIR}/", repo_dir
+        ], check=True)
+
+        # Git add
+        subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
+
+        # Git commit (allow-empty → değişiklik olmasa bile commit atar)
+        subprocess.run([
+            "git", "-C", repo_dir, "commit",
+            "--allow-empty", "-m", "Auto sync"
+        ], check=True)
+
+        # Git push
+        subprocess.run(["git", "-C", repo_dir, "push"], check=True)
+
+        logging.info("✅ GitHub push tamamlandı.")
+    except Exception as e:
+        logging.error(f"❌ Sync failed: {e}")
+
+# 🔹 Scheduler tanımları
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
@@ -808,3 +849,4 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     port = int(os.getenv("PORT", 8020))
     flask_app.run(host="0.0.0.0", port=port)
+
