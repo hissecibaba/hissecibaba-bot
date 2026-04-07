@@ -733,6 +733,7 @@ def start_bot():
 
     updater.start_polling()
     updater.idle()
+
 # PARÇA 5C/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
 
 import pytz
@@ -747,7 +748,7 @@ def otomatik_mesaj_telegram():
             chat_id,
             "📢 Otomatik Mesaj\n\n"
             "Hissecibaba program verileri güncellenmiştir.\n"
-            "Komutlar: AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA"
+            "Komutlar: AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA, DESTEK/DİRENÇ"
         )
 
 # 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
@@ -795,7 +796,7 @@ scheduler.add_job(
     timezone=istanbul_tz
 )
 
-# Keep-alive job'u (her 30 dakikada bir)
+# Keep-alive job'u (her 10 dakikada bir)
 scheduler.add_job(
     keep_alive,
     "interval",
@@ -805,7 +806,7 @@ scheduler.add_job(
     timezone=istanbul_tz
 )
 
-# Günlük tek deploy job'u (20:30)
+# Günlük GitHub sync job'u (her iş günü 20:30)
 scheduler.add_job(
     sync_to_github,
     "cron",
@@ -830,6 +831,15 @@ scheduler.add_job(
 )
 
 scheduler.start()
+
+# 🔹 Deploy sonrası otomatik GitHub push
+@flask_app.before_first_request
+def initial_sync():
+    try:
+        logging.info("🚀 Deploy sonrası otomatik GitHub push başlatılıyor...")
+        sync_to_github()
+    except Exception as e:
+        logging.error(f"Deploy sonrası sync_to_github hatası: {e}")
 
 # 🔹 Flask uygulaması çalıştırma (Render uyumlu)
 if __name__ == "__main__":
