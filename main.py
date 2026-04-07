@@ -596,13 +596,14 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-        # 📌 Sembol bazlı komutlar (örneğin ADESE → txt_dosyalar/adese.txt)
-        fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
-        if os.path.exists(fp_symbol):
-            with open(fp_symbol, "r", encoding="utf-8") as f:
-                content = f.read()
-            send_message(chat_id, content, mobil_mode)
-            return content, 200
+        # 📌 Sembol bazlı komutlar (case-insensitive kontrol)
+        for fn in os.listdir(TXT_DIR):
+            if fn.lower() == f"{text_low}.txt":
+                fp_symbol = os.path.join(TXT_DIR, fn)
+                with open(fp_symbol, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
 
         # 📌 Fallback: Diğer mesajlar
         send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
