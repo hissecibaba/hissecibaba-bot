@@ -848,4 +848,3 @@ if __name__ == "__main__":
     initial_sync()
     port = int(os.getenv("PORT", 8020))   # Render’ın verdiği PORT’u kullan
     flask_app.run(host="0.0.0.0", port=port)
-
