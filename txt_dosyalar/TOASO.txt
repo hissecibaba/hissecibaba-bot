@@ -1,59 +1,60 @@
+# Güncelleme zamanı: 07.04.2026 16:06:27
 ===TOASO===
-Analiz Tarihi: 03.04.2026
+Analiz Tarihi: 06.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:269,50
-KAPANIS:264,25
-GUN.F%:-1,95
+ACILIS:264,50
+KAPANIS:266,00
+GUN.F%:0,66
 G.DUSUK:263,00
-G.YUKSEK:269,75
-G.HACIM:659.210.409,00
-PGC8:7.040.000,00
+G.YUKSEK:268,50
+G.HACIM:573.734.381,00
+PGC8:11.598.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:264.25
-UST BANT:278.6875
-ALT BANT:263.9318
-FIYAT/BANT ORANI:2.16
+KAPANIS:266.00
+UST BANT:277.4224
+ALT BANT:262.0173
+FIYAT/BANT ORANI:25.85
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:264.25
-WT1:-50.01
-WT2:-47.8
-WT1-WT2:-2.22
+KAPANIS:266.0
+WT1:-50.72
+WT2:-48.74
+WT1-WT2:-1.98
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:261.58
-S4:258.92
-S3:254.83
-S2:248.08
-S1:241.33
-P:265.67
-R1:268.33
-R2:272.42
-R3:275.08
-R4:281.83
-R5:288.58
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):269.75
-0,236:268.16
-0,382:267.17
-0,500:266.38
-0,618:265.58
-0,786:264.44
+S5:263.17
+S4:260.33
+S3:257.67
+S2:252.17
+S1:246.67
+P:265.83
+R1:268.67
+R2:271.33
+R3:274.17
+R4:279.67
+R5:285.17
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):268.50
+0,236:267.20
+0,382:266.40
+0,500:265.75
+0,618:265.10
+0,786:264.18
 1,0(DIP):263.00
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-257,372,000.0
-PGC HAFTALIK:-8,450,000.0
-PGC GUNLUK:7.040.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+PGC AYLIK:-258,898,000.0
+PGC HAFTALIK:19,587,000.0
+PGC GUNLUK:11.598.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.14, ROA=0.05, Net Marj=0.03 → Zayıf
@@ -61,6 +62,6 @@ Büyüme		: Net Satış Değ%=102.91, Net Kar Değ%=22.23 → Çok yüksek
 Borçluluk	: KV.Borç/Top.Borç=0.62 → Orta risk
 Nakit Durumu	: Cari Oran=1.7 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=0.71 → Ucuz
+Ucuz mu?	: PEG=0.72 → Ucuz
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=0.71 → Ucuz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=0.72 → Ucuz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
