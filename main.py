@@ -596,7 +596,7 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-        # 📌 Sembol bazlı komutlar (örneğin KCHOL → txt_dosyalar/kchol.txt)
+        # 📌 Sembol bazlı komutlar (örneğin ADESE → txt_dosyalar/adese.txt)
         fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
         if os.path.exists(fp_symbol):
             with open(fp_symbol, "r", encoding="utf-8") as f:
@@ -611,6 +611,7 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
+
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
