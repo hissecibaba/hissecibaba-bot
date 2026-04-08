@@ -481,8 +481,16 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
-        # 📌 Destek/Direnç
+        # 📌 Destek/Direnç (özel düzeltme)
         if "destek" in text_low or "direnc" in text_low or "destek_direnc" in text_low:
+            # Önce sabit dosya kontrolü
+            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+            if os.path.exists(fp_fixed):
+                with open(fp_fixed, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
+            # Eğer sabit dosya yoksa eski mantık
             fp = find_latest_file(DESTEK_DIRENC_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -499,6 +507,7 @@ def webhook():
                 content = f.read()
             send_message(chat_id, content, mobil_mode)
             return content, 200
+
 
 # PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Bölüm 2
 
