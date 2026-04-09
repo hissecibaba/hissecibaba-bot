@@ -588,7 +588,8 @@ def webhook():
 
         # 📌 Sembol bazlı komutlar (case-insensitive ve Türkçe karakter normalize)
         for fn in os.listdir(TXT_DIR):
-            if normalize_tr(fn.lower()) == text_norm:
+            fn_name = normalize_tr(fn.lower().replace(".txt",""))
+            if fn_name == text_norm:
                 fp_symbol = os.path.join(TXT_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
