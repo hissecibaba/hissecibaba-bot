@@ -386,7 +386,7 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
         
-# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Tam Entegre Kod
+# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — DÜZELTİLMİŞ TAM KOD
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -423,7 +423,6 @@ def webhook():
                 return None
 
         # --- Komutlar ---
-
         if any(x in text_low for x in ["öneri", "oneri", "önerı", "onerı"]):
             fp = find_latest_file(ONERI_DIR)
             if fp:
@@ -499,7 +498,16 @@ def webhook():
             send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
             return "❌ Destek/Direnç dosyası bulunamadı.", 200
 
-        logging.info(f"Gelen text_low: {text_low}")  # 📌 Mobil stringi görmek için
+        # 📌 Sembol bazlı komutlar (case-insensitive ve startswith kontrolü)
+        for fn in os.listdir(TXT_DIR):
+            if fn.lower().startswith(text_low.lower()):
+                fp_symbol = os.path.join(TXT_DIR, fn)
+                with open(fp_symbol, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
+
+        logging.info(f"Gelen text_low: {text_low}")
 
         # 📌 Ballı Kaymak
         if ("balli" in text_low or "kaymak" in text_low) or "balli_kaymak" in text_low:
@@ -538,41 +546,6 @@ def webhook():
                 return content, 200
             send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
             return "❌ Tüm hisseler dosyası bulunamadı.", 200
-
-        # 📌 Mobil: HİSSE ANALİZ → Sembol listesi ve detay sayfa
-        if mobil_mode and text_low == "hisse_analiz":
-            # Sembol dosyalarını oku
-            symbols = [fn.replace(".txt","").upper() for fn in os.listdir(TXT_DIR) if fn.endswith(".txt")]
-            response_json = {
-                "header": {
-                    "logo": "logo.png",
-                    "title": "HissecibabaAI",
-                    "subtitle": "Yapay Zeka Destekli Borsa Analizi",
-                    "page_name": "HİSSE ANALİZ"
-                },
-                "search_box": True,
-                "symbols": symbols,
-                "scrollable": True
-            }
-            return response_json, 200
-
-        # 📌 Mobil: Sembol seçildiğinde detay gösterimi
-        if mobil_mode:
-            fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
-            if os.path.exists(fp_symbol):
-                with open(fp_symbol, "r", encoding="utf-8") as f:
-                    content = f.read()
-                response_json = {
-                    "header": {
-                        "logo": "logo.png",
-                        "title": "HissecibabaAI",
-                        "subtitle": "Yapay Zeka Destekli Borsa Analizi",
-                        "page_name": f"Sembol: {text_low.upper()}"
-                    },
-                    "content": content,
-                    "scrollable": True
-                }
-                return response_json, 200
 
         # 📌 Mobil: Bugün AL
         if text_low in ["bugün al", "bugunal", "al_mobil"]:
@@ -628,15 +601,6 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-        # 📌 Telegram: Sembol bazlı komutlar (eski mantık, mobil_mode=False)
-        if not mobil_mode:
-            fp_symbol = os.path.join(TXT_DIR, f"{text_low}.txt")
-            if os.path.exists(fp_symbol):
-                with open(fp_symbol, "r", encoding="utf-8") as f:
-                    content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-
         # 📌 Fallback: Diğer mesajlar
         send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
         return f"Mesajını aldım: {msg_text}", 200
@@ -644,7 +608,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
-
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 
