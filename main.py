@@ -386,7 +386,43 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
         
-# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — Entegre ve Tam Kod
+# PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar)
+
+@flask_app.route("/get_symbol_files", methods=["POST"])
+def get_symbol_files():
+    try:
+        data = request.get_json(silent=True) or {}
+        folder = data.get("folder", "txt_dosyalar")
+        dir_path = os.path.join(BASE_DIR, folder)
+
+        if not os.path.exists(dir_path):
+            return jsonify([]), 200
+
+        files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
+        return jsonify(files), 200
+    except Exception as e:
+        logging.error(f"/get_symbol_files hatası: {e}")
+        return jsonify([]), 500
+
+
+@flask_app.route("/get_symbol_file_content", methods=["POST"])
+def get_symbol_file_content():
+    try:
+        data = request.get_json(silent=True) or {}
+        folder = data.get("folder", "txt_dosyalar")
+        symbol = data.get("symbol", "")
+        dir_path = os.path.join(BASE_DIR, folder)
+        fp = os.path.join(dir_path, symbol)
+
+        if os.path.exists(fp):
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            return content, 200
+        return "❌ Dosya bulunamadı", 200
+    except Exception as e:
+        logging.error(f"/get_symbol_file_content hatası: {e}")
+        return f"Hata: {e}", 500
+
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -428,6 +464,8 @@ def webhook():
             except Exception as e:
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
+
+# PARÇA 4/5 — Bölüm 2-A (webhook komutlar başlangıcı)
 
         # --- Komutlar ---
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
@@ -487,6 +525,8 @@ def webhook():
                     return "OK", 200
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
+
+# PARÇA 4/5 — Bölüm 2-B (destek/direnç + fallback + görsel üretim)
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
@@ -586,11 +626,13 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-        # 📌 Sembol bazlı komutlar (case-insensitive ve Türkçe karakter normalize)
-        for fn in os.listdir(TXT_DIR):
+        # 📌 Sembol bazlı komutlar (txt_dosyalar klasöründen)
+        SYMBOL_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
+
+        for fn in os.listdir(SYMBOL_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt",""))
             if fn_name == text_norm:
-                fp_symbol = os.path.join(TXT_DIR, fn)
+                fp_symbol = os.path.join(SYMBOL_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
@@ -603,6 +645,7 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
         return f"Hata: {e}", 500
+
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 
