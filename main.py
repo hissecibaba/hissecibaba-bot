@@ -464,7 +464,8 @@ def webhook():
             except Exception as e:
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
-        
+      
+# PARÇA 4/5 — Bölüm 2-A (webhook komutlar başlangıcı)  
         # --- Komutlar ---
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
@@ -526,22 +527,32 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return jsonify({"error": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
+# PARÇA 4/5 — Bölüm 2-B (destek/direnç + fallback + görsel üretim)
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
             if os.path.exists(fp_fixed):
                 with open(fp_fixed, "r", encoding="utf-8") as f:
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
             fp = find_latest_file(DESTEK_DIRENC_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
-            send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
-            return jsonify({"error": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
+                return "❌ Destek/Direnç dosyası bulunamadı.", 200
 
         # 📌 Ballı Kaymak
         if ("balli" in text_norm or "kaymak" in text_norm) or "balli_kaymak" in text_norm:
@@ -550,14 +561,16 @@ def webhook():
                 if mobil_mode:
                     with open(fp, "r", encoding="utf-8") as f: 
                         content = f.read()
-                    send_message(chat_id, content, mobil_mode)
                     return jsonify({"content": content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return "OK", 200
-            send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
-            return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200
+            if mobil_mode:
+                return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
+                return "❌ Ballı Kaymak listesi bulunamadı.", 200
 
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
@@ -565,10 +578,16 @@ def webhook():
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
-            send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
-            return jsonify({"error": "❌ Tüm hisseler dosyası bulunamadı."}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ Tüm hisseler dosyası bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ Tüm hisseler dosyası bulunamadı.", mobil_mode)
+                return "❌ Tüm hisseler dosyası bulunamadı.", 200
 
         # 📌 Mobil: Bugün AL
         if text_norm in ["bugun al", "al_mobil"]:
@@ -576,10 +595,16 @@ def webhook():
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
-            send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
-            return jsonify({"error": "❌ Bugün AL listesi bulunamadı."}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ Bugün AL listesi bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ Bugün AL listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün AL listesi bulunamadı.", 200
 
         # 📌 Mobil: Bugün SAT
         if text_norm in ["bugun sat", "sat_mobil"]:
@@ -587,10 +612,16 @@ def webhook():
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
-            send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
-            return jsonify({"error": "❌ Bugün SAT listesi bulunamadı."}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ Bugün SAT listesi bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ Bugün SAT listesi bulunamadı.", mobil_mode)
+                return "❌ Bugün SAT listesi bulunamadı.", 200
 
         # 📌 Telegram: AL
         if text_norm == "al":
@@ -600,7 +631,7 @@ def webhook():
                     with open(fp, "r", encoding="utf-8") as f: 
                         content = f.read()
                     send_message(chat_id, content, mobil_mode)
-                    return content, 200   # ✅ Telegram AL doğru çalışıyor, dokunmadım
+                    return content, 200   # Telegram AL doğru çalışıyor, dokunmadım
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
@@ -616,7 +647,7 @@ def webhook():
                     with open(fp, "r", encoding="utf-8") as f: 
                         content = f.read()
                     send_message(chat_id, content, mobil_mode)
-                    return content, 200   # ✅ Telegram SAT doğru çalışıyor, dokunmadım
+                    return content, 200   # Telegram SAT doğru çalışıyor, dokunmadım
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
@@ -633,16 +664,26 @@ def webhook():
                 fp_symbol = os.path.join(SYMBOL_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return jsonify({"content": content}), 200
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
 
         # 📌 Fallback: Diğer mesajlar
-        send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
-        return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
+        if mobil_mode:
+            return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
+        else:
+            send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
+            return f"Mesajını aldım: {msg_text}", 200
 
     except Exception as e:
         logging.error(f"/webhook route hatası: {e}")
-        return jsonify({"error": f"Hata: {e}"}), 500
+        if mobil_mode:
+            return jsonify({"error": f"Hata: {e}"}), 500
+        else:
+            return f"Hata: {e}", 500
+
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
