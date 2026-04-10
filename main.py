@@ -971,16 +971,19 @@ scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=2
 scheduler.add_job(keep_alive, "interval", minutes=10, id="ping") # 10 dk idealdir
 scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0, minute=5, id="cleanup", timezone=istanbul_tz)
 
-# --- UYGULAMA ÇALIŞTIRMA (DÜZELTİLMİŞ) ---
-if __name__ == "__main__":
+# --- UYGULAMA ÇALIŞTIRMA (RENDER & GUNICORN UYUMLU) ---
+
+def start_services():
     # 1. Telegram Bot Thread Başlatma
     try:
         from threading import Thread
-        # run_telegram_bot fonksiyonunun 5B'de tanımlı olduğundan emin olun
-        t = Thread(target=run_telegram_bot)
-        t.daemon = True
-        t.start()
-        logging.info("🚀 Telegram bot thread başlatıldı.")
+        import threading
+        # Gunicorn birden fazla worker açarsa botun çakışmaması için kontrol
+        if not any(thread.name == "TelegramBotThread" for thread in threading.enumerate()):
+            t = Thread(target=run_telegram_bot, name="TelegramBotThread")
+            t.daemon = True
+            t.start()
+            logging.info("🚀 Telegram bot thread başlatıldı.")
     except Exception as e:
         logging.error(f"❌ Bot thread başlatılamadı: {e}")
 
@@ -992,9 +995,13 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"❌ Scheduler başlatılamadı: {e}")
 
-    # 3. Flask'ı başlat
-    port = int(os.environ.get("PORT", 8020))
+# KRİTİK: Gunicorn'un bu servisleri tetiklemesi için fonksiyonu if bloğunun dışında çağırıyoruz.
+start_services()
+
+if __name__ == "__main__":
+    # Render'ın atadığı veya varsayılan portu al
+    port = int(os.environ.get("PORT", 10000))
     logging.info(f"🌐 Uygulama {port} portunda yayında...")
     
-    # Debug mode Render'da False olmalı
+    # Yerel çalıştırma için (python main.py dersen burası çalışır)
     flask_app.run(host="0.0.0.0", port=port, debug=False)
