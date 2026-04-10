@@ -536,7 +536,7 @@ def webhook():
                 msg = "❌ TAVAN listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 3. BİST TÜM Komutu (Mobil: TÜM HİSSELER)
+            # 3. BİST TÜM Komutu
             if any(x in text_norm for x in ["bisttum", "bist_tum", "tum_hisseler"]):
                 fp = find_latest_file(BISTTUM_DIR)
                 if fp:
@@ -549,7 +549,7 @@ def webhook():
                 msg = "❌ BİST Tüm listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 4. PERFORMANS Komutu (Mobil: DÜNKÜ PERFORMANS)
+            # 4. PERFORMANS Komutu
             if any(x in text_norm for x in ["performans", "dunku_performans"]):
                 fp = find_latest_file(PERFORMANS_DIR)
                 if fp:
@@ -592,7 +592,7 @@ def webhook():
                 msg = "❌ AlinanSatilan.xlsx bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 8. BUGÜN AL / AL_MOBİL
+            # 8. BUGÜN AL
             if text_norm in ["bugun al", "al_mobil"]:
                 fp = find_latest_file(AL_MOBIL_DIR)
                 if fp:
@@ -605,7 +605,7 @@ def webhook():
                 msg = "❌ Bugün AL listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 9. GENEL AL LİSTESİ (Görsel)
+            # 9. GENEL AL
             if text_norm == "al":
                 fp = find_latest_file(AL_DIR)
                 if fp:
@@ -619,7 +619,7 @@ def webhook():
                 msg = "❌ AL listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 10. BUGÜN SAT / SAT_MOBİL
+            # 10. BUGÜN SAT
             if text_norm in ["bugun sat", "sat_mobil"]:
                 fp = find_latest_file(SAT_MOBIL_DIR)
                 if fp:
@@ -632,7 +632,7 @@ def webhook():
                 msg = "❌ Bugün SAT listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 11. GENEL SAT LİSTESİ (Görsel)
+            # 11. GENEL SAT
             if text_norm == "sat":
                 fp = find_latest_file(SAT_DIR)
                 if fp:
@@ -646,7 +646,7 @@ def webhook():
                 msg = "❌ SAT listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 12. BALLI KAYMAK Komutu
+            # 12. BALLI KAYMAK
             if any(x in text_norm for x in ["balli", "kaymak", "balli_kaymak"]):
                 fp = find_latest_file(BALLI_KAYMAK_DIR)
                 if fp:
@@ -660,7 +660,7 @@ def webhook():
                 msg = "❌ Ballı Kaymak listesi bulunamadı."
                 return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-            # 13. SEMBOL BAZLI SORGULAMA (Örn: THYAO)
+            # 13. SEMBOL BAZLI
             symbol_fp = os.path.join(BASE_DIR, "txt_dosyalar", f"{text_norm.upper()}.txt")
             if os.path.exists(symbol_fp):
                 with open(symbol_fp, "r", encoding="utf-8") as f: content = f.read()
@@ -681,7 +681,7 @@ def webhook():
         except Exception as e:
             logging.error(f"/webhook route hatası: {e}")
             error_msg = f"❌ Bir hata oluştu: {str(e)}"
-            return jsonify({"content": error_msg}) if mobil_mode else (error_msg, 200)
+            return jsonify({"content": error_msg}) if 'mobil_mode' in locals() and mobil_mode else (error_msg, 200)
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 import os
