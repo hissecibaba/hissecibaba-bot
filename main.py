@@ -507,7 +507,7 @@ def webhook():
                 return None
 
 # --- Parça 4/5 Bölüm:2 Matriks Komutları ve Sorgu İşlemleri ---
-        try:
+
             # 1. ÖNERİ Komutu
             if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
                 fp = find_latest_file(ONERI_DIR)
