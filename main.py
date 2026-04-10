@@ -531,9 +531,15 @@ try:
                     return "OK", 200
         return jsonify({"error": "❌ AlinanSatilan.xlsx bulunamadı."}), 200 if mobil_mode else ("❌ AlinanSatilan.xlsx bulunamadı.", 200)
 
+except Exception as e:
+    logging.error(f"/webhook route hatası: {e}")
+    if mobil_mode:
+        return jsonify({"error": f"Hata: {e}"}), 500
+    else:
+        return f"Hata: {e}", 500
 
-
-# PARÇA 4/5 — 2-B    
+# PARÇA 4/5 — 2-B
+try:
     # 📌 Destek/Direnç
     if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
         fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -649,6 +655,13 @@ try:
     else:
         send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
         return f"Mesajını aldım: {msg_text}", 200
+
+except Exception as e:
+    logging.error(f"/webhook route hatası: {e}")
+    if mobil_mode:
+        return jsonify({"error": f"Hata: {e}"}), 500
+    else:
+        return f"Hata: {e}", 500
 
 
 
