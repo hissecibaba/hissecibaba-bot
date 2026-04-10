@@ -974,23 +974,30 @@ scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=2
 scheduler.add_job(keep_alive, "interval", minutes=10, id="ping") # 10 dk idealdir
 scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0, minute=5, id="cleanup", timezone=istanbul_tz)
 
-# --- UYGULAMA ÇALIŞTIRMA ---
+# --- UYGULAMA ÇALIŞTIRMA (DÜZELTİLMİŞ) ---
 if __name__ == "__main__":
-    # Önce bot thread'ini başlat (Parça 5B'de tanımladığımız fonksiyon)
+    # 1. Telegram Bot Thread Başlatma
     try:
         from threading import Thread
-        # run_telegram_bot fonksiyonunun 5B'de tanımlı olduğunu varsayıyoruz
+        # run_telegram_bot fonksiyonunun 5B'de tanımlı olduğundan emin olun
         t = Thread(target=run_telegram_bot)
         t.daemon = True
         t.start()
+        logging.info("🚀 Telegram bot thread başlatıldı.")
     except Exception as e:
-        logging.error(f"Bot thread başlatılamadı: {e}")
+        logging.error(f"❌ Bot thread başlatılamadı: {e}")
 
-    # Scheduler'ı başlat
-    scheduler.start()
-    logging.info("⏰ Scheduler ve Bot aktif.")
+    # 2. Scheduler'ı başlat
+    try:
+        if not scheduler.running:
+            scheduler.start()
+            logging.info("⏰ Scheduler aktif edildi.")
+    except Exception as e:
+        logging.error(f"❌ Scheduler başlatılamadı: {e}")
 
-    # Flask'ı başlat
+    # 3. Flask'ı başlat
     port = int(os.environ.get("PORT", 8020))
-    logging.info(f"🚀 Uygulama {port} portunda yayında...")
-    flask_app.run(host="0.0.0.0", port=port)
+    logging.info(f"🌐 Uygulama {port} portunda yayında...")
+    
+    # Debug mode Render'da False olmalı
+    flask_app.run(host="0.0.0.0", port=port, debug=False)
