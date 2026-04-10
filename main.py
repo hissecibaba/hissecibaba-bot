@@ -461,6 +461,7 @@ def webhook():
                 return None
 
 # PARÇA 4/5 — 2-A
+
         # --- Komutlar ---
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
@@ -468,7 +469,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
@@ -486,7 +487,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
@@ -547,7 +548,6 @@ def webhook():
                 return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
 
-
 # PARÇA 4/5 — 2-B    
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
@@ -556,7 +556,7 @@ def webhook():
                 with open(fp_fixed, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -566,7 +566,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -584,7 +584,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
@@ -603,7 +603,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -621,7 +621,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -639,7 +639,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -657,7 +657,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
@@ -676,7 +676,7 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
@@ -698,7 +698,7 @@ def webhook():
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    safe_content = str(content).replace("\n"," ").replace("\r"," ").replace("\"","'")
                     return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
@@ -717,8 +717,6 @@ def webhook():
             return jsonify({"error": f"Hata: {e}"}), 500
         else:
             return f"Hata: {e}", 500
-
-
 
 
 
