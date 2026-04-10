@@ -671,6 +671,7 @@ def webhook():
                     return "OK", 200
 
             # 14. FALLBACK
+
             final_msg = f"Mesajını aldım: {msg_text}"
             if mobil_mode:
                 return jsonify({"content": final_msg}), 200
@@ -683,21 +684,17 @@ def webhook():
             error_msg = f"❌ Bir hata oluştu: {str(e)}"
             return jsonify({"content": error_msg}) if 'mobil_mode' in locals() and mobil_mode else (error_msg, 200)
 
-# PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
+# =================================================================
+# PARÇA 5a — Görsel Üretim ve Yardımcı Fonksiyonlar
+# =================================================================
 import os
 import datetime
 import logging
 from PIL import Image, ImageDraw, ImageFont
 
 def get_latest_file_content_as_image(target_dir):
-    """
-    Belirtilen klasördeki en güncel dosyayı bulur,
-    içeriğini okur ve görsel haline getirir.
-    Görsel 'gorsel_cache' klasörüne kaydedilir.
-    """
     try:
         dir_path = os.path.join(BASE_DIR, target_dir)
-        # Global cache_dir değişkeninin tanımlı olduğundan emin oluyoruz
         cache_path = os.path.join(BASE_DIR, "gorsel_cache")
         os.makedirs(cache_path, exist_ok=True)
 
@@ -705,26 +702,21 @@ def get_latest_file_content_as_image(target_dir):
             logging.warning(f"❌ Klasör bulunamadı: {dir_path}")
             return None
 
-        # .txt dosyalarını filtrele ve gizli dosyaları ele
         files = [f for f in os.listdir(dir_path) if f.lower().endswith(".txt") and not f.startswith(".")]
-        
         if not files:
             logging.warning(f"❌ Klasörde işlenecek .txt dosyası yok: {dir_path}")
             return None
 
-        # En güncel dosyayı bul (Değiştirilme zamanına göre)
         latest_file = max(files, key=lambda f: os.path.getmtime(os.path.join(dir_path, f)))
         latest_path = os.path.join(dir_path, latest_file)
 
         with open(latest_path, "r", encoding="utf-8") as f:
             content = f.read()
 
-        # Font Ayarı: Linux sunucularda Türkçe karakter desteği için DejaVuSans veya Arial öncelikli
         font_paths = [
             "/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",
             "/usr/share/fonts/truetype/liberation/LiberationSans-Regular.ttf",
-            "DejaVuSans.ttf", 
-            "arial.ttf"
+            "DejaVuSans.ttf", "arial.ttf"
         ]
         
         font = None
@@ -732,24 +724,19 @@ def get_latest_file_content_as_image(target_dir):
             try:
                 font = ImageFont.truetype(path, 15)
                 break
-            except:
-                continue
+            except: continue
         
-        if font is None:
-            font = ImageFont.load_default()
+        if font is None: font = ImageFont.load_default()
 
         lines = content.splitlines()
-        # Görsel boyutlandırma (Genişlik sabit, yükseklik satır sayısına göre dinamik)
         width = 1000
         line_height = 25
-        height = line_height * (len(lines) + 3) # Alt ve üst payı eklendi
+        height = line_height * (len(lines) + 4)
 
-        # Yeni görsel oluştur (Koyu tema veya beyaz tema seçilebilir - burada beyaz tercih edildi)
         img = Image.new("RGB", (width, height), color=(255, 255, 255))
         draw = ImageDraw.Draw(img)
 
         y = 20
-        # Başlık kısmına tarih ekle
         draw.text((20, y), f"Rapor Tarihi: {datetime.datetime.now().strftime('%d.%m.%Y %H:%M')}", font=font, fill=(100, 100, 100))
         y += 40
 
@@ -757,251 +744,116 @@ def get_latest_file_content_as_image(target_dir):
             draw.text((20, y), line, font=font, fill=(0, 0, 0))
             y += line_height
 
-        # Dosya adını temizle ve kaydet
         clean_name = latest_file.replace(".txt", "").replace(" ", "_")
         img_name = f"{target_dir}_{clean_name}.png"
         img_full_path = os.path.join(cache_path, img_name)
-        
         img.save(img_full_path)
 
         logging.info(f"✅ Görsel üretildi: {img_full_path}")
         return img_full_path
-
     except Exception as e:
         logging.error(f"❌ Görsel üretim hatası: {e}")
         return None
 
-
-# PARÇA 5b — Telegram komut entegrasyonu ve Başlatıcı
+# =================================================================
+# PARÇA 5b — Telegram Bot Mantığı
+# =================================================================
 import threading
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
 def handle_telegram_message(update: Update, context: CallbackContext):
-    """Telegram üzerinden gelen mesajları yönetir."""
     try:
-        if not update.message or not update.message.text:
-            return
+        if not update.message or not update.message.text: return
+        text_norm = update.message.text.strip().lower().translate(str.maketrans("ışğçöü", "isgcou"))
 
-        chat_id = update.message.chat_id
-        text = update.message.text.strip().lower()
-        
-        # Daha önce normalize_tr tanımladıysak onu kullanabilirsin
-        text_norm = text.replace("ı", "i").replace("ş", "s").replace("ğ", "g").replace("ç", "c").replace("ö", "o").replace("ü", "u")
-
-        # AL Komutu
         if text_norm == "al":
             fp = find_latest_file(AL_DIR)
             if fp:
                 images = txt_to_images(fp, "al_listesi")
-                if images:
-                    for idx, img in enumerate(images, start=1):
-                        with open(img, "rb") as f:
-                            update.message.reply_photo(photo=f, caption=f"📈 Günlük AL listesi (parça {idx})")
-                else:
-                    update.message.reply_text("❌ AL listesi görseli şu an üretilemedi, lütfen metin olarak isteyin.")
-            else:
-                update.message.reply_text("❌ Sistemde güncel AL listesi bulunamadı.")
+                for idx, img in enumerate(images or [], start=1):
+                    with open(img, "rb") as f:
+                        update.message.reply_photo(photo=f, caption=f"📈 Günlük AL listesi ({idx})")
+            else: update.message.reply_text("❌ Güncel AL listesi bulunamadı.")
 
-        # SAT Komutu
         elif text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
             if fp:
                 images = txt_to_images(fp, "sat_listesi")
-                if images:
-                    for idx, img in enumerate(images, start=1):
-                        with open(img, "rb") as f:
-                            update.message.reply_photo(photo=f, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                else:
-                    update.message.reply_text("❌ SAT listesi görseli şu an üretilemedi.")
-            else:
-                update.message.reply_text("❌ Sistemde güncel SAT listesi bulunamadı.")
-
-        # Diğer komutları Webhook mantığına yönlendiriyoruz (Kod tekrarı yapmamak için)
+                for idx, img in enumerate(images or [], start=1):
+                    with open(img, "rb") as f:
+                        update.message.reply_photo(photo=f, caption=f"📉 Günlük SAT listesi ({idx})")
+            else: update.message.reply_text("❌ Güncel SAT listesi bulunamadı.")
+        
         else:
-            # Buraya diğer özel komutlarını (bofa, temel vb.) ekleyebilir 
-            # veya webhook fonksiyonunu doğrudan çağırabilirsin.
-            update.message.reply_text(f"🤖 Komut anlaşılamadı veya yetkiniz yok: {text}")
-
+            update.message.reply_text("🤖 Komut anlaşılamadı. Örn: AL, SAT, Hisse Kodu")
     except Exception as e:
-        logging.error(f"Telegram handle_message hatası: {e}")
+        logging.error(f"Telegram Hatası: {e}")
 
 def run_telegram_bot():
-    """Botu Flask'tan bağımsız bir thread'de başlatır."""
-    token = os.getenv("BOT_TOKEN") # Değişken ismini Parça 1 ile uyumlu yaptık
-    if not token:
-        logging.error("❌ BOT_TOKEN bulunamadı, Telegram bot başlatılamıyor!")
-        return
-
+    token = os.getenv("BOT_TOKEN")
+    if not token: return
     try:
         updater = Updater(token, use_context=True)
         dp = updater.dispatcher
-        # Sadece metin mesajlarını dinle, komutları ayıkla
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_telegram_message))
-        
-        logging.info("🚀 Telegram Bot arka planda başlatıldı...")
-        updater.start_polling()
-        # updater.idle() KULLANILMIYOR çünkü Flask ana thread'de çalışacak.
+        updater.start_polling(drop_pending_updates=True)
     except Exception as e:
-        logging.error(f"❌ Bot başlatma hatası: {e}")
+        logging.error(f"Bot Başlatma Hatası: {e}")
 
-# --- ANA ÇALIŞTIRICI ---
-if __name__ == "__main__":
-    # 1. Telegram Botu ayrı bir kolda başlat
-    bot_thread = threading.Thread(target=run_telegram_bot)
-    bot_thread.daemon = True # Ana program kapanınca botu da kapat
-    bot_thread.start()
+# =================================================================
+# PARÇA 5c — Zamanlanmış Görevler (Scheduler)
+# =================================================================
+import pytz, requests, shutil, subprocess
 
-    # 2. Scheduler'ı başlat (Daha önce tanımladığın scheduler)
-    if 'scheduler' in globals():
+def otomatik_mesaj_telegram():
+    for chat_id in IZINLI_ID_LIST:
+        try:
+            send_message(chat_id, "📢 *Sistem Bilgilendirmesi*\nVeriler güncellendi!", mobil_mode=False)
+        except: pass
+
+def keep_alive():
+    try:
+        url = os.getenv("APP_URL", "https://hissecibaba-bot.onrender.com")
+        requests.get(url, timeout=10)
+    except: pass
+
+def monthly_cleanup():
+    try:
+        for root, dirs, files in os.walk(BASE_DIR):
+            if any(x in root for x in [".git", "venv"]): continue
+            for f in files:
+                if f.endswith(".txt") and f not in ["requirements.txt", "runtime.txt"]:
+                    os.remove(os.path.join(root, f))
+    except: pass
+
+# --- SCHEDULER AYARLARI ---
+from apscheduler.schedulers.background import BackgroundScheduler
+scheduler = BackgroundScheduler(timezone=pytz.timezone("Europe/Istanbul"))
+scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=21, minute=0)
+scheduler.add_job(keep_alive, "interval", minutes=10)
+scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0)
+
+# =================================================================
+# ANA ÇALIŞTIRICI (RENDER & GUNICORN UYUMLU)
+# =================================================================
+
+def start_services():
+    # Gunicorn'un botu birden fazla kez başlatmasını önlemek için check
+    if not any(t.name == "TelegramBotThread" for t in threading.enumerate()):
+        t = threading.Thread(target=run_telegram_bot, name="TelegramBotThread", daemon=True)
+        t.start()
+        logging.info("🚀 Telegram bot thread başlatıldı.")
+
+    if not scheduler.running:
         scheduler.start()
         logging.info("⏰ Scheduler aktif edildi.")
 
-    # 3. Flask Uygulamasını başlat (Render Portu ile)
-    port = int(os.environ.get("PORT", 5000))
-    logging.info(f"🌐 Flask sunucusu {port} portunda başlatılıyor...")
-    flask_app.run(host="0.0.0.0", port=port)
-
-# PARÇA 5C/5 — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma
-import pytz
-import requests
-import shutil
-import subprocess
-
-def otomatik_mesaj_telegram():
-    """Hafta içi her akşam 21:10'da kullanıcılara bilgilendirme mesajı atar."""
-    logging.info("📢 Otomatik mesaj gönderimi başlatıldı.")
-    # Parça 1'de tanımladığımız IZINLI_ID_LIST kullanılıyor
-    for chat_id in IZINLI_ID_LIST:
-        try:
-            logging.info(f"📢 Otomatik mesaj gönderiliyor → Chat ID: {chat_id}")
-            send_message(
-                chat_id,
-                "📢 *Sistem Bilgilendirmesi*\n\n"
-                "Hissecibaba verileri güncellenmiştir.\n\n"
-                "🔍 *Hisse Analizi:* Hisse kodunu yazın (Örn: THYAO)\n"
-                "📋 *Komutlar:* AL, SAT, TAVAN, ÖNERİ, TEMEL, TEKNİK, BOFA",
-                mobil_mode=False # Telegram formatında gönder
-            )
-        except Exception as e:
-            logging.error(f"Chat ID {chat_id} için mesaj gönderilemedi: {e}")
-
-def keep_alive():
-    """Render'ın ücretsiz tier'ında uyumasını engellemek için self-ping atar."""
-    try:
-        # Uygulamanın kendi URL'sini environment'tan alıyoruz
-        app_url = os.getenv("APP_URL", "https://hissecibaba-bot.onrender.com")
-        requests.get(f"{app_url}/get_symbol_files", timeout=10)
-        logging.info("🔄 Keep-alive ping başarıyla gönderildi.")
-    except Exception as e:
-        logging.error(f"Keep-alive ping failed: {e}")
-
-def monthly_cleanup():
-    """Gereksiz TXT ve log dosyalarını temizler, sistem dosyalarına dokunmaz."""
-    try:
-        # Silinmemesi gereken kritik dosyalar
-        keep_list = [
-            "runtime.txt", "requirements.txt", "render.yaml", "main.py", 
-            "Dockerfile", "assets", "venv", ".git", ".env"
-        ]
-        # Sadece TXT dosyalarını temizlemek daha güvenlidir
-        deleted_count = 0
-        for root, dirs, files in os.walk(BASE_DIR):
-            # Sistem klasörlerini atla
-            if any(k in root for k in [".git", "venv", "__pycache__"]):
-                continue
-                
-            for file in files:
-                if file.endswith(".txt") and file not in keep_list:
-                    file_path = os.path.join(root, file)
-                    # Dosya yaşını kontrol edip (örn: 30 günden eski) silmek daha iyidir
-                    # Şimdilik direkt siliyoruz:
-                    os.remove(file_path)
-                    deleted_count += 1
-        
-        logging.info(f"✅ Aylık temizlik tamamlandı. {deleted_count} eski dosya silindi.")
-    except Exception as e:
-        logging.error(f"monthly_cleanup failed: {e}")
-
-def sync_to_github():
-    """Verileri GitHub'a yedekler."""
-    try:
-        repo_url = os.getenv("GITHUB_REPO")
-        token = os.getenv("GITHUB_TOKEN")
-
-        if not repo_url or not token:
-            logging.warning("⚠️ GitHub bilgileri eksik, yedekleme atlanıyor.")
-            return
-
-        # URL'ye token enjekte et
-        authenticated_url = repo_url.replace("https://", f"https://{token}@")
-        repo_dir = "/tmp/hissecibaba_backup"
-
-        if os.path.exists(repo_dir):
-            shutil.rmtree(repo_dir)
-
-        # Sessizce clone yap
-        subprocess.run(["git", "clone", authenticated_url, repo_dir], check=True, capture_output=True)
-
-        # Dosyaları kopyala (Sadece veri klasörlerini yedeklemek daha mantıklı olabilir)
-        # Örnek: txt_dosyalar, al_listeleri vb.
-        subprocess.run([
-            "rsync", "-av", "--exclude", ".git", "--exclude", "venv",
-            f"{BASE_DIR}/", repo_dir
-        ], check=True, capture_output=True)
-
-        subprocess.run(["git", "-C", repo_dir, "config", "user.name", "hissecibaba-bot"], check=True)
-        subprocess.run(["git", "-C", repo_dir, "config", "user.email", "bot@hissecibaba.local"], check=True)
-
-        subprocess.run(["git", "-C", repo_dir, "add", "."], check=True)
-        subprocess.run(["git", "-C", repo_dir, "commit", "-m", f"Auto backup: {datetime.datetime.now()}"], check=True)
-        subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-
-        logging.info("✅ GitHub yedekleme (sync) tamamlandı.")
-    except Exception as e:
-        logging.error(f"❌ Sync failed: {e}")
-
-# --- SCHEDULER KURULUMU ---
-scheduler = BackgroundScheduler()
-istanbul_tz = pytz.timezone("Europe/Istanbul")
-
-# Görevler
-scheduler.add_job(sync_to_github, "cron", day_of_week="mon-fri", hour=20, minute=45, id="daily_sync", timezone=istanbul_tz)
-scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=21, minute=00, id="otomatik_msg", timezone=istanbul_tz)
-scheduler.add_job(keep_alive, "interval", minutes=10, id="ping") # 10 dk idealdir
-scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0, minute=5, id="cleanup", timezone=istanbul_tz)
-
-# --- UYGULAMA ÇALIŞTIRMA (RENDER & GUNICORN UYUMLU) ---
-
-def start_services():
-    # 1. Telegram Bot Thread Başlatma
-    try:
-        from threading import Thread
-        import threading
-        # Gunicorn birden fazla worker açarsa botun çakışmaması için kontrol
-        if not any(thread.name == "TelegramBotThread" for thread in threading.enumerate()):
-            t = Thread(target=run_telegram_bot, name="TelegramBotThread")
-            t.daemon = True
-            t.start()
-            logging.info("🚀 Telegram bot thread başlatıldı.")
-    except Exception as e:
-        logging.error(f"❌ Bot thread başlatılamadı: {e}")
-
-    # 2. Scheduler'ı başlat
-    try:
-        if not scheduler.running:
-            scheduler.start()
-            logging.info("⏰ Scheduler aktif edildi.")
-    except Exception as e:
-        logging.error(f"❌ Scheduler başlatılamadı: {e}")
-
-# KRİTİK: Gunicorn'un bu servisleri tetiklemesi için fonksiyonu if bloğunun dışında çağırıyoruz.
+# Gunicorn veya Python doğrudan çalıştırmada servisleri tetikler
 start_services()
 
 if __name__ == "__main__":
-    # Render'ın atadığı veya varsayılan portu al
+    # Render Portu
     port = int(os.environ.get("PORT", 10000))
-    logging.info(f"🌐 Uygulama {port} portunda yayında...")
-    
-    # Yerel çalıştırma için (python main.py dersen burası çalışır)
+    # Local çalıştırma
     flask_app.run(host="0.0.0.0", port=port, debug=False)
