@@ -538,6 +538,7 @@ except Exception as e:
     else:
         return f"Hata: {e}", 500
 
+
 # PARÇA 4/5 — 2-B
 try:
     # 📌 Destek/Direnç
@@ -662,8 +663,6 @@ except Exception as e:
         return jsonify({"error": f"Hata: {e}"}), 500
     else:
         return f"Hata: {e}", 500
-
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
