@@ -1,25 +1,33 @@
-# Python 3.10.12 tabanlı resmi imajı kullan
+# 1. Python 3.10-slim kullanarak imaj boyutunu küçük tutuyoruz
 FROM python:3.10.12-slim
 
-# Sistem paketlerini güncelle ve git + rsync kur
-RUN apt-get update && apt-get install -y git rsync && rm -rf /var/lib/apt/lists/*
+# 2. Sistem paketlerini kur ve temizle (İmaj boyutunu optimize eder)
+RUN apt-get update && apt-get install -y \
+    git \
+    rsync \
+    && rm -rf /var/lib/apt/lists/*
 
-# Çalışma dizini ayarla
+# 3. Çalışma dizini
 WORKDIR /app
 
-# Gereksinimleri kopyala ve yükle
+# 4. Önce sadece gereksinimleri kopyalıyoruz (Docker Cache avantajı)
 COPY requirements.txt .
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
 
-# Tüm kodu kopyala
+# 5. Pip güncelleme ve paket kurulumu
+# --no-cache-dir build süresini biraz uzatır ama imajın şişmesini ve RAM aşımını önler
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir -r requirements.txt
+
+# 6. Tüm proje dosyalarını kopyala
 COPY . .
 
-# Render'ın verdiği PORT'u environment variable olarak ayarla
-ENV PORT=8020
+# 7. Render için dinamik port ayarı
+# EXPOSE komutu Render'da genellikle göz ardı edilir ama dökümantasyon için iyidir.
+# Önemli olan CMD kısmında Render'ın atadığı $PORT değişkenini kullanmaktır.
+ENV PORT=10000
+EXPOSE 10000
 
-# Flask uygulamasının dinleyeceği portu expose et
-EXPOSE 8020
-
-# Uygulamayı production-ready şekilde başlat
-CMD ["gunicorn", "-b", "0.0.0.0:8020", "main:flask_app"]
+# 8. Gunicorn Başlatma Komutu
+# Render $PORT değişkenini otomatik sağlar, bu yüzden gunicorn'u buna bağlıyoruz.
+# 'main:flask_app' kısmının main.py içindeki flask_app objesiyle eşleştiğinden emin ol.
+CMD gunicorn -b 0.0.0.0:$PORT main:flask_app
