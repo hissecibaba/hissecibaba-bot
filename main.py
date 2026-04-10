@@ -388,13 +388,13 @@ def get_symbol_files():
         dir_path = os.path.join(BASE_DIR, folder)
 
         if not os.path.exists(dir_path):
-            return jsonify([]), 200
+            return jsonify({"error": "❌ Klasör bulunamadı"}), 200
 
         files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
-        return jsonify(files), 200
+        return jsonify({"files": files}), 200
     except Exception as e:
         logging.error(f"/get_symbol_files hatası: {e}")
-        return jsonify([]), 500
+        return jsonify({"error": f"Hata: {e}"}), 500
 
 
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
@@ -460,8 +460,6 @@ def webhook():
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
-      
-# PARÇA 4/5 — Bölüm 2-A (webhook komutlar başlangıcı)  
         # --- Komutlar ---
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
@@ -503,7 +501,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"file": "Temp.xlsx", "status": "ok"}), 200
+                        return jsonify({"content": "Temp.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -519,7 +517,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"file": "gunluk_veri.xlsx", "status": "ok"}), 200
+                        return jsonify({"content": "gunluk_veri.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -535,7 +533,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"file": "AlinanSatilan.xlsx", "status": "ok"}), 200
+                        return jsonify({"content": "AlinanSatilan.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -545,7 +543,10 @@ def webhook():
                 send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
                 return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
-# PARÇA 4/5 — Bölüm 2-B (destek/direnç + fallback + görsel üretim)
+      
+
+
+
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -653,8 +654,11 @@ def webhook():
                     for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
                     return "OK", 200
-            send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
-            return "❌ AL listesi bulunamadı.", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ AL listesi bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ AL listesi bulunamadı.", mobil_mode)
+                return "❌ AL listesi bulunamadı.", 200
 
         # 📌 Telegram: SAT
         if text_norm == "sat":
@@ -668,8 +672,11 @@ def webhook():
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
                     return "OK", 200
-            send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
-            return "❌ SAT listesi bulunamadı.", 200
+            if mobil_mode:
+                return jsonify({"error": "❌ SAT listesi bulunamadı."}), 200
+            else:
+                send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
+                return "❌ SAT listesi bulunamadı.", 200
 
         # 📌 Sembol bazlı komutlar (txt_dosyalar klasöründen)
         SYMBOL_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
