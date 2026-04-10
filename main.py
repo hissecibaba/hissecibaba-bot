@@ -388,13 +388,13 @@ def get_symbol_files():
         dir_path = os.path.join(BASE_DIR, folder)
 
         if not os.path.exists(dir_path):
-            return jsonify({"error": "❌ Klasör bulunamadı"}), 200
+            return jsonify([]), 200   # ✅ Liste olarak dönüyor
 
         files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
-        return jsonify({"files": files}), 200
+        return jsonify(files), 200   # ✅ Sadece liste dönüyor
     except Exception as e:
         logging.error(f"/get_symbol_files hatası: {e}")
-        return jsonify({"error": f"Hata: {e}"}), 500
+        return jsonify([]), 500      # ✅ Hata durumunda da liste dönüyor
 
 
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
@@ -460,6 +460,7 @@ def webhook():
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
+# PARÇA 4/5 — 2-A
         # --- Komutlar ---
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
@@ -543,9 +544,7 @@ def webhook():
                 send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
                 return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
-      
-
-
+  # PARÇA 4/5 — 2-B    
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
