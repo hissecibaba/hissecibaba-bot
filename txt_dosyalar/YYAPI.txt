@@ -1,60 +1,60 @@
-# Son Güncelleme: 09.04.2026 22:02:02
+# Son Güncelleme: 10.04.2026 18:54:01
 ===YYAPI===
-Analiz Tarihi: 09.04.2026
+Analiz Tarihi: 10.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,04
-KAPANIS:1,01
-GUN.F%:-2,88
+ACILIS:1,01
+KAPANIS:1,00
+GUN.F%:-0,99
 G.DUSUK:1,00
-G.YUKSEK:1,04
-G.HACIM:6.525.971,00
-PGC8:-191.000,00
+G.YUKSEK:1,01
+G.HACIM:10.148.076,00
+PGC8:367.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:1.01
-UST BANT:1.0742
-ALT BANT:0.9842
-FIYAT/BANT ORANI:28.67
+KAPANIS:1.00
+UST BANT:1.0741
+ALT BANT:0.9741
+FIYAT/BANT ORANI:25.86
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.01
-WT1:-59.64
-WT2:-63.33
-WT1-WT2:3.69
+KAPANIS:1.0
+WT1:-58.06
+WT2:-60.94
+WT1-WT2:2.88
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:0.99
-S4:0.98
-S3:0.95
-S2:0.91
-S1:0.87
-P:1.02
-R1:1.03
-R2:1.06
-R3:1.07
-R4:1.11
-R5:1.15
+S5:1.00
+S4:0.99
+S3:0.99
+S2:0.98
+S1:0.97
+P:1.00
+R1:1.01
+R2:1.01
+R3:1.02
+R4:1.03
+R5:1.04
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.04
-0,236:1.03
-0,382:1.02
-0,500:1.02
-0,618:1.02
-0,786:1.01
+0,0(TEPE):1.01
+0,236:1.01
+0,382:1.01
+0,500:1.00
+0,618:1.00
+0,786:1.00
 1,0(DIP):1.00
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-6,800,000.0
-PGC HAFTALIK:-66,000.0
-PGC GUNLUK:-191.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-7,975,000.0
+PGC HAFTALIK:646,000.0
+PGC GUNLUK:367.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.02, ROA=0.02, Net Marj=13.73 → Zayıf
