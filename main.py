@@ -493,8 +493,6 @@ def webhook():
             if latest_folder:
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
-                    # Excel dosyaları 'r' ile okunmaz, ancak kodunda content okumak istediğin için yapıyı koruyorum. 
-                    # Eğer hata alırsan burayı 'rb' (read binary) yapmak gerekebilir.
                     with open(fp, "r", encoding="utf-8", errors="ignore") as f:
                         content = f.read()
                     if mobil_mode:
@@ -635,7 +633,7 @@ def webhook():
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
 
-        # 📌 Fallback
+        # 📌 Fallback (Hiçbir komut eşleşmezse)
         if mobil_mode:
             return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
         else:
@@ -648,8 +646,6 @@ def webhook():
             return jsonify({"error": f"Hata: {e}"}), 500
         else:
             return f"Hata: {e}", 500
-
-
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 import os
