@@ -468,7 +468,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
@@ -485,7 +486,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
@@ -502,7 +504,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"content": "Temp.xlsx"}), 200   # ✅ düzeltildi
+                        return jsonify({"content": "Temp.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -518,7 +520,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"content": "gunluk_veri.xlsx"}), 200   # ✅ düzeltildi
+                        return jsonify({"content": "gunluk_veri.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -534,7 +536,7 @@ def webhook():
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                 if os.path.exists(fp):
                     if mobil_mode:
-                        return jsonify({"content": "AlinanSatilan.xlsx"}), 200   # ✅ düzeltildi
+                        return jsonify({"content": "AlinanSatilan.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -545,6 +547,7 @@ def webhook():
                 return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
 
+
 # PARÇA 4/5 — 2-B    
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
@@ -553,7 +556,8 @@ def webhook():
                 with open(fp_fixed, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -562,7 +566,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -579,7 +584,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
@@ -597,7 +603,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -614,7 +621,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -631,7 +639,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -648,7 +657,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
@@ -666,7 +676,8 @@ def webhook():
                 with open(fp, "r", encoding="utf-8") as f: 
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
@@ -687,7 +698,8 @@ def webhook():
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 if mobil_mode:
-                    return jsonify({"content": str(content)}), 200   # ✅ düzeltildi
+                    safe_content = str(content).replace("\n", " ").replace("\r", " ")
+                    return jsonify({"content": safe_content}), 200
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
@@ -705,6 +717,7 @@ def webhook():
             return jsonify({"error": f"Hata: {e}"}), 500
         else:
             return f"Hata: {e}", 500
+
 
 
 
