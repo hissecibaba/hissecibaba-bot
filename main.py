@@ -504,10 +504,9 @@ def webhook():
                     content = f.read()
                 if mobil_mode:
                     return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
+                for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
+                return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ ÖNERİ listesi bulunamadı."}), 200
 
         if text_norm == "tavan":
@@ -517,10 +516,9 @@ def webhook():
                     content = f.read()
                 if mobil_mode:
                     return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
+                for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
+                return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ TAVAN listesi bulunamadı."}), 200
 
         if text_norm == "temel":
@@ -530,9 +528,8 @@ def webhook():
                 if os.path.exists(fp):
                     if mobil_mode:
                         return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
-                    else:
-                        send_document(chat_id, fp, caption="📊 TEMEL verisi")
-                        return jsonify({"status": "ok"}), 200
+                    send_document(chat_id, fp, caption="📊 TEMEL verisi")
+                    return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ Temp.xlsx bulunamadı."}), 200
 
         if text_norm == "teknik":
@@ -542,9 +539,8 @@ def webhook():
                 if os.path.exists(fp):
                     if mobil_mode:
                         return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
-                    else:
-                        send_document(chat_id, fp, caption="📊 TEKNİK veri")
-                        return jsonify({"status": "ok"}), 200
+                    send_document(chat_id, fp, caption="📊 TEKNİK veri")
+                    return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ gunluk_veri.xlsx bulunamadı."}), 200
 
         if text_norm == "bofa":
@@ -554,9 +550,8 @@ def webhook():
                 if os.path.exists(fp):
                     if mobil_mode:
                         return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
-                    else:
-                        send_document(chat_id, fp, caption="📊 BOFA verisi")
-                        return jsonify({"status": "ok"}), 200
+                    send_document(chat_id, fp, caption="📊 BOFA verisi")
+                    return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
         # 📌 Destek/Direnç
@@ -568,9 +563,8 @@ def webhook():
                     content = f.read()
                 if mobil_mode:
                     return jsonify({"content": content}), 200
-                else:
-                    send_message(chat_id, content)
-                    return jsonify({"status": "ok"}), 200
+                send_message(chat_id, content)
+                return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Ballı Kaymak
@@ -581,11 +575,12 @@ def webhook():
                     content = f.read()
                 if mobil_mode:
                     return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
+                for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
+                return jsonify({"status": "ok"}), 200
             return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200
+
+
 
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
@@ -618,8 +613,6 @@ def webhook():
         if text_norm == "al":
             fp = find_latest_file(AL_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
                 for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                     send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
                 return jsonify({"status": "ok"}), 200
@@ -629,8 +622,6 @@ def webhook():
         if text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
             if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
                 for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                     send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
                 return jsonify({"status": "ok"}), 200
@@ -661,6 +652,8 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
+
+
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 
