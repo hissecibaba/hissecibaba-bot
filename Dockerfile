@@ -1,15 +1,22 @@
-# Python 3.10.12 tabanlı resmi imajı kullan
 FROM python:3.10.12-slim
 
-# Çalışma dizini ayarla
 WORKDIR /app
 
-# Gereksinimleri kopyala ve yükle
+# sistem bağımlılıkları (matplotlib + pillow crash önlemek için)
+RUN apt-get update && apt-get install -y \
+    libgl1 \
+    libglib2.0-0 \
+    libsm6 \
+    libxext6 \
+    libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+
+# requirements
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Tüm kodu kopyala
+# proje kodu
 COPY . .
 
-# Uygulamayı başlat
-CMD ["python", "main.py"]
+# gunicorn ile çalıştır
+CMD ["gunicorn", "main:app", "--bind", "0.0.0.0:8020", "--workers", "2", "--timeout", "120"]
