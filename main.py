@@ -508,6 +508,9 @@ def webhook():
 
 
     # --- Parça 4/5 Bölüm:2 Matriks Komutları ve Sorgu İşlemleri ---
+
+print("DEBUG: Deploy test satır 510")
+   
     try:
         # 1. ÖNERİ Komutu
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
