@@ -106,29 +106,28 @@ def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode:
 def find_latest_file(folder_path: str) -> str:
     try:
         logging.info(f"📂 Klasör içeriği kontrol ediliyor: {folder_path}")
-        logging.info(f"📂 Dosyalar: {os.listdir(folder_path)}")
         files = []
         for fn in os.listdir(folder_path):
             if fn.lower().endswith(".txt"):
                 full_path = os.path.join(folder_path, fn)
                 try:
-                    parts = fn[:-4].split("_")
-                    if len(parts) >= 3:
-                        dt = datetime.datetime.strptime(parts[-2] + parts[-1], "%Y%m%d%H%M")
-                        files.append((dt, full_path))
-                    else:
-                        files.append((datetime.datetime.min, full_path))
+                    # Dosya adı formatı: 10.04.2026.txt
+                    dt = datetime.datetime.strptime(fn.replace(".txt", ""), "%d.%m.%Y").date()
+                    files.append((dt, full_path))
                 except Exception:
-                    files.append((datetime.datetime.min, full_path))
-        files.sort(reverse=True)
+                    # Tarih parse edilemezse en eskiye at
+                    files.append((datetime.date.min, full_path))
+        files.sort(reverse=True, key=lambda x: x[0])
         if files:
             logging.info(f"✅ Seçilen dosya: {files[0][1]}")
+            return files[0][1]
         else:
             logging.warning("❌ Hiç dosya bulunamadı.")
-        return files[0][1] if files else None
+            return None
     except Exception as e:
         logging.error(f"find_latest_file failed: {e}")
         return None
+
 
 def txt_to_images(file_path, tag, chunk_size=40):
     try:
@@ -581,6 +580,7 @@ def webhook():
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return "OK", 200
             return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200 if mobil_mode else ("❌ Ballı Kaymak listesi bulunamadı.", 200)
+
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
             fp = find_latest_file(BISTTUM_DIR)
@@ -649,7 +649,7 @@ def webhook():
             return jsonify({"error": "❌ SAT listesi bulunamadı."}), 200 if mobil_mode else ("❌ SAT listesi bulunamadı.", 200)
 
         # 📌 Dünkü Performans
-        if "dunku" in text_norm and "performans" in text_norm:
+        if "performans" in text_norm:
             fp = find_latest_file(PERFORMANS_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -659,10 +659,10 @@ def webhook():
                 else:
                     send_message(chat_id, content, mobil_mode)
                     return "OK", 200
-            return jsonify({"error": "❌ Dünkü performans dosyası bulunamadı."}), 200 if mobil_mode else ("❌ Dünkü performans dosyası bulunamadı.", 200)
+            return jsonify({"error": "❌ Performans dosyası bulunamadı."}), 200 if mobil_mode else ("❌ Performans dosyası bulunamadı.", 200)
 
         # 📌 Sembol bazlı komutlar
-        SYMBOL_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
+        SYMBOL_DIR = os.path.join(BASE_DIR, "bisttum")
         for fn in os.listdir(SYMBOL_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt", ""))
             if fn_name == text_norm:
@@ -685,8 +685,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return "Internal Server Error", 500
-
-
 
 
 
