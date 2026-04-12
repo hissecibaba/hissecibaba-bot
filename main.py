@@ -1,4 +1,4 @@
-print("DEBUG: Bu dosya güncel versiyon")
+raise SystemExit("DEBUG: Bu dosya güncel versiyon")
 # PARÇA 1/5 — Importlar, Ortam Değişkenleri ve Temel Fonksiyonlar
 # -- coding: utf-8 --
 import os, re, logging, requests, datetime
