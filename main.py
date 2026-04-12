@@ -31,6 +31,8 @@ BALLI_KAYMAK_DIR = os.path.join(BASE_DIR, "ballikaymak")
 BISTTUM_DIR = os.path.join(BASE_DIR, "bisttum")
 PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
 CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
+DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destekdirenc")
+
 
 # 🔹 Onaylayanlar klasörü sabiti
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
