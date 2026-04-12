@@ -523,10 +523,8 @@ def webhook():
             if latest_folder:
                 fp = os.path.join(latest_folder, "Temp.xlsx")
                 if os.path.exists(fp):
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
                     if mobil_mode:
-                        return jsonify({"content": content}), 200
+                        return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEMEL verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -537,10 +535,8 @@ def webhook():
             if latest_folder:
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                 if os.path.exists(fp):
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
                     if mobil_mode:
-                        return jsonify({"content": content}), 200
+                        return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 TEKNİK veri", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -551,10 +547,8 @@ def webhook():
             if latest_folder:
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                 if os.path.exists(fp):
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
                     if mobil_mode:
-                        return jsonify({"content": content}), 200
+                        return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
                     else:
                         send_document(chat_id, fp, caption="📊 BOFA verisi", mobil_mode=mobil_mode)
                         return "OK", 200
@@ -587,7 +581,6 @@ def webhook():
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return "OK", 200
             return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200 if mobil_mode else ("❌ Ballı Kaymak listesi bulunamadı.", 200)
-
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
             fp = find_latest_file(BISTTUM_DIR)
@@ -655,6 +648,19 @@ def webhook():
                     return "OK", 200
             return jsonify({"error": "❌ SAT listesi bulunamadı."}), 200 if mobil_mode else ("❌ SAT listesi bulunamadı.", 200)
 
+        # 📌 Dünkü Performans
+        if "dunku" in text_norm and "performans" in text_norm:
+            fp = find_latest_file(PERFORMANS_DIR)
+            if fp:
+                with open(fp, "r", encoding="utf-8") as f:
+                    content = f.read()
+                if mobil_mode:
+                    return jsonify({"content": content}), 200
+                else:
+                    send_message(chat_id, content, mobil_mode)
+                    return "OK", 200
+            return jsonify({"error": "❌ Dünkü performans dosyası bulunamadı."}), 200 if mobil_mode else ("❌ Dünkü performans dosyası bulunamadı.", 200)
+
         # 📌 Sembol bazlı komutlar
         SYMBOL_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
         for fn in os.listdir(SYMBOL_DIR):
@@ -679,6 +685,7 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return "Internal Server Error", 500
+
 
 
 
