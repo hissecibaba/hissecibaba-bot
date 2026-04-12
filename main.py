@@ -678,6 +678,10 @@ else:
     return f"Mesajını aldım: {msg_text}", 200
 
 
+    except Exception as e:
+        logging.error(f"/webhook hatası: {e}")
+        return "Internal Server Error", 500
+
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı)
 
