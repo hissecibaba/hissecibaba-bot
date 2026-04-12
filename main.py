@@ -447,7 +447,6 @@ def get_symbol_file_content():
         logging.error(f"/get_symbol_file_content hatası: {e}")
         return f"Hata: {e}", 500
 
-
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
     try:
@@ -464,12 +463,19 @@ def webhook():
         text_low = str(msg_text).lower()
         mobil_mode = data.get("mobil_mode", False)
 
+        # 🔹 Debug loglar
+        logging.info(f"📩 Gelen ham mesaj: {msg_text}")
+        logging.info(f"🔍 Normalize öncesi: {text_low}")
+        logging.info(f"📱 mobil_mode: {mobil_mode}")
+
         # Türkçe karakter normalize fonksiyonu
         def normalize_tr(text: str) -> str:
             tr_map = str.maketrans("çğıöşü", "cgiosu")
             return text.lower().translate(tr_map)
 
         text_norm = normalize_tr(text_low)
+        logging.info(f"✅ Normalize edilmiş komut: {text_norm}")
+
 
         # MATRİKS klasörü bulucu
         def find_latest_matrix_folder():
