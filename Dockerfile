@@ -22,12 +22,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
 COPY . .
 
 # 7. Render için dinamik port ayarı
-# EXPOSE komutu Render'da genellikle göz ardı edilir ama dökümantasyon için iyidir.
-# Önemli olan CMD kısmında Render'ın atadığı $PORT değişkenini kullanmaktır.
 ENV PORT=10000
 EXPOSE 10000
 
 # 8. Gunicorn Başlatma Komutu
-# Render $PORT değişkenini otomatik sağlar, bu yüzden gunicorn'u buna bağlıyoruz.
-# 'main:flask_app' kısmının main.py içindeki flask_app objesiyle eşleştiğinden emin ol.
-CMD gunicorn -b 0.0.0.0:$PORT main:flask_app
+# Burada main.py içindeki Flask objesi 'app' olduğu için main:app kullanıyoruz
+CMD gunicorn -b 0.0.0.0:$PORT main:app
