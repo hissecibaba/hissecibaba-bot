@@ -433,19 +433,25 @@ def get_symbol_files():
 def get_symbol_file_content():
     try:
         data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "txt_dosyalar")
+        folder = data.get("folder", "")
         symbol = data.get("symbol", "")
-        dir_path = os.path.join(BASE_DIR, folder)
-        fp = os.path.join(dir_path, symbol)
 
+        if not folder or not symbol:
+            return jsonify({"error": "❌ Klasör veya sembol belirtilmedi."}), 400
+
+        fp = os.path.join(BASE_DIR, folder, symbol)
         if os.path.exists(fp):
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
-            return content, 200
-        return "❌ Dosya bulunamadı", 200
+            # 🔹 JSON garantili dönüş
+            return jsonify({"content": content}), 200
+        else:
+            return jsonify({"error": f"❌ Dosya bulunamadı: {symbol}"}), 404
+
     except Exception as e:
-        logging.error(f"/get_symbol_file_content hatası: {e}")
-        return f"Hata: {e}", 500
+        logging.error(f"get_symbol_file_content hatası: {e}")
+        return jsonify({"error": "Internal Server Error"}), 500
+
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
