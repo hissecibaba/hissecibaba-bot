@@ -506,185 +506,185 @@ def webhook():
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
-
-    # --- Parça 4/5 Bölüm:2 Matriks Komutları ve Sorgu İşlemleri ---
+# --- Parça 4/5 Bölüm:2 Matriks Komutları ve Sorgu İşlemleri ---
 
 print("DEBUG: Deploy test satır 510")
-   
-    try:
-        # 1. ÖNERİ Komutu
-        if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
-            fp = find_latest_file(ONERI_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
-                    return "OK", 200
-            msg = "❌ ÖNERİ listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-        # 2. TAVAN Komutu
-        if text_norm == "tavan":
-            fp = find_latest_file(TAVAN_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
-                    return "OK", 200
-            msg = "❌ TAVAN listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 3. BİST TÜM Komutu
-        if any(x in text_norm for x in ["bisttum", "bist_tum", "tum_hisseler"]):
-            fp = find_latest_file(BISTTUM_DIR)
-            if fp:
+try:
+    # 1. ÖNERİ Komutu
+    if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
+        fp = find_latest_file(ONERI_DIR)
+        if fp:
+            if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                if mobil_mode:
-                    return jsonify({"content": content}), 200
-                else:
-                    send_message(chat_id, content, mobil_mode)
-                    return "OK", 200
-            msg = "❌ BİST Tüm listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+                return jsonify({"content": content}), 200
+            else:
+                for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
+                return "OK", 200
+        msg = "❌ ÖNERİ listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-        # 4. PERFORMANS Komutu
-        if any(x in text_norm for x in ["performans", "dunku_performans"]):
-            fp = find_latest_file(PERFORMANS_DIR)
-            if fp:
+    # 2. TAVAN Komutu
+    if text_norm == "tavan":
+        fp = find_latest_file(TAVAN_DIR)
+        if fp:
+            if mobil_mode:
                 with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                if mobil_mode:
-                    return jsonify({"content": content}), 200
-                else:
-                    send_message(chat_id, content, mobil_mode)
-                    return "OK", 200
-            msg = "❌ Performans verisi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+                return jsonify({"content": content}), 200
+            else:
+                for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
+                return "OK", 200
+        msg = "❌ TAVAN listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-        # 5. TEMEL Komutu (Excel)
-        if text_norm == "temel":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "Temp.xlsx")
-                if os.path.exists(fp):
-                    return send_document(chat_id, fp, caption="📊 TEMEL verisi (Excel)", mobil_mode=mobil_mode)
-            msg = "❌ Temp.xlsx bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 6. TEKNİK Komutu (Excel)
-        if text_norm == "teknik":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
-                if os.path.exists(fp):
-                    return send_document(chat_id, fp, caption="📊 TEKNİK veri (Excel)", mobil_mode=mobil_mode)
-            msg = "❌ gunluk_veri.xlsx bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 7. BOFA Komutu (Excel)
-        if text_norm == "bofa":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
-                if os.path.exists(fp):
-                    return send_document(chat_id, fp, caption="📊 BOFA verisi (Excel)", mobil_mode=mobil_mode)
-            msg = "❌ AlinanSatilan.xlsx bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-        # 8. BUGÜN AL
-        if text_norm in ["bugun al", "al_mobil"]:
-            fp = find_latest_file(AL_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                if mobil_mode:
-                    return jsonify({"content": content}), 200
-                else:
-                    send_message(chat_id, content, mobil_mode)
-                    return "OK", 200
-            msg = "❌ Bugün AL listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 9. GENEL AL
-        if text_norm == "al":
-            fp = find_latest_file(AL_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                    return "OK", 200
-            msg = "❌ AL listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 10. BUGÜN SAT
-        if text_norm in ["bugun sat", "sat_mobil"]:
-            fp = find_latest_file(SAT_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                if mobil_mode:
-                    return jsonify({"content": content}), 200
-                else:
-                    send_message(chat_id, content, mobil_mode)
-                    return "OK", 200
-            msg = "❌ Bugün SAT listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 11. GENEL SAT
-        if text_norm == "sat":
-            fp = find_latest_file(SAT_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return "OK", 200
-            msg = "❌ SAT listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 12. BALLI KAYMAK
-        if any(x in text_norm for x in ["balli", "kaymak", "balli_kaymak"]):
-            fp = find_latest_file(BALLI_KAYMAK_DIR)
-            if fp:
-                if mobil_mode:
-                    with open(fp, "r", encoding="utf-8") as f: content = f.read()
-                    return jsonify({"content": content}), 200
-                else:
-                    for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
-                    return "OK", 200
-            msg = "❌ Ballı Kaymak listesi bulunamadı."
-            return jsonify({"content": msg}) if mobil_mode else (msg, 200)
-
-        # 13. SEMBOL BAZLI
-        symbol_fp = os.path.join(BASE_DIR, "txt_dosyalar", f"{text_norm.upper()}.txt")
-        if os.path.exists(symbol_fp):
-            with open(symbol_fp, "r", encoding="utf-8") as f: content = f.read()
+    # 3. BİST TÜM Komutu
+    if any(x in text_norm for x in ["bisttum", "bist_tum", "tum_hisseler"]):
+        fp = find_latest_file(BISTTUM_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f: content = f.read()
             if mobil_mode:
                 return jsonify({"content": content}), 200
             else:
                 send_message(chat_id, content, mobil_mode)
                 return "OK", 200
+        msg = "❌ BİST Tüm listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
 
-        # 14. FALLBACK
-        final_msg = f"Mesajını aldım: {msg_text}"
+    # 4. PERFORMANS Komutu
+    if any(x in text_norm for x in ["performans", "dunku_performans"]):
+        fp = find_latest_file(PERFORMANS_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f: content = f.read()
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            else:
+                send_message(chat_id, content, mobil_mode)
+                return "OK", 200
+        msg = "❌ Performans verisi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 5. TEMEL Komutu (Excel)
+    if text_norm == "temel":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "Temp.xlsx")
+            if os.path.exists(fp):
+                return send_document(chat_id, fp, caption="📊 TEMEL verisi (Excel)", mobil_mode=mobil_mode)
+        msg = "❌ Temp.xlsx bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 6. TEKNİK Komutu (Excel)
+    if text_norm == "teknik":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
+            if os.path.exists(fp):
+                return send_document(chat_id, fp, caption="📊 TEKNİK veri (Excel)", mobil_mode=mobil_mode)
+        msg = "❌ gunluk_veri.xlsx bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 7. BOFA Komutu (Excel)
+    if text_norm == "bofa":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
+            if os.path.exists(fp):
+                return send_document(chat_id, fp, caption="📊 BOFA verisi (Excel)", mobil_mode=mobil_mode)
+        msg = "❌ AlinanSatilan.xlsx bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+    # 8. BUGÜN AL
+    if text_norm in ["bugun al", "al_mobil"]:
+        fp = find_latest_file(AL_MOBIL_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f: content = f.read()
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            else:
+                send_message(chat_id, content, mobil_mode)
+                return "OK", 200
+        msg = "❌ Bugün AL listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 9. GENEL AL
+    if text_norm == "al":
+        fp = find_latest_file(AL_DIR)
+        if fp:
+            if mobil_mode:
+                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                return jsonify({"content": content}), 200
+            else:
+                for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+                return "OK", 200
+        msg = "❌ AL listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 10. BUGÜN SAT
+    if text_norm in ["bugun sat", "sat_mobil"]:
+        fp = find_latest_file(SAT_MOBIL_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f: content = f.read()
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            else:
+                send_message(chat_id, content, mobil_mode)
+                return "OK", 200
+        msg = "❌ Bugün SAT listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 11. GENEL SAT
+    if text_norm == "sat":
+        fp = find_latest_file(SAT_DIR)
+        if fp:
+            if mobil_mode:
+                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                return jsonify({"content": content}), 200
+            else:
+                for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+                return "OK", 200
+        msg = "❌ SAT listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 12. BALLI KAYMAK
+    if any(x in text_norm for x in ["balli", "kaymak", "balli_kaymak"]):
+        fp = find_latest_file(BALLI_KAYMAK_DIR)
+        if fp:
+            if mobil_mode:
+                with open(fp, "r", encoding="utf-8") as f: content = f.read()
+                return jsonify({"content": content}), 200
+            else:
+                for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
+                    send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
+                return "OK", 200
+        msg = "❌ Ballı Kaymak listesi bulunamadı."
+        return jsonify({"content": msg}) if mobil_mode else (msg, 200)
+
+    # 13. SEMBOL BAZLI
+    symbol_fp = os.path.join(BASE_DIR, "txt_dosyalar", f"{text_norm.upper()}.txt")
+    if os.path.exists(symbol_fp):
+        with open(symbol_fp, "r", encoding="utf-8") as f: content = f.read()
         if mobil_mode:
-            return jsonify({"content": final_msg}), 200
+            return jsonify({"content": content}), 200
         else:
-            send_message(chat_id, final_msg, mobil_mode)
+            send_message(chat_id, content, mobil_mode)
             return "OK", 200
 
-    except Exception as e:
-        logging.error(f"/webhook route hatası: {e}")
-        error_msg = f"❌ Bir hata oluştu: {str(e)}"
-        return jsonify({"content": error_msg}) if 'mobil_mode' in locals() and mobil_mode else (error_msg, 200)
+    # 14. FALLBACK
+    final_msg = f"Mesajını aldım: {msg_text}"
+    if mobil_mode:
+        return jsonify({"content": final_msg}), 200
+    else:
+        send_message(chat_id, final_msg, mobil_mode)
+        return "OK", 200
+
+except Exception as e:
+    logging.error(f"/webhook route hatası: {e}")
+    error_msg = f"❌ Bir hata oluştu: {str(e)}"
+    return jsonify({"content": error_msg}) if 'mobil_mode' in locals() and mobil_mode else (error_msg, 200)
+
 
 
 # =================================================================
