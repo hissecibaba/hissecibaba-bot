@@ -1,4 +1,3 @@
-raise SystemExit("DEBUG: Bu dosya güncel versiyon")
 # PARÇA 1/5 — Importlar, Ortam Değişkenleri ve Temel Fonksiyonlar
 # -- coding: utf-8 --
 import os, re, logging, requests, datetime
@@ -649,11 +648,14 @@ def webhook():
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
 
-        # 📌 Sembol bazlı komutlar
-        for fn in os.listdir(TXT_DIR):
+       
+        # 📌 Sembol bazlı komutlar (txt_dosyalar klasöründen)
+        SYMBOL_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
+
+        for fn in os.listdir(SYMBOL_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt",""))
             if fn_name == text_norm:
-                fp_symbol = os.path.join(TXT_DIR, fn)
+                fp_symbol = os.path.join(SYMBOL_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content, mobil_mode)
