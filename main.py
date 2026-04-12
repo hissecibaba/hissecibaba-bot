@@ -408,106 +408,44 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return jsonify({"status": "error", "error": str(e)}), 500
 
+
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar)
+
 @flask_app.route("/get_symbol_files", methods=["POST"])
 def get_symbol_files():
     try:
         data = request.get_json(silent=True) or {}
-        # Flutter'dan gelen klasör ismini temizle ve güvenli hale getir
-        folder = data.get("folder", "txt_dosyalar").strip("/")
+        folder = data.get("folder", "txt_dosyalar")
         dir_path = os.path.join(BASE_DIR, folder)
 
         if not os.path.exists(dir_path):
-            logging.warning(f"⚠️ Klasör bulunamadı: {dir_path}")
             return jsonify([]), 200
 
-        # Dosyaları listele, gizli dosyaları ve .txt olmayanları ele
-        files = [f for f in os.listdir(dir_path) if f.lower().endswith(".txt") and not f.startswith(".")]
-        # Listeyi alfabetik sırala (Flutter'da daha düzenli görünür)
-        files.sort()
-        
+        files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
         return jsonify(files), 200
     except Exception as e:
         logging.error(f"/get_symbol_files hatası: {e}")
-        return jsonify([]), 200 # Flutter tarafının çökmemesi için 200 dönüyoruz
+        return jsonify([]), 500
 
 
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
 def get_symbol_file_content():
     try:
         data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "txt_dosyalar").strip("/")
-        symbol = data.get("symbol", "").strip()
-        
-        if not symbol:
-            return jsonify({"error": "❌ Sembol parametresi eksik"}), 200
-
-        # Uzantı kontrolü (Flutter'dan uzantısız gelirse ekle)
-        if not symbol.lower().endswith(".txt"):
-            symbol = f"{symbol}.txt"
-
+        folder = data.get("folder", "txt_dosyalar")
+        symbol = data.get("symbol", "")
         dir_path = os.path.join(BASE_DIR, folder)
         fp = os.path.join(dir_path, symbol)
 
-        if os.path.exists(fp) and os.path.isfile(fp):
+        if os.path.exists(fp):
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
-            return jsonify({"content": content}), 200
-            
-        return jsonify({"error": f"❌ {symbol} dosyası bulunamadı"}), 200
+            return content, 200
+        return "❌ Dosya bulunamadı", 200
     except Exception as e:
         logging.error(f"/get_symbol_file_content hatası: {e}")
-        return jsonify({"error": f"Sistem Hatası: {str(e)}"}), 200
+        return f"Hata: {e}", 500
 
-
-@flask_app.route("/webhook", methods=["POST"])
-def webhook():
-    try:
-        data = request.get_json(silent=True) or {}
-
-        msg = data.get("message", "")
-        # Telegram verisi mi yoksa Flutter butonu mu kontrolü
-        if isinstance(msg, dict):
-            msg_text = msg.get("text", "")
-            chat_id = msg.get("chat", {}).get("id", 0)
-        else:
-            msg_text = msg
-            chat_id = data.get("chat_id", 0)
-
-        text_low = str(msg_text).lower().strip()
-        mobil_mode = data.get("mobil_mode", False)
-
-        # Türkçe karakterleri normalize et (Hatalı eşleşmeyi önlemek için)
-        def normalize_tr(text: str) -> str:
-            tr_map = str.maketrans("çğıöşü", "cgiosu")
-            return text.translate(tr_map)
-
-        text_norm = normalize_tr(text_low)
-
-        # MATRİKS klasörü bulucu (Hiyerarşik yapı kontrolü)
-        def find_latest_matrix_folder():
-            try:
-                if not os.path.exists(MATRIX_DIR):
-                    return None
-                folders = []
-                for fn in os.listdir(MATRIX_DIR):
-                    full_path = os.path.join(MATRIX_DIR, fn)
-                    if os.path.isdir(full_path):
-                        try:
-                            # 09.04.2026 formatını parse et
-                            dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
-                            folders.append((dt, full_path))
-                        except Exception:
-                            continue
-                if folders:
-                    folders.sort(reverse=True)
-                    return folders[0][1]
-                return None
-            except Exception as e:
-                logging.error(f"find_latest_matrix_folder failed: {e}")
-                return None
-
-# PARÇA 4/5 (WEBHOOK ROUTE — Tüm komutlar ve fallback) — DÜZELTİLMİŞ TAM KOD
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -524,6 +462,13 @@ def webhook():
 
         text_low = str(msg_text).lower()
         mobil_mode = data.get("mobil_mode", False)
+
+        # Türkçe karakter normalize fonksiyonu
+        def normalize_tr(text: str) -> str:
+            tr_map = str.maketrans("çğıöşü", "cgiosu")
+            return text.lower().translate(tr_map)
+
+        text_norm = normalize_tr(text_low)
 
         # MATRİKS klasörü bulucu
         def find_latest_matrix_folder():
@@ -543,8 +488,10 @@ def webhook():
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
+# PARÇA 4/5 — Bölüm 2-A (webhook komutlar başlangıcı)
+
         # --- Komutlar ---
-        if any(x in text_low for x in ["öneri", "oneri", "önerı", "onerı"]):
+        if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
             if fp:
                 if mobil_mode:
@@ -558,7 +505,7 @@ def webhook():
             send_message(chat_id, "❌ ÖNERİ listesi bulunamadı.", mobil_mode)
             return "❌ ÖNERİ listesi bulunamadı.", 200
 
-        if text_low == "tavan":
+        if text_norm == "tavan":
             fp = find_latest_file(TAVAN_DIR)
             if fp:
                 if mobil_mode:
@@ -572,7 +519,7 @@ def webhook():
             send_message(chat_id, "❌ TAVAN listesi bulunamadı.", mobil_mode)
             return "❌ TAVAN listesi bulunamadı.", 200
 
-        if text_low == "temel":
+        if text_norm == "temel":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
                 fp = os.path.join(latest_folder, "Temp.xlsx")
@@ -582,7 +529,7 @@ def webhook():
             send_message(chat_id, "❌ Temp.xlsx bulunamadı.", mobil_mode)
             return "❌ Temp.xlsx bulunamadı.", 200
 
-        if text_low == "teknik":
+        if text_norm == "teknik":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
                 fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
@@ -592,7 +539,7 @@ def webhook():
             send_message(chat_id, "❌ gunluk_veri.xlsx bulunamadı.", mobil_mode)
             return "❌ gunluk_veri.xlsx bulunamadı.", 200
 
-        if text_low == "bofa":
+        if text_norm == "bofa":
             latest_folder = find_latest_matrix_folder()
             if latest_folder:
                 fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
@@ -602,8 +549,10 @@ def webhook():
             send_message(chat_id, "❌ AlinanSatilan.xlsx bulunamadı.", mobil_mode)
             return "❌ AlinanSatilan.xlsx bulunamadı.", 200
 
-        # 📌 Destek/Direnç (özel düzeltme)
-        if "destek" in text_low or "direnc" in text_low or "destek_direnc" in text_low:
+# PARÇA 4/5 — Bölüm 2-B (destek/direnç + fallback + görsel üretim)
+
+        # 📌 Destek/Direnç
+        if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
             if os.path.exists(fp_fixed):
                 with open(fp_fixed, "r", encoding="utf-8") as f:
@@ -619,19 +568,8 @@ def webhook():
             send_message(chat_id, "❌ Destek/Direnç dosyası bulunamadı.", mobil_mode)
             return "❌ Destek/Direnç dosyası bulunamadı.", 200
 
-        # 📌 Sembol bazlı komutlar (case-insensitive ve startswith kontrolü)
-        for fn in os.listdir(TXT_DIR):
-            if fn.lower().startswith(text_low.lower()):
-                fp_symbol = os.path.join(TXT_DIR, fn)
-                with open(fp_symbol, "r", encoding="utf-8") as f:
-                    content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-
-        logging.info(f"Gelen text_low: {text_low}")
-
         # 📌 Ballı Kaymak
-        if ("balli" in text_low or "kaymak" in text_low) or "balli_kaymak" in text_low:
+        if ("balli" in text_norm or "kaymak" in text_norm) or "balli_kaymak" in text_norm:
             fp = find_latest_file(BALLI_KAYMAK_DIR)
             if fp:
                 if mobil_mode:
@@ -646,19 +584,8 @@ def webhook():
             send_message(chat_id, "❌ Ballı Kaymak listesi bulunamadı.", mobil_mode)
             return "❌ Ballı Kaymak listesi bulunamadı.", 200
 
-        # 📌 Dünkü Performans
-        if ("dünkü" in text_low and "performans" in text_low) or text_low == "performans":
-            fp = find_latest_file(PERFORMANS_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f: 
-                    content = f.read()
-                send_message(chat_id, content, mobil_mode)
-                return content, 200
-            send_message(chat_id, "❌ Performans dosyası bulunamadı.", mobil_mode)
-            return "❌ Performans dosyası bulunamadı.", 200
-
         # 📌 Tüm Hisseler
-        if ("tüm" in text_low and "hisse" in text_low) or text_low == "tum_hisseler":
+        if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
@@ -669,7 +596,7 @@ def webhook():
             return "❌ Tüm hisseler dosyası bulunamadı.", 200
 
         # 📌 Mobil: Bugün AL
-        if text_low in ["bugün al", "bugunal", "al_mobil"]:
+        if text_norm in ["bugun al", "al_mobil"]:
             fp = find_latest_file(AL_MOBIL_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
@@ -680,7 +607,7 @@ def webhook():
             return "❌ Bugün AL listesi bulunamadı.", 200
 
         # 📌 Mobil: Bugün SAT
-        if text_low in ["bugün sat", "bugunsat", "sat_mobil"]:
+        if text_norm in ["bugun sat", "sat_mobil"]:
             fp = find_latest_file(SAT_MOBIL_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f: 
@@ -691,7 +618,7 @@ def webhook():
             return "❌ Bugün SAT listesi bulunamadı.", 200
 
         # 📌 Telegram: AL
-        if text_low == "al":
+        if text_norm == "al":
             fp = find_latest_file(AL_DIR)
             if fp:
                 if mobil_mode:
@@ -707,7 +634,7 @@ def webhook():
             return "❌ AL listesi bulunamadı.", 200
 
         # 📌 Telegram: SAT
-        if text_low == "sat":
+        if text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
             if fp:
                 if mobil_mode:
@@ -721,6 +648,16 @@ def webhook():
                     return "OK", 200
             send_message(chat_id, "❌ SAT listesi bulunamadı.", mobil_mode)
             return "❌ SAT listesi bulunamadı.", 200
+
+        # 📌 Sembol bazlı komutlar
+        for fn in os.listdir(TXT_DIR):
+            fn_name = normalize_tr(fn.lower().replace(".txt",""))
+            if fn_name == text_norm:
+                fp_symbol = os.path.join(TXT_DIR, fn)
+                with open(fp_symbol, "r", encoding="utf-8") as f:
+                    content = f.read()
+                send_message(chat_id, content, mobil_mode)
+                return content, 200
 
         # 📌 Fallback: Diğer mesajlar
         send_message(chat_id, f"Mesajını aldım: {msg_text}", mobil_mode)
