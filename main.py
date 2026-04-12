@@ -819,21 +819,12 @@ def keep_alive():
         requests.get(url, timeout=10)
     except: pass
 
-def monthly_cleanup():
-    try:
-        for root, dirs, files in os.walk(BASE_DIR):
-            if any(x in root for x in [".git", "venv"]): continue
-            for f in files:
-                if f.endswith(".txt") and f not in ["requirements.txt", "runtime.txt"]:
-                    os.remove(os.path.join(root, f))
-    except: pass
-
 # --- SCHEDULER AYARLARI ---
 from apscheduler.schedulers.background import BackgroundScheduler
 scheduler = BackgroundScheduler(timezone=pytz.timezone("Europe/Istanbul"))
 scheduler.add_job(otomatik_mesaj_telegram, "cron", day_of_week="mon-fri", hour=21, minute=0)
 scheduler.add_job(keep_alive, "interval", minutes=10)
-scheduler.add_job(monthly_cleanup, "cron", day=1, hour=0)
+
 
 # =================================================================
 # ANA ÇALIŞTIRICI (RENDER & GUNICORN UYUMLU)
