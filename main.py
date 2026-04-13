@@ -421,6 +421,8 @@ def upload_file():
         return f"Hata: {e}", 500
 
 
+
+
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
 @flask_app.route("/get_symbol_files", methods=["POST"])
@@ -511,11 +513,12 @@ def webhook():
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
+        # 🔹 Şimdilik placeholder dönüş (Bölüm 2’de komutlara özel içerik eklenecek)
+        return jsonify({"content": f"Komut alındı: {text_norm}"}), 200
+
     except Exception as e:
         logging.error(f"/webhook başlangıcı hatası: {e}")
-        return "Webhook initialization error", 500
-
-
+        return jsonify({"error": "Webhook initialization error"}), 500
 
 
 # PARÇA 4/5 — Bölüm 2 (--- Komutlar ---) — Düzeltilmiş
@@ -676,6 +679,9 @@ def webhook():
             return jsonify({"error": "Internal Server Error"}), 500
 
 
+
+
+
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
 
 import os
@@ -740,6 +746,7 @@ def get_latest_file_content_as_image(target_dir):
 # PARÇA 5b — Telegram komut entegrasyonu (al/sat → görsel gönder) — Düzeltilmiş
 
 import os
+import logging
 from telegram import Update
 from telegram.ext import Updater, MessageHandler, Filters, CallbackContext
 
@@ -811,6 +818,10 @@ def start_bot():
 
 import pytz
 import requests
+import datetime
+import os
+import logging
+from apscheduler.schedulers.background import BackgroundScheduler
 
 def otomatik_mesaj_telegram():
     try:
@@ -915,3 +926,4 @@ scheduler.start()
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     flask_app.run(host="0.0.0.0", port=8020)
+
