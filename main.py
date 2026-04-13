@@ -920,23 +920,6 @@ scheduler.add_job(
 scheduler.start()
 
 
-# --- Otomatik route düzeltme kontrolü ---
-def fix_routes_in_file():
-    file_path = os.path.abspath(__file__)
-    try:
-        with open(file_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        if "@app.route" in content:
-            fixed_content = content.replace("@app.route", "@flask_app.route")
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(fixed_content)
-            logging.info("✅ @app.route satırları otomatik olarak düzeltildi.")
-        else:
-            logging.info("ℹ️ @app.route satırı bulunmadı, dosya temiz.")
-    except Exception as e:
-        logging.error(f"Route düzeltme hatası: {e}")
-
-
 # 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
