@@ -697,9 +697,6 @@ def webhook():
 
 # PARÇA 4/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
 
-@flask_app.route("/webhook", methods=["POST"])
-def webhook():
-    try:
         # 📌 Telegram: SAT
         if text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
