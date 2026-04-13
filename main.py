@@ -691,46 +691,47 @@ try:
 
 # PARÇA 5/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
 
-            # 📌 Telegram: SAT
-            if text_norm == "sat":
-                fp = find_latest_file(SAT_DIR)
-                if fp:
-                    logging.info(f"✅ SAT dosyası seçildi: {fp}")
-                    for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return jsonify({"content": "SAT listesi gönderildi"}), 200
-                logging.warning("❌ SAT listesi bulunamadı.")
-                return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
+    # 📌 Telegram: SAT
+    if text_norm == "sat":
+        fp = find_latest_file(SAT_DIR)
+        if fp:
+            logging.info(f"✅ SAT dosyası seçildi: {fp}")
+            for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
+                send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+            return jsonify({"content": "SAT listesi gönderildi"}), 200
+        logging.warning("❌ SAT listesi bulunamadı.")
+        return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
-            # 📌 Dünkü Performans
-            if "performans" in text_norm:
-                fp = find_latest_file(PERFORMANS_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Performans dosyası seçildi: {fp}")
-                    return jsonify({"content": content}), 200
-                logging.warning("❌ Performans dosyası bulunamadı.")
-                return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
+    # 📌 Dünkü Performans
+    if "performans" in text_norm:
+        fp = find_latest_file(PERFORMANS_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Performans dosyası seçildi: {fp}")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Performans dosyası bulunamadı.")
+        return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
 
-            # 📌 Sembol bazlı komutlar
-            SYMBOL_DIR = os.path.join(BASE_DIR, "bisttum")
-            for fn in os.listdir(SYMBOL_DIR):
-                fn_name = normalize_tr(fn.lower().replace(".txt", ""))
-                if fn_name == text_norm:
-                    fp_symbol = os.path.join(SYMBOL_DIR, fn)
-                    with open(fp_symbol, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Sembol dosyası seçildi: {fp_symbol}")
-                    return jsonify({"content": content}), 200
+    # 📌 Sembol bazlı komutlar
+    SYMBOL_DIR = os.path.join(BASE_DIR, "bisttum")
+    for fn in os.listdir(SYMBOL_DIR):
+        fn_name = normalize_tr(fn.lower().replace(".txt", ""))
+        if fn_name == text_norm:
+            fp_symbol = os.path.join(SYMBOL_DIR, fn)
+            with open(fp_symbol, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Sembol dosyası seçildi: {fp_symbol}")
+            return jsonify({"content": content}), 200
 
-            # 📌 Fallback
-            logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
-            return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
+    # 📌 Fallback
+    logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
+    return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
 
-        except Exception as e:
-            logging.error(f"/webhook hatası: {e}")
-            return jsonify({"content": "Internal Server Error"}), 500
+except Exception as e:
+    logging.error(f"/webhook hatası: {e}")
+    return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 
