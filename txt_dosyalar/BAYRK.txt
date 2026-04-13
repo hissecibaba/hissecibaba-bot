@@ -1,60 +1,60 @@
-# Son Güncelleme: 10.04.2026 18:41:57
+# Son Güncelleme: 13.04.2026 18:56:35
 ===BAYRK===
-Analiz Tarihi: 10.04.2026
+Analiz Tarihi: 13.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:4,70
-KAPANIS:4,68
-GUN.F%:0,43
-G.DUSUK:4,65
-G.YUKSEK:4,73
-G.HACIM:40.543.671,00
-PGC8:-836.000,00
+ACILIS:4,68
+KAPANIS:4,62
+GUN.F%:-1,28
+G.DUSUK:4,57
+G.YUKSEK:4,78
+G.HACIM:61.951.247,00
+PGC8:-1.685.000,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:4.68
-UST BANT:4.7400
-ALT BANT:4.5277
-FIYAT/BANT ORANI:71.73
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:4.62
+UST BANT:4.7144
+ALT BANT:4.5431
+FIYAT/BANT ORANI:44.92
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:4.68
-WT1:2.12
-WT2:-0.7
-WT1-WT2:2.82
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:4.62
+WT1:0.35
+WT2:-0.68
+WT1-WT2:1.03
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:4.64
-S4:4.61
-S3:4.56
-S2:4.48
-S1:4.40
-P:4.69
-R1:4.72
-R2:4.77
-R3:4.80
-R4:4.88
-R5:4.96
+S5:4.53
+S4:4.45
+S3:4.32
+S2:4.11
+S1:3.90
+P:4.66
+R1:4.74
+R2:4.87
+R3:4.95
+R4:5.16
+R5:5.37
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):4.73
-0,236:4.71
+0,0(TEPE):4.78
+0,236:4.73
 0,382:4.70
-0,500:4.69
-0,618:4.68
-0,786:4.67
-1,0(DIP):4.65
+0,500:4.68
+0,618:4.65
+0,786:4.61
+1,0(DIP):4.57
 SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:4,465,000.0
-PGC HAFTALIK:1,356,000.0
-PGC GUNLUK:-836.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+PGC AYLIK:2,076,000.0
+PGC HAFTALIK:-783,000.0
+PGC GUNLUK:-1.685.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.92, ROA=-0.31, Net Marj=-0.85 → Zayıf
