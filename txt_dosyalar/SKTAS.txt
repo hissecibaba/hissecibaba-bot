@@ -1,59 +1,59 @@
-# Son Güncelleme: 10.04.2026 18:51:44
+# Son Güncelleme: 13.04.2026 19:07:32
 ===SKTAS===
-Analiz Tarihi: 10.04.2026
+Analiz Tarihi: 13.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,09
-KAPANIS:3,08
-GUN.F%:0,33
-G.DUSUK:3,07
-G.YUKSEK:3,11
-G.HACIM:23.777.575,00
-PGC8:-787.000,00
+ACILIS:3,08
+KAPANIS:3,04
+GUN.F%:-1,30
+G.DUSUK:2,99
+G.YUKSEK:3,08
+G.HACIM:18.270.977,00
+PGC8:-10.000,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:3.08
-UST BANT:3.2251
-ALT BANT:2.8651
-FIYAT/BANT ORANI:59.69
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:3.04
+UST BANT:3.1957
+ALT BANT:2.9107
+FIYAT/BANT ORANI:45.37
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:3.08
-WT1:-21.16
-WT2:-30.89
-WT1-WT2:9.73
+KAPANIS:3.04
+WT1:-20.02
+WT2:-25.36
+WT1-WT2:5.34
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:3.06
-S4:3.05
-S3:3.02
-S2:2.98
-S1:2.94
-P:3.09
-R1:3.10
-R2:3.13
-R3:3.14
-R4:3.18
-R5:3.22
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):3.11
-0,236:3.10
-0,382:3.09
-0,500:3.09
-0,618:3.09
-0,786:3.08
-1,0(DIP):3.07
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+S5:2.99
+S4:2.95
+S3:2.90
+S2:2.81
+S1:2.72
+P:3.04
+R1:3.08
+R2:3.13
+R3:3.17
+R4:3.26
+R5:3.35
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):3.08
+0,236:3.06
+0,382:3.05
+0,500:3.04
+0,618:3.02
+0,786:3.01
+1,0(DIP):2.99
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-4,581,000.0
-PGC HAFTALIK:-1,960,000.0
-PGC GUNLUK:-787.000,00
+PGC AYLIK:-4,296,000.0
+PGC HAFTALIK:-1,937,000.0
+PGC GUNLUK:-10.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
