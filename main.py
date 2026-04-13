@@ -479,11 +479,36 @@ def get_symbol_file_content():
 
 
 
-# PARÇA 4/5 — Bölüm 2A (Komutlar) — Düzeltilmiş
-
+# PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
     try:
+        data = request.get_json(silent=True) or {}
+
+        msg = data.get("message", "")
+        if isinstance(msg, dict):
+            msg_text = msg.get("text", "")
+            chat_id = msg.get("chat", {}).get("id", 0)
+        else:
+            msg_text = msg
+            chat_id = data.get("chat_id", 0)
+
+        text_low = str(msg_text).lower()
+        mobil_mode = data.get("mobil_mode", False)
+
+        # 🔹 Debug loglar
+        logging.info(f"📩 Gelen ham mesaj: {msg_text}")
+        logging.info(f"🔍 Normalize öncesi: {text_low}")
+        logging.info(f"📱 mobil_mode: {mobil_mode}")
+
+        # Türkçe karakter normalize fonksiyonu
+        def normalize_tr(text: str) -> str:
+            tr_map = str.maketrans("çğıöşü", "cgiosu")
+            return text.lower().translate(tr_map)
+
+        text_norm = normalize_tr(text_low)
+        logging.info(f"✅ Normalize edilmiş komut: {text_norm}")
+
         # 📌 ÖNERİ
         if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
             fp = find_latest_file(ONERI_DIR)
@@ -597,6 +622,7 @@ def webhook():
             logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
             return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
 
+
         # 📌 Mobil: Bugün AL
         if text_norm in ["bugun al", "al_mobil"]:
             fp = find_latest_file(AL_MOBIL_DIR)
@@ -671,6 +697,7 @@ def webhook():
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
 
+        
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
 
