@@ -432,8 +432,6 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-
-
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
 @flask_app.route("/get_symbol_files", methods=["POST"])
@@ -479,64 +477,6 @@ def get_symbol_file_content():
         return jsonify({"error": "Internal Server Error"}), 500
 
 
-@flask_app.route("/webhook", methods=["POST"])
-def webhook():
-    try:
-        data = request.get_json(silent=True) or {}
-
-        msg = data.get("message", "")
-        if isinstance(msg, dict):
-            msg_text = msg.get("text", "")
-            chat_id = msg.get("chat", {}).get("id", 0)
-        else:
-            msg_text = msg
-            chat_id = data.get("chat_id", 0)
-
-        text_low = str(msg_text).lower()
-        mobil_mode = data.get("mobil_mode", False)
-
-        # 🔹 Debug loglar
-        logging.info(f"📩 Gelen ham mesaj: {msg_text}")
-        logging.info(f"🔍 Normalize öncesi: {text_low}")
-        logging.info(f"📱 mobil_mode: {mobil_mode}")
-
-        # Türkçe karakter normalize fonksiyonu
-        def normalize_tr(text: str) -> str:
-            tr_map = str.maketrans("çğıöşü", "cgiosu")
-            return text.lower().translate(tr_map)
-
-        text_norm = normalize_tr(text_low)
-        logging.info(f"✅ Normalize edilmiş komut: {text_norm}")
-
-        # MATRİKS klasörü bulucu
-        def find_latest_matrix_folder():
-            try:
-                folders = []
-                for fn in os.listdir(MATRIX_DIR):
-                    full_path = os.path.join(MATRIX_DIR, fn)
-                    if os.path.isdir(full_path):
-                        try:
-                            dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
-                            folders.append((dt, full_path))
-                        except Exception:
-                            continue
-                folders.sort(reverse=True)
-                if folders:
-                    logging.info(f"✅ Seçilen MATRİKS klasörü: {folders[0][1]}")
-                else:
-                    logging.warning("❌ MATRİKS klasörü bulunamadı.")
-                return folders[0][1] if folders else None
-            except Exception as e:
-                logging.error(f"find_latest_matrix_folder failed: {e}")
-                return None
-
-        # 🔹 Burada artık placeholder yerine komutlara özel içerik eklenecek (Bölüm 2’de)
-        send_message(chat_id, f"Komut alındı: {text_norm}", mobil_mode)
-        return "OK", 200
-
-    except Exception as e:
-        logging.error(f"/webhook başlangıcı hatası: {e}")
-        return jsonify({"error": "Webhook initialization error"}), 500
 
 
 # PARÇA 4/5 — Bölüm 2A (Komutlar) — Düzeltilmiş
