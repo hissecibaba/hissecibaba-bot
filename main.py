@@ -538,157 +538,158 @@ def webhook():
         return jsonify({"error": "Webhook initialization error"}), 500
 
 
-
 # PARÇA 4/5 — Bölüm 2A (Komutlar) — Düzeltilmiş
 
-        try:
-            # 📌 ÖNERİ
-            if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
-                fp = find_latest_file(ONERI_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ ÖNERİ dosyası seçildi: {fp}")
-                    if mobil_mode:
-                        return jsonify({"content": content}), 200
-                    for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
-                logging.warning("❌ ÖNERİ listesi bulunamadı.")
-                return jsonify({"error": "❌ ÖNERİ listesi bulunamadı."}), 200
+try:
+    # 📌 ÖNERİ
+    if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
+        fp = find_latest_file(ONERI_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ ÖNERİ dosyası seçildi: {fp}")
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
+                send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ ÖNERİ listesi bulunamadı.")
+        return jsonify({"content": "❌ ÖNERİ listesi bulunamadı."}), 200
 
-            # 📌 TAVAN
-            if text_norm == "tavan":
-                fp = find_latest_file(TAVAN_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ TAVAN dosyası seçildi: {fp}")
-                    if mobil_mode:
-                        return jsonify({"content": content}), 200
-                    for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
-                logging.warning("❌ TAVAN listesi bulunamadı.")
-                return jsonify({"error": "❌ TAVAN listesi bulunamadı."}), 200
+    # 📌 TAVAN
+    if text_norm == "tavan":
+        fp = find_latest_file(TAVAN_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ TAVAN dosyası seçildi: {fp}")
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
+                send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ TAVAN listesi bulunamadı.")
+        return jsonify({"content": "❌ TAVAN listesi bulunamadı."}), 200
 
-            # 📌 TEMEL
-            if text_norm == "temel":
-                latest_folder = find_latest_matrix_folder()
-                if latest_folder:
-                    fp = os.path.join(latest_folder, "Temp.xlsx")
-                    if os.path.exists(fp):
-                        logging.info(f"✅ TEMEL dosyası bulundu: {fp}")
-                        if mobil_mode:
-                            return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
-                        send_document(chat_id, fp, caption="📊 TEMEL verisi")
-                        return jsonify({"status": "ok"}), 200
-                logging.warning("❌ Temp.xlsx bulunamadı.")
-                return jsonify({"error": "❌ Temp.xlsx bulunamadı."}), 200
+    # 📌 TEMEL
+    if text_norm == "temel":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "Temp.xlsx")
+            if os.path.exists(fp):
+                logging.info(f"✅ TEMEL dosyası bulundu: {fp}")
+                if mobil_mode:
+                    return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
+                send_document(chat_id, fp, caption="📊 TEMEL verisi")
+                return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
+        logging.warning("❌ Temp.xlsx bulunamadı.")
+        return jsonify({"content": "❌ Temp.xlsx bulunamadı."}), 200
 
-            # 📌 TEKNİK
-            if text_norm == "teknik":
-                latest_folder = find_latest_matrix_folder()
-                if latest_folder:
-                    fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
-                    if os.path.exists(fp):
-                        logging.info(f"✅ TEKNİK dosyası bulundu: {fp}")
-                        if mobil_mode:
-                            return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
-                        send_document(chat_id, fp, caption="📊 TEKNİK veri")
-                        return jsonify({"status": "ok"}), 200
-                logging.warning("❌ gunluk_veri.xlsx bulunamadı.")
-                return jsonify({"error": "❌ gunluk_veri.xlsx bulunamadı."}), 200
+    # 📌 TEKNİK
+    if text_norm == "teknik":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
+            if os.path.exists(fp):
+                logging.info(f"✅ TEKNİK dosyası bulundu: {fp}")
+                if mobil_mode:
+                    return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
+                send_document(chat_id, fp, caption="📊 TEKNİK veri")
+                return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
+        logging.warning("❌ gunluk_veri.xlsx bulunamadı.")
+        return jsonify({"content": "❌ gunluk_veri.xlsx bulunamadı."}), 200
 
-            # 📌 BOFA
-            if text_norm == "bofa":
-                latest_folder = find_latest_matrix_folder()
-                if latest_folder:
-                    fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
-                    if os.path.exists(fp):
-                        logging.info(f"✅ BOFA dosyası bulundu: {fp}")
-                        if mobil_mode:
-                            return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
-                        send_document(chat_id, fp, caption="📊 BOFA verisi")
-                        return jsonify({"status": "ok"}), 200
-                logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
-                return jsonify({"error": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
+    # 📌 BOFA
+    if text_norm == "bofa":
+        latest_folder = find_latest_matrix_folder()
+        if latest_folder:
+            fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
+            if os.path.exists(fp):
+                logging.info(f"✅ BOFA dosyası bulundu: {fp}")
+                if mobil_mode:
+                    return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
+                send_document(chat_id, fp, caption="📊 BOFA verisi")
+                return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
+        logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
+        return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-            # 📌 Destek/Direnç
-            if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-                if target_fp:
-                    with open(target_fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
-                    if mobil_mode:
-                        return jsonify({"content": content}), 200
-                    send_message(chat_id, content)
-                    return jsonify({"status": "ok"}), 200
-                logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
-                return jsonify({"error": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+    # 📌 Destek/Direnç
+    if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
+        fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+        target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+        if target_fp:
+            with open(target_fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            send_message(chat_id, content)
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
+        return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
-            # 📌 Ballı Kaymak
-            if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
-                fp = find_latest_file(BALLI_KAYMAK_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Ballı Kaymak dosyası seçildi: {fp}")
-                    if mobil_mode:
-                        return jsonify({"content": content}), 200
-                    for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
-                logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
-                return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200
+    # 📌 Ballı Kaymak
+    if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
+        fp = find_latest_file(BALLI_KAYMAK_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Ballı Kaymak dosyası seçildi: {fp}")
+            if mobil_mode:
+                return jsonify({"content": content}), 200
+            for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
+                send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
+        return jsonify({"content": "❌ Ballı Kaymak listesi bulunamadı."}), 200
 
-            # 📌 Tüm Hisseler
-            if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
-                fp = find_latest_file(BISTTUM_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Tüm Hisseler dosyası seçildi: {fp}")
-                    return jsonify({"content": content}), 200
-                logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
-                return jsonify({"error": "❌ Tüm hisseler dosyası bulunamadı."}), 200
+    # 📌 Tüm Hisseler
+    if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
+        fp = find_latest_file(BISTTUM_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Tüm Hisseler dosyası seçildi: {fp}")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
+        return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
 
-            # 📌 Mobil: Bugün AL
-            if text_norm in ["bugun al", "al_mobil"]:
-                fp = find_latest_file(AL_MOBIL_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Bugün AL dosyası seçildi: {fp}")
-                    return jsonify({"content": content}), 200
-                logging.warning("❌ Bugün AL listesi bulunamadı.")
-                return jsonify({"error": "❌ Bugün AL listesi bulunamadı."}), 200
+    # 📌 Mobil: Bugün AL
+    if text_norm in ["bugun al", "al_mobil"]:
+        fp = find_latest_file(AL_MOBIL_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Bugün AL dosyası seçildi: {fp}")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Bugün AL listesi bulunamadı.")
+        return jsonify({"content": "❌ Bugün AL listesi bulunamadı."}), 200
 
-            # 📌 Mobil: Bugün SAT
-            if text_norm in ["bugun sat", "sat_mobil"]:
-                fp = find_latest_file(SAT_MOBIL_DIR)
-                if fp:
-                    with open(fp, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    logging.info(f"✅ Bugün SAT dosyası seçildi: {fp}")
-                    return jsonify({"content": content}), 200
-                logging.warning("❌ Bugün SAT listesi bulunamadı.")
-                return jsonify({"error": "❌ Bugün SAT listesi bulunamadı."}), 200
+    # 📌 Mobil: Bugün SAT
+    if text_norm in ["bugun sat", "sat_mobil"]:
+        fp = find_latest_file(SAT_MOBIL_DIR)
+        if fp:
+            with open(fp, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ Bugün SAT dosyası seçildi: {fp}")
+            return jsonify({"content": content}), 200
+        logging.warning("❌ Bugün SAT listesi bulunamadı.")
+        return jsonify({"content": "❌ Bugün SAT listesi bulunamadı."}), 200
 
-            # 📌 Telegram: AL
-            if text_norm == "al":
-                fp = find_latest_file(AL_DIR)
-                if fp:
-                    logging.info(f"✅ AL dosyası seçildi: {fp}")
-                    for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
-                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
-                logging.warning("❌ AL listesi bulunamadı.")
-                return jsonify({"error": "❌ AL listesi bulunamadı."}), 200
+    # 📌 Telegram: AL
+    if text_norm == "al":
+        fp = find_latest_file(AL_DIR)
+        if fp:
+            logging.info(f"✅ AL dosyası seçildi: {fp}")
+            for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
+                send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+            return jsonify({"content": "AL listesi gönderildi"}), 200
+        logging.warning("❌ AL listesi bulunamadı.")
+        return jsonify({"content": "❌ AL listesi bulunamadı."}), 200
 
-# PARÇA 4/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
+
+
+# PARÇA 5/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
 
             # 📌 Telegram: SAT
             if text_norm == "sat":
@@ -697,9 +698,9 @@ def webhook():
                     logging.info(f"✅ SAT dosyası seçildi: {fp}")
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                    return jsonify({"status": "ok"}), 200
+                    return jsonify({"content": "SAT listesi gönderildi"}), 200
                 logging.warning("❌ SAT listesi bulunamadı.")
-                return jsonify({"error": "❌ SAT listesi bulunamadı."}), 200
+                return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
             # 📌 Dünkü Performans
             if "performans" in text_norm:
@@ -710,7 +711,7 @@ def webhook():
                     logging.info(f"✅ Performans dosyası seçildi: {fp}")
                     return jsonify({"content": content}), 200
                 logging.warning("❌ Performans dosyası bulunamadı.")
-                return jsonify({"error": "❌ Performans dosyası bulunamadı."}), 200
+                return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
 
             # 📌 Sembol bazlı komutlar
             SYMBOL_DIR = os.path.join(BASE_DIR, "bisttum")
@@ -729,7 +730,8 @@ def webhook():
 
         except Exception as e:
             logging.error(f"/webhook hatası: {e}")
-            return jsonify({"error": "Internal Server Error"}), 500
+            return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
