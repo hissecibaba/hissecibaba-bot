@@ -1,6 +1,6 @@
 # PARÇA 1/5 — Importlar, Ortam Değişkenleri ve Temel Fonksiyonlar (Düzeltilmiş)
 # -- coding: utf-8 --
-import os, re, logging, requests, datetime
+import os, re, logging, requests, datetime, uuid   # ✅ uuid eklendi
 import matplotlib.pyplot as plt
 from flask import Flask, request, jsonify
 from apscheduler.schedulers.background import BackgroundScheduler
@@ -90,6 +90,7 @@ def find_id_no_by_device(device_id: str):
     except Exception as e:
         logging.error(f"find_id_no_by_device failed: {e}")
         return None
+
 
 
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları (Düzeltilmiş)
@@ -538,10 +539,9 @@ def webhook():
         return jsonify({"error": "Webhook initialization error"}), 500
 
 
-
 # PARÇA 4/5 — Bölüm 2A (Komutlar) — Düzeltilmiş
 
-@app.route("/webhook", methods=["POST"])
+@flask_app.route("/webhook", methods=["POST"])
 def webhook():
     try:
         # 📌 ÖNERİ
@@ -691,8 +691,15 @@ def webhook():
             return jsonify({"content": "❌ AL listesi bulunamadı."}), 200
 
 
+
+
+
+
 # PARÇA 4/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
 
+@flask_app.route("/webhook", methods=["POST"])
+def webhook():
+    try:
         # 📌 Telegram: SAT
         if text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
@@ -733,7 +740,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
 
 
 
@@ -986,8 +992,26 @@ scheduler.add_job(
 
 scheduler.start()
 
+
+# --- Otomatik route düzeltme kontrolü ---
+def fix_routes_in_file():
+    file_path = os.path.abspath(__file__)
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        if "@app.route" in content:
+            fixed_content = content.replace("@app.route", "@flask_app.route")
+            with open(file_path, "w", encoding="utf-8") as f:
+                f.write(fixed_content)
+            logging.info("✅ @app.route satırları otomatik olarak düzeltildi.")
+        else:
+            logging.info("ℹ️ @app.route satırı bulunmadı, dosya temiz.")
+    except Exception as e:
+        logging.error(f"Route düzeltme hatası: {e}")
+
+
 # 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
-    flask_app.run(host="0.0.0.0", port=8020)
-
+    fix_routes_in_file()
+    flask_app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8020)))
