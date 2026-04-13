@@ -1,60 +1,60 @@
-# Son Güncelleme: 10.04.2026 18:46:22
+# Son Güncelleme: 13.04.2026 19:01:29
 ===IHEVA===
-Analiz Tarihi: 10.04.2026
+Analiz Tarihi: 13.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,14
-KAPANIS:2,17
-GUN.F%:1,40
+ACILIS:2,15
+KAPANIS:2,14
+GUN.F%:-1,38
 G.DUSUK:2,12
-G.YUKSEK:2,17
-G.HACIM:4.327.901,00
-PGC8:45.000,00
+G.YUKSEK:2,15
+G.HACIM:2.515.772,00
+PGC8:-268.000,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:2.17
-UST BANT:2.1669
-ALT BANT:2.1106
-FIYAT/BANT ORANI:105.59
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL:SAT
+KAPANIS:2.14
+UST BANT:2.1678
+ALT BANT:2.1125
+FIYAT/BANT ORANI:49.69
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.17
-WT1:-29.58
-WT2:-37.54
-WT1-WT2:7.96
+KAPANIS:2.14
+WT1:-26.84
+WT2:-33.06
+WT1-WT2:6.22
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:2.14
-S4:2.10
+S5:2.12
+S4:2.11
 S3:2.09
-S2:2.04
-S1:1.99
-P:2.15
-R1:2.19
-R2:2.20
-R3:2.24
-R4:2.29
-R5:2.34
+S2:2.06
+S1:2.03
+P:2.14
+R1:2.15
+R2:2.17
+R3:2.18
+R4:2.21
+R5:2.24
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
-0,0(TEPE):2.17
-0,236:2.16
-0,382:2.15
-0,500:2.15
-0,618:2.14
+SINYAL:AL
+0,0(TEPE):2.15
+0,236:2.14
+0,382:2.14
+0,500:2.13
+0,618:2.13
 0,786:2.13
 1,0(DIP):2.12
-SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-2,951,000.0
-PGC HAFTALIK:-630,000.0
-PGC GUNLUK:45.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-3,214,000.0
+PGC HAFTALIK:-899,000.0
+PGC GUNLUK:-268.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.01, ROA=0.01, Net Marj=0.01 → Zayıf
