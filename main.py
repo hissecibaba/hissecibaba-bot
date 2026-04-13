@@ -201,9 +201,7 @@ def find_latest_matrix_file(keyword: str) -> str:
 import os
 import logging
 import datetime
-import uuid
 import subprocess
-
 from flask import Flask, request, jsonify
 
 def sync_to_github():
@@ -217,16 +215,17 @@ def sync_to_github():
             logging.error("❌ GITHUB_REPO veya GITHUB_TOKEN tanımlı değil.")
             return
 
-        # Repo yoksa klonla
+        # Repo yoksa klonla, varsa pull yap
         if not os.path.exists(repo_dir):
             subprocess.run([
                 "git", "clone",
-                f"https://{token}@{repo_url}",
+                f"https://{token}@github.com/{repo_url}",
                 repo_dir
             ], check=True)
             logging.info("✅ GitHub repo klonlandı.")
-
-        changed_files = []
+        else:
+            subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
+            logging.info("🔄 Repo güncellendi (pull).")
 
         # ✅ Senkronize edilecek klasörler
         target_dirs = [
@@ -241,6 +240,10 @@ def sync_to_github():
             # Push yapılacak klasörler
             "mobil_izinliler", "onaylayanlar"
         ]
+
+        push_dirs = ["mobil_izinliler", "onaylayanlar"]
+
+        changed_files = []
 
         for d in target_dirs:
             src = os.path.join(BASE_DIR, d)
@@ -257,13 +260,9 @@ def sync_to_github():
             # rsync çıktısından sadece dosya isimlerini ayıkla
             for line in result.stdout.splitlines():
                 line = line.strip()
-                if not line:
+                if not line or line.startswith("./") or line.endswith("/"):
                     continue
                 if any(skip in line for skip in ["sending", "sent", "total size", "speedup"]):
-                    continue
-                if line.startswith("./"):
-                    continue
-                if line.endswith("/"):   # 🔹 klasörleri atla
                     continue
                 changed_files.append(os.path.join(d, line))
 
@@ -273,34 +272,29 @@ def sync_to_github():
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
 
-        # Sadece değişen dosyaları add et ve commit et
-        if changed_files:
-            for f in changed_files:
+        # Sadece mobil_izinliler ve onaylayanlar için push yapılacak
+        staged = False
+        for f in changed_files:
+            if any(f.startswith(d) for d in push_dirs):
                 subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
-                logging.info(f"✅ Stage edildi: {f}")
+                logging.info(f"✅ Stage edildi (push klasörü): {f}")
+                staged = True
 
-            # 🔹 gerçekten değişiklik var mı kontrol et
+        if staged:
             status = subprocess.run(
                 ["git", "-C", repo_dir, "status", "--porcelain"],
                 capture_output=True, text=True
             )
-
             if status.stdout.strip():
-                commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
+                commit_msg = f"Auto sync {datetime.date.today()} — push klasörleri güncellendi"
                 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
                 logging.info(f"✅ Commit yapıldı: {commit_msg}")
-
-                # 🔹 Push öncesi remote ile senkronizasyon
-                subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
-                logging.info("🔄 Remote ile rebase yapıldı.")
-
-                # 🔹 Ardından push
                 subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-                logging.info("✅ GitHub push tamamlandı.")
+                logging.info("✅ GitHub push tamamlandı (mobil_izinliler & onaylayanlar).")
             else:
-                logging.info("ℹ️ No staged changes, commit skipped.")
+                logging.info("ℹ️ Push klasörlerinde değişiklik yok, commit skipped.")
         else:
-            logging.info("ℹ️ No changes detected, commit skipped.")
+            logging.info("ℹ️ Push klasörlerinde değişiklik yok.")
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
@@ -877,7 +871,6 @@ def start_bot():
         logging.error(f"start_bot hatası: {e}")
 
 
-
 # PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Düzeltilmiş
 
 import pytz
@@ -950,7 +943,7 @@ def keep_alive():
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
-# 🔹 Deploy job'u (20:45 TSİ)
+# 🔹 Deploy job'u (20:45 TSİ) → pull + mobil_izinliler/onaylayanlar push
 scheduler.add_job(
     sync_to_github,
     "cron",
@@ -990,3 +983,4 @@ scheduler.start()
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     flask_app.run(host="0.0.0.0", port=8020)
+
