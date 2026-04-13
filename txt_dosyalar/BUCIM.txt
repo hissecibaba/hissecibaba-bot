@@ -1,59 +1,59 @@
-# Son Güncelleme: 10.04.2026 18:42:42
+# Son Güncelleme: 13.04.2026 18:57:23
 ===BUCIM===
-Analiz Tarihi: 10.04.2026
+Analiz Tarihi: 13.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:6,09
-KAPANIS:6,11
-GUN.F%:0,83
-G.DUSUK:6,07
-G.YUKSEK:6,14
-G.HACIM:103.820.931,00
-PGC8:-2.070.000,00
+ACILIS:6,08
+KAPANIS:6,02
+GUN.F%:-1,47
+G.DUSUK:6,00
+G.YUKSEK:6,08
+G.HACIM:55.283.711,00
+PGC8:-5.935.000,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:6.11
-UST BANT:6.1500
-ALT BANT:5.9550
-FIYAT/BANT ORANI:79.49
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:6.02
+UST BANT:6.1354
+ALT BANT:5.9561
+FIYAT/BANT ORANI:35.64
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:6.11
-WT1:-29.06
-WT2:-38.83
-WT1-WT2:9.77
+KAPANIS:6.02
+WT1:-32.07
+WT2:-35.04
+WT1-WT2:2.98
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:6.07
-S4:6.04
-S3:6.00
-S2:5.93
-S1:5.86
-P:6.11
-R1:6.14
-R2:6.18
-R3:6.21
-R4:6.28
-R5:6.35
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):6.14
-0,236:6.12
-0,382:6.11
-0,500:6.11
-0,618:6.10
-0,786:6.08
-1,0(DIP):6.07
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+S5:5.99
+S4:5.95
+S3:5.91
+S2:5.83
+S1:5.75
+P:6.03
+R1:6.07
+R2:6.11
+R3:6.15
+R4:6.23
+R5:6.31
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):6.08
+0,236:6.06
+0,382:6.05
+0,500:6.04
+0,618:6.03
+0,786:6.02
+1,0(DIP):6.00
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-13,929,000.0
-PGC HAFTALIK:-11,776,000.0
-PGC GUNLUK:-2.070.000,00
+PGC AYLIK:-17,146,000.0
+PGC HAFTALIK:-15,942,000.0
+PGC GUNLUK:-5.935.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
