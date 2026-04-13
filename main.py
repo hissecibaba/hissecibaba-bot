@@ -34,25 +34,28 @@ PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
 CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
 DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destek_direnc")
 
-# 🔹 Onaylayanlar klasörü sabiti (push yapılacak)
+# 🔹 Onaylayanlar klasörü sabiti
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
 
-# 🔹 Mobil izinliler klasörü sabiti (push yapılacak)
+# 🔹 Mobil izinliler klasörü sabiti
 MOBIL_IZINLILER_DIR = os.path.join(BASE_DIR, "mobil_izinliler")
 
 flask_app = Flask(__name__)
 
 def send_message(chat_id: int, text: str, mobil_mode: bool = False):
+    """Telegram veya mobil tarafa mesaj gönderir."""
     try:
         requests.post(
             f"{TELEGRAM_API}/sendMessage",
             json={"chat_id": chat_id, "text": text, "disable_notification": mobil_mode},
             timeout=10
         )
+        logging.info(f"✅ Mesaj gönderildi → Chat ID: {chat_id}")
     except Exception as e:
         logging.error(f"send_message failed: {e}")
 
 def send_photo(chat_id: int, file_path: str, caption: str = None):
+    """Telegram tarafına görsel gönderir."""
     try:
         if not os.path.exists(file_path):
             send_message(chat_id, "❌ Görsel bulunamadı.")
@@ -63,11 +66,11 @@ def send_photo(chat_id: int, file_path: str, caption: str = None):
             if caption:
                 data["caption"] = caption
             requests.post(f"{TELEGRAM_API}/sendPhoto", data=data, files=files, timeout=30)
+        logging.info(f"✅ Görsel gönderildi → {file_path}")
     except Exception as e:
         logging.error(f"send_photo failed: {e}")
         send_message(chat_id, "❌ Görsel gönderimi başarısız.")
 
-# ✅ Yardımcı fonksiyon: cihaz ID → ID NO eşleştirmesi
 def find_id_no_by_device(device_id: str):
     """
     Onaylayanlar klasöründe cihaz ID'yi arar ve karşılık gelen ID NO'yu döndürür.
@@ -80,15 +83,19 @@ def find_id_no_by_device(device_id: str):
                 if f"CIHAZ ID: {device_id}" in content:
                     for line in content.splitlines():
                         if line.startswith("ID NO:"):
+                            logging.info(f"✅ ID NO bulundu → {line}")
                             return line.replace("ID NO:", "").strip()
+        logging.warning(f"❌ ID NO bulunamadı → Device ID: {device_id}")
         return None
     except Exception as e:
         logging.error(f"find_id_no_by_device failed: {e}")
         return None
 
+
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları (Düzeltilmiş)
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
+    """Telegram veya mobil tarafa dosya gönderir."""
     try:
         if not os.path.exists(file_path):
             send_message(chat_id, "❌ Dosya bulunamadı.", mobil_mode)
@@ -99,12 +106,14 @@ def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode:
             if caption:
                 data["caption"] = caption
             requests.post(f"{TELEGRAM_API}/sendDocument", data=data, files=files, timeout=30)
+        logging.info(f"✅ Dosya gönderildi → {file_path}")
     except Exception as e:
         logging.error(f"send_document failed: {e}")
         send_message(chat_id, "❌ Dosya gönderimi başarısız.", mobil_mode)
 
 
 def find_latest_file(folder_path: str) -> str:
+    """Belirtilen klasördeki en güncel tarihli .txt dosyasını bulur."""
     try:
         logging.info(f"📂 Klasör içeriği kontrol ediliyor: {folder_path}")
         files = []
@@ -116,7 +125,6 @@ def find_latest_file(folder_path: str) -> str:
                     dt = datetime.datetime.strptime(fn.replace(".txt", ""), "%d.%m.%Y").date()
                     files.append((dt, full_path))
                 except Exception:
-                    # Tarih parse edilemezse en eskiye at
                     files.append((datetime.date.min, full_path))
         files.sort(reverse=True, key=lambda x: x[0])
         if files:
@@ -131,6 +139,7 @@ def find_latest_file(folder_path: str) -> str:
 
 
 def txt_to_images(file_path, tag, chunk_size=40):
+    """Bir .txt dosyasını parçalara ayırarak görsellere dönüştürür."""
     try:
         logging.info(f"🖼 txt_to_images başladı: {file_path}")
         with open(file_path, "r", encoding="utf-8") as f:
@@ -160,6 +169,7 @@ def txt_to_images(file_path, tag, chunk_size=40):
 
 
 def find_latest_matrix_file(keyword: str) -> str:
+    """MATRİKS klasöründe en güncel tarihli klasörü bulur ve keyword içeren dosyayı döndürür."""
     try:
         logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
         folders = []
@@ -184,6 +194,7 @@ def find_latest_matrix_file(keyword: str) -> str:
     except Exception as e:
         logging.error(f"find_latest_matrix_file failed: {e}")
         return None
+
 
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
 
@@ -213,10 +224,11 @@ def sync_to_github():
                 f"https://{token}@{repo_url}",
                 repo_dir
             ], check=True)
+            logging.info("✅ GitHub repo klonlandı.")
 
         changed_files = []
 
-        # ✅ Senkronize edilecek klasörler (çift kaynak yaklaşımı + push/pull ayrımı)
+        # ✅ Senkronize edilecek klasörler
         target_dirs = [
             # Telegram tarafı
             "al_listeleri", "sat_listeleri",
@@ -265,6 +277,7 @@ def sync_to_github():
         if changed_files:
             for f in changed_files:
                 subprocess.run(["git", "-C", repo_dir, "add", f], check=True)
+                logging.info(f"✅ Stage edildi: {f}")
 
             # 🔹 gerçekten değişiklik var mı kontrol et
             status = subprocess.run(
@@ -275,13 +288,14 @@ def sync_to_github():
             if status.stdout.strip():
                 commit_msg = f"Auto sync {datetime.date.today()} — {len(changed_files)} file(s) updated"
                 subprocess.run(["git", "-C", repo_dir, "commit", "-m", commit_msg], check=True)
+                logging.info(f"✅ Commit yapıldı: {commit_msg}")
 
                 # 🔹 Push öncesi remote ile senkronizasyon
                 subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
+                logging.info("🔄 Remote ile rebase yapıldı.")
 
                 # 🔹 Ardından push
                 subprocess.run(["git", "-C", repo_dir, "push"], check=True)
-
                 logging.info("✅ GitHub push tamamlandı.")
             else:
                 logging.info("ℹ️ No staged changes, commit skipped.")
@@ -290,6 +304,8 @@ def sync_to_github():
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
+
+
 
         
 # PARÇA 3B/5 — Bölüm B (Consent ve Upload Route) — Düzeltilmiş
@@ -323,6 +339,7 @@ def check_consent():
             end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
 
         now = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
+        logging.info(f"⏳ Abonelik kontrolü → Şimdi: {now}, Bitiş: {end_date}")
         if now > end_date:
             return jsonify({"expired": "true", "end_date": end_date_str}), 200
         else:
@@ -422,7 +439,6 @@ def upload_file():
 
 
 
-
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
 @flask_app.route("/get_symbol_files", methods=["POST"])
@@ -436,6 +452,7 @@ def get_symbol_files():
             return jsonify([]), 200
 
         files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
+        logging.info(f"✅ Sembol dosyaları listelendi: {files}")
         return jsonify(files), 200
     except Exception as e:
         logging.error(f"/get_symbol_files hatası: {e}")
@@ -456,9 +473,10 @@ def get_symbol_file_content():
         if os.path.exists(fp):
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
-            # 🔹 JSON garantili dönüş
+            logging.info(f"✅ Dosya içeriği okundu: {fp}")
             return jsonify({"content": content}), 200
         else:
+            logging.warning(f"❌ Dosya bulunamadı: {symbol}")
             return jsonify({"error": f"❌ Dosya bulunamadı: {symbol}"}), 404
 
     except Exception as e:
@@ -508,77 +526,98 @@ def webhook():
                         except Exception:
                             continue
                 folders.sort(reverse=True)
+                if folders:
+                    logging.info(f"✅ Seçilen MATRİKS klasörü: {folders[0][1]}")
+                else:
+                    logging.warning("❌ MATRİKS klasörü bulunamadı.")
                 return folders[0][1] if folders else None
             except Exception as e:
                 logging.error(f"find_latest_matrix_folder failed: {e}")
                 return None
 
-        # 🔹 Şimdilik placeholder dönüş (Bölüm 2’de komutlara özel içerik eklenecek)
-        return jsonify({"content": f"Komut alındı: {text_norm}"}), 200
+        # 🔹 Burada artık placeholder yerine komutlara özel içerik eklenecek (Bölüm 2’de)
+        send_message(chat_id, f"Komut alındı: {text_norm}", mobil_mode)
+        return "OK", 200
 
     except Exception as e:
         logging.error(f"/webhook başlangıcı hatası: {e}")
         return jsonify({"error": "Webhook initialization error"}), 500
 
 
-# PARÇA 4/5 — Bölüm 2 (--- Komutlar ---) — Düzeltilmiş
+
+# PARÇA 4/5 — Bölüm 2A (Komutlar) — Düzeltilmiş
 
         try:
+            # 📌 ÖNERİ
             if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
                 fp = find_latest_file(ONERI_DIR)
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ ÖNERİ dosyası seçildi: {fp}")
                     if mobil_mode:
                         return jsonify({"content": content}), 200
                     for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ ÖNERİ listesi bulunamadı.")
                 return jsonify({"error": "❌ ÖNERİ listesi bulunamadı."}), 200
 
+            # 📌 TAVAN
             if text_norm == "tavan":
                 fp = find_latest_file(TAVAN_DIR)
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ TAVAN dosyası seçildi: {fp}")
                     if mobil_mode:
                         return jsonify({"content": content}), 200
                     for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ TAVAN listesi bulunamadı.")
                 return jsonify({"error": "❌ TAVAN listesi bulunamadı."}), 200
 
+            # 📌 TEMEL
             if text_norm == "temel":
                 latest_folder = find_latest_matrix_folder()
                 if latest_folder:
                     fp = os.path.join(latest_folder, "Temp.xlsx")
                     if os.path.exists(fp):
+                        logging.info(f"✅ TEMEL dosyası bulundu: {fp}")
                         if mobil_mode:
                             return jsonify({"content": "Excel dosyası bulundu: Temp.xlsx"}), 200
                         send_document(chat_id, fp, caption="📊 TEMEL verisi")
                         return jsonify({"status": "ok"}), 200
+                logging.warning("❌ Temp.xlsx bulunamadı.")
                 return jsonify({"error": "❌ Temp.xlsx bulunamadı."}), 200
 
+            # 📌 TEKNİK
             if text_norm == "teknik":
                 latest_folder = find_latest_matrix_folder()
                 if latest_folder:
                     fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
                     if os.path.exists(fp):
+                        logging.info(f"✅ TEKNİK dosyası bulundu: {fp}")
                         if mobil_mode:
                             return jsonify({"content": "Excel dosyası bulundu: gunluk_veri.xlsx"}), 200
                         send_document(chat_id, fp, caption="📊 TEKNİK veri")
                         return jsonify({"status": "ok"}), 200
+                logging.warning("❌ gunluk_veri.xlsx bulunamadı.")
                 return jsonify({"error": "❌ gunluk_veri.xlsx bulunamadı."}), 200
 
+            # 📌 BOFA
             if text_norm == "bofa":
                 latest_folder = find_latest_matrix_folder()
                 if latest_folder:
                     fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
                     if os.path.exists(fp):
+                        logging.info(f"✅ BOFA dosyası bulundu: {fp}")
                         if mobil_mode:
                             return jsonify({"content": "Excel dosyası bulundu: AlinanSatilan.xlsx"}), 200
                         send_document(chat_id, fp, caption="📊 BOFA verisi")
                         return jsonify({"status": "ok"}), 200
+                logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
                 return jsonify({"error": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
             # 📌 Destek/Direnç
@@ -588,10 +627,12 @@ def webhook():
                 if target_fp:
                     with open(target_fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
                     if mobil_mode:
                         return jsonify({"content": content}), 200
                     send_message(chat_id, content)
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
                 return jsonify({"error": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
             # 📌 Ballı Kaymak
@@ -600,11 +641,13 @@ def webhook():
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Ballı Kaymak dosyası seçildi: {fp}")
                     if mobil_mode:
                         return jsonify({"content": content}), 200
                     for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
                 return jsonify({"error": "❌ Ballı Kaymak listesi bulunamadı."}), 200
 
             # 📌 Tüm Hisseler
@@ -613,7 +656,9 @@ def webhook():
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Tüm Hisseler dosyası seçildi: {fp}")
                     return jsonify({"content": content}), 200
+                logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
                 return jsonify({"error": "❌ Tüm hisseler dosyası bulunamadı."}), 200
 
             # 📌 Mobil: Bugün AL
@@ -622,7 +667,9 @@ def webhook():
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Bugün AL dosyası seçildi: {fp}")
                     return jsonify({"content": content}), 200
+                logging.warning("❌ Bugün AL listesi bulunamadı.")
                 return jsonify({"error": "❌ Bugün AL listesi bulunamadı."}), 200
 
             # 📌 Mobil: Bugün SAT
@@ -631,25 +678,33 @@ def webhook():
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Bugün SAT dosyası seçildi: {fp}")
                     return jsonify({"content": content}), 200
+                logging.warning("❌ Bugün SAT listesi bulunamadı.")
                 return jsonify({"error": "❌ Bugün SAT listesi bulunamadı."}), 200
 
             # 📌 Telegram: AL
             if text_norm == "al":
                 fp = find_latest_file(AL_DIR)
                 if fp:
+                    logging.info(f"✅ AL dosyası seçildi: {fp}")
                     for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ AL listesi bulunamadı.")
                 return jsonify({"error": "❌ AL listesi bulunamadı."}), 200
+
+# PARÇA 4/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
 
             # 📌 Telegram: SAT
             if text_norm == "sat":
                 fp = find_latest_file(SAT_DIR)
                 if fp:
+                    logging.info(f"✅ SAT dosyası seçildi: {fp}")
                     for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                         send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
                     return jsonify({"status": "ok"}), 200
+                logging.warning("❌ SAT listesi bulunamadı.")
                 return jsonify({"error": "❌ SAT listesi bulunamadı."}), 200
 
             # 📌 Dünkü Performans
@@ -658,7 +713,9 @@ def webhook():
                 if fp:
                     with open(fp, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Performans dosyası seçildi: {fp}")
                     return jsonify({"content": content}), 200
+                logging.warning("❌ Performans dosyası bulunamadı.")
                 return jsonify({"error": "❌ Performans dosyası bulunamadı."}), 200
 
             # 📌 Sembol bazlı komutlar
@@ -669,17 +726,16 @@ def webhook():
                     fp_symbol = os.path.join(SYMBOL_DIR, fn)
                     with open(fp_symbol, "r", encoding="utf-8") as f:
                         content = f.read()
+                    logging.info(f"✅ Sembol dosyası seçildi: {fp_symbol}")
                     return jsonify({"content": content}), 200
 
             # 📌 Fallback
+            logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
             return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
 
         except Exception as e:
             logging.error(f"/webhook hatası: {e}")
             return jsonify({"error": "Internal Server Error"}), 500
-
-
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
@@ -743,6 +799,7 @@ def get_latest_file_content_as_image(target_dir):
         return None
 
 
+
 # PARÇA 5b — Telegram komut entegrasyonu (al/sat → görsel gönder) — Düzeltilmiş
 
 import os
@@ -757,6 +814,7 @@ def handle_message(update: Update, context: CallbackContext):
         if text == "al":
             fp = find_latest_file(AL_DIR)
             if fp:
+                logging.info(f"✅ AL dosyası seçildi: {fp}")
                 images = txt_to_images(fp, "al_listesi")
                 if images:
                     for idx, img in enumerate(images, start=1):
@@ -769,11 +827,13 @@ def handle_message(update: Update, context: CallbackContext):
                 else:
                     update.message.reply_text("❌ AL listesi görsel üretilemedi.")
             else:
+                logging.warning("❌ AL listesi bulunamadı.")
                 update.message.reply_text("❌ AL listesi bulunamadı.")
 
         elif text == "sat":
             fp = find_latest_file(SAT_DIR)
             if fp:
+                logging.info(f"✅ SAT dosyası seçildi: {fp}")
                 images = txt_to_images(fp, "sat_listesi")
                 if images:
                     for idx, img in enumerate(images, start=1):
@@ -786,9 +846,11 @@ def handle_message(update: Update, context: CallbackContext):
                 else:
                     update.message.reply_text("❌ SAT listesi görsel üretilemedi.")
             else:
+                logging.warning("❌ SAT listesi bulunamadı.")
                 update.message.reply_text("❌ SAT listesi bulunamadı.")
 
         else:
+            logging.info(f"ℹ️ Diğer mesaj alındı: {text}")
             update.message.reply_text(f"Mesajını aldım: {text}")
 
     except Exception as e:
@@ -808,10 +870,12 @@ def start_bot():
 
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
 
+        logging.info("🚀 Telegram bot başlatılıyor...")
         updater.start_polling()
         updater.idle()
     except Exception as e:
         logging.error(f"start_bot hatası: {e}")
+
 
 
 # PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Düzeltilmiş
@@ -926,4 +990,3 @@ scheduler.start()
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     flask_app.run(host="0.0.0.0", port=8020)
-
