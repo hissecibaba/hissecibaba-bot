@@ -1,60 +1,60 @@
-# Son Güncelleme: 10.04.2026 18:47:57
+# Son Güncelleme: 13.04.2026 19:03:20
 ===KRPLS===
-Analiz Tarihi: 10.04.2026
+Analiz Tarihi: 13.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,60
-KAPANIS:8,70
-GUN.F%:1,16
-G.DUSUK:8,59
-G.YUKSEK:8,80
-G.HACIM:23.244.952,00
-PGC8:-162.000,00
+ACILIS:8,70
+KAPANIS:8,69
+GUN.F%:-0,11
+G.DUSUK:8,53
+G.YUKSEK:9,06
+G.HACIM:56.646.339,00
+PGC8:-718.000,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:8.70
-UST BANT:8.8965
-ALT BANT:8.4065
-FIYAT/BANT ORANI:59.90
+SINYAL:AL
+KAPANIS:8.69
+UST BANT:8.8931
+ALT BANT:8.4292
+FIYAT/BANT ORANI:56.23
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:8.7
-WT1:34.77
-WT2:35.55
-WT1-WT2:-0.78
+KAPANIS:8.69
+WT1:37.13
+WT2:36.25
+WT1-WT2:0.87
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:8.59
-S4:8.49
-S3:8.38
-S2:8.17
-S1:7.96
-P:8.70
-R1:8.80
-R2:8.91
-R3:9.01
-R4:9.22
-R5:9.43
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):8.80
-0,236:8.75
-0,382:8.72
-0,500:8.70
-0,618:8.67
-0,786:8.63
-1,0(DIP):8.59
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+S5:8.46
+S4:8.23
+S3:7.93
+S2:7.40
+S1:6.87
+P:8.76
+R1:8.99
+R2:9.29
+R3:9.52
+R4:10.05
+R5:10.58
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):9.06
+0,236:8.93
+0,382:8.86
+0,500:8.79
+0,618:8.73
+0,786:8.64
+1,0(DIP):8.53
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-552,000.0
-PGC HAFTALIK:154,000.0
-PGC GUNLUK:-162.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+PGC AYLIK:-1,690,000.0
+PGC HAFTALIK:-566,000.0
+PGC GUNLUK:-718.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.15, ROA=-0.09, Net Marj=-0.07 → Zayıf
