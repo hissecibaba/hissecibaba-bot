@@ -2,7 +2,7 @@ FROM python:3.10.12-slim
 
 WORKDIR /app
 
-# sistem bağımlılıkları (matplotlib + pillow + headless render stabilitesi)
+# sistem bağımlılıkları (matplotlib + pillow + headless render stabilitesi + git)
 RUN apt-get update && apt-get install -y \
     libgl1 \
     libglib2.0-0 \
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     zlib1g-dev \
     gcc \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # requirements
