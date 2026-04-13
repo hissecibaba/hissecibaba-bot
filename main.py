@@ -690,13 +690,6 @@ def webhook():
             logging.warning("❌ AL listesi bulunamadı.")
             return jsonify({"content": "❌ AL listesi bulunamadı."}), 200
 
-
-
-
-
-
-# PARÇA 4/5 — Bölüm 2B (Komutlar, Telegram SAT ve sonrası) — Düzeltilmiş
-
         # 📌 Telegram: SAT
         if text_norm == "sat":
             fp = find_latest_file(SAT_DIR)
@@ -737,9 +730,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
-
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
