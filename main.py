@@ -211,7 +211,8 @@ BASE_DIR = os.getenv("BASE_DIR", "/render")  # Render ana klasör
 def sync_to_github():
     """Render içindeki klasörleri GitHub repo ile senkronize eder (optimize edilmiş)."""
     try:
-        repo_url = os.getenv("GITHUB_REPO")   # Örn: "hissecibaba/hissecibaba-bot.git"
+        # Örn: GITHUB_REPO=hissecibaba/hissecibaba-bot.git
+        repo_url = os.getenv("GITHUB_REPO")
         token = os.getenv("GITHUB_TOKEN")
         repo_dir = "/tmp/hissecibaba_sync"
 
@@ -223,13 +224,10 @@ def sync_to_github():
         if os.path.exists(repo_dir):
             subprocess.run(["rm", "-rf", repo_dir], check=True)
 
-        # Repo klonla
-        subprocess.run([
-            "git", "clone",
-            f"https://{token}@github.com/{repo_url}",
-            repo_dir
-        ], check=True)
-        logging.info("✅ GitHub repo klonlandı.")
+        # Repo klonla (URL formatı düzeltilmiş)
+        clone_url = f"https://{token}@github.com/{repo_url}"
+        subprocess.run(["git", "clone", clone_url, repo_dir], check=True)
+        logging.info(f"✅ GitHub repo klonlandı: {clone_url}")
 
         # ✅ Senkronize edilecek klasörler
         target_dirs = [
@@ -917,8 +915,8 @@ if not scheduler.get_job("auto_deploy"):
         sync_to_github,
         "cron",
         day_of_week="mon-fri",
-        hour=21,
-        minute=51,
+        hour=22,
+        minute=15,
         id="auto_deploy",
         replace_existing=True,
         timezone=istanbul_tz
