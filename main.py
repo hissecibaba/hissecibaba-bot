@@ -95,6 +95,7 @@ def find_id_no_by_device(device_id: str):
 
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları (Düzeltilmiş)
 
+
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
     """Telegram veya mobil tarafa dosya gönderir."""
     try:
@@ -138,7 +139,6 @@ def find_latest_matrix_folder() -> str:
         return None
 
 
-
 def txt_to_images(file_path, tag, chunk_size=40):
     """Bir .txt dosyasını parçalara ayırarak görsellere dönüştürür."""
     try:
@@ -169,41 +169,12 @@ def txt_to_images(file_path, tag, chunk_size=40):
         return []
 
 
-def find_latest_matrix_folder(keyword: str) -> str:
-    """MATRİKS klasöründe en güncel tarihli klasörü bulur ve keyword içeren dosyayı döndürür."""
-    try:
-        logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
-        folders = []
-        for fn in os.listdir(MATRIX_DIR):
-            full_path = os.path.join(MATRIX_DIR, fn)
-            if os.path.isdir(full_path):
-                try:
-                    dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
-                    folders.append((dt, full_path))
-                except Exception:
-                    continue
-        folders.sort(reverse=True)
-        if folders:
-            latest_folder = folders[0][1]
-            logging.info(f"✅ Seçilen MATRİKS klasörü: {latest_folder}")
-            for file in os.listdir(latest_folder):
-                if keyword.lower() in file.lower():
-                    logging.info(f"✅ MATRİKS dosyası bulundu: {file}")
-                    return os.path.join(latest_folder, file)
-        logging.warning("❌ MATRİKS dosyası bulunamadı.")
-        return None
-    except Exception as e:
-        logging.error(f"find_latest_matrix_folder failed: {e}")
-        return None
-
-
-
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
-
 import os
 import logging
 import datetime
 import subprocess
+import shutil
 from flask import Flask, request, jsonify
 
 BASE_DIR = os.getenv("BASE_DIR", "/render")  # Render ana klasör
@@ -220,9 +191,15 @@ def sync_to_github():
             logging.error("❌ GITHUB_REPO veya GITHUB_TOKEN tanımlı değil.")
             return
 
-        # Önceki sync klasörünü temizle
+        # Önceki sync klasörünü kesin olarak temizle
         if os.path.exists(repo_dir):
-            subprocess.run(["rm", "-rf", repo_dir], check=True)
+            try:
+                shutil.rmtree(repo_dir)
+                logging.info("🗑 Eski sync klasörü silindi (shutil).")
+            except Exception as e:
+                logging.warning(f"⚠️ shutil.rmtree başarısız: {e}, rm -rf ile denenecek.")
+                subprocess.run(["rm", "-rf", repo_dir], check=True)
+                logging.info("🗑 Eski sync klasörü silindi (rm -rf).")
 
         # Repo klonla (URL formatı düzeltilmiş)
         clone_url = f"https://{token}@github.com/{repo_url}"
@@ -293,8 +270,6 @@ def sync_to_github():
 
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
-
-
 
 
         
@@ -916,8 +891,8 @@ if not scheduler.get_job("auto_deploy"):
         sync_to_github,
         "cron",
         day_of_week="mon-fri",
-        hour=22,
-        minute=45,
+        hour=23,
+        minute=05,
         id="auto_deploy",
         replace_existing=True,
         timezone=istanbul_tz
