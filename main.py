@@ -113,30 +113,30 @@ def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode:
         send_message(chat_id, "❌ Dosya gönderimi başarısız.", mobil_mode)
 
 
-def find_latest_file(folder_path: str) -> str:
-    """Belirtilen klasördeki en güncel tarihli .txt dosyasını bulur."""
+def find_latest_matrix_folder() -> str:
+    """MATRİKS klasöründe en güncel tarihli klasörü bulur ve yolunu döndürür."""
     try:
-        logging.info(f"📂 Klasör içeriği kontrol ediliyor: {folder_path}")
-        files = []
-        for fn in os.listdir(folder_path):
-            if fn.lower().endswith(".txt"):
-                full_path = os.path.join(folder_path, fn)
+        logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
+        folders = []
+        for fn in os.listdir(MATRIX_DIR):
+            full_path = os.path.join(MATRIX_DIR, fn)
+            if os.path.isdir(full_path):
                 try:
-                    # Dosya adı formatı: 10.04.2026.txt
-                    dt = datetime.datetime.strptime(fn.replace(".txt", ""), "%d.%m.%Y").date()
-                    files.append((dt, full_path))
+                    dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
+                    folders.append((dt, full_path))
                 except Exception:
-                    files.append((datetime.date.min, full_path))
-        files.sort(reverse=True, key=lambda x: x[0])
-        if files:
-            logging.info(f"✅ Seçilen dosya: {files[0][1]}")
-            return files[0][1]
-        else:
-            logging.warning("❌ Hiç dosya bulunamadı.")
-            return None
-    except Exception as e:
-        logging.error(f"find_latest_file failed: {e}")
+                    continue
+        folders.sort(reverse=True)
+        if folders:
+            latest_folder = folders[0][1]
+            logging.info(f"✅ Seçilen MATRİKS klasörü: {latest_folder}")
+            return latest_folder
+        logging.warning("❌ MATRİKS klasörü bulunamadı.")
         return None
+    except Exception as e:
+        logging.error(f"find_latest_matrix_folder failed: {e}")
+        return None
+
 
 
 def txt_to_images(file_path, tag, chunk_size=40):
@@ -580,6 +580,7 @@ def webhook():
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
+
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -916,7 +917,7 @@ if not scheduler.get_job("auto_deploy"):
         "cron",
         day_of_week="mon-fri",
         hour=22,
-        minute=40,
+        minute=45,
         id="auto_deploy",
         replace_existing=True,
         timezone=istanbul_tz
