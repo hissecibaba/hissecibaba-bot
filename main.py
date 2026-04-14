@@ -916,7 +916,7 @@ scheduler.add_job(
     "cron",
     day_of_week="mon-fri",
     hour=20,
-    minute=45,
+    minute=57,
     id="auto_deploy",
     replace_existing=True,
     timezone=istanbul_tz
