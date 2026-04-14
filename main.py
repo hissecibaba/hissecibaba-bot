@@ -169,7 +169,7 @@ def txt_to_images(file_path, tag, chunk_size=40):
         return []
 
 
-def find_latest_matrix_file(keyword: str) -> str:
+def find_latest_matrix_folder(keyword: str) -> str:
     """MATRİKS klasöründe en güncel tarihli klasörü bulur ve keyword içeren dosyayı döndürür."""
     try:
         logging.info(f"📂 MATRİKS klasörü içeriği: {os.listdir(MATRIX_DIR)}")
@@ -193,8 +193,9 @@ def find_latest_matrix_file(keyword: str) -> str:
         logging.warning("❌ MATRİKS dosyası bulunamadı.")
         return None
     except Exception as e:
-        logging.error(f"find_latest_matrix_file failed: {e}")
+        logging.error(f"find_latest_matrix_folder failed: {e}")
         return None
+
 
 
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
@@ -910,39 +911,42 @@ def keep_alive():
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
-# 🔹 Deploy job'u (20:45 TSİ) → pull + mobil_izinliler/onaylayanlar push
-scheduler.add_job(
-    sync_to_github,
-    "cron",
-    day_of_week="mon-fri",
-    hour=20,
-    minute=57,
-    id="auto_deploy",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
+# 🔹 Deploy job'u (20:45 TSİ)
+if not scheduler.get_job("auto_deploy"):
+    scheduler.add_job(
+        sync_to_github,
+        "cron",
+        day_of_week="mon-fri",
+        hour=21,
+        minute=29,
+        id="auto_deploy",
+        replace_existing=True,
+        timezone=istanbul_tz
+    )
 
 # 🔹 Telegram otomatik mesaj job'u (21:00 TSİ)
-scheduler.add_job(
-    otomatik_mesaj_telegram,
-    "cron",
-    day_of_week="mon-fri",
-    hour=21,
-    minute=0,
-    id="otomatik_mesaj_21",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
+if not scheduler.get_job("otomatik_mesaj_21"):
+    scheduler.add_job(
+        otomatik_mesaj_telegram,
+        "cron",
+        day_of_week="mon-fri",
+        hour=21,
+        minute=0,
+        id="otomatik_mesaj_21",
+        replace_existing=True,
+        timezone=istanbul_tz
+    )
 
 # 🔹 Keep-alive job'u
-scheduler.add_job(
-    keep_alive,
-    "interval",
-    minutes=5,
-    id="keep_alive_ping",
-    replace_existing=True,
-    timezone=istanbul_tz
-)
+if not scheduler.get_job("keep_alive_ping"):
+    scheduler.add_job(
+        keep_alive,
+        "interval",
+        minutes=5,
+        id="keep_alive_ping",
+        replace_existing=True,
+        timezone=istanbul_tz
+    )
 
 scheduler.start()
 
@@ -952,3 +956,4 @@ if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     fix_routes_in_file()
     flask_app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8020)))
+
