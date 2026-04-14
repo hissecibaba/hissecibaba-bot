@@ -892,7 +892,7 @@ if not scheduler.get_job("auto_deploy"):
         "cron",
         day_of_week="mon-fri",
         hour=23,
-        minute=05,
+        minute=30,
         id="auto_deploy",
         replace_existing=True,
         timezone=istanbul_tz
