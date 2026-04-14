@@ -891,8 +891,8 @@ if not scheduler.get_job("auto_deploy"):
         sync_to_github,
         "cron",
         day_of_week="mon-fri",
-        hour=23,
-        minute=30,
+        hour=20,
+        minute=45,
         id="auto_deploy",
         replace_existing=True,
         timezone=istanbul_tz
