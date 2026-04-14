@@ -205,10 +205,12 @@ import datetime
 import subprocess
 from flask import Flask, request, jsonify
 
+BASE_DIR = os.getenv("BASE_DIR", "/render")  # Render ana klasör
+
 def sync_to_github():
     """Render içindeki klasörleri GitHub repo ile senkronize eder (optimize edilmiş)."""
     try:
-        repo_url = os.getenv("GITHUB_REPO")
+        repo_url = os.getenv("GITHUB_REPO")   # Örn: "hissecibaba/hissecibaba-bot.git"
         token = os.getenv("GITHUB_TOKEN")
         repo_dir = "/tmp/hissecibaba_sync"
 
@@ -216,34 +218,29 @@ def sync_to_github():
             logging.error("❌ GITHUB_REPO veya GITHUB_TOKEN tanımlı değil.")
             return
 
-        # Repo yoksa klonla, varsa pull yap
-        if not os.path.exists(repo_dir):
-            subprocess.run([
-                "git", "clone",
-                f"https://{token}@github.com/{repo_url}",
-                repo_dir
-            ], check=True)
-            logging.info("✅ GitHub repo klonlandı.")
-        else:
-            subprocess.run(["git", "-C", repo_dir, "pull", "--rebase"], check=True)
-            logging.info("🔄 Repo güncellendi (pull).")
+        # Önceki sync klasörünü temizle
+        if os.path.exists(repo_dir):
+            subprocess.run(["rm", "-rf", repo_dir], check=True)
+
+        # Repo klonla
+        subprocess.run([
+            "git", "clone",
+            f"https://{token}@github.com/{repo_url}",
+            repo_dir
+        ], check=True)
+        logging.info("✅ GitHub repo klonlandı.")
 
         # ✅ Senkronize edilecek klasörler
         target_dirs = [
-            # Telegram tarafı
             "al_listeleri", "sat_listeleri",
-            # Mobil tarafı
             "al", "sat",
-            # Ortak klasörler
             "matriks", "tavan_listeleri", "txt_dosyalar", "öneri",
             "performans", "ballikaymak", "bisttum", "gorsel_cache",
             "destek_direnc", "assets",
-            # Push yapılacak klasörler
             "mobil_izinliler", "onaylayanlar"
         ]
 
         push_dirs = ["mobil_izinliler", "onaylayanlar"]
-
         changed_files = []
 
         for d in target_dirs:
@@ -258,7 +255,7 @@ def sync_to_github():
             )
             logging.info(f"📂 {d.upper()} klasörü senkronize edildi.")
 
-            # rsync çıktısından sadece dosya isimlerini ayıkla
+            # rsync çıktısından dosya isimlerini ayıkla
             for line in result.stdout.splitlines():
                 line = line.strip()
                 if not line or line.startswith("./") or line.endswith("/"):
@@ -268,8 +265,6 @@ def sync_to_github():
                 changed_files.append(os.path.join(d, line))
 
         # Git kimlik bilgisi ayarları
-        subprocess.run(["git", "config", "--global", "user.name", "RenderBot"], check=True)
-        subprocess.run(["git", "config", "--global", "user.email", "render@hissecibaba.com"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.name", "RenderBot"], check=True)
         subprocess.run(["git", "-C", repo_dir, "config", "user.email", "render@hissecibaba.com"], check=True)
 
@@ -302,6 +297,7 @@ def sync_to_github():
 
 
 
+
         
 # PARÇA 3B/5 — Bölüm B (Consent ve Upload Route) — Düzeltilmiş
 
@@ -328,7 +324,10 @@ def check_consent():
 
         with open(izin_file, "r", encoding="utf-8") as f:
             lines = f.read().splitlines()
-            end_date_line = [l for l in lines if l.startswith("END_DATE:")][0]
+            end_date_line = next((l for l in lines if l.startswith("END_DATE:")), None)
+            if not end_date_line:
+                return jsonify({"authorized": "false", "error": "END_DATE bulunamadı"}), 200
+
             end_date_str = end_date_line.replace("END_DATE:", "").strip()
             # ✅ 24 saat formatına çevrildi
             end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
@@ -367,7 +366,7 @@ def upload_file():
             end_dt = start_dt + datetime.timedelta(days=7)
             end_date = end_dt.strftime("%d.%m.%Y %H:%M")
 
-            if device_id and uuid_val and id_no:
+            if device_id:
                 # 1️⃣ mobil_izinliler dosyası
                 izin_file = os.path.join(MOBIL_IZINLILER_DIR, f"{id_no}.txt")
                 with open(izin_file, "w", encoding="utf-8") as f:
@@ -400,7 +399,7 @@ def upload_file():
 
                 return "✅ Consent & Subscription saved", 200
             else:
-                return "❌ device_id veya UUID eksik", 400
+                return "❌ device_id eksik", 400
         except Exception as e:
             logging.error(f"Upload JSON failed: {e}")
             return f"Hata: {e}", 500
@@ -431,6 +430,7 @@ def upload_file():
     except Exception as e:
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
+
 
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
