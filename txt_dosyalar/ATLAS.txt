@@ -1,59 +1,59 @@
-# Son Güncelleme: 14.04.2026 19:16:34
+# Son Güncelleme: 15.04.2026 18:41:38
 ===ATLAS===
-Analiz Tarihi: 14.04.2026
+Analiz Tarihi: 15.04.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:7,40
-KAPANIS:7,50
-GUN.F%:1,35
-G.DUSUK:7,30
-G.YUKSEK:7,67
-G.HACIM:14.957.435,00
-PGC8:118.000,00
+KAPANIS:7,73
+GUN.F%:3,07
+G.DUSUK:7,33
+G.YUKSEK:8,20
+G.HACIM:17.168.894,00
+PGC8:1.311.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:7.50
-UST BANT:8.0203
-ALT BANT:7.2001
-FIYAT/BANT ORANI:36.56
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:7.73
+UST BANT:8.0148
+ALT BANT:7.2448
+FIYAT/BANT ORANI:63.01
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:7.5
-WT1:-35.53
-WT2:-32.24
-WT1-WT2:-3.29
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:7.73
+WT1:-30.22
+WT2:-32.54
+WT1-WT2:2.32
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:7.31
-S4:7.12
-S3:6.94
-S2:6.57
-S1:6.20
-P:7.49
-R1:7.68
-R2:7.86
-R3:8.05
-R4:8.42
-R5:8.79
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):7.67
-0,236:7.58
-0,382:7.53
-0,500:7.48
-0,618:7.44
-0,786:7.38
-1,0(DIP):7.30
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+S5:7.31
+S4:6.88
+S3:6.44
+S2:5.57
+S1:4.70
+P:7.75
+R1:8.18
+R2:8.62
+R3:9.05
+R4:9.92
+R5:10.79
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):8.20
+0,236:7.99
+0,382:7.87
+0,500:7.76
+0,618:7.66
+0,786:7.52
+1,0(DIP):7.33
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-7,146,000.0
-PGC HAFTALIK:-2,064,000.0
-PGC GUNLUK:118.000,00
+PGC AYLIK:-5,991,000.0
+PGC HAFTALIK:-850,000.0
+PGC GUNLUK:1.311.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
