@@ -1,59 +1,59 @@
-# Son Güncelleme: 14.04.2026 19:25:23
+# Son Güncelleme: 15.04.2026 18:50:53
 ===MTRYO===
-Analiz Tarihi: 14.04.2026
+Analiz Tarihi: 15.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,35
-KAPANIS:9,70
-GUN.F%:4,64
-G.DUSUK:9,25
-G.YUKSEK:9,82
-G.HACIM:6.526.766,00
-PGC8:68.000,00
+ACILIS:9,60
+KAPANIS:9,80
+GUN.F%:1,03
+G.DUSUK:9,50
+G.YUKSEK:10,67
+G.HACIM:3.209.448,00
+PGC8:100.000,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:9.70
-UST BANT:9.6251
-ALT BANT:9.0175
-FIYAT/BANT ORANI:112.33
+SINYAL:AL
+KAPANIS:9.80
+UST BANT:9.9281
+ALT BANT:8.9350
+FIYAT/BANT ORANI:87.10
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:9.7
-WT1:-6.26
-WT2:-22.76
-WT1-WT2:16.51
+KAPANIS:9.8
+WT1:11.55
+WT2:-11.39
+WT1-WT2:22.93
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:9.36
-S4:9.02
-S3:8.79
-S2:8.22
-S1:7.65
-P:9.59
-R1:9.93
-R2:10.16
-R3:10.50
-R4:11.07
-R5:11.64
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):9.82
-0,236:9.69
-0,382:9.60
-0,500:9.54
-0,618:9.47
-0,786:9.37
-1,0(DIP):9.25
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+S5:9.31
+S4:8.82
+S3:8.14
+S2:6.97
+S1:5.80
+P:9.99
+R1:10.48
+R2:11.16
+R3:11.65
+R4:12.82
+R5:13.99
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):10.67
+0,236:10.39
+0,382:10.22
+0,500:10.09
+0,618:9.95
+0,786:9.75
+1,0(DIP):9.50
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-541,000.0
-PGC HAFTALIK:169,000.0
-PGC GUNLUK:68.000,00
+PGC AYLIK:-396,000.0
+PGC HAFTALIK:255,000.0
+PGC GUNLUK:100.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
