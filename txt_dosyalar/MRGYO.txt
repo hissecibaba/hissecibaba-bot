@@ -1,60 +1,60 @@
-# Son Güncelleme: 15.04.2026 18:50:46
+# Son Güncelleme: 16.04.2026 18:54:27
 ===MRGYO===
-Analiz Tarihi: 15.04.2026
+Analiz Tarihi: 16.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,60
+ACILIS:1,63
 KAPANIS:1,61
-GUN.F%:1,90
-G.DUSUK:1,57
-G.YUKSEK:1,62
-G.HACIM:371.808.183,00
-PGC8:12.237.000,00
+GUN.F%:0,00
+G.DUSUK:1,59
+G.YUKSEK:1,65
+G.HACIM:309.346.112,00
+PGC8:329.000,00
 ===NADARAYA WATSON===
 SINYAL:AL
 KAPANIS:1.61
-UST BANT:1.6358
-ALT BANT:1.4908
-FIYAT/BANT ORANI:82.24
+UST BANT:1.6393
+ALT BANT:1.5043
+FIYAT/BANT ORANI:78.28
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
 KAPANIS:1.61
-WT1:25.59
-WT2:21.45
-WT1-WT2:4.14
+WT1:30.09
+WT2:23.71
+WT1-WT2:6.39
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:1.58
-S4:1.55
-S3:1.53
-S2:1.48
-S1:1.43
-P:1.60
-R1:1.63
-R2:1.65
-R3:1.68
-R4:1.73
-R5:1.78
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):1.62
-0,236:1.61
-0,382:1.60
-0,500:1.60
-0,618:1.59
-0,786:1.58
-1,0(DIP):1.57
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+S5:1.58
+S4:1.56
+S3:1.52
+S2:1.46
+S1:1.40
+P:1.62
+R1:1.64
+R2:1.68
+R3:1.70
+R4:1.76
+R5:1.82
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):1.65
+0,236:1.64
+0,382:1.63
+0,500:1.62
+0,618:1.61
+0,786:1.60
+1,0(DIP):1.59
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-21,162,000.0
-PGC HAFTALIK:-3,180,000.0
-PGC GUNLUK:12.237.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+PGC AYLIK:-21,105,000.0
+PGC HAFTALIK:10,117,000.0
+PGC GUNLUK:329.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/09
 Karlılık 	: ROE=0.0, ROA=0.0, Net Marj=0.14 → Zayıf
