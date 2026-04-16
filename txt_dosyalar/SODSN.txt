@@ -1,60 +1,60 @@
-# Son Güncelleme: 15.04.2026 18:54:10
+# Son Güncelleme: 16.04.2026 18:57:39
 ===SODSN===
-Analiz Tarihi: 15.04.2026
+Analiz Tarihi: 16.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,45
-KAPANIS:9,67
-GUN.F%:2,33
-G.DUSUK:9,45
-G.YUKSEK:9,67
-G.HACIM:1.831.640,00
-PGC8:10.000,00
+ACILIS:9,80
+KAPANIS:9,85
+GUN.F%:1,86
+G.DUSUK:9,80
+G.YUKSEK:9,85
+G.HACIM:1.109.564,00
+PGC8:-2.000,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:9.67
-UST BANT:9.7151
-ALT BANT:9.3701
-FIYAT/BANT ORANI:86.92
+SINYAL:TUT
+KAPANIS:9.85
+UST BANT:9.8305
+ALT BANT:9.3805
+FIYAT/BANT ORANI:104.33
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:9.67
-WT1:-5.31
-WT2:-8.55
-WT1-WT2:3.24
+KAPANIS:9.85
+WT1:5.4
+WT2:-5.38
+WT1-WT2:10.78
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:9.52
-S4:9.38
-S3:9.30
-S2:9.08
-S1:8.86
-P:9.60
-R1:9.74
-R2:9.82
-R3:9.96
-R4:10.18
-R5:10.40
+S5:9.82
+S4:9.78
+S3:9.77
+S2:9.72
+S1:9.67
+P:9.83
+R1:9.87
+R2:9.88
+R3:9.92
+R4:9.97
+R5:10.02
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.67
-0,236:9.62
-0,382:9.59
-0,500:9.56
-0,618:9.53
-0,786:9.50
-1,0(DIP):9.45
+0,0(TEPE):9.85
+0,236:9.84
+0,382:9.83
+0,500:9.82
+0,618:9.82
+0,786:9.81
+1,0(DIP):9.80
 SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-414,000.0
-PGC HAFTALIK:-7,000.0
-PGC GUNLUK:10.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-376,000.0
+PGC HAFTALIK:-10,000.0
+PGC GUNLUK:-2.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.21, ROA=-0.15, Net Marj=-0.14 → Zayıf
