@@ -1,59 +1,59 @@
-# Son Güncelleme: 15.04.2026 18:46:49
+# Son Güncelleme: 16.04.2026 18:50:31
 ===GSDHO===
-Analiz Tarihi: 15.04.2026
+Analiz Tarihi: 16.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,02
-KAPANIS:5,03
-GUN.F%:0,40
+ACILIS:5,04
+KAPANIS:4,99
+GUN.F%:-0,80
 G.DUSUK:4,98
-G.YUKSEK:5,04
-G.HACIM:14.272.307,00
-PGC8:410.000,00
+G.YUKSEK:5,07
+G.HACIM:26.789.935,00
+PGC8:524.000,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:5.03
-UST BANT:5.1935
-ALT BANT:4.7705
-FIYAT/BANT ORANI:61.35
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:4.99
+UST BANT:5.1340
+ALT BANT:4.8619
+FIYAT/BANT ORANI:47.08
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:5.03
-WT1:34.92
-WT2:31.57
-WT1-WT2:3.36
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:4.99
+WT1:35.59
+WT2:33.74
+WT1-WT2:1.85
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:4.99
-S4:4.96
-S3:4.93
-S2:4.87
-S1:4.81
-P:5.02
-R1:5.05
-R2:5.08
-R3:5.11
-R4:5.17
-R5:5.23
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):5.04
-0,236:5.03
-0,382:5.02
-0,500:5.01
-0,618:5.00
-0,786:4.99
+S5:4.96
+S4:4.92
+S3:4.87
+S2:4.78
+S1:4.69
+P:5.01
+R1:5.05
+R2:5.10
+R3:5.14
+R4:5.23
+R5:5.32
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):5.07
+0,236:5.05
+0,382:5.04
+0,500:5.03
+0,618:5.01
+0,786:5.00
 1,0(DIP):4.98
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:10,791,000.0
-PGC HAFTALIK:9,872,000.0
-PGC GUNLUK:410.000,00
+PGC AYLIK:9,736,000.0
+PGC HAFTALIK:6,606,000.0
+PGC GUNLUK:524.000,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
