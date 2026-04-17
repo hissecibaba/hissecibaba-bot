@@ -1,28 +1,28 @@
-# Son Güncelleme: 17.04.2026 20:03:40
+# Son Güncelleme: 17.04.2026 21:12:28
 ===PSGYO===
-Analiz Tarihi: 16.04.2026
+Analiz Tarihi: 17.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,70
-KAPANIS:2,75
-GUN.F%:3,38
-G.DUSUK:2,61
-G.YUKSEK:2,92
-G.HACIM:1.928.385.545,00
-PGC8:-6.022.000,00
+ACILIS:nan
+KAPANIS:nan
+GUN.F%:0,00
+G.DUSUK:nan
+G.YUKSEK:nan
+G.HACIM:nan
+PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:2.75
-UST BANT:2.7894
-ALT BANT:2.2700
-FIYAT/BANT ORANI:92.41
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:BELİRSİZ
+KAPANIS:nan
+UST BANT:nan
+ALT BANT:nan
+FIYAT/BANT ORANI:nan
+TREND YONU:Yatay
+SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.75
+KAPANIS:nan
 WT1:29.24
-WT2:13.14
-WT1-WT2:16.1
+WT2:19.04
+WT1-WT2:10.21
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
@@ -50,11 +50,11 @@ SINYAL:SAT
 1,0(DIP):2.61
 SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-29,815,000.0
-PGC HAFTALIK:36,085,000.0
-PGC GUNLUK:-6.022.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+SINYAL:TUT
+PGC AYLIK:-26,350,000.0
+PGC HAFTALIK:35,228,000.0
+PGC GUNLUK:0,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Tut.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.08, ROA=0.04, Net Marj=9.41 → Zayıf
@@ -62,6 +62,6 @@ Büyüme		: Net Satış Değ%=-53.47, Net Kar Değ%=-6.48 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.3 → Düşük risk
 Nakit Durumu	: Cari Oran=2.74 → Borç oranı uygun
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=-1.01 → Belirsiz
+Ucuz mu?	: PEG=-1.11 → Belirsiz
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-1.01 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-1.11 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
