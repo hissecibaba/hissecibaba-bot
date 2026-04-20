@@ -1,60 +1,60 @@
-# Son Güncelleme: 17.04.2026 21:13:51
+# Son Güncelleme: 20.04.2026 18:56:15
 ===SODSN===
-Analiz Tarihi: 17.04.2026
+Analiz Tarihi: 20.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,90
-KAPANIS:10,79
-GUN.F%:9,54
-G.DUSUK:9,90
-G.YUKSEK:10,79
-G.HACIM:2.248.113,00
-PGC8:46.000,00
+ACILIS:10,65
+KAPANIS:10,50
+GUN.F%:-2,69
+G.DUSUK:10,50
+G.YUKSEK:10,65
+G.HACIM:1.217.455,00
+PGC8:-25.000,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:10.79
-UST BANT:10.5074
-ALT BANT:9.1850
-FIYAT/BANT ORANI:121.37
+SINYAL:AL
+KAPANIS:10.50
+UST BANT:10.9504
+ALT BANT:9.0775
+FIYAT/BANT ORANI:75.95
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:10.79
-WT1:21.4
-WT2:2.47
-WT1-WT2:18.94
+KAPANIS:10.5
+WT1:31.01
+WT2:13.13
+WT1-WT2:17.88
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:10.20
-S4:9.60
-S3:9.31
-S2:8.42
-S1:7.53
-P:10.49
-R1:11.09
-R2:11.38
-R3:11.98
-R4:12.87
-R5:13.76
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:10.45
+S4:10.40
+S3:10.30
+S2:10.15
+S1:10.00
+P:10.55
+R1:10.60
+R2:10.70
+R3:10.75
+R4:10.90
+R5:11.05
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):10.79
-0,236:10.58
-0,382:10.45
-0,500:10.34
-0,618:10.24
-0,786:10.09
-1,0(DIP):9.90
-SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+0,0(TEPE):10.65
+0,236:10.61
+0,382:10.59
+0,500:10.57
+0,618:10.56
+0,786:10.53
+1,0(DIP):10.50
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-319,000.0
-PGC HAFTALIK:36,000.0
-PGC GUNLUK:46.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-325,000.0
+PGC HAFTALIK:11,000.0
+PGC GUNLUK:-25.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.21, ROA=-0.15, Net Marj=-0.14 → Zayıf
