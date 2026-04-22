@@ -1,60 +1,60 @@
-# Son Güncelleme: 21.04.2026 19:38:40
+# Son Güncelleme: 22.04.2026 19:24:57
 ===KLNMA===
-Analiz Tarihi: 21.04.2026
+Analiz Tarihi: 22.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,60
-KAPANIS:9,59
-GUN.F%:-0,10
-G.DUSUK:9,51
-G.YUKSEK:9,60
-G.HACIM:1.625.116,00
-PGC8:-10.000,00
+ACILIS:9,62
+KAPANIS:9,60
+GUN.F%:0,10
+G.DUSUK:9,60
+G.YUKSEK:9,62
+G.HACIM:2.123.236,00
+PGC8:21.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:9.59
-UST BANT:9.8580
+KAPANIS:9.60
+UST BANT:9.8609
 ALT BANT:9.3800
-FIYAT/BANT ORANI:43.93
+FIYAT/BANT ORANI:45.74
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:9.59
-WT1:-28.49
-WT2:-29.31
-WT1-WT2:0.82
+KAPANIS:9.6
+WT1:-28.14
+WT2:-27.89
+WT1-WT2:-0.24
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:9.53
-S4:9.48
-S3:9.44
-S2:9.35
-S1:9.26
-P:9.57
-R1:9.62
-R2:9.66
-R3:9.71
-R4:9.80
-R5:9.89
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):9.60
-0,236:9.58
-0,382:9.57
-0,500:9.55
-0,618:9.54
-0,786:9.53
-1,0(DIP):9.51
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
-===PARA GİRİŞ ÇIKIŞI===
+S5:9.59
+S4:9.59
+S3:9.57
+S2:9.55
+S1:9.53
+P:9.61
+R1:9.61
+R2:9.63
+R3:9.63
+R4:9.65
+R5:9.67
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
 SINYAL:SAT
-PGC AYLIK:-4,300,000.0
-PGC HAFTALIK:-119,000.0
-PGC GUNLUK:-10.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+0,0(TEPE):9.62
+0,236:9.62
+0,382:9.61
+0,500:9.61
+0,618:9.61
+0,786:9.60
+1,0(DIP):9.60
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+===PARA GİRİŞ ÇIKIŞI===
+SINYAL:AL
+PGC AYLIK:-4,762,000.0
+PGC HAFTALIK:-51,000.0
+PGC GUNLUK:21.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.27, ROA=0.04, Net Marj=0.0 → Güçlü
