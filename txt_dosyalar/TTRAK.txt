@@ -1,60 +1,60 @@
-# Son Güncelleme: 22.04.2026 19:31:59
+# Son Güncelleme: 24.04.2026 21:41:33
 ===TTRAK===
-Analiz Tarihi: 22.04.2026
+Analiz Tarihi: 24.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:481,75
-KAPANIS:481,00
-GUN.F%:-0,16
-G.DUSUK:475,00
-G.YUKSEK:483,00
-G.HACIM:54.508.729,00
-PGC8:2.483.000,00
+ACILIS:481,00
+KAPANIS:472,25
+GUN.F%:-1,82
+G.DUSUK:467,50
+G.YUKSEK:481,00
+G.HACIM:60.559.990,00
+PGC8:-4.717.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:481.00
-UST BANT:493.0283
-ALT BANT:475.6761
-FIYAT/BANT ORANI:30.68
+KAPANIS:472.25
+UST BANT:491.7406
+ALT BANT:472.1156
+FIYAT/BANT ORANI:0.68
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:481.0
-WT1:32.24
-WT2:33.9
-WT1-WT2:-1.65
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:472.25
+WT1:26.49
+WT2:31.97
+WT1-WT2:-5.49
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:476.33
-S4:471.67
-S3:468.33
-S2:460.33
-S1:452.33
-P:479.67
-R1:484.33
-R2:487.67
-R3:492.33
-R4:500.33
-R5:508.33
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:466.17
+S4:460.08
+S3:452.67
+S2:439.17
+S1:425.67
+P:473.58
+R1:479.67
+R2:487.08
+R3:493.17
+R4:506.67
+R5:520.17
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):483.00
-0,236:481.11
-0,382:479.94
-0,500:479.00
-0,618:478.06
-0,786:476.71
-1,0(DIP):475.00
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+SINYAL:SAT
+0,0(TEPE):481.00
+0,236:477.81
+0,382:475.84
+0,500:474.25
+0,618:472.66
+0,786:470.39
+1,0(DIP):467.50
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:17,303,000.0
-PGC HAFTALIK:5,482,000.0
-PGC GUNLUK:2.483.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:8,229,000.0
+PGC HAFTALIK:-2,078,000.0
+PGC GUNLUK:-4.717.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.03, ROA=0.01, Net Marj=0.01 → Zayıf
@@ -62,6 +62,6 @@ Büyüme		: Net Satış Değ%=-38.58, Net Kar Değ%=-93.95 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.81 → Orta risk
 Nakit Durumu	: Cari Oran=1.22 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=-1.13 → Belirsiz
+Ucuz mu?	: PEG=-1.11 → Belirsiz
 Karar   	: Uzak dur.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-1.13 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-1.11 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
