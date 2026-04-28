@@ -1,59 +1,59 @@
-# Son Güncelleme: 27.04.2026 18:54:58
+# Son Güncelleme: 28.04.2026 19:44:59
 ===SRVGY===
-Analiz Tarihi: 27.04.2026
+Analiz Tarihi: 28.04.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,27
-KAPANIS:3,32
-GUN.F%:1,84
-G.DUSUK:3,26
+ACILIS:3,29
+KAPANIS:3,27
+GUN.F%:-1,51
+G.DUSUK:3,25
 G.YUKSEK:3,34
-G.HACIM:67.569.654,00
-PGC8:1.119.000,00
+G.HACIM:58.645.868,00
+PGC8:57.000,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:3.32
-UST BANT:3.3659
-ALT BANT:3.1786
-FIYAT/BANT ORANI:75.50
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:3.27
+UST BANT:3.3547
+ALT BANT:3.1949
+FIYAT/BANT ORANI:46.99
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:3.32
-WT1:39.13
-WT2:37.61
-WT1-WT2:1.51
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:3.27
+WT1:39.93
+WT2:37.78
+WT1-WT2:2.16
+KESİSİM YONU:Yükseliş
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:3.27
-S4:3.23
-S3:3.19
-S2:3.11
-S1:3.03
-P:3.31
-R1:3.35
-R2:3.39
-R3:3.43
-R4:3.51
-R5:3.59
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
+S5:3.23
+S4:3.20
+S3:3.14
+S2:3.05
+S1:2.96
+P:3.29
+R1:3.32
+R2:3.38
+R3:3.41
+R4:3.50
+R5:3.59
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
 0,0(TEPE):3.34
 0,236:3.32
 0,382:3.31
-0,500:3.30
-0,618:3.29
-0,786:3.28
-1,0(DIP):3.26
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+0,500:3.29
+0,618:3.28
+0,786:3.27
+1,0(DIP):3.25
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:35,261,000.0
-PGC HAFTALIK:3,604,000.0
-PGC GUNLUK:1.119.000,00
+PGC AYLIK:34,262,000.0
+PGC HAFTALIK:3,411,000.0
+PGC GUNLUK:57.000,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
