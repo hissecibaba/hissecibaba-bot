@@ -1,59 +1,59 @@
-# Son Güncelleme: 05.05.2026 18:43:21
+# Son Güncelleme: 06.05.2026 19:11:51
 ===ATLAS===
-Analiz Tarihi: 05.05.2026
+Analiz Tarihi: 06.05.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,29
-KAPANIS:9,81
-GUN.F%:9,98
-G.DUSUK:8,92
-G.YUKSEK:9,81
-G.HACIM:44.361.352,00
-PGC8:2.043.000,00
+ACILIS:8,93
+KAPANIS:9,62
+GUN.F%:-1,94
+G.DUSUK:8,93
+G.YUKSEK:10,40
+G.HACIM:26.064.452,00
+PGC8:130.000,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:9.81
-UST BANT:9.6884
-ALT BANT:7.9734
-FIYAT/BANT ORANI:107.09
+SINYAL:AL
+KAPANIS:9.62
+UST BANT:10.0003
+ALT BANT:8.0153
+FIYAT/BANT ORANI:80.84
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:9.81
-WT1:34.82
-WT2:25.89
-WT1-WT2:8.93
+KAPANIS:9.62
+WT1:41.68
+WT2:30.13
+WT1-WT2:11.54
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:9.22
-S4:8.62
-S3:8.33
-S2:7.44
-S1:6.55
-P:9.51
-R1:10.11
-R2:10.40
-R3:11.00
-R4:11.89
-R5:12.78
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:8.90
+S4:8.18
+S3:7.43
+S2:5.96
+S1:4.49
+P:9.65
+R1:10.37
+R2:11.12
+R3:11.84
+R4:13.31
+R5:14.78
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.81
-0,236:9.60
-0,382:9.47
-0,500:9.37
-0,618:9.26
-0,786:9.11
-1,0(DIP):8.92
-SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+0,0(TEPE):10.40
+0,236:10.05
+0,382:9.84
+0,500:9.66
+0,618:9.49
+0,786:9.24
+1,0(DIP):8.93
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-2,017,000.0
-PGC HAFTALIK:1,315,000.0
-PGC GUNLUK:2.043.000,00
+PGC AYLIK:-1,106,000.0
+PGC HAFTALIK:476,000.0
+PGC GUNLUK:130.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
