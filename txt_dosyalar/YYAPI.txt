@@ -1,59 +1,59 @@
-# Son Güncelleme: 06.05.2026 19:28:55
+# Son Güncelleme: 07.05.2026 19:00:35
 ===YYAPI===
-Analiz Tarihi: 06.05.2026
+Analiz Tarihi: 07.05.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,19
-KAPANIS:1,19
-GUN.F%:-5,56
-G.DUSUK:1,19
-G.YUKSEK:1,20
-G.HACIM:9.769.206,00
-PGC8:-485.000,00
+KAPANIS:1,17
+GUN.F%:-1,68
+G.DUSUK:1,17
+G.YUKSEK:1,19
+G.HACIM:10.028.456,00
+PGC8:-336.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:1.19
-UST BANT:1.4081
-ALT BANT:1.0881
-FIYAT/BANT ORANI:31.83
+KAPANIS:1.17
+UST BANT:1.3660
+ALT BANT:1.1110
+FIYAT/BANT ORANI:23.15
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.19
-WT1:13.59
-WT2:13.01
-WT1-WT2:0.58
+KAPANIS:1.17
+WT1:11.81
+WT2:13.28
+WT1-WT2:-1.47
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:1.19
-S4:1.18
-S3:1.18
-S2:1.17
-S1:1.16
-P:1.19
-R1:1.20
+S5:1.16
+S4:1.16
+S3:1.14
+S2:1.12
+S1:1.10
+P:1.18
+R1:1.18
 R2:1.20
-R3:1.21
+R3:1.20
 R4:1.22
-R5:1.23
+R5:1.24
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.20
-0,236:1.20
-0,382:1.20
-0,500:1.19
-0,618:1.19
-0,786:1.19
-1,0(DIP):1.19
+0,0(TEPE):1.19
+0,236:1.19
+0,382:1.18
+0,500:1.18
+0,618:1.18
+0,786:1.17
+1,0(DIP):1.17
 SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:437,000.0
-PGC HAFTALIK:4,617,000.0
-PGC GUNLUK:-485.000,00
+PGC AYLIK:1,041,000.0
+PGC HAFTALIK:3,712,000.0
+PGC GUNLUK:-336.000,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
@@ -62,6 +62,6 @@ Büyüme		: Net Satış Değ%=-78.21, Net Kar Değ%=-85.14 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.99 → Orta risk
 Nakit Durumu	: Cari Oran=4.95 → Borç oranı uygun
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=-0.21 → Belirsiz
+Ucuz mu?	: PEG=-0.20 → Belirsiz
 Karar   	: Uzak dur.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç oranı uygun, PEG=-0.21 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk orta riskli, Nakit Durumu borç oranı uygun, PEG=-0.20 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
