@@ -1,51 +1,51 @@
-# Son Güncelleme: 07.05.2026 18:56:14
+# Son Güncelleme: 08.05.2026 18:55:55
 ===RPTEKF2===
-Analiz Tarihi: 07.05.2026
+Analiz Tarihi: 08.05.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,17
+ACILIS:4,66
 KAPANIS:4,66
-GUN.F%:-9,86
+GUN.F%:0,00
 G.DUSUK:4,66
-G.YUKSEK:5,17
-G.HACIM:21.415,00
+G.YUKSEK:4,66
+G.HACIM:755,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
+SINYAL:SAT
 KAPANIS:4.66
-UST BANT:nan
-ALT BANT:nan
-FIYAT/BANT ORANI:nan
-TREND YONU:Yatay
-SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
+UST BANT:5.4500
+ALT BANT:4.2633
+FIYAT/BANT ORANI:33.43
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:4.66
-KAPANIS:-1.23
-WT1:-9.15
-WT2:7.92
-WT1-WT2:Yükseliş
-KESİSİM YONU:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:-5.53
+WT1:-4.64
+WT2:-0.88
+WT1-WT2:Yatay
+KESİSİM YONU:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:4.49
-S5:4.32
-S4:3.98
-S3:3.47
-S2:2.96
-S1:4.83
-P:5.00
-R1:5.34
-R2:5.51
-R3:6.02
-R4:6.53
-R5:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:4.66
+S5:4.66
+S4:4.66
+S3:4.66
+S2:4.66
+S1:4.66
+P:4.66
+R1:4.66
+R2:4.66
+R3:4.66
+R4:4.66
+R5:Pivot analizi tutarlı bir sonuç vermemektedir.
 ===FİBO NOKTALARI===
-SINYAL:5.17
-0,0(TEPE):5.05
-0,236:4.98
-0,382:4.92
-0,500:4.85
-0,618:4.77
+SINYAL:4.66
+0,0(TEPE):4.66
+0,236:4.66
+0,382:4.66
+0,500:4.66
+0,618:4.66
 0,786:4.66
-1,0(DIP):Dip/Toplama bölgesi. Tepki alımları görülebilir.
+1,0(DIP):Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
