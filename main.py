@@ -638,11 +638,11 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 logging.info(f"✅ Ballı Kaymak dosyası seçildi: {fp}")
                 if mobil_mode:
                     return jsonify({"content": content}), 200
-                for idx, img in enumerate(txt_to_images(fp, "balli_kaymak_listesi"), start=1):
-                    send_photo(chat_id, img, caption=f"🍯 Ballı Kaymak listesi (parça {idx})")
+                send_message(chat_id, content)
                 return jsonify({"content": content}), 200
-            logging.warning("❌ Ballı Kaymak listesi bulunamadı.")
-            return jsonify({"content": "❌ Ballı Kaymak listesi bulunamadı."}), 200
+            logging.warning("❌ Ballı Kaymak dosyası bulunamadı.")
+            return jsonify({"content": "❌ Ballı Kaymak dosyası bulunamadı."}), 200
+
 
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
