@@ -720,7 +720,6 @@ def webhook():
         return jsonify({"content": "Internal Server Error"}), 500
 
 
-        
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
 
@@ -728,6 +727,7 @@ import os
 import datetime
 import logging
 from PIL import Image, ImageDraw, ImageFont
+from flask import request, jsonify
 
 def get_latest_file_content_as_image(target_dir):
     """
@@ -781,6 +781,43 @@ def get_latest_file_content_as_image(target_dir):
     except Exception as e:
         logging.error(f"❌ Görsel üretim hatası: {e}")
         return None
+
+
+# 📌 Yeni Route: sembol dosyalarını listeleme
+@flask_app.route("/get_symbol_files", methods=["POST"])
+def get_symbol_files():
+    try:
+        data = request.get_json()
+        folder = data.get("folder", "txt_dosyalar")
+        folder_path = os.path.join(BASE_DIR, folder)
+        files = [fn for fn in os.listdir(folder_path) if fn.endswith(".txt")]
+        logging.info(f"✅ Sembol dosyaları listelendi: {files}")
+        return jsonify(files), 200
+    except Exception as e:
+        logging.error(f"get_symbol_files failed: {e}")
+        return jsonify({"error": str(e)}), 500
+
+
+# 📌 Yeni Route: seçilen sembol dosyasının içeriğini getirme
+@flask_app.route("/get_symbol_file_content", methods=["POST"])
+def get_symbol_file_content():
+    try:
+        data = request.get_json()
+        folder = data.get("folder", "txt_dosyalar")
+        symbol = data.get("symbol")
+        file_path = os.path.join(BASE_DIR, folder, symbol)
+
+        if os.path.exists(file_path):
+            with open(file_path, "r", encoding="utf-8") as f:
+                content = f.read()
+            logging.info(f"✅ {symbol} dosyası okundu: {file_path}")
+            return jsonify({"content": content}), 200
+        else:
+            logging.warning(f"❌ {symbol} dosyası bulunamadı.")
+            return jsonify({"error": "Dosya bulunamadı"}), 404
+    except Exception as e:
+        logging.error(f"get_symbol_file_content failed: {e}")
+        return jsonify({"error": str(e)}), 500
 
 
 
