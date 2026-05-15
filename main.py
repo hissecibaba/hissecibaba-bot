@@ -624,7 +624,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
                 if mobil_mode:
                     # İlk iki satırı (# Son Güncelleme ve başlık) atla, sadece sembol isimlerini döndür
-                    symbols = [line.split()[0] for line in lines[2:] if line.strip()]
+                    symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
                     return jsonify({"content": "\n".join(symbols)}), 200
                 # Normal modda tüm tabloyu gönder
                 content = "".join(lines)
@@ -632,7 +632,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 return jsonify({"content": content}), 200
             logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
-
 
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
