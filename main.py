@@ -602,15 +602,17 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
         # 📌 Hisse Analiz — sembol detay
         if text_norm.startswith("analiz_"):
             sembol = text_norm.replace("analiz_", "")
-            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol}.txt")
+            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol.upper()}.txt")  # ✅ büyük harf
+            logging.info(f"Aranan dosya yolu: {file_path}")  # ✅ log ekledik
             if os.path.exists(file_path):
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
-                logging.info(f"✅ {sembol} dosyası bulundu: {file_path}")
+                logging.info(f"✅ {sembol.upper()}.txt dosyası bulundu: {file_path}")
                 return jsonify({"content": content}), 200
             else:
-                logging.warning(f"❌ {sembol} için dosya bulunamadı.")
-                return jsonify({"content": f"❌ {sembol} için dosya bulunamadı."}), 200
+                logging.warning(f"❌ {sembol.upper()}.txt için dosya bulunamadı.")
+                return jsonify({"content": f"❌ {sembol.upper()}.txt için dosya bulunamadı."}), 200
+
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
