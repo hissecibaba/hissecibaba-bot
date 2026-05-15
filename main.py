@@ -20,10 +20,11 @@ TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 # 🔹 Klasör yolları (Render uyumlu)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Eğer txt_dosyalar burada yoksa /app kullan
+# Eğer ana klasör içinde txt_dosyalar yoksa /app kullan
 if not os.path.exists(os.path.join(BASE_DIR, "txt_dosyalar")):
     BASE_DIR = "/app"
 
+# 🔹 Ana klasör sabitleri
 TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
 AL_DIR = os.path.join(BASE_DIR, "al_listeleri")
 SAT_DIR = os.path.join(BASE_DIR, "sat_listeleri")
@@ -38,13 +39,10 @@ PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
 CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
 DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destek_direnc")
 
-
-
-# 🔹 Onaylayanlar klasörü sabiti
+# 🔹 Ek klasör sabitleri
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
-
-# 🔹 Mobil izinliler klasörü sabiti
 MOBIL_IZINLILER_DIR = os.path.join(BASE_DIR, "mobil_izinliler")
+
 
 # ✅ Flask app tek yerde tanımlandı
 flask_app = Flask(__name__)
@@ -578,20 +576,25 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-        # 📌 Hisse Analiz — en güncel bisttum dosyası
+        # 📌 Hisse Analiz — en güncel sembol dosyası (txt_dosyalar içinden)
         if text_norm == "hisse_analiz":
             try:
-                folder = os.path.join(BASE_DIR, "bisttum")
-                files = [f for f in os.listdir(folder) if f.endswith(".txt")]
+                files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
                 if not files:
-                    logging.warning("❌ bisttum klasöründe dosya yok.")
-                    return jsonify({"content": "❌ bisttum klasöründe dosya yok."}), 200
+                    logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
+                    return jsonify({"content": "❌ txt_dosyalar klasöründe dosya yok."}), 200
 
-                # 🔹 Dosyaları tarihe göre sırala (GG.AA.YYYY.txt formatı)
-                files.sort(key=lambda x: datetime.strptime(x.replace(".txt", ""), "%d.%m.%Y"), reverse=True)
+                # 🔹 Dosyaları tarihe göre sırala (GG.AA.YYYY.txt formatı varsa)
+                try:
+                    files.sort(key=lambda x: datetime.strptime(x.replace(".txt", ""), "%d.%m.%Y"), reverse=True)
+                except Exception:
+                    logging.info("ℹ️ Dosya isimleri tarih formatında değil, alfabetik sıralama yapılacak.")
+                    files.sort()
+
                 latest_file = files[0]
+                fp = os.path.join(TXT_DIR, latest_file)
 
-                with open(os.path.join(folder, latest_file), "r", encoding="utf-8") as f:
+                with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
 
                 logging.info(f"✅ Hisse Analiz en güncel dosya seçildi: {latest_file}")
@@ -605,15 +608,13 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             sembol_raw = text_norm.replace("analiz_", "")
             logging.warning(f"analiz_ komutuna girildi, sembol_raw: {sembol_raw}")
 
-            folder = os.path.join(BASE_DIR, "txt_dosyalar")
-
             # 🔹 Eğer frontend zaten .txt ile gönderiyorsa, tekrar ekleme
             if sembol_raw.lower().endswith(".txt"):
                 file_name = sembol_raw
             else:
                 file_name = f"{sembol_raw.upper()}.txt"
 
-            file_path = os.path.join(folder, file_name)
+            file_path = os.path.join(TXT_DIR, file_name)
             logging.warning(f"Aranan dosya yolu: {file_path}")
 
             if os.path.exists(file_path):
@@ -624,9 +625,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             else:
                 logging.error(f"❌ {file_name} için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {file_name} için dosya bulunamadı."}), 200
-
-
-
 
 
 
