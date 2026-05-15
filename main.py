@@ -599,23 +599,25 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 logging.error(f"❌ Hisse Analiz hata: {e}")
                 return jsonify({"content": f"❌ Hisse Analiz hata: {e}"}), 200
 
-        # 📌 Hisse Analiz — sembol detay
+        # 📌 Hisse Analiz — sembol detay (txt_dosyalar içinden okuma)
         if text_norm.startswith("analiz_"):
-            sembol = text_norm.replace("analiz_", "")
-            logging.warning(f"analiz_ komutuna girildi, sembol: {sembol}")  # Render INFO'yu göstermediği için WARNING kullandık
+            sembol = text_norm.replace("analiz_", "").upper()
+            logging.warning(f"analiz_ komutuna girildi, sembol: {sembol}")
 
-            # 🔹 Render ortamında BASE_DIR yerine doğrudan /app kullan
-            file_path = os.path.join("/app", "txt_dosyalar", f"{sembol.upper()}.txt")
-            logging.warning(f"Aranan dosya yolu: {file_path}")  # ✅ artık logda kesin görünür
+            folder = os.path.join(BASE_DIR, "txt_dosyalar")
+            file_name = f"{sembol}.txt"
+            file_path = os.path.join(folder, file_name)
+            logging.warning(f"Aranan dosya yolu: {file_path}")
 
             if os.path.exists(file_path):
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
-                logging.warning(f"✅ {sembol.upper()}.txt dosyası bulundu: {file_path}")
+                logging.warning(f"✅ {file_name} bulundu ve okundu.")
                 return jsonify({"content": content}), 200
             else:
-                logging.error(f"❌ {sembol.upper()}.txt için dosya bulunamadı.")
-                return jsonify({"content": f"❌ {sembol.upper()}.txt için dosya bulunamadı."}), 200
+                logging.error(f"❌ {file_name} için dosya bulunamadı.")
+                return jsonify({"content": f"❌ {file_name} için dosya bulunamadı."}), 200
+
 
 
 
