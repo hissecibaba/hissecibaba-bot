@@ -785,7 +785,7 @@ def get_latest_file_content_as_image(target_dir):
 
 # 📌 Yeni Route: sembol dosyalarını listeleme
 @flask_app.route("/get_symbol_files", methods=["POST"])
-def get_symbol_files():
+def get_symbol_files_route():
     try:
         data = request.get_json()
         folder = data.get("folder", "txt_dosyalar")
@@ -800,7 +800,7 @@ def get_symbol_files():
 
 # 📌 Yeni Route: seçilen sembol dosyasının içeriğini getirme
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
-def get_symbol_file_content():
+def get_symbol_file_content_route():
     try:
         data = request.get_json()
         folder = data.get("folder", "txt_dosyalar")
@@ -818,6 +818,7 @@ def get_symbol_file_content():
     except Exception as e:
         logging.error(f"get_symbol_file_content failed: {e}")
         return jsonify({"error": str(e)}), 500
+
 
 
 
