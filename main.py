@@ -17,19 +17,18 @@ izinli_raw = os.getenv("IZINLI_ID_LIST", "")
 IZINLI_ID_LIST = [int(id.strip()) for id in izinli_raw.split(",") if id.strip().isdigit()]
 TELEGRAM_API = f"https://api.telegram.org/bot{BOT_TOKEN}"
 
-# 🔹 Klasör yolları (göreceli hale getirildi)
+# 🔹 Klasör yolları (Render uyumlu)
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
 
-# ✅ Telegram tarafı: al_listeleri / sat_listeleri
+# Eğer txt_dosyalar burada yoksa /app kullan
+if not os.path.exists(os.path.join(BASE_DIR, "txt_dosyalar")):
+    BASE_DIR = "/app"
+
+TXT_DIR = os.path.join(BASE_DIR, "txt_dosyalar")
 AL_DIR = os.path.join(BASE_DIR, "al_listeleri")
 SAT_DIR = os.path.join(BASE_DIR, "sat_listeleri")
-
-# ✅ Mobil tarafı: al / sat
 AL_MOBIL_DIR = os.path.join(BASE_DIR, "al")
 SAT_MOBIL_DIR = os.path.join(BASE_DIR, "sat")
-
-# ✅ Diğer klasörler
 TAVAN_DIR = os.path.join(BASE_DIR, "tavan_listeleri")
 ONERI_DIR = os.path.join(BASE_DIR, "öneri")
 MATRIX_DIR = os.path.join(BASE_DIR, "matriks")
@@ -38,6 +37,8 @@ BISTTUM_DIR = os.path.join(BASE_DIR, "bisttum")
 PERFORMANS_DIR = os.path.join(BASE_DIR, "performans")
 CACHE_DIR = os.path.join(BASE_DIR, "gorsel_cache")
 DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destek_direnc")
+
+
 
 # 🔹 Onaylayanlar klasörü sabiti
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
