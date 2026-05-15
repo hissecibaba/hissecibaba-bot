@@ -92,9 +92,7 @@ def find_id_no_by_device(device_id: str):
         return None
 
 
-
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları (Düzeltilmiş)
-
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
     """Telegram veya mobil tarafa dosya gönderir."""
@@ -139,6 +137,32 @@ def find_latest_matrix_folder() -> str:
         return None
 
 
+def find_latest_file(base_dir: str) -> str:
+    """Belirtilen klasörde en güncel tarihli .txt dosyasını bulur ve yolunu döndürür."""
+    try:
+        logging.info(f"📂 Klasör içeriği: {os.listdir(base_dir)}")
+        files = []
+        for fn in os.listdir(base_dir):
+            full_path = os.path.join(base_dir, fn)
+            if os.path.isfile(full_path) and fn.lower().endswith(".txt"):
+                try:
+                    # Dosya adından tarihi çöz
+                    dt = datetime.datetime.strptime(fn.replace(".txt", ""), "%d.%m.%Y").date()
+                    files.append((dt, full_path))
+                except Exception:
+                    continue
+        files.sort(reverse=True)
+        if files:
+            latest_file = files[0][1]
+            logging.info(f"✅ Seçilen dosya: {latest_file}")
+            return latest_file
+        logging.warning("❌ Tarihli txt dosyası bulunamadı.")
+        return None
+    except Exception as e:
+        logging.error(f"find_latest_file failed: {e}")
+        return None
+
+
 def txt_to_images(file_path, tag, chunk_size=40):
     """Bir .txt dosyasını parçalara ayırarak görsellere dönüştürür."""
     try:
@@ -167,6 +191,8 @@ def txt_to_images(file_path, tag, chunk_size=40):
     except Exception as e:
         logging.error(f"txt_to_images failed: {e}")
         return []
+
+
 
 
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
