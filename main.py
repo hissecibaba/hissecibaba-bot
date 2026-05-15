@@ -602,8 +602,8 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
         # 📌 Hisse Analiz — sembol detay
         if text_norm.startswith("analiz_"):
             sembol = text_norm.replace("analiz_", "")
-            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol.upper()}.txt")  # ✅ büyük harf
-            logging.info(f"Aranan dosya yolu: {file_path}")  # ✅ log ekledik
+            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol.upper()}.txt")  # ✅ dosya adı büyük harf
+            logging.info(f"Aranan dosya yolu: {file_path}")  # ✅ tam path log
             if os.path.exists(file_path):
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
