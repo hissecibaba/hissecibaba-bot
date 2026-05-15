@@ -43,7 +43,6 @@ DESTEK_DIRENC_DIR = os.path.join(BASE_DIR, "destek_direnc")
 ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
 MOBIL_IZINLILER_DIR = os.path.join(BASE_DIR, "mobil_izinliler")
 
-
 # ✅ Flask app tek yerde tanımlandı
 flask_app = Flask(__name__)
 
@@ -150,7 +149,6 @@ def find_latest_file(base_dir: str) -> str:
             full_path = os.path.join(base_dir, fn)
             if os.path.isfile(full_path) and fn.lower().endswith(".txt"):
                 try:
-                    # Dosya adından tarihi çöz
                     dt = datetime.datetime.strptime(fn.replace(".txt", ""), "%d.%m.%Y").date()
                     files.append((dt, full_path))
                 except Exception:
@@ -195,15 +193,12 @@ def txt_to_images(file_path, tag, chunk_size=40):
         logging.error(f"txt_to_images failed: {e}")
         return []
 
-
-# PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
+# PARÇA 3A/5 (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
 import os
 import logging
 import datetime
 import subprocess
 import shutil
-
-BASE_DIR = os.getenv("BASE_DIR", "/render")  # Render ana klasör
 
 def sync_to_github():
     """Render içindeki klasörleri GitHub repo ile senkronize eder (optimize edilmiş)."""
@@ -298,6 +293,7 @@ def sync_to_github():
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
 
+
 @flask_app.route("/check", methods=["GET", "POST"])
 def check_consent_route():
     try:
@@ -321,13 +317,11 @@ def check_consent_route():
 
         with open(izin_file, "r", encoding="utf-8") as f:
             lines = f.read().splitlines()
-            # ✅ next() default parametresi doğru şekilde eklendi
             end_date_line = next((l for l in lines if l.startswith("END_DATE:")), None)
             if not end_date_line:
                 return jsonify({"authorized": "false", "error": "END_DATE bulunamadı"}), 200
 
             end_date_str = end_date_line.replace("END_DATE:", "").strip()
-            # ✅ 24 saat formatına çevrildi
             end_date = datetime.datetime.strptime(end_date_str, "%d.%m.%Y %H:%M")
 
         now = datetime.datetime.utcnow() + datetime.timedelta(hours=3)
@@ -341,6 +335,10 @@ def check_consent_route():
         logging.error(f"/check route hatası: {e}")
         return jsonify({"authorized": "false", "error": str(e)}), 500
 
+
+
+
+# PARÇA 3B/5 — Upload Route (Düzeltilmiş)
 
 @flask_app.route("/upload", methods=["POST"])
 def upload_file_route():
@@ -413,7 +411,13 @@ def upload_file_route():
         return "No selected file", 400
 
     target = request.form.get("target", "txt_dosyalar")
-    save_dir = os.path.join(BASE_DIR, target)
+
+    # ✅ txt_dosyalar için sabit TXT_DIR kullanılıyor
+    if target == "txt_dosyalar":
+        save_dir = TXT_DIR
+    else:
+        save_dir = os.path.join(BASE_DIR, target)
+
     os.makedirs(save_dir, exist_ok=True)
 
     save_path = os.path.join(save_dir, file.filename)
@@ -429,21 +433,13 @@ def upload_file_route():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-
-        
-# PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
+# PARÇA 4A/5 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
 @flask_app.route("/get_symbol_files", methods=["POST"])
 def get_symbol_files_route_v2():
     try:
-        data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "txt_dosyalar")
-        dir_path = os.path.join(BASE_DIR, folder)
-
-        if not os.path.exists(dir_path):
-            return jsonify([]), 200
-
-        files = [f for f in os.listdir(dir_path) if f.endswith(".txt")]
+        # ✅ Artık doğrudan TXT_DIR kullanılıyor
+        files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
         logging.info(f"✅ Sembol dosyaları listelendi: {files}")
         return jsonify(files), 200
     except Exception as e:
@@ -455,13 +451,12 @@ def get_symbol_files_route_v2():
 def get_symbol_file_content_route_v2():
     try:
         data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "")
         symbol = data.get("symbol", "")
 
-        if not folder or not symbol:
-            return jsonify({"error": "❌ Klasör veya sembol belirtilmedi."}), 400
+        if not symbol:
+            return jsonify({"error": "❌ Sembol belirtilmedi."}), 400
 
-        fp = os.path.join(BASE_DIR, folder, symbol)
+        fp = os.path.join(TXT_DIR, symbol)
         if os.path.exists(fp):
             with open(fp, "r", encoding="utf-8") as f:
                 content = f.read()
@@ -476,7 +471,7 @@ def get_symbol_file_content_route_v2():
         return jsonify({"error": "Internal Server Error"}), 500
 
 
-# PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
+# PARÇA 4B/5 — Bölüm 1 (Komutlar) — Düzeltilmiş
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     try:
@@ -616,6 +611,9 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
 
 
+
+# PARÇA 4B/5 — Bölüm 2 (Komutlar Devamı) — Düzeltilmiş
+
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -656,7 +654,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 return jsonify({"content": content}), 200
             logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
             return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
-
 
         # 📌 Mobil: Bugün AL
         if text_norm in ["bugun al", "al_mobil"]:
@@ -720,11 +717,10 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
 
         # 📌 Sembol bazlı komutlar
-        SYMBOL_DIR = os.path.join(BASE_DIR, "bisttum")
-        for fn in os.listdir(SYMBOL_DIR):
+        for fn in os.listdir(BISTTUM_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt", ""))
             if fn_name == text_norm:
-                fp_symbol = os.path.join(SYMBOL_DIR, fn)
+                fp_symbol = os.path.join(BISTTUM_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 logging.info(f"✅ Sembol dosyası seçildi: {fp_symbol}")
@@ -737,8 +733,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
@@ -807,10 +801,7 @@ def get_latest_file_content_as_image(target_dir):
 @flask_app.route("/get_symbol_files", methods=["POST"])
 def get_symbol_files_route_v3():   # ✅ benzersiz isim
     try:
-        data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "txt_dosyalar")
-        folder_path = os.path.join(BASE_DIR, folder)
-        files = [fn for fn in os.listdir(folder_path) if fn.endswith(".txt")]
+        files = [fn for fn in os.listdir(TXT_DIR) if fn.endswith(".txt")]
         logging.info(f"✅ Sembol dosyaları listelendi: {files}")
         return jsonify(files), 200
     except Exception as e:
@@ -823,9 +814,8 @@ def get_symbol_files_route_v3():   # ✅ benzersiz isim
 def get_symbol_file_content_route_v3():   # ✅ benzersiz isim
     try:
         data = request.get_json(silent=True) or {}
-        folder = data.get("folder", "txt_dosyalar")
         symbol = data.get("symbol")
-        file_path = os.path.join(BASE_DIR, folder, symbol)
+        file_path = os.path.join(TXT_DIR, symbol)
 
         if os.path.exists(file_path):
             with open(file_path, "r", encoding="utf-8") as f:
@@ -917,7 +907,7 @@ def start_bot():
     except Exception as e:
         logging.error(f"start_bot hatası: {e}")
 
-# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Final
+# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Düzeltilmiş
 
 import pytz
 import requests
@@ -1037,3 +1027,5 @@ scheduler.start()
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
     flask_app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8020)))
+
+
