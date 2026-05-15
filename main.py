@@ -5,7 +5,12 @@ import matplotlib.pyplot as plt
 from flask import Flask, request, jsonify
 from apscheduler.schedulers.background import BackgroundScheduler
 
-logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
+# 🔹 Logging formatı daha okunabilir hale getirildi
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S"
+)
 
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 izinli_raw = os.getenv("IZINLI_ID_LIST", "")
@@ -40,6 +45,7 @@ ONAYLAYANLAR_DIR = os.path.join(BASE_DIR, "onaylayanlar")
 # 🔹 Mobil izinliler klasörü sabiti
 MOBIL_IZINLILER_DIR = os.path.join(BASE_DIR, "mobil_izinliler")
 
+# ✅ Flask app tek yerde tanımlandı
 flask_app = Flask(__name__)
 
 def send_message(chat_id: int, text: str, mobil_mode: bool = False):
@@ -91,7 +97,6 @@ def find_id_no_by_device(device_id: str):
         logging.error(f"find_id_no_by_device failed: {e}")
         return None
 
-
 # PARÇA 2/5 — Dosya Gönderme, Dosya Bulma ve Görsel Üretim Fonksiyonları (Düzeltilmiş)
 
 def send_document(chat_id: int, file_path: str, caption: str = None, mobil_mode: bool = False):
@@ -130,7 +135,7 @@ def find_latest_matrix_folder() -> str:
             latest_folder = folders[0][1]
             logging.info(f"✅ Seçilen MATRİKS klasörü: {latest_folder}")
             return latest_folder
-        logging.warning("❌ MATRİKS klasörü bulunamadı.")
+        logging.warning("❌ MATRİKS klasöründe tarihli klasör bulunamadı.")
         return None
     except Exception as e:
         logging.error(f"find_latest_matrix_folder failed: {e}")
@@ -172,6 +177,7 @@ def txt_to_images(file_path, tag, chunk_size=40):
         logging.info(f"🖼 Dosyadan okunan satır sayısı: {len(lines)}")
         chunks = [lines[i:i+chunk_size] for i in range(0, len(lines), chunk_size)]
         image_paths = []
+        os.makedirs(CACHE_DIR, exist_ok=True)  # ✅ cache klasörü garanti altına alındı
         for idx, chunk in enumerate(chunks, start=1):
             fig, ax = plt.subplots(figsize=(10, 0.4 * len(chunk)))
             ax.axis("off")
@@ -180,8 +186,6 @@ def txt_to_images(file_path, tag, chunk_size=40):
             table.scale(1, 1.5)
             for key, cell in table.get_celld().items():
                 cell.set_fontsize(10)
-            if not os.path.exists(CACHE_DIR):
-                os.makedirs(CACHE_DIR)
             img_path = os.path.join(CACHE_DIR, f"{tag}_{idx}.png")
             fig.savefig(img_path, bbox_inches="tight")
             plt.close(fig)
@@ -193,15 +197,12 @@ def txt_to_images(file_path, tag, chunk_size=40):
         return []
 
 
-
-
 # PARÇA 3A/5 — Bölüm A (Optimize Sync + Empty Commit Fix + Rsync Filter + Status Check) — Düzeltilmiş
 import os
 import logging
 import datetime
 import subprocess
 import shutil
-from flask import Flask, request, jsonify
 
 BASE_DIR = os.getenv("BASE_DIR", "/render")  # Render ana klasör
 
@@ -228,6 +229,7 @@ def sync_to_github():
                 logging.info("🗑 Eski sync klasörü silindi (rm -rf).")
 
         # Repo klonla (URL formatı düzeltilmiş)
+        # ✅ repo_url sadece "owner/repo.git" formatında olmalı
         clone_url = f"https://{token}@github.com/{repo_url}"
         subprocess.run(["git", "clone", clone_url, repo_dir], check=True)
         logging.info(f"✅ GitHub repo klonlandı: {clone_url}")
@@ -298,11 +300,10 @@ def sync_to_github():
         logging.error(f"❌ Sync failed: {e}")
 
 
-        
 # PARÇA 3B/5 — Bölüm B (Consent ve Upload Route) — Düzeltilmiş
 
 @flask_app.route("/check", methods=["GET", "POST"])
-def check_consent():
+def check_consent_route():
     try:
         if request.method == "GET":
             # ✅ Keep-alive ping için basit cevap
@@ -324,7 +325,7 @@ def check_consent():
 
         with open(izin_file, "r", encoding="utf-8") as f:
             lines = f.read().splitlines()
-            end_date_line = next((l for l in lines if l.startswith("END_DATE:")), None)
+            end_date_line = next((l for l in lines if l.startswith("END_DATE:"), None))
             if not end_date_line:
                 return jsonify({"authorized": "false", "error": "END_DATE bulunamadı"}), 200
 
@@ -345,7 +346,7 @@ def check_consent():
 
 
 @flask_app.route("/upload", methods=["POST"])
-def upload_file():
+def upload_file_route():
     if request.is_json:
         data = request.get_json(silent=True) or {}
         payload = data.get("data", {})
@@ -431,11 +432,11 @@ def upload_file():
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
 
-
+        
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
 
 @flask_app.route("/get_symbol_files", methods=["POST"])
-def get_symbol_files():
+def get_symbol_files_route_v2():
     try:
         data = request.get_json(silent=True) or {}
         folder = data.get("folder", "txt_dosyalar")
@@ -453,7 +454,7 @@ def get_symbol_files():
 
 
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
-def get_symbol_file_content():
+def get_symbol_file_content_route_v2():
     try:
         data = request.get_json(silent=True) or {}
         folder = data.get("folder", "")
@@ -473,13 +474,14 @@ def get_symbol_file_content():
             return jsonify({"error": f"❌ Dosya bulunamadı: {symbol}"}), 404
 
     except Exception as e:
-        logging.error(f"get_symbol_file_content hatası: {e}")
+        logging.error(f"/get_symbol_file_content hatası: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
 
 
 # PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
+
 @flask_app.route("/webhook", methods=["POST"])
-def webhook():
+def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
     try:
         data = request.get_json(silent=True) or {}
 
@@ -604,6 +606,15 @@ def webhook():
                 logging.warning(f"❌ {sembol} için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {sembol} için dosya bulunamadı."}), 200
 
+      
+        logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
+        return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
+
+    except Exception as e:
+        logging.error(f"/webhook hatası: {e}")
+        return jsonify({"content": "Internal Server Error"}), 500
+
+
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -710,7 +721,7 @@ def webhook():
                     content = f.read()
                 logging.info(f"✅ Sembol dosyası seçildi: {fp_symbol}")
                 return jsonify({"content": content}), 200
-
+                        
         # 📌 Fallback
         logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
         return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
@@ -718,7 +729,6 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
@@ -785,9 +795,9 @@ def get_latest_file_content_as_image(target_dir):
 
 # 📌 Yeni Route: sembol dosyalarını listeleme
 @flask_app.route("/get_symbol_files", methods=["POST"])
-def get_symbol_files_route():
+def get_symbol_files_route_v3():   # ✅ benzersiz isim
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         folder = data.get("folder", "txt_dosyalar")
         folder_path = os.path.join(BASE_DIR, folder)
         files = [fn for fn in os.listdir(folder_path) if fn.endswith(".txt")]
@@ -800,9 +810,9 @@ def get_symbol_files_route():
 
 # 📌 Yeni Route: seçilen sembol dosyasının içeriğini getirme
 @flask_app.route("/get_symbol_file_content", methods=["POST"])
-def get_symbol_file_content_route():
+def get_symbol_file_content_route_v3():   # ✅ benzersiz isim
     try:
-        data = request.get_json()
+        data = request.get_json(silent=True) or {}
         folder = data.get("folder", "txt_dosyalar")
         symbol = data.get("symbol")
         file_path = os.path.join(BASE_DIR, folder, symbol)
@@ -818,9 +828,6 @@ def get_symbol_file_content_route():
     except Exception as e:
         logging.error(f"get_symbol_file_content failed: {e}")
         return jsonify({"error": str(e)}), 500
-
-
-
 
 # PARÇA 5b — Telegram komut entegrasyonu (al/sat → görsel gönder) — Düzeltilmiş
 
@@ -887,9 +894,11 @@ def start_bot():
             logging.error("❌ TELEGRAM_BOT_TOKEN tanımlı değil.")
             return
 
+        # ✅ python-telegram-bot v13 için use_context=True gerekli
         updater = Updater(token, use_context=True)
         dp = updater.dispatcher
 
+        # ✅ Filters.text & ~Filters.command → sadece normal mesajları yakalar
         dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
 
         logging.info("🚀 Telegram bot başlatılıyor...")
@@ -898,8 +907,7 @@ def start_bot():
     except Exception as e:
         logging.error(f"start_bot hatası: {e}")
 
-
-# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Düzeltilmiş
+# PARÇA 5c — Otomatik Mesaj, Scheduler ve Uygulama Çalıştırma — Final
 
 import pytz
 import requests
@@ -961,7 +969,7 @@ def check_subscription(user_id: str) -> bool:
 # 🔹 Keep-alive job (Render'ı sürekli uyanık tutmak için)
 def keep_alive():
     try:
-        requests.post("https://hissecibaba-bot.onrender.com/check", json={})
+        requests.post("https://hissecibaba-bot.onrender.com/check", json={}, timeout=10)
         logging.info("🔄 Keep-alive ping gönderildi.")
     except Exception as e:
         logging.error(f"Keep-alive ping failed: {e}")
@@ -971,49 +979,51 @@ def keep_alive():
 scheduler = BackgroundScheduler()
 istanbul_tz = pytz.timezone("Europe/Istanbul")
 
-# 🔹 Deploy job'u (20:45 TSİ)
-if not scheduler.get_job("auto_deploy"):
-    scheduler.add_job(
-        sync_to_github,
-        "cron",
-        day_of_week="mon-fri",
-        hour=20,
-        minute=45,
-        id="auto_deploy",
-        replace_existing=True,
-        timezone=istanbul_tz
-    )
+def add_jobs_once():
+    jobs = [job.id for job in scheduler.get_jobs()]
 
-# 🔹 Telegram otomatik mesaj job'u (21:00 TSİ)
-if not scheduler.get_job("otomatik_mesaj_21"):
-    scheduler.add_job(
-        otomatik_mesaj_telegram,
-        "cron",
-        day_of_week="mon-fri",
-        hour=21,
-        minute=0,
-        id="otomatik_mesaj_21",
-        replace_existing=True,
-        timezone=istanbul_tz
-    )
+    # 🔹 Deploy job'u (20:45 TSİ)
+    if "auto_deploy" not in jobs:
+        scheduler.add_job(
+            sync_to_github,
+            "cron",
+            day_of_week="mon-fri",
+            hour=20,
+            minute=45,
+            id="auto_deploy",
+            replace_existing=True,
+            timezone=istanbul_tz
+        )
 
-# 🔹 Keep-alive job'u
-if not scheduler.get_job("keep_alive_ping"):
-    scheduler.add_job(
-        keep_alive,
-        "interval",
-        minutes=5,
-        id="keep_alive_ping",
-        replace_existing=True,
-        timezone=istanbul_tz
-    )
+    # 🔹 Telegram otomatik mesaj job'u (21:00 TSİ)
+    if "otomatik_mesaj_21" not in jobs:
+        scheduler.add_job(
+            otomatik_mesaj_telegram,
+            "cron",
+            day_of_week="mon-fri",
+            hour=21,
+            minute=0,
+            id="otomatik_mesaj_21",
+            replace_existing=True,
+            timezone=istanbul_tz
+        )
 
+    # 🔹 Keep-alive job'u
+    if "keep_alive_ping" not in jobs:
+        scheduler.add_job(
+            keep_alive,
+            "interval",
+            minutes=5,
+            id="keep_alive_ping",
+            replace_existing=True,
+            timezone=istanbul_tz
+        )
+
+add_jobs_once()
 scheduler.start()
 
 
 # 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
-    fix_routes_in_file()
     flask_app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8020)))
-
