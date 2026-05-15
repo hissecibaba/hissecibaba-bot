@@ -576,55 +576,43 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-        # 📌 Hisse Analiz — en güncel sembol dosyası (txt_dosyalar içinden)
-        if text_norm == "hisse_analiz":
+        # 📌 Sembol dosyalarının listesini döner
+        if text_norm == "get_symbol_files":
             try:
                 files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
                 if not files:
                     logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
-                    return jsonify({"content": "❌ txt_dosyalar klasöründe dosya yok."}), 200
+                    return jsonify([]), 200
 
-                # 🔹 Dosyaları tarihe göre sırala (GG.AA.YYYY.txt formatı varsa)
-                try:
-                    files.sort(key=lambda x: datetime.strptime(x.replace(".txt", ""), "%d.%m.%Y"), reverse=True)
-                except Exception:
-                    logging.info("ℹ️ Dosya isimleri tarih formatında değil, alfabetik sıralama yapılacak.")
-                    files.sort()
-
-                latest_file = files[0]
-                fp = os.path.join(TXT_DIR, latest_file)
-
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-
-                logging.info(f"✅ Hisse Analiz en güncel dosya seçildi: {latest_file}")
-                return jsonify({"content": content}), 200
+                logging.info(f"✅ Sembol dosyaları alındı: {files}")
+                return jsonify(files), 200
             except Exception as e:
-                logging.error(f"❌ Hisse Analiz hata: {e}")
-                return jsonify({"content": f"❌ Hisse Analiz hata: {e}"}), 200
+                logging.error(f"❌ Sembol dosyaları hatası: {e}")
+                return jsonify([]), 200
 
-        # 📌 Hisse Analiz — sembol detay (txt_dosyalar içinden okuma)
-        if text_norm.startswith("analiz_"):
-            sembol_raw = text_norm.replace("analiz_", "")
-            logging.warning(f"analiz_ komutuna girildi, sembol_raw: {sembol_raw}")
+        # 📌 Seçilen sembol dosyasının içeriğini döner
+        if text_norm.startswith("get_symbol_file_content"):
+            try:
+                data = request.get_json(silent=True) or {}
+                file_name = data.get("symbol", "")
+                chat_id = data.get("chat_id", 0)
+                mobil_mode = data.get("mobil_mode", False)
 
-            # 🔹 Eğer frontend zaten .txt ile gönderiyorsa, tekrar ekleme
-            if sembol_raw.lower().endswith(".txt"):
-                file_name = sembol_raw
-            else:
-                file_name = f"{sembol_raw.upper()}.txt"
+                file_path = os.path.join(TXT_DIR, file_name)
+                logging.info(f"📂 Aranan dosya yolu: {file_path}")
 
-            file_path = os.path.join(TXT_DIR, file_name)
-            logging.warning(f"Aranan dosya yolu: {file_path}")
+                if os.path.exists(file_path):
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    logging.info(f"✅ {file_name} bulundu ve okundu.")
+                    return jsonify({"content": content}), 200
+                else:
+                    logging.warning(f"❌ {file_name} bulunamadı.")
+                    return jsonify({"content": f"❌ {file_name} bulunamadı."}), 200
+            except Exception as e:
+                logging.error(f"❌ Sembol içeriği hatası: {e}")
+                return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
 
-            if os.path.exists(file_path):
-                with open(file_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                logging.warning(f"✅ {file_name} bulundu ve okundu.")
-                return jsonify({"content": content}), 200
-            else:
-                logging.error(f"❌ {file_name} için dosya bulunamadı.")
-                return jsonify({"content": f"❌ {file_name} için dosya bulunamadı."}), 200
 
 
 
