@@ -480,7 +480,7 @@ def get_symbol_file_content_route_v2():
 # PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
 
 @flask_app.route("/webhook", methods=["POST"])
-def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
+def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     try:
         data = request.get_json(silent=True) or {}
 
@@ -495,12 +495,10 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
         text_low = str(msg_text).lower()
         mobil_mode = data.get("mobil_mode", False)
 
-        # 🔹 Debug loglar
         logging.info(f"📩 Gelen ham mesaj: {msg_text}")
         logging.info(f"🔍 Normalize öncesi: {text_low}")
         logging.info(f"📱 mobil_mode: {mobil_mode}")
 
-        # Türkçe karakter normalize fonksiyonu
         def normalize_tr(text: str) -> str:
             tr_map = str.maketrans("çğıöşü", "cgiosu")
             return text.lower().translate(tr_map)
@@ -509,7 +507,7 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
         logging.info(f"✅ Normalize edilmiş komut: {text_norm}")
 
         # 📌 ÖNERİ
-        if any(x in text_norm for x in ["oneri", "öneri", "onerı", "önerı"]):
+        if "oneri" in text_norm or "öneri" in text_norm:
             fp = find_latest_file(ONERI_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -605,15 +603,6 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
                 logging.warning(f"❌ {sembol} için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {sembol} için dosya bulunamadı."}), 200
 
-      
-        logging.info("ℹ️ Hiçbir komut eşleşmedi, fallback çalıştı.")
-        return jsonify({"content": f"Mesajını aldım: {msg_text}"}), 200
-
-    except Exception as e:
-        logging.error(f"/webhook hatası: {e}")
-        return jsonify({"content": "Internal Server Error"}), 500
-
-
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
@@ -682,6 +671,9 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
             fp = find_latest_file(AL_DIR)
             if fp:
                 logging.info(f"✅ AL dosyası seçildi: {fp}")
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        return jsonify({"content": f.read()}), 200
                 for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
                     send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
                 return jsonify({"content": "AL listesi gönderildi"}), 200
@@ -693,6 +685,9 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
             fp = find_latest_file(SAT_DIR)
             if fp:
                 logging.info(f"✅ SAT dosyası seçildi: {fp}")
+                if mobil_mode:
+                    with open(fp, "r", encoding="utf-8") as f:
+                        return jsonify({"content": f.read()}), 200
                 for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
                     send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
                 return jsonify({"content": "SAT listesi gönderildi"}), 200
@@ -728,6 +723,7 @@ def webhook_route_v2():   # ✅ fonksiyon adı benzersiz yapıldı
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
