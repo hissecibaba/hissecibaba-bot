@@ -601,11 +601,17 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
         # 📌 Hisse Analiz — sembol detay (txt_dosyalar içinden okuma)
         if text_norm.startswith("analiz_"):
-            sembol = text_norm.replace("analiz_", "").upper()
-            logging.warning(f"analiz_ komutuna girildi, sembol: {sembol}")
+            sembol_raw = text_norm.replace("analiz_", "")
+            logging.warning(f"analiz_ komutuna girildi, sembol_raw: {sembol_raw}")
 
             folder = os.path.join(BASE_DIR, "txt_dosyalar")
-            file_name = f"{sembol}.txt"
+
+            # 🔹 Eğer frontend zaten .txt ile gönderiyorsa, tekrar ekleme
+            if sembol_raw.lower().endswith(".txt"):
+                file_name = sembol_raw
+            else:
+                file_name = f"{sembol_raw.upper()}.txt"
+
             file_path = os.path.join(folder, file_name)
             logging.warning(f"Aranan dosya yolu: {file_path}")
 
@@ -617,6 +623,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             else:
                 logging.error(f"❌ {file_name} için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {file_name} için dosya bulunamadı."}), 200
+
 
 
 
