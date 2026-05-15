@@ -628,6 +628,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
 
 
+
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
