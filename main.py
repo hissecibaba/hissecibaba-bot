@@ -477,8 +477,6 @@ def get_symbol_file_content():
         return jsonify({"error": "Internal Server Error"}), 500
 
 
-
-
 # PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
 @flask_app.route("/webhook", methods=["POST"])
 def webhook():
@@ -581,6 +579,30 @@ def webhook():
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
+        # 📌 Hisse Analiz — sembol listesi
+        if text_norm == "hisse_analiz":
+            folder = os.path.join(BASE_DIR, "txt_dosyalar")
+            semboller = [fn.replace(".txt", "") for fn in os.listdir(folder) if fn.endswith(".txt")]
+            if semboller:
+                content = "📊 Hisse Analiz için sembol seç:\n" + "\n".join(semboller)
+                logging.info(f"✅ Hisse Analiz sembolleri listelendi: {len(semboller)} adet")
+                return jsonify({"content": content}), 200
+            else:
+                logging.warning("❌ txt_dosyalar klasöründe sembol dosyası yok.")
+                return jsonify({"content": "❌ txt_dosyalar klasöründe sembol dosyası yok."}), 200
+
+        # 📌 Hisse Analiz — sembol detay
+        if text_norm.startswith("analiz_"):
+            sembol = text_norm.replace("analiz_", "")
+            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol}.txt")
+            if os.path.exists(file_path):
+                with open(file_path, "r", encoding="utf-8") as f:
+                    content = f.read()
+                logging.info(f"✅ {sembol} dosyası bulundu: {file_path}")
+                return jsonify({"content": content}), 200
+            else:
+                logging.warning(f"❌ {sembol} için dosya bulunamadı.")
+                return jsonify({"content": f"❌ {sembol} için dosya bulunamadı."}), 200
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
@@ -622,7 +644,6 @@ def webhook():
                 return jsonify({"content": content}), 200
             logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
             return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
-
 
         # 📌 Mobil: Bugün AL
         if text_norm in ["bugun al", "al_mobil"]:
@@ -697,6 +718,7 @@ def webhook():
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
         
 
