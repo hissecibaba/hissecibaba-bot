@@ -602,18 +602,19 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
         # 📌 Hisse Analiz — sembol detay
         if text_norm.startswith("analiz_"):
             sembol = text_norm.replace("analiz_", "")
-            logging.info(f"analiz_ komutuna girildi, sembol: {sembol}")  # ✅ debug log
+            logging.warning(f"analiz_ komutuna girildi, sembol: {sembol}")  # Render INFO'yu göstermediği için WARNING kullandık
 
-            file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol.upper()}.txt")  # ✅ dosya adı büyük harf
-            logging.info(f"Aranan dosya yolu: {file_path}")  # ✅ tam path log
+            # 🔹 Render ortamında BASE_DIR yerine doğrudan /app kullan
+            file_path = os.path.join("/app", "txt_dosyalar", f"{sembol.upper()}.txt")
+            logging.warning(f"Aranan dosya yolu: {file_path}")  # ✅ artık logda kesin görünür
 
             if os.path.exists(file_path):
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
-                logging.info(f"✅ {sembol.upper()}.txt dosyası bulundu: {file_path}")
+                logging.warning(f"✅ {sembol.upper()}.txt dosyası bulundu: {file_path}")
                 return jsonify({"content": content}), 200
             else:
-                logging.warning(f"❌ {sembol.upper()}.txt için dosya bulunamadı.")
+                logging.error(f"❌ {sembol.upper()}.txt için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {sembol.upper()}.txt için dosya bulunamadı."}), 200
 
 
