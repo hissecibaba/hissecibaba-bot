@@ -478,7 +478,6 @@ def get_symbol_file_content_route_v2():
 
 
 # PARÇA 4/5 — Bölüm 2 (Komutlar) — Düzeltilmiş
-
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     try:
@@ -578,17 +577,27 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-        # 📌 Hisse Analiz — sembol listesi
+        # 📌 Hisse Analiz — en güncel bisttum dosyası
         if text_norm == "hisse_analiz":
-            folder = os.path.join(BASE_DIR, "txt_dosyalar")
-            semboller = [fn.replace(".txt", "") for fn in os.listdir(folder) if fn.endswith(".txt")]
-            if semboller:
-                content = "📊 Hisse Analiz için sembol seç:\n" + "\n".join(semboller)
-                logging.info(f"✅ Hisse Analiz sembolleri listelendi: {len(semboller)} adet")
+            try:
+                folder = os.path.join(BASE_DIR, "bisttum")
+                files = [f for f in os.listdir(folder) if f.endswith(".txt")]
+                if not files:
+                    logging.warning("❌ bisttum klasöründe dosya yok.")
+                    return jsonify({"content": "❌ bisttum klasöründe dosya yok."}), 200
+
+                # 🔹 Dosyaları tarihe göre sırala (GG.AA.YYYY.txt formatı)
+                files.sort(key=lambda x: datetime.strptime(x.replace(".txt", ""), "%d.%m.%Y"), reverse=True)
+                latest_file = files[0]
+
+                with open(os.path.join(folder, latest_file), "r", encoding="utf-8") as f:
+                    content = f.read()
+
+                logging.info(f"✅ Hisse Analiz en güncel dosya seçildi: {latest_file}")
                 return jsonify({"content": content}), 200
-            else:
-                logging.warning("❌ txt_dosyalar klasöründe sembol dosyası yok.")
-                return jsonify({"content": "❌ txt_dosyalar klasöründe sembol dosyası yok."}), 200
+            except Exception as e:
+                logging.error(f"❌ Hisse Analiz hata: {e}")
+                return jsonify({"content": f"❌ Hisse Analiz hata: {e}"}), 200
 
         # 📌 Hisse Analiz — sembol detay
         if text_norm.startswith("analiz_"):
@@ -643,6 +652,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 return jsonify({"content": content}), 200
             logging.warning("❌ Tüm hisseler dosyası bulunamadı.")
             return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
+
 
         # 📌 Mobil: Bugün AL
         if text_norm in ["bugun al", "al_mobil"]:
@@ -723,6 +733,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 
