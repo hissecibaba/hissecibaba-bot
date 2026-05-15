@@ -602,8 +602,11 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
         # 📌 Hisse Analiz — sembol detay
         if text_norm.startswith("analiz_"):
             sembol = text_norm.replace("analiz_", "")
+            logging.info(f"analiz_ komutuna girildi, sembol: {sembol}")  # ✅ debug log
+
             file_path = os.path.join(BASE_DIR, "txt_dosyalar", f"{sembol.upper()}.txt")  # ✅ dosya adı büyük harf
             logging.info(f"Aranan dosya yolu: {file_path}")  # ✅ tam path log
+
             if os.path.exists(file_path):
                 with open(file_path, "r", encoding="utf-8") as f:
                     content = f.read()
@@ -612,6 +615,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             else:
                 logging.warning(f"❌ {sembol.upper()}.txt için dosya bulunamadı.")
                 return jsonify({"content": f"❌ {sembol.upper()}.txt için dosya bulunamadı."}), 200
+
 
 
         # 📌 Destek/Direnç
