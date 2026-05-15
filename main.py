@@ -299,9 +299,6 @@ def sync_to_github():
     except Exception as e:
         logging.error(f"❌ Sync failed: {e}")
 
-
-# PARÇA 3B/5 — Bölüm B (Consent ve Upload Route) — Düzeltilmiş
-
 @flask_app.route("/check", methods=["GET", "POST"])
 def check_consent_route():
     try:
@@ -325,7 +322,8 @@ def check_consent_route():
 
         with open(izin_file, "r", encoding="utf-8") as f:
             lines = f.read().splitlines()
-            end_date_line = next((l for l in lines if l.startswith("END_DATE:"), None))
+            # ✅ next() default parametresi doğru şekilde eklendi
+            end_date_line = next((l for l in lines if l.startswith("END_DATE:")), None)
             if not end_date_line:
                 return jsonify({"authorized": "false", "error": "END_DATE bulunamadı"}), 200
 
@@ -431,6 +429,7 @@ def upload_file_route():
     except Exception as e:
         logging.error(f"Upload failed: {e}")
         return f"Hata: {e}", 500
+
 
         
 # PARÇA 4/5 — Bölüm 1 (webhook başlangıcı + yeni route’lar) — Düzeltilmiş
