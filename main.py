@@ -577,13 +577,13 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
                 if not files:
                     logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
-                    return jsonify([]), 200
+                    return jsonify({"symbols": []}), 200
 
                 logging.info(f"✅ Sembol dosyaları alındı: {files}")
-                return jsonify(files), 200
+                return jsonify({"symbols": files}), 200
             except Exception as e:
                 logging.error(f"❌ Sembol dosyaları hatası: {e}")
-                return jsonify([]), 200
+                return jsonify({"symbols": []}), 200
 
         # 📌 Seçilen sembol dosyasının içeriğini döner
         if text_norm.startswith("get_symbol_file_content"):
@@ -598,8 +598,16 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
                 if os.path.exists(file_path):
                     with open(file_path, "r", encoding="utf-8") as f:
-                        content = f.read()
+                        lines = f.readlines()
                     logging.info(f"✅ {file_name} bulundu ve okundu.")
+
+                    if mobil_mode:
+                        # Mobil için sadece satırları array olarak döndür
+                        symbols = [line.strip() for line in lines if line.strip()]
+                        return jsonify({"symbols": symbols}), 200
+
+                    # Normal modda tüm içeriği string olarak döndür
+                    content = "".join(lines)
                     return jsonify({"content": content}), 200
                 else:
                     logging.warning(f"❌ {file_name} bulunamadı.")
@@ -607,7 +615,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             except Exception as e:
                 logging.error(f"❌ Sembol içeriği hatası: {e}")
                 return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
-
 
 
 
