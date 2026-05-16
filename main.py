@@ -608,6 +608,36 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 logging.error(f"❌ Sembol içeriği hatası: {e}")
                 return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
 
+        # 📌 Seçilen sembolün destek/direnç satırını döner
+        if text_norm.startswith("get_destek_direnc_content"):
+            try:
+                data = request.get_json(silent=True) or {}
+                symbol = data.get("symbol", "").strip().upper()
+                chat_id = data.get("chat_id", 0)
+
+                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+
+                if target_fp and symbol:
+                    with open(target_fp, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+
+                    match = [line for line in lines if line.startswith(symbol)]
+                    if match:
+                        content = match[0].strip()
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu.")
+                        return jsonify({"content": content}), 200
+                    else:
+                        logging.warning(f"❌ {symbol} satırı bulunamadı.")
+                        return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
+                else:
+                    logging.warning("❌ Destek/Direnç dosyası yok veya sembol boş.")
+                    return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
+            except Exception as e:
+                logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
+                return jsonify({"content": f"❌ Hata: {e}"}), 200
+
+
 
 
 
@@ -633,6 +663,35 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
+        # 📌 Seçilen sembolün destek/direnç satırını döner
+        if text_norm.startswith("get_destek_direnc_content"):
+            try:
+                data = request.get_json(silent=True) or {}
+                symbol = data.get("symbol", "").strip().upper()
+                chat_id = data.get("chat_id", 0)
+
+                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+
+                if target_fp and symbol:
+                    with open(target_fp, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+
+                    match = [line for line in lines if line.startswith(symbol)]
+                    if match:
+                        content = match[0].strip()
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu.")
+                        return jsonify({"content": content}), 200
+                    else:
+                        logging.warning(f"❌ {symbol} satırı bulunamadı.")
+                        return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
+                else:
+                    logging.warning("❌ Destek/Direnç dosyası yok veya sembol boş.")
+                    return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
+            except Exception as e:
+                logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
+                return jsonify({"content": f"❌ Hata: {e}"}), 200
+
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
             fp = find_latest_file(BALLI_KAYMAK_DIR)
@@ -646,7 +705,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 return jsonify({"content": content}), 200
             logging.warning("❌ Ballı Kaymak dosyası bulunamadı.")
             return jsonify({"content": "❌ Ballı Kaymak dosyası bulunamadı."}), 200
-
 
         # 📌 Tüm Hisseler
         if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
@@ -737,6 +795,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
     except Exception as e:
         logging.error(f"/webhook hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 # PARÇA 5a — En güncel dosyayı bul ve görsel üret (24 saat formatı) — Düzeltilmiş
