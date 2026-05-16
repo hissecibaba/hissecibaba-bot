@@ -615,22 +615,17 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-            if target_fp:
-                with open(target_fp, "r", encoding="utf-8") as f:
-                    lines = f.readlines()
-                logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
-                if mobil_mode:
-                    # İlk iki satırı (# Son Güncelleme ve başlık) atla, sadece sembol isimlerini döndür
-                    symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
-                    return jsonify({"content": "\n".join(symbols)}), 200
-                # Normal modda tüm tabloyu gönder
-                content = "".join(lines)
-                send_message(chat_id, content)
-                return jsonify({"content": content}), 200
-            logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
-            return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+                if target_fp:
+                        with open(target_fp, "r", encoding="utf-8") as f:
+                                content = f.read()
+                        logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
+                        # Her zaman string döndür
+                        send_message(chat_id, content)
+                        return jsonify({"content": content}), 200
+                logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
+                return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
