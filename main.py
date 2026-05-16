@@ -572,6 +572,7 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
 
+
         # 📌 Sembol dosyalarının listesini döner
         if text_norm == "get_symbol_files":
                 try:
@@ -606,7 +607,6 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
                 except Exception as e:
                         logging.error(f"❌ Sembol içeriği hatası: {e}")
                         return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
-
 
 
 
