@@ -571,42 +571,43 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-
-
         # 📌 Sembol dosyalarının listesini döner
         if text_norm == "get_symbol_files":
-                try:
-                        files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
-                        if not files:
-                                logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
-                                return jsonify({"symbols": []}), 200
+            try:
+                files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
+                if not files:
+                    logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
+                    return jsonify([]), 200
 
-                        logging.info(f"✅ Sembol dosyaları alındı: {files}")
-                        return jsonify({"symbols": files}), 200
-                except Exception as e:
-                        logging.error(f"❌ Sembol dosyaları hatası: {e}")
-                        return jsonify({"symbols": []}), 200
+                logging.info(f"✅ Sembol dosyaları alındı: {files}")
+                return jsonify(files), 200
+            except Exception as e:
+                logging.error(f"❌ Sembol dosyaları hatası: {e}")
+                return jsonify([]), 200
 
         # 📌 Seçilen sembol dosyasının içeriğini döner
         if text_norm.startswith("get_symbol_file_content"):
-                try:
-                        data = request.get_json(silent=True) or {}
-                        file_name = data.get("symbol", "")
-                        file_path = os.path.join(TXT_DIR, file_name)
-                        logging.info(f"📂 Aranan dosya yolu: {file_path}")
+            try:
+                data = request.get_json(silent=True) or {}
+                file_name = data.get("symbol", "")
+                chat_id = data.get("chat_id", 0)
+                mobil_mode = data.get("mobil_mode", False)
 
-                        if os.path.exists(file_path):
-                                with open(file_path, "r", encoding="utf-8") as f:
-                                        content = f.read()
-                                logging.info(f"✅ {file_name} bulundu ve okundu.")
-                                # Her zaman string döndür
-                                return jsonify({"content": content}), 200
-                        else:
-                                logging.warning(f"❌ {file_name} bulunamadı.")
-                                return jsonify({"content": f"❌ {file_name} bulunamadı."}), 200
-                except Exception as e:
-                        logging.error(f"❌ Sembol içeriği hatası: {e}")
-                        return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
+                file_path = os.path.join(TXT_DIR, file_name)
+                logging.info(f"📂 Aranan dosya yolu: {file_path}")
+
+                if os.path.exists(file_path):
+                    with open(file_path, "r", encoding="utf-8") as f:
+                        content = f.read()
+                    logging.info(f"✅ {file_name} bulundu ve okundu.")
+                    return jsonify({"content": content}), 200
+                else:
+                    logging.warning(f"❌ {file_name} bulunamadı.")
+                    return jsonify({"content": f"❌ {file_name} bulunamadı."}), 200
+            except Exception as e:
+                logging.error(f"❌ Sembol içeriği hatası: {e}")
+                return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
+
 
 
 
@@ -615,17 +616,22 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
 
         # 📌 Destek/Direnç
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-                if target_fp:
-                        with open(target_fp, "r", encoding="utf-8") as f:
-                                content = f.read()
-                        logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
-                        # Her zaman string döndür
-                        send_message(chat_id, content)
-                        return jsonify({"content": content}), 200
-                logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
-                return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+            if target_fp:
+                with open(target_fp, "r", encoding="utf-8") as f:
+                    lines = f.readlines()
+                logging.info(f"✅ Destek/Direnç dosyası seçildi: {target_fp}")
+                if mobil_mode:
+                    # İlk iki satırı (# Son Güncelleme ve başlık) atla, sadece sembol isimlerini döndür
+                    symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
+                    return jsonify({"content": "\n".join(symbols)}), 200
+                # Normal modda tüm tabloyu gönder
+                content = "".join(lines)
+                send_message(chat_id, content)
+                return jsonify({"content": content}), 200
+            logging.warning("❌ Destek/Direnç dosyası bulunamadı.")
+            return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
