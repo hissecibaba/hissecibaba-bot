@@ -571,50 +571,41 @@ def webhook_route_v3():   # ✅ fonksiyon adı benzersiz yapıldı
             logging.warning("❌ AlinanSatilan.xlsx bulunamadı.")
             return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
+
         # 📌 Sembol dosyalarının listesini döner
         if text_norm == "get_symbol_files":
-            try:
-                files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
-                if not files:
-                    logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
-                    return jsonify({"symbols": []}), 200
+                try:
+                        files = [f for f in os.listdir(TXT_DIR) if f.endswith(".txt")]
+                        if not files:
+                                logging.warning("❌ txt_dosyalar klasöründe dosya yok.")
+                                return jsonify({"symbols": []}), 200
 
-                logging.info(f"✅ Sembol dosyaları alındı: {files}")
-                return jsonify({"symbols": files}), 200
-            except Exception as e:
-                logging.error(f"❌ Sembol dosyaları hatası: {e}")
-                return jsonify({"symbols": []}), 200
+                        logging.info(f"✅ Sembol dosyaları alındı: {files}")
+                        return jsonify({"symbols": files}), 200
+                except Exception as e:
+                        logging.error(f"❌ Sembol dosyaları hatası: {e}")
+                        return jsonify({"symbols": []}), 200
 
         # 📌 Seçilen sembol dosyasının içeriğini döner
         if text_norm.startswith("get_symbol_file_content"):
-            try:
-                data = request.get_json(silent=True) or {}
-                file_name = data.get("symbol", "")
-                chat_id = data.get("chat_id", 0)
-                mobil_mode = data.get("mobil_mode", False)
+                try:
+                        data = request.get_json(silent=True) or {}
+                        file_name = data.get("symbol", "")
+                        file_path = os.path.join(TXT_DIR, file_name)
+                        logging.info(f"📂 Aranan dosya yolu: {file_path}")
 
-                file_path = os.path.join(TXT_DIR, file_name)
-                logging.info(f"📂 Aranan dosya yolu: {file_path}")
-
-                if os.path.exists(file_path):
-                    with open(file_path, "r", encoding="utf-8") as f:
-                        lines = f.readlines()
-                    logging.info(f"✅ {file_name} bulundu ve okundu.")
-
-                    if mobil_mode:
-                        # Mobil için sadece satırları array olarak döndür
-                        symbols = [line.strip() for line in lines if line.strip()]
-                        return jsonify({"symbols": symbols}), 200
-
-                    # Normal modda tüm içeriği string olarak döndür
-                    content = "".join(lines)
-                    return jsonify({"content": content}), 200
-                else:
-                    logging.warning(f"❌ {file_name} bulunamadı.")
-                    return jsonify({"content": f"❌ {file_name} bulunamadı."}), 200
-            except Exception as e:
-                logging.error(f"❌ Sembol içeriği hatası: {e}")
-                return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
+                        if os.path.exists(file_path):
+                                with open(file_path, "r", encoding="utf-8") as f:
+                                        content = f.read()
+                                logging.info(f"✅ {file_name} bulundu ve okundu.")
+                                # Her zaman string döndür
+                                return jsonify({"content": content}), 200
+                        else:
+                                logging.warning(f"❌ {file_name} bulunamadı.")
+                                return jsonify({"content": f"❌ {file_name} bulunamadı."}), 200
+                except Exception as e:
+                        logging.error(f"❌ Sembol içeriği hatası: {e}")
+                        return jsonify({"content": f"❌ Sembol içeriği hatası: {e}"}), 200
 
 
 
