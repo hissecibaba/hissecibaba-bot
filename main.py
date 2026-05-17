@@ -471,7 +471,8 @@ def get_symbol_file_content_route_v2():
         return jsonify({"error": "Internal Server Error"}), 500
 
 
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş
+
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Eski Haliyle Düzeltilmiş
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
