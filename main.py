@@ -473,7 +473,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook)
+
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook + symbol fix)
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için doğru route
@@ -508,10 +509,10 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
-        if text_norm.startswith("get_destek_direnc_content"):
+        if text_norm == "get_destek_direnc_content":
             try:
-                data = request.get_json(silent=True) or {}
                 symbol = data.get("symbol", "").strip().upper()
+                logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
 
                 fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
                 target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
@@ -904,7 +905,7 @@ def otomatik_mesaj_telegram():
                 chat_id,
                 "📢 Otomatik Mesaj\n\n"
                 "Hissecibaba program verileri güncellenmiştir.\n"
-                "Hisse bilgileri için hissenin adını,\n"
+                "Hisse detaylı analizi için hissenin adını,\n"
                 "Günlük AL sinyali verenler için 'AL',\n"
                 "Günlük SAT sinyali verenler için 'SAT',\n"
                 "Günlük muhtemel TAVAN listesi için 'TAVAN',\n"
