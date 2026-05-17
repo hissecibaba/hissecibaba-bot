@@ -580,7 +580,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
         return jsonify({"content": "Internal Server Error"}), 500
 
 
-# PARÇA 4B/5 — Bölüm 2 (Komutlar – Telegram) — Düzeltilmiş
+
+# PARÇA 4B/5 — Bölüm 2 (Komutlar – Telegram) — Düzeltilmiş (txt_dosyalar klasörü kullanılıyor)
 
 @flask_app.route("/webhook_telegram", methods=["POST"])
 def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
@@ -670,12 +671,12 @@ def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
                 return jsonify({"content": "SAT listesi gönderildi"}), 200
             return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
-        # 📌 Telegram: Sembol bazlı komutlar (case-insensitive + log)
-        logging.info(f"📂 Klasördeki dosyalar: {os.listdir(BISTTUM_DIR)}")
-        for fn in os.listdir(BISTTUM_DIR):
+        # 📌 Telegram: Sembol bazlı komutlar (txt_dosyalar klasörü)
+        logging.info(f"📂 txt_dosyalar klasöründeki dosyalar: {os.listdir(TXT_DOSYALAR_DIR)}")
+        for fn in os.listdir(TXT_DOSYALAR_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt", ""))
             if fn_name == text_norm:
-                fp_symbol = os.path.join(BISTTUM_DIR, fn)
+                fp_symbol = os.path.join(TXT_DOSYALAR_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content)
