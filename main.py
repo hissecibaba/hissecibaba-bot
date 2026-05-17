@@ -581,115 +581,116 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
 
 
 
+
+
 # PARÇA 4B/5 — Bölüm 2 (Komutlar – Telegram) — Düzeltilmiş (txt_dosyalar klasörü kullanılıyor)
 
 @flask_app.route("/webhook_telegram", methods=["POST"])
 def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
-    try:
-        data = request.get_json(silent=True) or {}
-        msg = data.get("message", "")
-        if isinstance(msg, dict):
-            msg_text = msg.get("text", "")
-            chat_id = msg.get("chat", {}).get("id", 0)
-        else:
-            msg_text = msg
-            chat_id = data.get("chat_id", 0)
+        try:
+                data = request.get_json(silent=True) or {}
+                msg = data.get("message", "")
+                if isinstance(msg, dict):
+                        msg_text = msg.get("text", "")
+                        chat_id = msg.get("chat", {}).get("id", 0)
+                else:
+                        msg_text = msg
+                        chat_id = data.get("chat_id", 0)
 
-        text_low = str(msg_text).lower()
-        logging.info(f"📩 Gelen ham mesaj (telegram): {msg_text}")
+                text_low = str(msg_text).lower()
+                logging.info(f"📩 Gelen ham mesaj (telegram): {msg_text}")
 
-        def normalize_tr(text: str) -> str:
-            tr_map = str.maketrans("çğıöşü", "cgiosu")
-            return text.lower().translate(tr_map)
+                def normalize_tr(text: str) -> str:
+                        tr_map = str.maketrans("çğıöşü", "cgiosu")
+                        return text.lower().translate(tr_map)
 
-        text_norm = normalize_tr(text_low)
-        logging.info(f"✅ Normalize edilmiş komut (telegram): {text_norm}")
+                text_norm = normalize_tr(text_low)
+                logging.info(f"✅ Normalize edilmiş komut (telegram): {text_norm}")
 
-        # 📌 ÖNERİ
-        if "oneri" in text_norm or "öneri" in text_norm:
-            fp = find_latest_file(ONERI_DIR)
-            if fp:
-                for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
-                    send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
-                return jsonify({"content": "ÖNERİ listesi gönderildi"}), 200
-            return jsonify({"content": "❌ ÖNERİ listesi bulunamadı."}), 200
+                # 📌 ÖNERİ
+                if "oneri" in text_norm or "öneri" in text_norm:
+                        fp = find_latest_file(ONERI_DIR)
+                        if fp:
+                                for idx, img in enumerate(txt_to_images(fp, "öneri_listesi"), start=1):
+                                        send_photo(chat_id, img, caption=f"💡 Günlük ÖNERİ listesi (parça {idx})")
+                                return jsonify({"content": "ÖNERİ listesi gönderildi"}), 200
+                        return jsonify({"content": "❌ ÖNERİ listesi bulunamadı."}), 200
 
-        # 📌 TAVAN
-        if text_norm == "tavan":
-            fp = find_latest_file(TAVAN_DIR)
-            if fp:
-                for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
-                    send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
-                return jsonify({"content": "TAVAN listesi gönderildi"}), 200
-            return jsonify({"content": "❌ TAVAN listesi bulunamadı."}), 200
+                # 📌 TAVAN
+                if text_norm == "tavan":
+                        fp = find_latest_file(TAVAN_DIR)
+                        if fp:
+                                for idx, img in enumerate(txt_to_images(fp, "tavan_listesi"), start=1):
+                                        send_photo(chat_id, img, caption=f"🚀 Günlük TAVAN listesi (parça {idx})")
+                                return jsonify({"content": "TAVAN listesi gönderildi"}), 200
+                        return jsonify({"content": "❌ TAVAN listesi bulunamadı."}), 200
 
-        # 📌 TEMEL
-        if text_norm == "temel":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "Temp.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 TEMEL verisi")
-                    return jsonify({"content": "Temp.xlsx gönderildi"}), 200
-            return jsonify({"content": "❌ Temp.xlsx bulunamadı."}), 200
+                # 📌 TEMEL
+                if text_norm == "temel":
+                        latest_folder = find_latest_matrix_folder()
+                        if latest_folder:
+                                fp = os.path.join(latest_folder, "Temp.xlsx")
+                                if os.path.exists(fp):
+                                        send_document(chat_id, fp, caption="📊 TEMEL verisi")
+                                        return jsonify({"content": "Temp.xlsx gönderildi"}), 200
+                        return jsonify({"content": "❌ Temp.xlsx bulunamadı."}), 200
 
-        # 📌 TEKNİK
-        if text_norm == "teknik":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 TEKNİK veri")
-                    return jsonify({"content": "gunluk_veri.xlsx gönderildi"}), 200
-            return jsonify({"content": "❌ gunluk_veri.xlsx bulunamadı."}), 200
+                # 📌 TEKNİK
+                if text_norm == "teknik":
+                        latest_folder = find_latest_matrix_folder()
+                        if latest_folder:
+                                fp = os.path.join(latest_folder, "gunluk_veri.xlsx")
+                                if os.path.exists(fp):
+                                        send_document(chat_id, fp, caption="📊 TEKNİK veri")
+                                        return jsonify({"content": "gunluk_veri.xlsx gönderildi"}), 200
+                        return jsonify({"content": "❌ gunluk_veri.xlsx bulunamadı."}), 200
 
-        # 📌 BOFA
-        if text_norm == "bofa":
-            latest_folder = find_latest_matrix_folder()
-            if latest_folder:
-                fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
-                if os.path.exists(fp):
-                    send_document(chat_id, fp, caption="📊 BOFA verisi")
-                    return jsonify({"content": "AlinanSatilan.xlsx gönderildi"}), 200
-            return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
+                # 📌 BOFA
+                if text_norm == "bofa":
+                        latest_folder = find_latest_matrix_folder()
+                        if latest_folder:
+                                fp = os.path.join(latest_folder, "AlinanSatilan.xlsx")
+                                if os.path.exists(fp):
+                                        send_document(chat_id, fp, caption="📊 BOFA verisi")
+                                        return jsonify({"content": "AlinanSatilan.xlsx gönderildi"}), 200
+                        return jsonify({"content": "❌ AlinanSatilan.xlsx bulunamadı."}), 200
 
-        # 📌 Telegram: AL
-        if text_norm == "al":
-            fp = find_latest_file(AL_DIR)
-            if fp:
-                for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
-                    send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
-                return jsonify({"content": "AL listesi gönderildi"}), 200
-            return jsonify({"content": "❌ AL listesi bulunamadı."}), 200
+                # 📌 Telegram: AL
+                if text_norm == "al":
+                        fp = find_latest_file(AL_DIR)
+                        if fp:
+                                for idx, img in enumerate(txt_to_images(fp, "al_listesi"), start=1):
+                                        send_photo(chat_id, img, caption=f"📈 Günlük AL listesi (parça {idx})")
+                                return jsonify({"content": "AL listesi gönderildi"}), 200
+                        return jsonify({"content": "❌ AL listesi bulunamadı."}), 200
 
-        # 📌 Telegram: SAT
-        if text_norm == "sat":
-            fp = find_latest_file(SAT_DIR)
-            if fp:
-                for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
-                    send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
-                return jsonify({"content": "SAT listesi gönderildi"}), 200
-            return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
+                # 📌 Telegram: SAT
+                if text_norm == "sat":
+                        fp = find_latest_file(SAT_DIR)
+                        if fp:
+                                for idx, img in enumerate(txt_to_images(fp, "sat_listesi"), start=1):
+                                        send_photo(chat_id, img, caption=f"📉 Günlük SAT listesi (parça {idx})")
+                                return jsonify({"content": "SAT listesi gönderildi"}), 200
+                        return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
-        # 📌 Telegram: Sembol bazlı komutlar (txt_dosyalar klasörü)
-        logging.info(f"📂 txt_dosyalar klasöründeki dosyalar: {os.listdir(TXT_DIR)}")
-        for fn in os.listdir(TXT_DOSYALAR_DIR):
-            fn_name = normalize_tr(fn.lower().replace(".txt", ""))
-            if fn_name == text_norm:
-                fp_symbol = os.path.join(TXT_DOSYALAR_DIR, fn)
-                with open(fp_symbol, "r", encoding="utf-8") as f:
-                    content = f.read()
-                send_message(chat_id, content)
-                logging.info(f"✅ Sembol bulundu ve gönderildi: {fn}")
-                return jsonify({"content": f"Sembol dosyası ({fn}) gönderildi"}), 200
+                # 📌 Telegram: Sembol bazlı komutlar (txt_dosyalar klasörü)
+                logging.info(f"📂 txt_dosyalar klasöründeki dosyalar: {os.listdir(TXT_DIR)}")
+                for fn in os.listdir(TXT_DIR):
+                        fn_name = normalize_tr(fn.lower().replace(".txt", ""))
+                        if fn_name == text_norm:
+                                fp_symbol = os.path.join(TXT_DIR, fn)
+                                with open(fp_symbol, "r", encoding="utf-8") as f:
+                                        content = f.read()
+                                send_message(chat_id, content)
+                                logging.info(f"✅ Sembol bulundu ve gönderildi: {fn}")
+                                return jsonify({"content": f"Sembol dosyası ({fn}) gönderildi"}), 200
 
-        # 📌 Fallback
-        return jsonify({"content": f"Mesajını aldım (telegram): {msg_text}"}), 200
+                # 📌 Fallback
+                return jsonify({"content": f"Mesajını aldım (telegram): {msg_text}"}), 200
 
-    except Exception as e:
-        logging.error(f"/webhook telegram hatası: {e}")
-        return jsonify({"content": "Internal Server Error"}), 500
-
+        except Exception as e:
+                logging.error(f"/webhook telegram hatası: {e}")
+                return jsonify({"content": "Internal Server Error"}), 500
 
 
 
