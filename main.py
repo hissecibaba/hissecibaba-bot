@@ -474,7 +474,6 @@ def get_symbol_file_content_route_v2():
 
 
 
-
 # PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook + JSON payload log)
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -597,6 +596,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
+
 
 
 
