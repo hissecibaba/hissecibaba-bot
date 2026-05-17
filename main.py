@@ -579,8 +579,6 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
 
-
-
 # PARÇA 4B/5 — Bölüm 2 (Komutlar – Telegram) — Düzeltilmiş
 
 @flask_app.route("/webhook_telegram", methods=["POST"])
@@ -671,7 +669,7 @@ def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
                 return jsonify({"content": "SAT listesi gönderildi"}), 200
             return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
-        # 📌 Telegram: Sembol bazlı komutlar
+        # 📌 Telegram: Sembol bazlı komutlar (case-insensitive)
         for fn in os.listdir(BISTTUM_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt", ""))
             if fn_name == text_norm:
@@ -679,7 +677,8 @@ def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
                 send_message(chat_id, content)
-                return jsonify({"content": "Sembol dosyası gönderildi"}), 200
+                logging.info(f"✅ Sembol bulundu ve gönderildi: {fn}")
+                return jsonify({"content": f"Sembol dosyası ({fn}) gönderildi"}), 200
 
         # 📌 Fallback
         return jsonify({"content": f"Mesajını aldım (telegram): {msg_text}"}), 200
@@ -687,6 +686,9 @@ def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
     except Exception as e:
         logging.error(f"/webhook telegram hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
+
+
 
 
 
