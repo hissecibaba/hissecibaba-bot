@@ -473,7 +473,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Dart ile uyumlu
+
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Sağlamlaştırılmış
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
@@ -520,7 +521,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
                     with open(target_fp, "r", encoding="utf-8") as f:
                         lines = f.readlines()
 
-                    match = [line for line in lines if line.startswith(symbol)]
+                    # 🔹 sağlamlaştırılmış eşleşme: ilk sütun sembol ile karşılaştırılır
+                    match = [line for line in lines if line.split()[0].strip().upper() == symbol]
                     if match:
                         content = match[0].strip()   # sadece sembol satırı
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
