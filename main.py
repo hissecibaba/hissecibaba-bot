@@ -672,7 +672,7 @@ def webhook_route_v3_telegram():   # ✅ telegram için ayrı fonksiyon
             return jsonify({"content": "❌ SAT listesi bulunamadı."}), 200
 
         # 📌 Telegram: Sembol bazlı komutlar (txt_dosyalar klasörü)
-        logging.info(f"📂 txt_dosyalar klasöründeki dosyalar: {os.listdir(TXT_DOSYALAR_DIR)}")
+        logging.info(f"📂 txt_dosyalar klasöründeki dosyalar: {os.listdir(TXT_DIR)}")
         for fn in os.listdir(TXT_DOSYALAR_DIR):
             fn_name = normalize_tr(fn.lower().replace(".txt", ""))
             if fn_name == text_norm:
