@@ -509,7 +509,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
-        if text_norm == "get_destek_direnc_content":
+        if msg_text == "get_destek_direnc_content":   # ✅ doğrudan msg_text kontrolü
             try:
                 symbol = data.get("symbol", "").strip().upper()
                 logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
@@ -524,14 +524,14 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                     # 🔹 ilk 2 satırı atla (# Son Güncelleme ve başlık)
                     match = [line for line in lines[2:] if line.split()[0].strip().upper() == symbol]
                     if match:
-                        content = match[0].strip()   # sadece sembol satırı
+                        content = match[0].strip()
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
                         return jsonify({"content": content}), 200
                     else:
                         logging.warning(f"❌ {symbol} satırı bulunamadı.")
                         return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
                 else:
-                    logging.warning("❌ Destek/Direnç dosyası yok veya sembol boş.")
+                    logging.warning("❌ Dosya yok veya sembol boş.")
                     return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
             except Exception as e:
                 logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
@@ -597,6 +597,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 
