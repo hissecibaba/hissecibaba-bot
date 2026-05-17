@@ -474,7 +474,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook + symbol fix)
+
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook + JSON payload log)
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için doğru route
@@ -503,7 +504,6 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if target_fp:
                 with open(target_fp, "r", encoding="utf-8") as f:
                     lines = f.readlines()
-                # sadece sembol isimleri döndür (ilk 2 satırı atla)
                 symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
                 return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
@@ -511,6 +511,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
         # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
         if msg_text == "get_destek_direnc_content":   # ✅ doğrudan msg_text kontrolü
             try:
+                logging.info(f"📡 JSON payload: {data}")   # 🔹 tüm JSON’u logla
                 symbol = data.get("symbol", "").strip().upper()
                 logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
 
@@ -521,7 +522,6 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                     with open(target_fp, "r", encoding="utf-8") as f:
                         lines = f.readlines()
 
-                    # 🔹 ilk 2 satırı atla (# Son Güncelleme ve başlık)
                     match = [line for line in lines[2:] if line.split()[0].strip().upper() == symbol]
                     if match:
                         content = match[0].strip()
