@@ -470,6 +470,7 @@ def get_symbol_file_content_route_v2():
         logging.error(f"/get_symbol_file_content hatası: {e}")
         return jsonify({"error": "Internal Server Error"}), 500
 
+
 # PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -492,7 +493,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
         text_norm = normalize_tr(text_low)
         logging.info(f"✅ Normalize edilmiş komut (mobil): {text_norm}")
 
-        # 📌 Destek/Direnç
+        # 📌 Destek/Direnç — sembol listesi
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
             target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
@@ -503,7 +504,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
                 return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
-        # 📌 Seçilen sembolün destek/direnç satırını döner
+        # 📌 Seçilen sembolün destek/direnç satırını döner (başlık + satır)
         if text_norm.startswith("get_destek_direnc_content"):
             data = request.get_json(silent=True) or {}
             symbol = data.get("symbol", "").strip().upper()
@@ -514,7 +515,10 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
                     lines = f.readlines()
                 match = [line for line in lines if line.startswith(symbol)]
                 if match:
-                    return jsonify({"content": match[0].strip()}), 200
+                    header = lines[1].strip()   # Başlık satırı
+                    content = header + "\n" + match[0].strip()
+                    logging.info(f"✅ {symbol} için destek/direnç bulundu (başlık + satır).")
+                    return jsonify({"content": content}), 200
                 return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
             return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
 
