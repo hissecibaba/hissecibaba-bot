@@ -506,21 +506,32 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
 
         # 📌 Seçilen sembolün destek/direnç satırını döner (başlık + satır)
         if text_norm.startswith("get_destek_direnc_content"):
-            data = request.get_json(silent=True) or {}
-            symbol = data.get("symbol", "").strip().upper()
-            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-            if target_fp and symbol:
-                with open(target_fp, "r", encoding="utf-8") as f:
-                    lines = f.readlines()
-                match = [line for line in lines if line.startswith(symbol)]
-                if match:
-                    header = lines[1].strip()   # Başlık satırı
-                    content = header + "\n" + match[0].strip()
-                    logging.info(f"✅ {symbol} için destek/direnç bulundu (başlık + satır).")
-                    return jsonify({"content": content}), 200
-                return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
-            return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
+            try:
+                data = request.get_json(silent=True) or {}
+                symbol = data.get("symbol", "").strip().upper()
+
+                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+
+                if target_fp and symbol:
+                    with open(target_fp, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+
+                    match = [line for line in lines if line.startswith(symbol)]
+                    if match:
+                        header = lines[1].strip()   # Başlık satırı
+                        content = header + "\n" + match[0].strip()
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu (başlık + satır).")
+                        return jsonify({"content": content}), 200
+                    else:
+                        logging.warning(f"❌ {symbol} satırı bulunamadı.")
+                        return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
+                else:
+                    logging.warning("❌ Destek/Direnç dosyası yok veya sembol boş.")
+                    return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
+            except Exception as e:
+                logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
+                return jsonify({"content": f"❌ Hata: {e}"}), 200
 
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
@@ -582,6 +593,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
 
 
 
