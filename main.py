@@ -472,7 +472,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Eski Haliyle Düzeltilmiş
+
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Dart ile uyumlu
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
@@ -494,18 +495,19 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
         text_norm = normalize_tr(text_low)
         logging.info(f"✅ Normalize edilmiş komut (mobil): {text_norm}")
 
-        # 📌 Destek/Direnç — sembol listesi
+        # 📌 Destek/Direnç — sembol listesi (ilk sayfa)
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
             fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
             target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
             if target_fp:
                 with open(target_fp, "r", encoding="utf-8") as f:
                     lines = f.readlines()
+                # sadece sembol isimleri döndür
                 symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
                 return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
-        # 📌 Seçilen sembolün destek/direnç satırını döner (başlık + satır)
+        # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
         if text_norm.startswith("get_destek_direnc_content"):
             try:
                 data = request.get_json(silent=True) or {}
@@ -520,9 +522,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
 
                     match = [line for line in lines if line.startswith(symbol)]
                     if match:
-                        header = lines[1].strip()   # Başlık satırı
-                        content = header + "\n" + match[0].strip()
-                        logging.info(f"✅ {symbol} için destek/direnç bulundu (başlık + satır).")
+                        content = match[0].strip()   # sadece sembol satırı
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
                         return jsonify({"content": content}), 200
                     else:
                         logging.warning(f"❌ {symbol} satırı bulunamadı.")
