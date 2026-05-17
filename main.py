@@ -473,12 +473,10 @@ def get_symbol_file_content_route_v2():
 
 
 
-
-
-# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş
+# PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Son Düzeltilmiş (Route /webhook)
 
 @flask_app.route("/webhook", methods=["POST"])
-def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
+def webhook_route_v3_mobil():   # ✅ mobil için doğru route
     try:
         data = request.get_json(silent=True) or {}
         msg = data.get("message", "")
@@ -504,7 +502,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
             if target_fp:
                 with open(target_fp, "r", encoding="utf-8") as f:
                     lines = f.readlines()
-                # sadece sembol isimleri döndür
+                # sadece sembol isimleri döndür (ilk 2 satırı atla)
                 symbols = [line.split()[0].strip() for line in lines[2:] if line.strip()]
                 return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
@@ -598,7 +596,6 @@ def webhook_route_v3_mobil():   # ✅ mobil için ayrı fonksiyon
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
 
 
 
