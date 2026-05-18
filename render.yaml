@@ -4,4 +4,4 @@ services:
     env: python
     runtime: python-3.10.12
     buildCommand: pip install -r requirements.txt
-    startCommand: python main.pyİ
+    startCommand: gunicorn -b 0.0.0.0:$PORT main:flask_app
