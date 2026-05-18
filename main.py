@@ -1011,7 +1011,7 @@ scheduler.start()
 # 🔹 Flask uygulaması çalıştırma
 if __name__ == "__main__":
     logging.info("🚀 Flask uygulaması başlatılıyor...")
-    flask_app.run(host="0.0.0.0", port=int(os.getenv("PORT", 10000)))
+
 
 
 
