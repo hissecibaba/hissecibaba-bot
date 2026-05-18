@@ -5,3 +5,5 @@ matplotlib
 python-telegram-bot==13.15
 Pillow
 gunicorn
+pandas==3.0.2
+openpyxl==3.1.2
