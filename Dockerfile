@@ -23,5 +23,5 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # Flask + Gunicorn production start (shell form → $PORT expand edilir)
-CMD python -m gunicorn main:flask_app --bind 0.0.0.0:${PORT} --workers 2 --timeout 120 --access-logfile - --error-logfile -
+CMD gunicorn main:flask_app --bind 0.0.0.0:10000 --workers 2 --timeout 120 --access-logfile - --error-logfile -
 
