@@ -474,7 +474,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş ===
+
+# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Final Düzeltilmiş Kod ===
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için doğru route
@@ -503,13 +504,12 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if target_fp:
                 with open(target_fp, "r", encoding="utf-8") as f:
                     lines = f.readlines()
-                # ✅ İlk satır başlık, atlıyoruz → sadece sembol listesi
                 symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
                 return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
-        if msg_text == "get_destek_direnc_content":   # ✅ doğrudan msg_text kontrolü
+        if msg_text == "get_destek_direnc_content":
             try:
                 logging.info(f"📡 JSON payload: {data}")
                 symbol = data.get("symbol", "").strip().upper()
@@ -522,13 +522,23 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                     with open(target_fp, "r", encoding="utf-8") as f:
                         lines = f.readlines()
 
-                    # ✅ İlk satır başlık, atlıyoruz → sembol satırını bul
                     match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
                     if match:
-                        content = match[0].strip()
+                        parts = match[0].strip().split()
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
-                        # 🔹 Artık JSON array döndürüyoruz
-                        return jsonify({"values": content.split()}), 200
+
+                        # 🔹 Tablo başlıklarına göre doğru JSON eşleştirme
+                        result = {
+                            "symbol": parts[0],
+                            "direnc3": parts[1] if len(parts) > 1 else "",
+                            "direnc2": parts[2] if len(parts) > 2 else "",
+                            "pivot": parts[3] if len(parts) > 3 else "",
+                            "destek1": parts[4] if len(parts) > 4 else "",
+                            "destek2": parts[5] if len(parts) > 5 else "",
+                            "destek3": parts[6] if len(parts) > 6 else "",
+                            "son_fiyat": parts[7] if len(parts) > 7 else ""
+                        }
+                        return jsonify(result), 200
                     else:
                         logging.warning(f"❌ {symbol} satırı bulunamadı.")
                         return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
