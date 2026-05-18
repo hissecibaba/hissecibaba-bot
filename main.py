@@ -480,7 +480,6 @@ def get_symbol_file_content_route_v2():
 
 
 
-
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -511,7 +510,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                 with open(target_fp, "r", encoding="utf-8") as f:
                     lines = f.readlines()
                 symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
-                return jsonify({"symbols": symbols}), 200   # ✅ artık liste dönüyor
+                logging.info(f"📡 JSON sembol listesi hazırlanıyor: {symbols}")
+                return jsonify({"symbols": symbols}), 200
+            logging.warning("❌ destek_direnc.txt bulunamadı")
             return jsonify({"symbols": []}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını JSON döner (ikinci sayfa)
@@ -531,7 +532,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                     match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
                     if match:
                         parts = match[0].strip().split()
-                        logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır): {parts}")
 
                         result = {
                             "symbol": parts[0],
@@ -543,12 +544,16 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                             "destek3": parts[6] if len(parts) > 6 else "",
                             "son_fiyat": parts[7] if len(parts) > 7 else ""
                         }
+                        logging.info(f"📡 JSON response (mobil): {json.dumps(result, ensure_ascii=False)}")
                         return jsonify(result), 200
                     else:
+                        logging.warning(f"❌ {symbol} bulunamadı")
                         return jsonify({"error": f"{symbol} bulunamadı"}), 200
                 else:
+                    logging.error("❌ Dosya yok veya sembol boş")
                     return jsonify({"error": "Dosya yok veya sembol boş"}), 200
             except Exception as e:
+                logging.error(f"❌ get_destek_direnc_content hata: {e}")
                 return jsonify({"error": f"Hata: {e}"}), 200
 
         # 📌 Ballı Kaymak
@@ -557,7 +562,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info("📡 Ballı Kaymak JSON response hazırlandı")
                 return jsonify({"content": content}), 200
+            logging.warning("❌ Ballı Kaymak dosyası bulunamadı")
             return jsonify({"content": "❌ Ballı Kaymak dosyası bulunamadı."}), 200
 
         # 📌 Tüm Hisseler
@@ -566,7 +573,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info("📡 Tüm Hisseler JSON response hazırlandı")
                 return jsonify({"content": content}), 200
+            logging.warning("❌ Tüm hisseler dosyası bulunamadı")
             return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
 
         # 📌 Mobil: Bugün AL
@@ -575,7 +584,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info("📡 Bugün AL JSON response hazırlandı")
                 return jsonify({"content": content}), 200
+            logging.warning("❌ Bugün AL listesi bulunamadı")
             return jsonify({"content": "❌ Bugün AL listesi bulunamadı."}), 200
 
         # 📌 Mobil: Bugün SAT
@@ -584,7 +595,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info("📡 Bugün SAT JSON response hazırlandı")
                 return jsonify({"content": content}), 200
+            logging.warning("❌ Bugün SAT listesi bulunamadı")
             return jsonify({"content": "❌ Bugün SAT listesi bulunamadı."}), 200
 
         # 📌 Dünkü Performans
@@ -593,7 +606,9 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info("📡 Performans JSON response hazırlandı")
                 return jsonify({"content": content}), 200
+            logging.warning("❌ Performans dosyası bulunamadı")
             return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
 
         # 📌 Hisse Analiz (sembol dosyaları)
@@ -603,14 +618,18 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                 fp_symbol = os.path.join(BISTTUM_DIR, fn)
                 with open(fp_symbol, "r", encoding="utf-8") as f:
                     content = f.read()
+                logging.info(f"📡 {fn} sembol dosyası JSON response hazırlandı")
                 return jsonify({"content": content}), 200
 
         # 📌 Fallback
+        logging.info(f"⚠️ Fallback tetiklendi: {msg_text}")
         return jsonify({"content": f"Mesajını aldım (mobil): {msg_text}"}), 200
 
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
+
 
 
 
