@@ -473,6 +473,7 @@ def get_symbol_file_content_route_v2():
 
 
 
+
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş ===
 
 @flask_app.route("/webhook", methods=["POST"])
@@ -526,7 +527,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                     if match:
                         content = match[0].strip()
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
-                        return jsonify({"content": content}), 200
+                        # 🔹 Artık JSON array döndürüyoruz
+                        return jsonify({"values": content.split()}), 200
                     else:
                         logging.warning(f"❌ {symbol} satırı bulunamadı.")
                         return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
