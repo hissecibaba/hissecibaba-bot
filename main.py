@@ -472,23 +472,8 @@ def get_symbol_file_content_route_v2():
 
 
 
-# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş ===
-import pandas as pd
-import datetime
-import os
 
-def find_latest_matrix_folder(base_dir):
-    folders = []
-    for fn in os.listdir(base_dir):
-        full_path = os.path.join(base_dir, fn)
-        if os.path.isdir(full_path):
-            try:
-                dt = datetime.datetime.strptime(fn, "%d.%m.%Y").date()
-                folders.append((dt, full_path))
-            except Exception:
-                continue
-    folders.sort(reverse=True)
-    return folders[0][1] if folders else None
+# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş ===
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için doğru route
@@ -512,39 +497,44 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
 
         # 📌 Destek/Direnç — sembol listesi (ilk sayfa)
         if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-            matrix_base = os.path.join("/app", "matriks")
-            latest_folder = find_latest_matrix_folder(matrix_base)
-            if latest_folder:
-                file_path = os.path.join(latest_folder, "destek_direnc.xlsx")
-                if os.path.exists(file_path):
-                    df = pd.read_excel(file_path)
-                    symbols = df["SEMBOL"].dropna().tolist()
-                    return jsonify({"content": "\n".join(symbols)}), 200
+            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+            if target_fp:
+                with open(target_fp, "r", encoding="utf-8") as f:
+                    lines = f.readlines()
+                # ✅ İlk satır başlık, atlıyoruz → sadece sembol listesi
+                symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
+                return jsonify({"content": "\n".join(symbols)}), 200
             return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
-        if msg_text == "get_destek_direnc_content":
+        if msg_text == "get_destek_direnc_content":   # ✅ doğrudan msg_text kontrolü
             try:
+                logging.info(f"📡 JSON payload: {data}")
                 symbol = data.get("symbol", "").strip().upper()
                 logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
 
-                matrix_base = os.path.join("/app", "matriks")
-                latest_folder = find_latest_matrix_folder(matrix_base)
-                if latest_folder:
-                    file_path = os.path.join(latest_folder, "destek_direnc.xlsx")
-                    if os.path.exists(file_path):
-                        df = pd.read_excel(file_path)
-                        row = df[df["SEMBOL"].str.upper() == symbol]
-                        if not row.empty:
-                            values = row.values.tolist()[0]
-                            content = " ".join(str(v) for v in values)
-                            logging.info(f"✅ {symbol} için destek/direnç bulundu (Excel’den).")
-                            return jsonify({"content": content}), 200
-                        else:
-                            return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
-                return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
+                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+
+                if target_fp and symbol:
+                    with open(target_fp, "r", encoding="utf-8") as f:
+                        lines = f.readlines()
+
+                    # ✅ İlk satır başlık, atlıyoruz → sembol satırını bul
+                    match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
+                    if match:
+                        content = match[0].strip()
+                        logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
+                        return jsonify({"content": content}), 200
+                    else:
+                        logging.warning(f"❌ {symbol} satırı bulunamadı.")
+                        return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
+                else:
+                    logging.warning("❌ Dosya yok veya sembol boş.")
+                    return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
             except Exception as e:
-                logging.error(f"❌ Excel okuma hatası: {e}")
+                logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
                 return jsonify({"content": f"❌ Hata: {e}"}), 200
 
         # 📌 Ballı Kaymak
