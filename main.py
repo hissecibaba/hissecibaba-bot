@@ -472,6 +472,7 @@ def get_symbol_file_content_route_v2():
 
 
 
+
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
 
         @flask_app.route("/webhook", methods=["POST"])
@@ -502,8 +503,8 @@ def get_symbol_file_content_route_v2():
                         with open(target_fp, "r", encoding="utf-8") as f:
                             lines = f.readlines()
                         symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
-                        return jsonify({"content": "\n".join(symbols)}), 200
-                    return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
+                        return jsonify({"symbols": symbols}), 200   # ✅ artık liste dönüyor
+                    return jsonify({"symbols": []}), 200
 
                 # 📌 Seçilen sembolün destek/direnç satırını JSON döner (ikinci sayfa)
                 if msg_text == "get_destek_direnc_content":
@@ -536,13 +537,10 @@ def get_symbol_file_content_route_v2():
                                 }
                                 return jsonify(result), 200
                             else:
-                                logging.warning(f"❌ {symbol} satırı bulunamadı.")
                                 return jsonify({"error": f"{symbol} bulunamadı"}), 200
                         else:
-                            logging.warning("❌ Dosya yok veya sembol boş.")
                             return jsonify({"error": "Dosya yok veya sembol boş"}), 200
                     except Exception as e:
-                        logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
                         return jsonify({"error": f"Hata: {e}"}), 200
 
                 # 📌 Ballı Kaymak
@@ -605,7 +603,6 @@ def get_symbol_file_content_route_v2():
             except Exception as e:
                 logging.error(f"/webhook mobil hatası: {e}")
                 return jsonify({"content": "Internal Server Error"}), 500
-
 
 
 
