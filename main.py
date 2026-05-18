@@ -475,142 +475,49 @@ def get_symbol_file_content_route_v2():
 
 
 
-# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Final Düzeltilmiş Kod ===
 
-@flask_app.route("/webhook", methods=["POST"])
-def webhook_route_v3_mobil():   # ✅ mobil için doğru route
+
+# === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
+
+if msg_text == "get_destek_direnc_content":
     try:
-        data = request.get_json(silent=True) or {}
-        msg = data.get("message", "")
-        if isinstance(msg, dict):
-            msg_text = msg.get("text", "")
+        logging.info(f"📡 JSON payload: {data}")
+        symbol = data.get("symbol", "").strip().upper()
+        logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
+
+        fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+        target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+
+        if target_fp and symbol:
+            with open(target_fp, "r", encoding="utf-8") as f:
+                lines = f.readlines()
+
+            match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
+            if match:
+                parts = match[0].strip().split()
+                logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
+
+                # 🔹 Tablo başlıklarına göre doğru JSON eşleştirme
+                result = {
+                    "symbol": parts[0],
+                    "direnc3": parts[1] if len(parts) > 1 else "",
+                    "direnc2": parts[2] if len(parts) > 2 else "",
+                    "pivot": parts[3] if len(parts) > 3 else "",
+                    "destek1": parts[4] if len(parts) > 4 else "",
+                    "destek2": parts[5] if len(parts) > 5 else "",
+                    "destek3": parts[6] if len(parts) > 6 else "",
+                    "son_fiyat": parts[7] if len(parts) > 7 else ""
+                }
+                return jsonify(result), 200
+            else:
+                logging.warning(f"❌ {symbol} satırı bulunamadı.")
+                return jsonify({"error": f"{symbol} bulunamadı"}), 200
         else:
-            msg_text = msg
-
-        text_low = str(msg_text).lower()
-        logging.info(f"📩 Gelen ham mesaj (mobil): {msg_text}")
-
-        def normalize_tr(text: str) -> str:
-            tr_map = str.maketrans("çğıöşü", "cgiosu")
-            return text.lower().translate(tr_map)
-
-        text_norm = normalize_tr(text_low)
-        logging.info(f"✅ Normalize edilmiş komut (mobil): {text_norm}")
-
-        # 📌 Destek/Direnç — sembol listesi (ilk sayfa)
-        if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-            if target_fp:
-                with open(target_fp, "r", encoding="utf-8") as f:
-                    lines = f.readlines()
-                symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
-                return jsonify({"content": "\n".join(symbols)}), 200
-            return jsonify({"content": "❌ Destek/Direnç dosyası bulunamadı."}), 200
-
-        # 📌 Seçilen sembolün destek/direnç satırını döner (ikinci sayfa)
-        if msg_text == "get_destek_direnc_content":
-            try:
-                logging.info(f"📡 JSON payload: {data}")
-                symbol = data.get("symbol", "").strip().upper()
-                logging.info(f"📡 JSON’dan gelen sembol: {symbol}")
-
-                fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-                target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-
-                if target_fp and symbol:
-                    with open(target_fp, "r", encoding="utf-8") as f:
-                        lines = f.readlines()
-
-                    match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
-                    if match:
-                        parts = match[0].strip().split()
-                        logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır).")
-
-                        # 🔹 Tablo başlıklarına göre doğru JSON eşleştirme
-                        result = {
-                            "symbol": parts[0],
-                            "direnc3": parts[1] if len(parts) > 1 else "",
-                            "direnc2": parts[2] if len(parts) > 2 else "",
-                            "pivot": parts[3] if len(parts) > 3 else "",
-                            "destek1": parts[4] if len(parts) > 4 else "",
-                            "destek2": parts[5] if len(parts) > 5 else "",
-                            "destek3": parts[6] if len(parts) > 6 else "",
-                            "son_fiyat": parts[7] if len(parts) > 7 else ""
-                        }
-                        return jsonify(result), 200
-                    else:
-                        logging.warning(f"❌ {symbol} satırı bulunamadı.")
-                        return jsonify({"content": f"❌ {symbol} bulunamadı."}), 200
-                else:
-                    logging.warning("❌ Dosya yok veya sembol boş.")
-                    return jsonify({"content": "❌ Dosya yok veya sembol boş."}), 200
-            except Exception as e:
-                logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
-                return jsonify({"content": f"❌ Hata: {e}"}), 200
-
-        # 📌 Ballı Kaymak
-        if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
-            fp = find_latest_file(BALLI_KAYMAK_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-            return jsonify({"content": "❌ Ballı Kaymak dosyası bulunamadı."}), 200
-
-        # 📌 Tüm Hisseler
-        if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
-            fp = find_latest_file(BISTTUM_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-            return jsonify({"content": "❌ Tüm hisseler dosyası bulunamadı."}), 200
-
-        # 📌 Mobil: Bugün AL
-        if text_norm in ["bugun al", "al_mobil"]:
-            fp = find_latest_file(AL_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-            return jsonify({"content": "❌ Bugün AL listesi bulunamadı."}), 200
-
-        # 📌 Mobil: Bugün SAT
-        if text_norm in ["bugun sat", "sat_mobil"]:
-            fp = find_latest_file(SAT_MOBIL_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-            return jsonify({"content": "❌ Bugün SAT listesi bulunamadı."}), 200
-
-        # 📌 Dünkü Performans
-        if "performans" in text_norm:
-            fp = find_latest_file(PERFORMANS_DIR)
-            if fp:
-                with open(fp, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-            return jsonify({"content": "❌ Performans dosyası bulunamadı."}), 200
-
-        # 📌 Hisse Analiz (sembol dosyaları)
-        for fn in os.listdir(BISTTUM_DIR):
-            fn_name = normalize_tr(fn.lower().replace(".txt", ""))
-            if fn_name == text_norm:
-                fp_symbol = os.path.join(BISTTUM_DIR, fn)
-                with open(fp_symbol, "r", encoding="utf-8") as f:
-                    content = f.read()
-                return jsonify({"content": content}), 200
-
-        # 📌 Fallback
-        return jsonify({"content": f"Mesajını aldım (mobil): {msg_text}"}), 200
-
+            logging.warning("❌ Dosya yok veya sembol boş.")
+            return jsonify({"error": "Dosya yok veya sembol boş"}), 200
     except Exception as e:
-        logging.error(f"/webhook mobil hatası: {e}")
-        return jsonify({"content": "Internal Server Error"}), 500
-
-
+        logging.error(f"❌ Destek/Direnç sembol hatası: {e}")
+        return jsonify({"error": f"Hata: {e}"}), 200
 
 
 
