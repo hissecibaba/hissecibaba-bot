@@ -480,7 +480,16 @@ def get_symbol_file_content_route_v2():
 
 
 
+
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
+
+import os
+import logging
+import json
+from flask import request, jsonify
+
+# ✅ Logging yapılandırması
+logging.basicConfig(level=logging.INFO)
 
 @flask_app.route("/webhook", methods=["POST"])
 def webhook_route_v3_mobil():   # ✅ mobil için doğru route
@@ -516,7 +525,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             return jsonify({"symbols": []}), 200
 
         # 📌 Seçilen sembolün destek/direnç satırını JSON döner (ikinci sayfa)
-        if msg_text == "get_destek_direnc_content":
+        if "get_destek_direnc_content" in text_norm:   # ✅ daha esnek kontrol
             try:
                 logging.info(f"📡 JSON payload: {data}")
                 symbol = data.get("symbol", "").strip().upper()
