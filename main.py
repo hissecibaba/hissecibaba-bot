@@ -481,6 +481,8 @@ def get_symbol_file_content_route_v2():
 
 
 
+
+
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
 
 import os
@@ -543,15 +545,17 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                         parts = match[0].strip().split()
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır): {parts}")
 
+                        # ✅ Dosya sütun sırasına göre düzenlendi
                         result = {
                             "symbol": parts[0],
                             "direnc3": parts[1] if len(parts) > 1 else "",
                             "direnc2": parts[2] if len(parts) > 2 else "",
-                            "pivot": parts[3] if len(parts) > 3 else "",
-                            "destek1": parts[4] if len(parts) > 4 else "",
-                            "destek2": parts[5] if len(parts) > 5 else "",
-                            "destek3": parts[6] if len(parts) > 6 else "",
-                            "son_fiyat": parts[7] if len(parts) > 7 else ""
+                            "direnc1": parts[3] if len(parts) > 3 else "",
+                            "pivot": parts[4] if len(parts) > 4 else "",
+                            "destek1": parts[5] if len(parts) > 5 else "",
+                            "destek2": parts[6] if len(parts) > 6 else "",
+                            "destek3": parts[7] if len(parts) > 7 else "",
+                            "son_fiyat": parts[8] if len(parts) > 8 else ""
                         }
                         logging.info(f"📡 JSON response (mobil): {json.dumps(result, ensure_ascii=False)}")
                         return jsonify(result), 200
@@ -637,7 +641,6 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
-
 
 
 
