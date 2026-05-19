@@ -481,8 +481,6 @@ def get_symbol_file_content_route_v2():
 
 
 
-
-
 # === PARÇA 4B/5 — Bölüm 1 (Komutlar – Mobil) — Düzeltilmiş get_destek_direnc_content ===
 
 import os
@@ -513,21 +511,10 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
         text_norm = normalize_tr(text_low)
         logging.info(f"✅ Normalize edilmiş komut (mobil): {text_norm}")
 
-        # 📌 Destek/Direnç — sembol listesi (ilk sayfa)
-        if "destek" in text_norm or "direnc" in text_norm or "destek_direnc" in text_norm:
-            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
-            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
-            if target_fp:
-                with open(target_fp, "r", encoding="utf-8") as f:
-                    lines = f.readlines()
-                symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
-                logging.info(f"📡 JSON sembol listesi hazırlanıyor: {symbols}")
-                return jsonify({"symbols": symbols}), 200
-            logging.warning("❌ destek_direnc.txt bulunamadı")
-            return jsonify({"symbols": []}), 200
-
+        # =========================
         # 📌 Seçilen sembolün destek/direnç satırını JSON döner (ikinci sayfa)
-        if "get_destek_direnc_content" in text_norm:   # ✅ daha esnek kontrol
+        # =========================
+        if "get_destek_direnc_content" in text_norm:
             try:
                 logging.info(f"📡 JSON payload: {data}")
                 symbol = data.get("symbol", "").strip().upper()
@@ -542,10 +529,10 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
 
                     match = [line for line in lines[1:] if line.split()[0].strip().upper() == symbol]
                     if match:
+                        logging.info(f"RAW SATIR: {match[0]}")
                         parts = match[0].strip().split()
                         logging.info(f"✅ {symbol} için destek/direnç bulundu (tek satır): {parts}")
 
-                        # ✅ Dosya sütun sırasına göre düzenlendi
                         result = {
                             "symbol": parts[0],
                             "direnc3": parts[1] if len(parts) > 1 else "",
@@ -569,6 +556,21 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
                 logging.error(f"❌ get_destek_direnc_content hata: {e}")
                 return jsonify({"error": f"Hata: {e}"}), 200
 
+        # =========================
+        # 📌 Destek/Direnç — sembol listesi (ilk sayfa)
+        # =========================
+        if text_norm in ["destek", "direnc", "destek_direnc"]:
+            fp_fixed = os.path.join(DESTEK_DIRENC_DIR, "destek_direnc.txt")
+            target_fp = fp_fixed if os.path.exists(fp_fixed) else find_latest_file(DESTEK_DIRENC_DIR)
+            if target_fp:
+                with open(target_fp, "r", encoding="utf-8") as f:
+                    lines = f.readlines()
+                symbols = [line.split()[0].strip() for line in lines[1:] if line.strip()]
+                logging.info(f"📡 JSON sembol listesi hazırlanıyor: {symbols}")
+                return jsonify({"symbols": symbols}), 200
+            logging.warning("❌ destek_direnc.txt bulunamadı")
+            return jsonify({"symbols": []}), 200
+
         # 📌 Ballı Kaymak
         if "balli" in text_norm or "kaymak" in text_norm or "balli_kaymak" in text_norm:
             fp = find_latest_file(BALLI_KAYMAK_DIR)
@@ -581,7 +583,7 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
             return jsonify({"content": "❌ Ballı Kaymak dosyası bulunamadı."}), 200
 
         # 📌 Tüm Hisseler
-        if ("tum" in text_norm and "hisse" in text_norm) or text_norm == "tum_hisseler":
+        if text_norm == "tum_hisseler" or ("tum" in text_norm and "hisse" in text_norm):
             fp = find_latest_file(BISTTUM_DIR)
             if fp:
                 with open(fp, "r", encoding="utf-8") as f:
@@ -641,6 +643,8 @@ def webhook_route_v3_mobil():   # ✅ mobil için doğru route
     except Exception as e:
         logging.error(f"/webhook mobil hatası: {e}")
         return jsonify({"content": "Internal Server Error"}), 500
+
+
 
 
 
