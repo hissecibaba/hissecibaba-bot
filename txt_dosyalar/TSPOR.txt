@@ -1,59 +1,59 @@
-# Son Güncelleme: 25.05.2026 19:10:41
+# Son Güncelleme: 26.05.2026 19:50:51
 ===TSPOR===
-Analiz Tarihi: 25.05.2026
+Analiz Tarihi: 26.05.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:0,96
-KAPANIS:0,95
-GUN.F%:0,00
+ACILIS:0,95
+KAPANIS:1,02
+GUN.F%:7,37
 G.DUSUK:0,95
-G.YUKSEK:0,97
-G.HACIM:58.156.739,00
-PGC8:232.000,00
+G.YUKSEK:1,02
+G.HACIM:91.115.852,00
+PGC8:13.652.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:0.95
-UST BANT:1.0379
-ALT BANT:0.8936
-FIYAT/BANT ORANI:39.08
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:1.02
+UST BANT:1.0384
+ALT BANT:0.9052
+FIYAT/BANT ORANI:86.17
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:0.95
-WT1:-20.0
-WT2:-8.84
-WT1-WT2:-11.16
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:1.02
+WT1:-14.4
+WT2:-14.6
+WT1-WT2:0.2
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:0.94
-S4:0.94
-S3:0.92
-S2:0.90
-S1:0.88
-P:0.96
-R1:0.96
-R2:0.98
-R3:0.98
-R4:1.00
-R5:1.02
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:SAT
+S5:0.97
+S4:0.93
+S3:0.90
+S2:0.83
+S1:0.76
+P:1.00
+R1:1.04
+R2:1.07
+R3:1.11
+R4:1.18
+R5:1.25
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):0.97
-0,236:0.97
-0,382:0.96
-0,500:0.96
-0,618:0.96
-0,786:0.95
+0,0(TEPE):1.02
+0,236:1.00
+0,382:0.99
+0,500:0.98
+0,618:0.98
+0,786:0.96
 1,0(DIP):0.95
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:38,194,000.0
-PGC HAFTALIK:17,864,000.0
-PGC GUNLUK:232.000,00
+PGC AYLIK:32,858,000.0
+PGC HAFTALIK:39,793,000.0
+PGC GUNLUK:13.652.000,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/09
