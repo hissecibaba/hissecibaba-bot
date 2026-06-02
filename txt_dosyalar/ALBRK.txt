@@ -1,60 +1,60 @@
-# Son Güncelleme: 01.06.2026 20:14:14
+# Son Güncelleme: 02.06.2026 19:14:06
 ===ALBRK===
-Analiz Tarihi: 01.06.2026
+Analiz Tarihi: 02.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,00
-KAPANIS:7,85
-GUN.F%:-1,13
-G.DUSUK:7,84
-G.YUKSEK:8,10
-G.HACIM:141.796.089,00
-PGC8:-8.129.000,00
+ACILIS:7,93
+KAPANIS:8,28
+GUN.F%:5,48
+G.DUSUK:7,91
+G.YUKSEK:8,31
+G.HACIM:262.107.467,00
+PGC8:10.333.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:7.85
-UST BANT:8.3035
-ALT BANT:7.6235
-FIYAT/BANT ORANI:33.31
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:8.28
+UST BANT:8.3151
+ALT BANT:7.6917
+FIYAT/BANT ORANI:94.36
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:7.85
-WT1:-45.75
-WT2:-44.56
-WT1-WT2:-1.19
+KAPANIS:8.28
+WT1:-40.76
+WT2:-44.0
+WT1-WT2:3.25
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:7.76
-S4:7.67
-S3:7.50
-S2:7.24
-S1:6.98
-P:7.93
-R1:8.02
-R2:8.19
-R3:8.28
-R4:8.54
-R5:8.80
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:SAT
+S5:8.02
+S4:7.77
+S3:7.62
+S2:7.22
+S1:6.82
+P:8.17
+R1:8.42
+R2:8.57
+R3:8.82
+R4:9.22
+R5:9.62
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
-0,0(TEPE):8.10
-0,236:8.04
-0,382:8.00
-0,500:7.97
-0,618:7.94
-0,786:7.90
-1,0(DIP):7.84
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL:AL
+0,0(TEPE):8.31
+0,236:8.22
+0,382:8.16
+0,500:8.11
+0,618:8.06
+0,786:8.00
+1,0(DIP):7.91
+SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-57,769,000.0
-PGC HAFTALIK:-40,827,000.0
-PGC GUNLUK:-8.129.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-47,665,000.0
+PGC HAFTALIK:-26,614,000.0
+PGC GUNLUK:10.333.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=0.52, ROA=0.03, Net Marj=0.0 → Güçlü
