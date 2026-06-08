@@ -1,46 +1,46 @@
-# Son Güncelleme: 07.06.2026 15:08:27
+# Son Güncelleme: 08.06.2026 19:14:02
 ===PAHOL===
-Analiz Tarihi: 05.06.2026
+Analiz Tarihi: 08.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,66
-KAPANIS:1,66
-GUN.F%:0,00
+ACILIS:1,64
+KAPANIS:1,67
+GUN.F%:0,60
 G.DUSUK:1,64
 G.YUKSEK:1,69
-G.HACIM:703.068.032,00
-PGC8:20.568.000,00
+G.HACIM:597.840.117,00
+PGC8:1.472.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:1.66
-UST BANT:1.7173
-ALT BANT:1.6173
-FIYAT/BANT ORANI:42.73
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:1.67
+UST BANT:1.6974
+ALT BANT:1.6423
+FIYAT/BANT ORANI:50.24
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:1.66
-WT1:13.64
-WT2:15.54
-WT1-WT2:-1.9
+KAPANIS:1.67
+WT1:13.16
+WT2:14.58
+WT1-WT2:-1.42
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
+SINYAL:SAT
 S5:1.64
-S4:1.61
+S4:1.62
 S3:1.59
 S2:1.54
 S1:1.49
-P:1.66
+P:1.67
 R1:1.69
-R2:1.71
+R2:1.72
 R3:1.74
 R4:1.79
 R5:1.84
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
+SINYAL:AL
 0,0(TEPE):1.69
 0,236:1.68
 0,382:1.67
@@ -48,13 +48,13 @@ SINYAL:SAT
 0,618:1.66
 0,786:1.65
 1,0(DIP):1.64
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:84,858,000.0
-PGC HAFTALIK:4,718,000.0
-PGC GUNLUK:20.568.000,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+PGC AYLIK:38,762,000.0
+PGC HAFTALIK:-13,212,000.0
+PGC GUNLUK:1.472.000,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.05, ROA=-0.04, Net Marj=-6.98 → Zayıf
