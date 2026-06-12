@@ -1,64 +1,64 @@
-# Son Güncelleme: 11.06.2026 18:46:55
+# Son Güncelleme: 12.06.2026 21:27:59
 ===MEGAP===
-Analiz Tarihi: 11.06.2026
+Analiz Tarihi: 12.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,38
-KAPANIS:2,34
-GUN.F%:-2,09
-G.DUSUK:2,34
-G.YUKSEK:2,38
-G.HACIM:2.665.482,00
-PGC8:-62.000,00
+ACILIS:2,46
+KAPANIS:2,42
+GUN.F%:3,42
+G.DUSUK:2,42
+G.YUKSEK:2,46
+G.HACIM:1.861.596,00
+PGC8:54.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:2.34
-UST BANT:2.4989
-ALT BANT:2.3268
-FIYAT/BANT ORANI:7.66
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:2.42
+UST BANT:2.4870
+ALT BANT:2.3309
+FIYAT/BANT ORANI:57.10
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.34
-WT1:-39.97
-WT2:-29.4
-WT1-WT2:-10.57
+KAPANIS:2.42
+WT1:-36.25
+WT2:-33.47
+WT1-WT2:-2.78
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:2.33
-S4:2.31
-S3:2.29
-S2:2.25
-S1:2.21
-P:2.35
-R1:2.37
-R2:2.39
-R3:2.41
-R4:2.45
-R5:2.49
+S5:2.41
+S4:2.39
+S3:2.37
+S2:2.33
+S1:2.29
+P:2.43
+R1:2.45
+R2:2.47
+R3:2.49
+R4:2.53
+R5:2.57
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):2.38
-0,236:2.37
-0,382:2.36
-0,500:2.36
-0,618:2.36
-0,786:2.35
-1,0(DIP):2.34
+0,0(TEPE):2.46
+0,236:2.45
+0,382:2.44
+0,500:2.44
+0,618:2.44
+0,786:2.43
+1,0(DIP):2.42
 SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-2,933,000.0
-PGC HAFTALIK:55,000.0
-PGC GUNLUK:-62.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-2,619,000.0
+PGC HAFTALIK:96,000.0
+PGC GUNLUK:54.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
-Karlılık 	: ROE=-0.37, ROA=-0.08, Net Marj=-0.08 → Zayıf
-Büyüme		: Net Satış Değ%=-27.75, Net Kar Değ%=-221.22 → Düşük
+Karlılık 	: ROE=-0.37, ROA=-0.08, Net Marj=-0.09 → Zayıf
+Büyüme		: Net Satış Değ%=-27.75, Net Kar Değ%=-233.34 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.99 → Orta risk
 Nakit Durumu	: Cari Oran=1.17 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
