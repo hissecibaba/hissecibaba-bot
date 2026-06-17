@@ -1,59 +1,59 @@
-# Son Güncelleme: 16.06.2026 19:03:06
+# Son Güncelleme: 17.06.2026 19:13:08
 ===SODSN===
-Analiz Tarihi: 16.06.2026
+Analiz Tarihi: 17.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,06
-KAPANIS:8,89
-GUN.F%:-2,20
-G.DUSUK:8,73
-G.YUKSEK:9,06
-G.HACIM:1.000.093,00
-PGC8:-10.000,00
+ACILIS:8,89
+KAPANIS:8,95
+GUN.F%:0,67
+G.DUSUK:8,75
+G.YUKSEK:8,97
+G.HACIM:948.432,00
+PGC8:-19.000,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:8.89
-UST BANT:9.2691
-ALT BANT:8.5574
-FIYAT/BANT ORANI:46.73
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:8.95
+UST BANT:9.2067
+ALT BANT:8.6200
+FIYAT/BANT ORANI:56.25
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:8.89
-WT1:-55.84
-WT2:-60.06
-WT1-WT2:4.22
+KAPANIS:8.95
+WT1:-54.44
+WT2:-57.43
+WT1-WT2:2.98
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:8.73
-S4:8.56
-S3:8.40
-S2:8.07
-S1:7.74
-P:8.89
-R1:9.06
-R2:9.22
-R3:9.39
-R4:9.72
-R5:10.05
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.06
-0,236:8.98
-0,382:8.93
-0,500:8.89
-0,618:8.86
+S5:8.81
+S4:8.67
+S3:8.59
+S2:8.37
+S1:8.15
+P:8.89
+R1:9.03
+R2:9.11
+R3:9.25
+R4:9.47
+R5:9.69
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):8.97
+0,236:8.92
+0,382:8.89
+0,500:8.86
+0,618:8.83
 0,786:8.80
-1,0(DIP):8.73
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+1,0(DIP):8.75
+SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-967,000.0
-PGC HAFTALIK:-79,000.0
-PGC GUNLUK:-10.000,00
+PGC AYLIK:-986,000.0
+PGC HAFTALIK:-73,000.0
+PGC GUNLUK:-19.000,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
