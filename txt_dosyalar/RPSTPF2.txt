@@ -1,42 +1,42 @@
-# Son Güncelleme: 16.06.2026 19:02:37
+# Son Güncelleme: 17.06.2026 19:12:42
 ===RPSTPF2===
-Analiz Tarihi: 16.06.2026
+Analiz Tarihi: 17.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:nan
-KAPANIS:nan
-GUN.F%:0,00
-G.DUSUK:nan
-G.YUKSEK:nan
-G.HACIM:nan
+ACILIS:1.224,00
+KAPANIS:1.386,50
+GUN.F%:10,00
+G.DUSUK:1.224,00
+G.YUKSEK:1.386,50
+G.HACIM:9.955,00
 PGC8:0,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:nan
+KAPANIS:1386.50
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
 TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
-SINYAL:nan
-KAPANIS:-68.72
-WT1:-68.72
-WT2:0.0
-WT1-WT2:Yatay
-KESİSİM YONU:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+SINYAL:1386.5
+KAPANIS:-65.77
+WT1:-67.98
+WT2:2.22
+WT1-WT2:Yükseliş
+KESİSİM YONU:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
-SINYAL:1207.67 1154.83 1049.17 890.67
-S5:732.17
-S4:1313.33 1366.17 1471.83 1524.67 1683.17 1841.67 Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:1278.17 1169.83 1115.67 953.17
+S5:790.67
+S4:1332.33 1440.67 1494.83 1603.17 1765.67 1928.17 Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:1419.00
-0,0(TEPE):1381.59
-0,236:1358.45
-0,382:1339.75
-0,500:1321.05
-0,618:1294.42
-0,786:1260.50
-1,0(DIP):Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL:1386.50
+0,0(TEPE):1348.15
+0,236:1324.42
+0,382:1305.25
+0,500:1286.08
+0,618:1258.78
+0,786:1224.00
+1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
