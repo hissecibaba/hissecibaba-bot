@@ -1,60 +1,60 @@
-# Son Güncelleme: 17.06.2026 19:07:27
+# Son Güncelleme: 18.06.2026 18:41:24
 ===ATLAS===
-Analiz Tarihi: 17.06.2026
+Analiz Tarihi: 18.06.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:7,66
-KAPANIS:7,45
-GUN.F%:-1,97
+ACILIS:7,52
+KAPANIS:7,49
+GUN.F%:0,54
 G.DUSUK:7,43
-G.YUKSEK:7,66
-G.HACIM:6.617.279,00
-PGC8:-296.000,00
+G.YUKSEK:7,55
+G.HACIM:5.493.700,00
+PGC8:272.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:7.45
-UST BANT:7.8215
-ALT BANT:7.3744
-FIYAT/BANT ORANI:16.92
+KAPANIS:7.49
+UST BANT:7.7632
+ALT BANT:7.3597
+FIYAT/BANT ORANI:32.29
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:7.45
-WT1:-48.34
-WT2:-46.92
-WT1-WT2:-1.42
+KAPANIS:7.49
+WT1:-49.31
+WT2:-47.8
+WT1-WT2:-1.51
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:7.37
-S4:7.28
-S3:7.14
-S2:6.91
-S1:6.68
-P:7.51
-R1:7.60
-R2:7.74
-R3:7.83
-R4:8.06
-R5:8.29
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:SAT
+S5:7.43
+S4:7.37
+S3:7.31
+S2:7.19
+S1:7.07
+P:7.49
+R1:7.55
+R2:7.61
+R3:7.67
+R4:7.79
+R5:7.91
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):7.66
-0,236:7.61
-0,382:7.57
-0,500:7.54
-0,618:7.52
-0,786:7.48
+0,0(TEPE):7.55
+0,236:7.52
+0,382:7.50
+0,500:7.49
+0,618:7.48
+0,786:7.46
 1,0(DIP):7.43
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-3,974,000.0
-PGC HAFTALIK:-907,000.0
-PGC GUNLUK:-296.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-3,441,000.0
+PGC HAFTALIK:-811,000.0
+PGC GUNLUK:272.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=0.55, ROA=0.55, Net Marj=0.1 → Güçlü
