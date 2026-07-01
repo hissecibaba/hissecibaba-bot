@@ -1,40 +1,42 @@
-# Son Güncelleme: 30.06.2026 20:29:02
+# Son Güncelleme: 01.07.2026 18:52:25
 ===RPSTPF2===
-Analiz Tarihi: 30.06.2026
+Analiz Tarihi: 01.07.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1.351,00
-KAPANIS:1.349,00
-GUN.F%:-3,81
-G.DUSUK:1.263,50
-G.YUKSEK:1.351,00
-G.HACIM:33.999,00
+ACILIS:1.349,00
+KAPANIS:1.215,50
+GUN.F%:-9,90
+G.DUSUK:1.215,50
+G.YUKSEK:1.349,00
+G.HACIM:31.737,00
 PGC8:0,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:1349.00
+KAPANIS:1215.50
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
 TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
-SINYAL:1349.0
-KAPANIS:-49.82
-WT1:-52.91
-WT2:3.09
-WT1-WT2:Yükseliş
-KESİSİM YONU:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+SINYAL:1215.5
+KAPANIS:-51.03
+WT1:-51.52
+WT2:0.49
+WT1-WT2:Yatay
+KESİSİM YONU:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:1291.33 1233.67 1203.83 1116.33 1028.83 1321.17 1378.83 1408.67 1466.33 1553.83 1641.33 Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:1171.00 1126.50 1037.50 904.00
+S5:770.50
+S4:1260.00 1304.50 1393.50 1438.00 1571.50 1705.00 Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:1351.00
-0,0(TEPE):1330.35
-0,236:1317.58
-0,382:1307.25
-0,500:1296.92
-0,618:1282.22
-0,786:1263.50
-1,0(DIP):Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+SINYAL:1349.00
+0,0(TEPE):1317.49
+0,236:1298.00
+0,382:1282.25
+0,500:1266.50
+0,618:1244.07
+0,786:1215.50
+1,0(DIP):Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
