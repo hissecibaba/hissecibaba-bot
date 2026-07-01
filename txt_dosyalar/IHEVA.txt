@@ -1,60 +1,60 @@
-# Son Güncelleme: 30.06.2026 20:25:53
+# Son Güncelleme: 01.07.2026 18:50:02
 ===IHEVA===
-Analiz Tarihi: 30.06.2026
+Analiz Tarihi: 01.07.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,06
+ACILIS:2,04
 KAPANIS:2,06
-GUN.F%:-0,48
-G.DUSUK:2,03
-G.YUKSEK:2,10
-G.HACIM:2.624.320,00
-PGC8:19.000,00
+GUN.F%:0,00
+G.DUSUK:2,04
+G.YUKSEK:2,07
+G.HACIM:1.154.566,00
+PGC8:-64.000,00
 ===NADARAYA WATSON===
 SINYAL:SAT
 KAPANIS:2.06
-UST BANT:2.1968
-ALT BANT:2.0268
-FIYAT/BANT ORANI:19.55
+UST BANT:2.1990
+ALT BANT:1.9969
+FIYAT/BANT ORANI:31.21
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
 KAPANIS:2.06
-WT1:-32.03
-WT2:-23.56
-WT1-WT2:-8.47
+WT1:-36.56
+WT2:-28.5
+WT1-WT2:-8.06
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:2.03
-S4:1.99
-S3:1.96
-S2:1.89
-S1:1.82
-P:2.06
-R1:2.10
-R2:2.13
-R3:2.17
-R4:2.24
-R5:2.31
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):2.10
-0,236:2.08
-0,382:2.07
-0,500:2.06
-0,618:2.06
-0,786:2.04
-1,0(DIP):2.03
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
-===PARA GİRİŞ ÇIKIŞI===
+S5:2.04
+S4:2.03
+S3:2.01
+S2:1.98
+S1:1.95
+P:2.06
+R1:2.07
+R2:2.09
+R3:2.10
+R4:2.13
+R5:2.16
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
 SINYAL:AL
-PGC AYLIK:-672,000.0
-PGC HAFTALIK:213,000.0
-PGC GUNLUK:19.000,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+0,0(TEPE):2.07
+0,236:2.06
+0,382:2.06
+0,500:2.05
+0,618:2.05
+0,786:2.05
+1,0(DIP):2.04
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+===PARA GİRİŞ ÇIKIŞI===
+SINYAL:SAT
+PGC AYLIK:-519,000.0
+PGC HAFTALIK:69,000.0
+PGC GUNLUK:-64.000,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.08, ROA=-0.06, Net Marj=-0.05 → Zayıf
