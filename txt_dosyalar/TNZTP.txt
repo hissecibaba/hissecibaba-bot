@@ -1,60 +1,60 @@
-# Son Güncelleme: 14.07.2026 19:06:53
+# Son Güncelleme: 16.07.2026 18:50:58
 ===TNZTP===
-Analiz Tarihi: 14.07.2026
+Analiz Tarihi: 16.07.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:22,64
-KAPANIS:23,32
-GUN.F%:3,28
-G.DUSUK:22,58
-G.YUKSEK:24,02
-G.HACIM:44.498.249,00
-PGC8:1.263,00
+ACILIS:23,38
+KAPANIS:23,68
+GUN.F%:1,54
+G.DUSUK:23,38
+G.YUKSEK:23,88
+G.HACIM:19.074.618,00
+PGC8:-230,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:23.32
-UST BANT:24.2897
-ALT BANT:22.4166
-FIYAT/BANT ORANI:48.23
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:23.68
+UST BANT:24.1327
+ALT BANT:22.5709
+FIYAT/BANT ORANI:71.01
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:23.32
-WT1:-42.8
-WT2:-39.83
-WT1-WT2:-2.97
+KAPANIS:23.68
+WT1:-40.69
+WT2:-41.2
+WT1-WT2:0.51
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:22.59
-S4:21.87
-S3:21.15
-S2:19.71
-S1:18.27
-P:23.31
-R1:24.03
-R2:24.75
-R3:25.47
-R4:26.91
-R5:28.35
+S5:23.41
+S4:23.15
+S3:22.91
+S2:22.41
+S1:21.91
+P:23.65
+R1:23.91
+R2:24.15
+R3:24.41
+R4:24.91
+R5:25.41
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):24.02
-0,236:23.68
-0,382:23.47
-0,500:23.30
-0,618:23.13
-0,786:22.89
-1,0(DIP):22.58
+0,0(TEPE):23.88
+0,236:23.76
+0,382:23.69
+0,500:23.63
+0,618:23.57
+0,786:23.49
+1,0(DIP):23.38
 SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-5,997,213.0
-PGC HAFTALIK:579,787.0
-PGC GUNLUK:1.263,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-6,701,443.0
+PGC HAFTALIK:-2,267,443.0
+PGC GUNLUK:-230,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=0.03, ROA=0.03, Net Marj=0.08 → Zayıf
@@ -62,6 +62,6 @@ Büyüme		: Net Satış Değ%=2.97, Net Kar Değ%=-17.7 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.4 → Düşük risk
 Nakit Durumu	: Cari Oran=2.37 → Borç oranı uygun
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
-Ucuz mu?	: PEG=-0.70 → Belirsiz
+Ucuz mu?	: PEG=-0.71 → Belirsiz
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-0.70 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç oranı uygun, PEG=-0.71 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
