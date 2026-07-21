@@ -1,46 +1,46 @@
-# Son Güncelleme: 20.07.2026 19:56:37
+# Son Güncelleme: 21.07.2026 18:41:58
 ===CANTE===
-Analiz Tarihi: 20.07.2026
+Analiz Tarihi: 21.07.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,28
-KAPANIS:1,29
-GUN.F%:0,78
+ACILIS:1,29
+KAPANIS:1,27
+GUN.F%:-1,55
 G.DUSUK:1,27
 G.YUKSEK:1,30
-G.HACIM:239.904.393,00
-PGC8:91,00
+G.HACIM:207.251.709,00
+PGC8:-3.007,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:1.29
-UST BANT:1.3096
-ALT BANT:1.2565
-FIYAT/BANT ORANI:63.00
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:1.27
+UST BANT:1.3034
+ALT BANT:1.2611
+FIYAT/BANT ORANI:20.93
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.29
-WT1:-51.33
-WT2:-55.84
-WT1-WT2:4.51
+KAPANIS:1.27
+WT1:-49.9
+WT2:-52.81
+WT1-WT2:2.91
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:1.27
-S4:1.26
-S3:1.24
-S2:1.21
-S1:1.18
-P:1.29
-R1:1.30
-R2:1.32
-R3:1.33
-R4:1.36
-R5:1.39
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
+S5:1.26
+S4:1.25
+S3:1.23
+S2:1.20
+S1:1.17
+P:1.28
+R1:1.29
+R2:1.31
+R3:1.32
+R4:1.35
+R5:1.38
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
 0,0(TEPE):1.30
 0,236:1.29
 0,382:1.29
@@ -48,13 +48,13 @@ SINYAL:AL
 0,618:1.28
 0,786:1.28
 1,0(DIP):1.27
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-129,977,481.0
-PGC HAFTALIK:3,325,519.0
-PGC GUNLUK:91,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-127,580,488.0
+PGC HAFTALIK:12,512.0
+PGC GUNLUK:-3.007,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.13, ROA=-0.12, Net Marj=-0.56 → Zayıf
