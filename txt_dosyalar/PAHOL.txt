@@ -1,46 +1,46 @@
-# Son Güncelleme: 21.07.2026 18:46:15
+# Son Güncelleme: 22.07.2026 19:24:02
 ===PAHOL===
-Analiz Tarihi: 21.07.2026
+Analiz Tarihi: 22.07.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,43
-KAPANIS:1,42
-GUN.F%:0,00
+KAPANIS:1,44
+GUN.F%:1,41
 G.DUSUK:1,42
 G.YUKSEK:1,45
-G.HACIM:247.654.857,00
-PGC8:3.441,00
+G.HACIM:220.451.400,00
+PGC8:13.754,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:1.42
-UST BANT:1.4357
-ALT BANT:1.4086
-FIYAT/BANT ORANI:42.03
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:1.44
+UST BANT:1.4428
+ALT BANT:1.4078
+FIYAT/BANT ORANI:92.11
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
-SINYAL:AL
-KAPANIS:1.42
-WT1:-53.77
-WT2:-56.39
-WT1-WT2:2.62
+SINYAL:TUT
+KAPANIS:1.44
+WT1:-49.83
+WT2:-54.48
+WT1-WT2:4.64
 KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.41
-S4:1.40
-S3:1.38
-S2:1.35
-S1:1.32
-P:1.43
-R1:1.44
-R2:1.46
-R3:1.47
-R4:1.50
-R5:1.53
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
+S5:1.42
+S4:1.41
+S3:1.39
+S2:1.36
+S1:1.33
+P:1.44
+R1:1.45
+R2:1.47
+R3:1.48
+R4:1.51
+R5:1.54
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
 0,0(TEPE):1.45
 0,236:1.44
 0,382:1.44
@@ -48,12 +48,12 @@ SINYAL:SAT
 0,618:1.43
 0,786:1.43
 1,0(DIP):1.42
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-231,532,556.0
-PGC HAFTALIK:6,444.0
-PGC GUNLUK:3.441,00
+PGC AYLIK:-221,048,802.0
+PGC HAFTALIK:12,938.0
+PGC GUNLUK:13.754,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
