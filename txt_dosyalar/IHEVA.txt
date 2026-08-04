@@ -1,60 +1,60 @@
-# Son Güncelleme: 03.08.2026 20:27:20
+# Son Güncelleme: 04.08.2026 18:50:49
 ===IHEVA===
-Analiz Tarihi: 03.08.2026
+Analiz Tarihi: 04.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,93
-KAPANIS:1,94
+ACILIS:1,94
+KAPANIS:1,95
 GUN.F%:0,52
-G.DUSUK:1,91
-G.YUKSEK:1,96
-G.HACIM:1.495.042,00
-PGC8:1,00
+G.DUSUK:1,93
+G.YUKSEK:1,95
+G.HACIM:415.204,00
+PGC8:-40,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:1.94
-UST BANT:2.0314
-ALT BANT:1.9042
-FIYAT/BANT ORANI:28.17
+KAPANIS:1.95
+UST BANT:2.0177
+ALT BANT:1.9027
+FIYAT/BANT ORANI:41.14
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.94
-WT1:-69.34
-WT2:-64.88
-WT1-WT2:-4.45
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:1.95
+WT1:-69.05
+WT2:-67.29
+WT1-WT2:-1.76
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:1.91
-S4:1.89
-S3:1.86
-S2:1.81
-S1:1.76
+S5:1.94
+S4:1.92
+S3:1.92
+S2:1.90
+S1:1.88
 P:1.94
 R1:1.96
-R2:1.99
-R3:2.01
-R4:2.06
-R5:2.11
+R2:1.96
+R3:1.98
+R4:2.00
+R5:2.02
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):1.96
+SINYAL:SAT
+0,0(TEPE):1.95
 0,236:1.95
 0,382:1.94
 0,500:1.94
-0,618:1.93
-0,786:1.92
-1,0(DIP):1.91
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+0,618:1.94
+0,786:1.93
+1,0(DIP):1.93
+SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:209,342.0
-PGC HAFTALIK:279.0
-PGC GUNLUK:1,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:129,302.0
+PGC HAFTALIK:177.0
+PGC GUNLUK:-40,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.08, ROA=-0.06, Net Marj=-0.05 → Zayıf
