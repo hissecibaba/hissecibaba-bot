@@ -1,17 +1,17 @@
-# Son Güncelleme: 03.08.2026 20:27:31
+# Son Güncelleme: 04.08.2026 18:51:01
 ===ISBTR===
-Analiz Tarihi: 03.08.2026
+Analiz Tarihi: 04.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:nan
-KAPANIS:nan
-GUN.F%:0,00
-G.DUSUK:nan
-G.YUKSEK:nan
-G.HACIM:nan
+ACILIS:475.002,50
+KAPANIS:492.375,00
+GUN.F%:5,01
+G.DUSUK:475.002,50
+G.YUKSEK:495.102,50
+G.HACIM:2.443.635,00
 PGC8:0,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:nan
+KAPANIS:492375.00
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -19,17 +19,18 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:nan
-WT1:-16.24
-WT2:-12.19
-WT1-WT2:-4.05
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:492375.0
+WT1:-14.97
+WT2:-14.72
+WT1-WT2:-0.26
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:468897.50468897.50468897.50468897.50468897.50468897.50468897.50468897.50468897.50468897.50468897.50Pivot analizi tutarlı bir sonuç vermemektedir.
+SINYAL:SAT
+S5:479884.17467393.33459784.17439684.17419584.17487493.33499984.17507593.33520084.17540184.17560284.17Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:TUT
-0,0(TEPE):468897.50 468897.50 468897.50 468897.50 468897.50 468897.50 468897.50 Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
+SINYAL:AL
+0,0(TEPE):495102.50 490358.90 487424.30 485052.50 482680.70 479303.90 475002.50 Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:630,000.0
@@ -43,6 +44,6 @@ Büyüme		: Net Satış Değ%=0.0, Net Kar Değ%=-26.81 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.0 → Düşük risk
 Nakit Durumu	: Cari Oran=0.0 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı yüksek
-Ucuz mu?	: PEG=-6502.56 → Belirsiz
+Ucuz mu?	: PEG=-6828.14 → Belirsiz
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=-6502.56 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
+Temel Veri Özeti: Karlılık zayıf, Büyüme düşük, Borçluluk düşük riskli, Nakit Durumu borç durumu riskli, PEG=-6828.14 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı yüksek.
