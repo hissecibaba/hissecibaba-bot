@@ -1,64 +1,64 @@
-# Son Güncelleme: 04.08.2026 18:47:44
+# Son Güncelleme: 05.08.2026 18:45:51
 ===ARCLK===
-Analiz Tarihi: 04.08.2026
+Analiz Tarihi: 05.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:96,10
-KAPANIS:97,45
-GUN.F%:1,09
-G.DUSUK:96,10
-G.YUKSEK:97,75
-G.HACIM:83.834.086,00
-PGC8:2.550,00
+ACILIS:97,10
+KAPANIS:98,10
+GUN.F%:0,67
+G.DUSUK:96,55
+G.YUKSEK:98,10
+G.HACIM:91.478.150,00
+PGC8:3.865,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:97.45
-UST BANT:98.9774
-ALT BANT:95.8823
-FIYAT/BANT ORANI:50.65
+SINYAL:AL
+KAPANIS:98.10
+UST BANT:98.7754
+ALT BANT:96.1504
+FIYAT/BANT ORANI:74.27
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:97.45
-WT1:-43.89
-WT2:-35.84
-WT1-WT2:-8.05
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:98.1
+WT1:-42.96
+WT2:-40.3
+WT1-WT2:-2.66
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:96.45
-S4:95.45
-S3:94.80
-S2:93.15
-S1:91.50
-P:97.10
-R1:98.10
-R2:98.75
-R3:99.75
-R4:101.40
-R5:103.05
+S5:97.07
+S4:96.03
+S3:95.52
+S2:93.97
+S1:92.42
+P:97.58
+R1:98.62
+R2:99.13
+R3:100.17
+R4:101.72
+R5:103.27
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):97.75
-0,236:97.36
-0,382:97.12
-0,500:96.92
-0,618:96.73
-0,786:96.45
-1,0(DIP):96.10
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+SINYAL:SAT
+0,0(TEPE):98.10
+0,236:97.73
+0,382:97.51
+0,500:97.32
+0,618:97.14
+0,786:96.88
+1,0(DIP):96.55
+SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-33,616,152.0
-PGC HAFTALIK:3,083.0
-PGC GUNLUK:2.550,00
+PGC AYLIK:-23,194,287.0
+PGC HAFTALIK:6,983.0
+PGC GUNLUK:3.865,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.04, ROA=0.01, Net Marj=0.01 → Zayıf
-Büyüme		: Net Satış Değ%=18.43, Net Kar Değ%=136.65 → Çok yüksek
+Büyüme		: Net Satış Değ%=-10.35, Net Kar Değ%=127.74 → Çok yüksek
 Borçluluk	: KV.Borç/Top.Borç=0.73 → Orta risk
 Nakit Durumu	: Cari Oran=1.0 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
