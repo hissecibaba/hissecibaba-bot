@@ -1,52 +1,51 @@
-# Son Güncelleme: 05.08.2026 18:50:32
+# Son Güncelleme: 06.08.2026 18:51:05
 ===OPTLRF===
-Analiz Tarihi: 05.08.2026
+Analiz Tarihi: 06.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:62,32
-KAPANIS:62,30
-GUN.F%:0,06
-G.DUSUK:62,30
-G.YUKSEK:62,32
-G.HACIM:4.722.960,00
+ACILIS:62,50
+KAPANIS:62,52
+GUN.F%:0,35
+G.DUSUK:62,50
+G.YUKSEK:62,52
+G.HACIM:7.764.126,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:62.30
-UST BANT:62.4942
-ALT BANT:61.7642
-FIYAT/BANT ORANI:73.40
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:0.0000
+KAPANIS:BELİRSİZ
+UST BANT:0.0000
+ALT BANT:0.00
+FIYAT/BANT ORANI:Yatay
+TREND YONU:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:62.3
-WT1:65.87
-WT2:66.65
-WT1-WT2:-0.77
+KAPANIS:62.52
+WT1:66.61
+WT2:66.51
+WT1-WT2:0.1
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:62.29
-S5:62.29
-S4:62.27
-S3:62.25
-S2:62.23
-S1:62.31
-P:62.31
-R1:62.33
-R2:62.33
-R3:62.35
-R4:62.37
-R5:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL:62.51
+S5:62.49
+S4:62.49
+S3:62.47
+S2:62.45
+S1:62.51
+P:62.53
+R1:62.53
+R2:62.55
+R3:62.57
+R4:62.59
+R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:62.32
-0,0(TEPE):62.32
-0,236:62.31
-0,382:62.31
-0,500:62.31
-0,618:62.30
-0,786:62.30
-1,0(DIP):Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL:62.52
+0,0(TEPE):62.52
+0,236:62.51
+0,382:62.51
+0,500:62.51
+0,618:62.50
+0,786:62.50
+1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
