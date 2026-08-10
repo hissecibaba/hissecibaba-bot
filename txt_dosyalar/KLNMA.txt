@@ -1,60 +1,60 @@
-# Son Güncelleme: 07.08.2026 19:17:22
+# Son Güncelleme: 10.08.2026 18:44:43
 ===KLNMA===
-Analiz Tarihi: 07.08.2026
+Analiz Tarihi: 10.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,92
-KAPANIS:9,00
-GUN.F%:1,01
+ACILIS:9,10
+KAPANIS:8,92
+GUN.F%:-0,89
 G.DUSUK:8,92
-G.YUKSEK:9,14
-G.HACIM:1.473.428,00
-PGC8:-2,00
+G.YUKSEK:9,10
+G.HACIM:1.118.967,00
+PGC8:24,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:9.00
-UST BANT:9.0629
-ALT BANT:8.8086
-FIYAT/BANT ORANI:75.27
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:8.92
+UST BANT:9.0399
+ALT BANT:8.8199
+FIYAT/BANT ORANI:45.48
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:9.0
-WT1:-28.89
-WT2:-29.85
-WT1-WT2:0.97
+KAPANIS:8.92
+WT1:-27.67
+WT2:-29.74
+WT1-WT2:2.07
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:8.90
+S5:8.86
 S4:8.80
 S3:8.68
-S2:8.46
-S1:8.24
-P:9.02
-R1:9.12
-R2:9.24
-R3:9.34
-R4:9.56
-R5:9.78
+S2:8.50
+S1:8.32
+P:8.98
+R1:9.04
+R2:9.16
+R3:9.22
+R4:9.40
+R5:9.58
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.14
-0,236:9.09
-0,382:9.06
-0,500:9.03
-0,618:9.00
-0,786:8.97
+0,0(TEPE):9.10
+0,236:9.06
+0,382:9.03
+0,500:9.01
+0,618:8.99
+0,786:8.96
 1,0(DIP):8.92
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:960,804.0
-PGC HAFTALIK:2.0
-PGC GUNLUK:-2,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:955,828.0
+PGC HAFTALIK:22.0
+PGC GUNLUK:24,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.27, ROA=0.05, Net Marj=0.0 → Güçlü
