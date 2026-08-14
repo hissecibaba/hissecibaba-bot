@@ -1,60 +1,60 @@
-# Son Güncelleme: 13.08.2026 19:11:36
+# Son Güncelleme: 14.08.2026 18:52:55
 ===EKOS===
-Analiz Tarihi: 13.08.2026
+Analiz Tarihi: 14.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,40
+ACILIS:5,55
 KAPANIS:5,50
-GUN.F%:1,66
-G.DUSUK:5,36
-G.YUKSEK:5,51
-G.HACIM:44.388.462,00
-PGC8:-445,00
+GUN.F%:0,00
+G.DUSUK:5,45
+G.YUKSEK:5,56
+G.HACIM:37.415.385,00
+PGC8:718,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
+SINYAL:AL
 KAPANIS:5.50
-UST BANT:5.5292
-ALT BANT:5.3392
-FIYAT/BANT ORANI:84.65
+UST BANT:5.5376
+ALT BANT:5.3526
+FIYAT/BANT ORANI:79.66
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
 KAPANIS:5.5
-WT1:-50.14
-WT2:-53.49
-WT1-WT2:3.35
+WT1:-45.07
+WT2:-51.03
+WT1-WT2:5.96
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:5.40
-S4:5.31
-S3:5.25
-S2:5.10
-S1:4.95
-P:5.46
-R1:5.55
-R2:5.61
-R3:5.70
-R4:5.85
-R5:6.00
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):5.51
-0,236:5.47
-0,382:5.45
-0,500:5.44
-0,618:5.42
-0,786:5.39
-1,0(DIP):5.36
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
-===PARA GİRİŞ ÇIKIŞI===
+S5:5.45
+S4:5.39
+S3:5.34
+S2:5.23
+S1:5.12
+P:5.50
+R1:5.56
+R2:5.61
+R3:5.67
+R4:5.78
+R5:5.89
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
 SINYAL:SAT
-PGC AYLIK:1,378,482.0
-PGC HAFTALIK:-520.0
-PGC GUNLUK:-445,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+0,0(TEPE):5.56
+0,236:5.53
+0,382:5.52
+0,500:5.50
+0,618:5.49
+0,786:5.47
+1,0(DIP):5.45
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+===PARA GİRİŞ ÇIKIŞI===
+SINYAL:AL
+PGC AYLIK:1,514,200.0
+PGC HAFTALIK:271.0
+PGC GUNLUK:718,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.16, ROA=-0.1, Net Marj=-0.33 → Zayıf
