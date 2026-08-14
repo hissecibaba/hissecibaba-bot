@@ -1,59 +1,59 @@
-# Son Güncelleme: 13.08.2026 19:11:06
+# Son Güncelleme: 14.08.2026 18:52:23
 ===DARDL===
-Analiz Tarihi: 13.08.2026
+Analiz Tarihi: 14.08.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,67
-KAPANIS:1,66
-GUN.F%:-0,60
-G.DUSUK:1,66
-G.YUKSEK:1,70
-G.HACIM:16.752.663,00
-PGC8:168,00
+KAPANIS:1,71
+GUN.F%:3,01
+G.DUSUK:1,67
+G.YUKSEK:1,74
+G.HACIM:39.075.605,00
+PGC8:407,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:1.66
-UST BANT:1.6779
-ALT BANT:1.6379
-FIYAT/BANT ORANI:55.22
+SINYAL:TUT
+KAPANIS:1.71
+UST BANT:1.7030
+ALT BANT:1.6343
+FIYAT/BANT ORANI:110.25
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.66
-WT1:-54.95
-WT2:-59.92
-WT1-WT2:4.97
+KAPANIS:1.71
+WT1:-47.54
+WT2:-55.84
+WT1-WT2:8.3
 KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
+SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.65
-S4:1.63
-S3:1.61
-S2:1.57
-S1:1.53
-P:1.67
-R1:1.69
-R2:1.71
-R3:1.73
-R4:1.77
-R5:1.81
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.70
-0,236:1.69
-0,382:1.68
-0,500:1.68
-0,618:1.68
-0,786:1.67
-1,0(DIP):1.66
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+S5:1.67
+S4:1.64
+S3:1.60
+S2:1.53
+S1:1.46
+P:1.71
+R1:1.74
+R2:1.78
+R3:1.81
+R4:1.88
+R5:1.95
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):1.74
+0,236:1.72
+0,382:1.71
+0,500:1.71
+0,618:1.70
+0,786:1.68
+1,0(DIP):1.67
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-89,811.0
-PGC HAFTALIK:1,928.0
-PGC GUNLUK:168,00
+PGC AYLIK:-848,404.0
+PGC HAFTALIK:3,153.0
+PGC GUNLUK:407,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
