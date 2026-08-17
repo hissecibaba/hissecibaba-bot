@@ -1,60 +1,60 @@
-# Son Güncelleme: 14.08.2026 18:56:37
+# Son Güncelleme: 17.08.2026 19:00:51
 ===SEGYO===
-Analiz Tarihi: 14.08.2026
+Analiz Tarihi: 17.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,83
-KAPANIS:3,93
-GUN.F%:2,61
-G.DUSUK:3,83
-G.YUKSEK:3,94
-G.HACIM:8.613.771,00
-PGC8:194,00
+ACILIS:3,93
+KAPANIS:3,84
+GUN.F%:-2,29
+G.DUSUK:3,84
+G.YUKSEK:3,93
+G.HACIM:8.483.371,00
+PGC8:-257,00
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:3.93
-UST BANT:3.9909
-ALT BANT:3.7827
-FIYAT/BANT ORANI:70.76
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:3.84
+UST BANT:3.9739
+ALT BANT:3.7739
+FIYAT/BANT ORANI:33.03
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:3.93
-WT1:-57.09
-WT2:-60.17
-WT1-WT2:3.08
+KAPANIS:3.84
+WT1:-55.02
+WT2:-58.53
+WT1-WT2:3.51
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi. Dipten güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:3.86
-S4:3.79
-S3:3.75
-S2:3.64
-S1:3.53
-P:3.90
-R1:3.97
-R2:4.01
-R3:4.08
-R4:4.19
-R5:4.30
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):3.94
+S5:3.81
+S4:3.78
+S3:3.72
+S2:3.63
+S1:3.54
+P:3.87
+R1:3.90
+R2:3.96
+R3:3.99
+R4:4.08
+R5:4.17
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):3.93
 0,236:3.91
 0,382:3.90
 0,500:3.88
 0,618:3.87
-0,786:3.85
-1,0(DIP):3.83
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+0,786:3.86
+1,0(DIP):3.84
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-2,955,319.0
-PGC HAFTALIK:332.0
-PGC GUNLUK:194,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-2,570,576.0
+PGC HAFTALIK:-104.0
+PGC GUNLUK:-257,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.18, ROA=-0.16, Net Marj=-3.94 → Zayıf
