@@ -1,59 +1,59 @@
-# Son Güncelleme: 17.08.2026 19:00:01
+# Son Güncelleme: 18.08.2026 20:13:59
 ===PENGD===
-Analiz Tarihi: 17.08.2026
+Analiz Tarihi: 18.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,62
-KAPANIS:9,59
-GUN.F%:0,10
-G.DUSUK:9,53
-G.YUKSEK:9,66
-G.HACIM:18.032.176,00
-PGC8:-110,00
+ACILIS:9,59
+KAPANIS:9,49
+GUN.F%:-1,04
+G.DUSUK:9,37
+G.YUKSEK:9,59
+G.HACIM:11.345.432,00
+PGC8:-152,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:9.59
-UST BANT:9.6224
-ALT BANT:9.4324
-FIYAT/BANT ORANI:82.93
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:9.49
+UST BANT:9.6131
+ALT BANT:9.4381
+FIYAT/BANT ORANI:29.65
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:9.59
-WT1:-49.17
-WT2:-54.35
-WT1-WT2:5.18
+KAPANIS:9.49
+WT1:-49.07
+WT2:-51.9
+WT1-WT2:2.83
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:9.53
-S4:9.46
-S3:9.40
-S2:9.27
-S1:9.14
-P:9.59
-R1:9.66
-R2:9.72
-R3:9.79
-R4:9.92
-R5:10.05
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.66
-0,236:9.63
-0,382:9.61
-0,500:9.59
-0,618:9.58
-0,786:9.56
-1,0(DIP):9.53
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+S5:9.38
+S4:9.26
+S3:9.16
+S2:8.94
+S1:8.72
+P:9.48
+R1:9.60
+R2:9.70
+R3:9.82
+R4:10.04
+R5:10.26
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):9.59
+0,236:9.54
+0,382:9.51
+0,500:9.48
+0,618:9.45
+0,786:9.42
+1,0(DIP):9.37
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:210,008.0
-PGC HAFTALIK:1,571.0
-PGC GUNLUK:-110,00
+PGC AYLIK:980,856.0
+PGC HAFTALIK:1,219.0
+PGC GUNLUK:-152,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
