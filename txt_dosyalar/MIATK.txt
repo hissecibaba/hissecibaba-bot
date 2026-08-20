@@ -1,66 +1,66 @@
-# Son Güncelleme: 19.08.2026 19:37:25
+# Son Güncelleme: 20.08.2026 18:50:06
 ===MIATK===
-Analiz Tarihi: 19.08.2026
+Analiz Tarihi: 20.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:31,10
-KAPANIS:31,00
-GUN.F%:-0,32
-G.DUSUK:29,56
-G.YUKSEK:31,74
-G.HACIM:390.878.995,00
-PGC8:7.165,00
+ACILIS:30,50
+KAPANIS:30,40
+GUN.F%:-1,94
+G.DUSUK:30,22
+G.YUKSEK:31,18
+G.HACIM:355.448.856,00
+PGC8:-2,58
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:31.00
-UST BANT:33.0992
-ALT BANT:29.5750
-FIYAT/BANT ORANI:40.43
+KAPANIS:30.40
+UST BANT:32.8901
+ALT BANT:29.5167
+FIYAT/BANT ORANI:26.18
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:31.0
-WT1:-18.16
-WT2:-21.21
-WT1-WT2:3.05
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:30.4
+WT1:-20.31
+WT2:-18.81
+WT1-WT2:-1.5
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:29.79
-S4:28.59
-S3:27.61
-S2:25.43
-S1:23.25
-P:30.77
-R1:31.97
-R2:32.95
-R3:34.15
-R4:36.33
-R5:38.51
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:30.02
+S4:29.64
+S3:29.06
+S2:28.10
+S1:27.14
+P:30.60
+R1:30.98
+R2:31.56
+R3:31.94
+R4:32.90
+R5:33.86
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):31.74
-0,236:31.23
-0,382:30.91
-0,500:30.65
-0,618:30.39
-0,786:30.03
-1,0(DIP):29.56
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+SINYAL:SAT
+0,0(TEPE):31.18
+0,236:30.95
+0,382:30.81
+0,500:30.70
+0,618:30.59
+0,786:30.43
+1,0(DIP):30.22
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-13,571,684.0
-PGC HAFTALIK:43,433.0
-PGC GUNLUK:7.165,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:10,058,313.42
+PGC HAFTALIK:42,758.42
+PGC GUNLUK:-2,58
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
-Dönem		: 26/03
-Karlılık 	: ROE=-0.15, ROA=-0.11, Net Marj=-0.55 → Zayıf
-Büyüme		: Net Satış Değ%=-40.04, Net Kar Değ%=-657.36 → Düşük
+Dönem		: 26/06
+Karlılık 	: ROE=-0.12, ROA=-0.09, Net Marj=-0.41 → Zayıf
+Büyüme		: Net Satış Değ%=-38.4, Net Kar Değ%=-164.41 → Düşük
 Borçluluk	: KV.Borç/Top.Borç=0.87 → Orta risk
-Nakit Durumu	: Cari Oran=1.54 → Borç durumu riskli
+Nakit Durumu	: Cari Oran=1.43 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
 Ucuz mu?	: PEG=-0.00 → Belirsiz
 Karar   	: Uzak dur.
