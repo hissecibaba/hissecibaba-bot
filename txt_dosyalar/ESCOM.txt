@@ -1,60 +1,60 @@
-# Son Güncelleme: 19.08.2026 19:34:49
+# Son Güncelleme: 20.08.2026 18:47:01
 ===ESCOM===
-Analiz Tarihi: 19.08.2026
+Analiz Tarihi: 20.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,89
-KAPANIS:5,86
-GUN.F%:-0,17
-G.DUSUK:5,81
-G.YUKSEK:5,92
-G.HACIM:113.001.426,00
-PGC8:-10,00
+ACILIS:5,86
+KAPANIS:5,84
+GUN.F%:-0,34
+G.DUSUK:5,73
+G.YUKSEK:5,91
+G.HACIM:162.462.926,00
+PGC8:2,77
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:5.86
-UST BANT:6.2345
-ALT BANT:5.6545
-FIYAT/BANT ORANI:35.43
+KAPANIS:5.84
+UST BANT:6.1692
+ALT BANT:5.6992
+FIYAT/BANT ORANI:29.96
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:5.86
-WT1:23.98
-WT2:24.14
-WT1-WT2:-0.15
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:5.84
+WT1:19.99
+WT2:24.21
+WT1-WT2:-4.21
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:5.81
-S4:5.75
-S3:5.70
-S2:5.59
-S1:5.48
-P:5.86
+SINYAL:SAT
+S5:5.74
+S4:5.65
+S3:5.56
+S2:5.38
+S1:5.20
+P:5.83
 R1:5.92
-R2:5.97
-R3:6.03
-R4:6.14
-R5:6.25
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+R2:6.01
+R3:6.10
+R4:6.28
+R5:6.46
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
-0,0(TEPE):5.92
-0,236:5.89
-0,382:5.88
-0,500:5.87
-0,618:5.85
-0,786:5.83
-1,0(DIP):5.81
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+SINYAL:AL
+0,0(TEPE):5.91
+0,236:5.87
+0,382:5.84
+0,500:5.82
+0,618:5.80
+0,786:5.77
+1,0(DIP):5.73
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:19,365,199.0
-PGC HAFTALIK:-8,724.0
-PGC GUNLUK:-10,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-3,679,798.23
+PGC HAFTALIK:-8,330.23
+PGC GUNLUK:2,77
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.16, ROA=0.16, Net Marj=0.37 → Güçlü
