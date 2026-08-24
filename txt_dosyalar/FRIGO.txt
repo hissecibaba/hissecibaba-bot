@@ -1,32 +1,32 @@
-# Son Güncelleme: 21.08.2026 19:02:03
+# Son Güncelleme: 24.08.2026 19:27:40
 ===FRIGO===
-Analiz Tarihi: 21.08.2026
+Analiz Tarihi: 24.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,32
-KAPANIS:2,30
-GUN.F%:0,44
-G.DUSUK:2,28
-G.YUKSEK:2,32
-G.HACIM:42.429.499,00
-PGC8:-1,15
+ACILIS:2,30
+KAPANIS:2,31
+GUN.F%:0,43
+G.DUSUK:2,27
+G.YUKSEK:2,31
+G.HACIM:40.698.136,00
+PGC8:-795,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:2.30
-UST BANT:2.3409
-ALT BANT:2.2659
-FIYAT/BANT ORANI:45.46
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:2.31
+UST BANT:2.3300
+ALT BANT:2.2750
+FIYAT/BANT ORANI:63.67
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:2.3
-WT1:22.91
-WT2:26.65
-WT1-WT2:-3.74
+KAPANIS:2.31
+WT1:19.76
+WT2:24.02
+WT1-WT2:-4.26
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
+SINYAL:SAT
 S5:2.28
 S4:2.26
 S3:2.24
@@ -38,23 +38,21 @@ R2:2.34
 R3:2.36
 R4:2.40
 R5:2.44
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):2.32
-0,236:2.31
-0,382:2.30
-0,500:2.30
-0,618:2.30
-0,786:2.29
-1,0(DIP):2.28
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+0,0(TEPE):2.31
+0,236:2.30
+0,382:2.29
+0,500:2.29
+0,618:2.29
+0,786:2.28
+1,0(DIP):2.27
+SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-1,484.22
-PGC HAFTALIK:-274.22
-PGC GUNLUK:-1,15
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+PGC AYLIK:-2,565.22000000000032,942.7799999999997-795,00
+PGC HAFTALIK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.2, ROA=-0.11, Net Marj=-0.19 → Zayıf
