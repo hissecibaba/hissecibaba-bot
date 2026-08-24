@@ -1,42 +1,42 @@
-# Son Güncelleme: 21.08.2026 19:05:38
+# Son Güncelleme: 24.08.2026 19:31:38
 ===RTALB===
-Analiz Tarihi: 21.08.2026
+Analiz Tarihi: 24.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,95
-KAPANIS:2,96
-GUN.F%:0,68
-G.DUSUK:2,93
+ACILIS:2,98
+KAPANIS:2,92
+GUN.F%:-1,35
+G.DUSUK:2,92
 G.YUKSEK:3,00
-G.HACIM:58.516.829,00
-PGC8:338,00
+G.HACIM:48.412.233,00
+PGC8:-2,47
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:2.96
-UST BANT:2.9925
-ALT BANT:2.9075
-FIYAT/BANT ORANI:61.77
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:2.92
+UST BANT:2.9818
+ALT BANT:2.9106
+FIYAT/BANT ORANI:13.23
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.96
-WT1:-40.26
-WT2:-44.95
-WT1-WT2:4.69
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:2.92
+WT1:-40.01
+WT2:-42.32
+WT1-WT2:2.3
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:2.93
-S4:2.89
-S3:2.86
-S2:2.79
-S1:2.72
-P:2.96
-R1:3.00
+S5:2.89
+S4:2.87
+S3:2.81
+S2:2.73
+S1:2.65
+P:2.95
+R1:2.97
 R2:3.03
-R3:3.07
-R4:3.14
+R3:3.05
+R4:3.13
 R5:3.21
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
@@ -45,16 +45,16 @@ SINYAL:SAT
 0,236:2.98
 0,382:2.97
 0,500:2.96
-0,618:2.96
+0,618:2.95
 0,786:2.94
-1,0(DIP):2.93
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+1,0(DIP):2.92
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-3,263.02
-PGC HAFTALIK:4,649.98
-PGC GUNLUK:338,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:1,447.51
+PGC HAFTALIK:3,923.51
+PGC GUNLUK:-2,47
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.39, ROA=-0.34, Net Marj=-3.29 → Zayıf
