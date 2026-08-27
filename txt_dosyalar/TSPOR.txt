@@ -1,60 +1,60 @@
-# Son Güncelleme: 26.08.2026 20:27:39
+# Son Güncelleme: 27.08.2026 20:38:17
 ===TSPOR===
-Analiz Tarihi: 26.08.2026
+Analiz Tarihi: 27.08.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,22
-KAPANIS:1,21
-GUN.F%:0,00
-G.DUSUK:1,18
-G.YUKSEK:1,25
-G.HACIM:785.869.998,00
-PGC8:5,63
+KAPANIS:1,25
+GUN.F%:3,31
+G.DUSUK:1,21
+G.YUKSEK:1,26
+G.HACIM:374.624.997,00
+PGC8:6,86
 ===NADARAYA WATSON===
 SINYAL:AL
-KAPANIS:1.21
-UST BANT:1.2733
-ALT BANT:1.0178
-FIYAT/BANT ORANI:75.23
+KAPANIS:1.25
+UST BANT:1.2972
+ALT BANT:1.0524
+FIYAT/BANT ORANI:80.71
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.21
-WT1:75.75
-WT2:69.28
-WT1-WT2:6.47
+KAPANIS:1.25
+WT1:77.33
+WT2:73.26
+WT1-WT2:4.07
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.18
-S4:1.14
-S3:1.11
-S2:1.04
-S1:0.97
-P:1.21
-R1:1.25
-R2:1.28
-R3:1.32
-R4:1.39
-R5:1.46
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.25
-0,236:1.23
-0,382:1.22
-0,500:1.21
-0,618:1.21
-0,786:1.19
-1,0(DIP):1.18
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+S5:1.22
+S4:1.19
+S3:1.17
+S2:1.12
+S1:1.07
+P:1.24
+R1:1.27
+R2:1.29
+R3:1.32
+R4:1.37
+R5:1.42
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):1.26
+0,236:1.25
+0,382:1.24
+0,500:1.23
+0,618:1.23
+0,786:1.22
+1,0(DIP):1.21
+SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:50,305.93
-PGC HAFTALIK:29,219.93
-PGC GUNLUK:5,63
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+PGC AYLIK:45,173.79
+PGC HAFTALIK:-1,125.21
+PGC GUNLUK:6,86
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.16, ROA=-0.08, Net Marj=-0.5 → Zayıf
