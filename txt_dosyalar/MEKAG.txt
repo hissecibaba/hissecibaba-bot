@@ -1,59 +1,60 @@
-# Son Güncelleme: 26.08.2026 20:25:00
+# Son Güncelleme: 27.08.2026 20:35:44
 ===MEKAG===
-Analiz Tarihi: 26.08.2026
+Analiz Tarihi: 27.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:3,05
-KAPANIS:3,03
-GUN.F%:0,00
-G.DUSUK:3,03
-G.YUKSEK:3,07
-G.HACIM:15.905.529,00
-PGC8:11,00
+ACILIS:2,99
+KAPANIS:3,04
+GUN.F%:0,33
+G.DUSUK:2,99
+G.YUKSEK:3,08
+G.HACIM:12.425.661,00
+PGC8:170,00
 ===NADARAYA WATSON===
 SINYAL:AL
-KAPANIS:3.03
-UST BANT:3.1257
-ALT BANT:2.8419
-FIYAT/BANT ORANI:66.27
+KAPANIS:3.04
+UST BANT:3.1487
+ALT BANT:2.8537
+FIYAT/BANT ORANI:63.15
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:3.03
-WT1:-8.35
-WT2:-23.27
-WT1-WT2:14.92
+KAPANIS:3.04
+WT1:-3.08
+WT2:-13.83
+WT1-WT2:10.75
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:3.02
-S4:3.00
-S3:2.98
-S2:2.94
-S1:2.90
-P:3.04
-R1:3.06
-R2:3.08
-R3:3.10
-R4:3.14
-R5:3.18
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):3.07
+S5:2.99
+S4:2.95
+S3:2.90
+S2:2.81
+S1:2.72
+P:3.04
+R1:3.08
+R2:3.13
+R3:3.17
+R4:3.26
+R5:3.35
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):3.08
 0,236:3.06
 0,382:3.05
-0,500:3.05
-0,618:3.05
-0,786:3.04
-1,0(DIP):3.03
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+0,500:3.04
+0,618:3.02
+0,786:3.01
+1,0(DIP):2.99
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-7,081.09
-PGC HAFTALIK:115.9100000000000811,00
-PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+PGC AYLIK:-7,328.09
+PGC HAFTALIK:1,140.91
+PGC GUNLUK:170,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.08, ROA=-0.04, Net Marj=-0.04 → Zayıf
