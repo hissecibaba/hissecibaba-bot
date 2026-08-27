@@ -1,59 +1,59 @@
-# Son Güncelleme: 26.08.2026 20:27:41
+# Son Güncelleme: 27.08.2026 20:38:20
 ===TUKAS===
-Analiz Tarihi: 26.08.2026
+Analiz Tarihi: 27.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,00
-KAPANIS:2,03
-GUN.F%:1,50
-G.DUSUK:2,00
+ACILIS:2,04
+KAPANIS:2,02
+GUN.F%:-0,49
+G.DUSUK:2,02
 G.YUKSEK:2,05
-G.HACIM:98.629.309,00
-PGC8:7,19
+G.HACIM:68.419.561,00
+PGC8:-2,25
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:2.03
-UST BANT:2.0460
-ALT BANT:1.9787
-FIYAT/BANT ORANI:76.25
+SINYAL:AL
+KAPANIS:2.02
+UST BANT:2.0454
+ALT BANT:1.9854
+FIYAT/BANT ORANI:57.60
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.03
-WT1:-7.51
-WT2:-17.11
-WT1-WT2:9.6
+KAPANIS:2.02
+WT1:-1.4
+WT2:-10.25
+WT1-WT2:8.85
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:2.00
-S4:1.98
-S3:1.95
-S2:1.90
-S1:1.85
-P:2.03
-R1:2.05
-R2:2.08
-R3:2.10
-R4:2.15
-R5:2.20
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
+S5:2.01
+S4:2.00
+S3:1.98
+S2:1.95
+S1:1.92
+P:2.03
+R1:2.04
+R2:2.06
+R3:2.07
+R4:2.10
+R5:2.13
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
 0,0(TEPE):2.05
 0,236:2.04
-0,382:2.03
-0,500:2.02
-0,618:2.02
-0,786:2.01
-1,0(DIP):2.00
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+0,382:2.04
+0,500:2.04
+0,618:2.03
+0,786:2.03
+1,0(DIP):2.02
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:9,837.53
-PGC HAFTALIK:4,203.5300000000017,19
-PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:5,625.28
+PGC HAFTALIK:3,890.2799999999997-2,25
+PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.05, ROA=-0.03, Net Marj=-0.08 → Zayıf
