@@ -1,60 +1,59 @@
-# Son Güncelleme: 27.08.2026 20:38:14
+# Son Güncelleme: 28.08.2026 20:22:23
 ===TRILC===
-Analiz Tarihi: 27.08.2026
+Analiz Tarihi: 28.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,13
+ACILIS:1,12
 KAPANIS:1,12
-GUN.F%:-0,88
+GUN.F%:0,00
 G.DUSUK:1,12
-G.YUKSEK:1,13
-G.HACIM:4.987.835,00
-PGC8:53,00
+G.YUKSEK:1,12
+G.HACIM:6.359.681,00
+PGC8:-229,00
 ===NADARAYA WATSON===
 SINYAL:SAT
 KAPANIS:1.12
-UST BANT:1.1675
-ALT BANT:1.1156
-FIYAT/BANT ORANI:8.43
+UST BANT:1.1653
+ALT BANT:1.1060
+FIYAT/BANT ORANI:23.54
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
 KAPANIS:1.12
-WT1:-47.35
-WT2:-44.15
-WT1-WT2:-3.2
+WT1:-49.53
+WT2:-45.77
+WT1-WT2:-3.75
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
+SINYAL:1.12
 S5:1.12
-S4:1.11
-S3:1.11
-S2:1.10
-S1:1.09
+S4:1.12
+S3:1.12
+S2:1.12
+S1:1.12
 P:1.12
-R1:1.13
-R2:1.13
-R3:1.14
-R4:1.15
-R5:1.16
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+R1:1.12
+R2:1.12
+R3:1.12
+R4:1.12
+R5:Pivot analizi tutarlı bir sonuç vermemektedir.
 ===FİBO NOKTALARI===
-SINYAL:SAT
-0,0(TEPE):1.13
-0,236:1.13
-0,382:1.13
+SINYAL:TUT
+0,0(TEPE):1.12
+0,236:1.12
+0,382:1.12
 0,500:1.12
 0,618:1.12
 0,786:1.12
 1,0(DIP):1.12
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+SINYAL ACIKLAMASI:Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-3,826.0
-PGC HAFTALIK:-645.0
-PGC GUNLUK:53,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-2,728.0
+PGC HAFTALIK:-840.0
+PGC GUNLUK:-229,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=0.42, ROA=0.1, Net Marj=0.15 → Güçlü
