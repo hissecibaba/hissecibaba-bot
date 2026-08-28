@@ -1,59 +1,59 @@
-# Son Güncelleme: 26.08.2026 20:21:12
+# Son Güncelleme: 28.08.2026 20:16:31
 ===CANTE===
-Analiz Tarihi: 26.08.2026
+Analiz Tarihi: 28.08.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:1,22
-KAPANIS:1,21
-GUN.F%:0,00
-G.DUSUK:1,20
-G.YUKSEK:1,22
-G.HACIM:164.973.084,00
-PGC8:5,64
+KAPANIS:1,30
+GUN.F%:7,44
+G.DUSUK:1,21
+G.YUKSEK:1,33
+G.HACIM:1.363.354.114,00
+PGC8:44,77
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:1.21
-UST BANT:1.2355
-ALT BANT:1.1952
-FIYAT/BANT ORANI:36.74
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:TUT
+KAPANIS:1.30
+UST BANT:1.2736
+ALT BANT:1.1873
+FIYAT/BANT ORANI:130.64
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.21
-WT1:-6.11
-WT2:-8.31
-WT1-WT2:2.19
+KAPANIS:1.3
+WT1:12.13
+WT2:-1.45
+WT1-WT2:13.58
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:1.20
-S4:1.19
-S3:1.18
-S2:1.16
-S1:1.14
-P:1.21
-R1:1.22
-R2:1.23
-R3:1.24
-R4:1.26
-R5:1.28
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.22
-0,236:1.22
-0,382:1.21
-0,500:1.21
-0,618:1.21
-0,786:1.20
-1,0(DIP):1.20
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+S5:1.23
+S4:1.16
+S3:1.11
+S2:0.99
+S1:0.87
+P:1.28
+R1:1.35
+R2:1.40
+R3:1.47
+R4:1.59
+R5:1.71
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):1.33
+0,236:1.30
+0,382:1.28
+0,500:1.27
+0,618:1.26
+0,786:1.24
+1,0(DIP):1.21
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:42,583.05
-PGC HAFTALIK:11,382.05
-PGC GUNLUK:5,64
+PGC AYLIK:41,963.99
+PGC HAFTALIK:1,527.99
+PGC GUNLUK:44,77
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
