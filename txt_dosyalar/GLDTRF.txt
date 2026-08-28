@@ -1,52 +1,52 @@
-# Son Güncelleme: 27.08.2026 20:33:44
+# Son Güncelleme: 28.08.2026 20:18:06
 ===GLDTRF===
-Analiz Tarihi: 27.08.2026
+Analiz Tarihi: 28.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:600,50
-KAPANIS:602,00
-GUN.F%:0,00
-G.DUSUK:595,00
-G.YUKSEK:602,00
-G.HACIM:91.918.726,00
+ACILIS:590,25
+KAPANIS:593,00
+GUN.F%:-1,50
+G.DUSUK:586,25
+G.YUKSEK:601,75
+G.HACIM:458.116.779,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:602.00
-UST BANT:620.6245
-ALT BANT:577.7495
-FIYAT/BANT ORANI:56.56
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:593.00
+UST BANT:614.9104
+ALT BANT:584.0354
+FIYAT/BANT ORANI:29.04
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
-SINYAL:TUT
-KAPANIS:602.0
-WT1:65.15
-WT2:67.34
-WT1-WT2:-2.2
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+SINYAL:SAT
+KAPANIS:593.0
+WT1:60.86
+WT2:65.55
+WT1-WT2:-4.68
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi. Tepeden güçlü dönüş sinyali.
 ===PİVOT NOKTALARI===
-SINYAL:597.33
-S5:592.67
-S4:590.33
-S3:583.33
-S2:576.33
-S1:599.67
-P:604.33
-R1:606.67
-R2:611.33
-R3:618.33
-R4:625.33
-R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:585.58
+S5:578.17
+S4:570.08
+S3:554.58
+S2:539.08
+S1:593.67
+P:601.08
+R1:609.17
+R2:616.58
+R3:632.08
+R4:647.58
+R5:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:602.00
-0,0(TEPE):600.35
-0,236:599.33
-0,382:598.50
-0,500:597.67
-0,618:596.50
-0,786:595.00
-1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+SINYAL:601.75
+0,0(TEPE):598.09
+0,236:595.83
+0,382:594.00
+0,500:592.17
+0,618:589.57
+0,786:586.25
+1,0(DIP):Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
