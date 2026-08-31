@@ -1,60 +1,59 @@
-# Son Güncelleme: 27.08.2026 20:35:48
+# Son Güncelleme: 31.08.2026 20:30:03
 ===METRO===
-Analiz Tarihi: 27.08.2026
+Analiz Tarihi: 31.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:8,93
-KAPANIS:8,65
-GUN.F%:-2,81
-G.DUSUK:8,65
-G.YUKSEK:9,05
-G.HACIM:63.199.273,00
-PGC8:-4,80
+ACILIS:8,71
+KAPANIS:8,77
+GUN.F%:0,69
+G.DUSUK:8,59
+G.YUKSEK:9,00
+G.HACIM:90.529.045,00
+PGC8:3,41
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:8.65
-UST BANT:8.8899
-ALT BANT:8.5499
-FIYAT/BANT ORANI:29.44
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:8.77
+UST BANT:8.8628
+ALT BANT:8.5843
+FIYAT/BANT ORANI:66.68
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:8.65
-WT1:23.58
-WT2:20.17
-WT1-WT2:3.41
+KAPANIS:8.77
+WT1:23.06
+WT2:22.4
+WT1-WT2:0.66
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:8.52
+S5:8.57
 S4:8.38
-S3:8.12
-S2:7.72
-S1:7.32
-P:8.78
-R1:8.92
-R2:9.18
-R3:9.32
-R4:9.72
-R5:10.12
+S3:8.16
+S2:7.75
+S1:7.34
+P:8.79
+R1:8.98
+R2:9.20
+R3:9.39
+R4:9.80
+R5:10.21
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):9.05
-0,236:8.96
-0,382:8.90
-0,500:8.85
-0,618:8.80
-0,786:8.74
-1,0(DIP):8.65
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+0,0(TEPE):9.00
+0,236:8.90
+0,382:8.84
+0,500:8.79
+0,618:8.75
+0,786:8.68
+1,0(DIP):8.59
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:772.97
-PGC HAFTALIK:1,914.97
-PGC GUNLUK:-4,80
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:7,032.2199999999991,012.47
+PGC HAFTALIK:3,41
+PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.2, ROA=0.2, Net Marj=11.19 → Güçlü
