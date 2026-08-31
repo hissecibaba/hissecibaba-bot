@@ -1,59 +1,60 @@
-# Son Güncelleme: 28.08.2026 20:20:24
+# Son Güncelleme: 31.08.2026 20:30:21
 ===NIBAS===
-Analiz Tarihi: 28.08.2026
+Analiz Tarihi: 31.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:4,34
-KAPANIS:4,40
-GUN.F%:-1,79
-G.DUSUK:4,20
-G.YUKSEK:4,82
-G.HACIM:320.276.100,00
-PGC8:935,00
+ACILIS:4,41
+KAPANIS:4,06
+GUN.F%:-7,73
+G.DUSUK:4,02
+G.YUKSEK:4,47
+G.HACIM:102.411.658,00
+PGC8:1,68
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:4.40
-UST BANT:4.9597
-ALT BANT:3.3899
-FIYAT/BANT ORANI:64.34
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:4.06
+UST BANT:4.8413
+ALT BANT:3.5704
+FIYAT/BANT ORANI:38.52
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:4.4
-WT1:12.46
-WT2:-2.99
-WT1-WT2:15.45
+KAPANIS:4.06
+WT1:13.32
+WT2:6.16
+WT1-WT2:7.16
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:4.13
-S4:3.85
-S3:3.51
-S2:2.89
-S1:2.27
-P:4.47
-R1:4.75
-R2:5.09
-R3:5.37
-R4:5.99
-R5:6.61
+S5:3.90
+S4:3.73
+S3:3.45
+S2:3.00
+S1:2.55
+P:4.18
+R1:4.35
+R2:4.63
+R3:4.80
+R4:5.25
+R5:5.70
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):4.82
-0,236:4.67
-0,382:4.58
-0,500:4.51
-0,618:4.44
-0,786:4.33
-1,0(DIP):4.20
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+0,0(TEPE):4.47
+0,236:4.36
+0,382:4.30
+0,500:4.24
+0,618:4.19
+0,786:4.12
+1,0(DIP):4.02
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:-1,622.26000000000021,860.74
-PGC HAFTALIK:935,00
-PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+PGC AYLIK:-2,914.58
+PGC HAFTALIK:1,513.42
+PGC GUNLUK:1,68
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-1.14, ROA=-1.0, Net Marj=-2.51 → Zayıf
