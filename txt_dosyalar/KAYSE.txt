@@ -1,60 +1,59 @@
-# Son Güncelleme: 28.08.2026 20:19:06
+# Son Güncelleme: 31.08.2026 20:28:55
 ===KAYSE===
-Analiz Tarihi: 28.08.2026
+Analiz Tarihi: 31.08.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:4,20
-KAPANIS:4,15
-GUN.F%:-1,19
-G.DUSUK:4,13
-G.YUKSEK:4,22
-G.HACIM:28.356.774,00
-PGC8:-904,00
+ACILIS:4,15
+KAPANIS:4,21
+GUN.F%:1,45
+G.DUSUK:4,07
+G.YUKSEK:4,26
+G.HACIM:63.742.345,00
+PGC8:1,81
 ===NADARAYA WATSON===
 SINYAL:AL
-KAPANIS:4.15
-UST BANT:4.3447
-ALT BANT:3.9140
-FIYAT/BANT ORANI:54.80
+KAPANIS:4.21
+UST BANT:4.3008
+ALT BANT:4.0169
+FIYAT/BANT ORANI:68.01
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:4.15
-WT1:16.77
-WT2:8.84
-WT1-WT2:7.94
+KAPANIS:4.21
+WT1:20.02
+WT2:13.89
+WT1-WT2:6.13
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:4.11
-S4:4.08
-S3:4.02
-S2:3.93
-S1:3.84
-P:4.17
-R1:4.20
-R2:4.26
-R3:4.29
-R4:4.38
-R5:4.47
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):4.22
-0,236:4.20
+S5:4.10
+S4:3.99
+S3:3.91
+S2:3.72
+S1:3.53
+P:4.18
+R1:4.29
+R2:4.37
+R3:4.48
+R4:4.67
+R5:4.86
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):4.26
+0,236:4.22
 0,382:4.19
 0,500:4.17
-0,618:4.16
-0,786:4.15
-1,0(DIP):4.13
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+0,618:4.14
+0,786:4.11
+1,0(DIP):4.07
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:-4,549.46
-PGC HAFTALIK:-773.46
-PGC GUNLUK:-904,00
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:-2,938.65
+PGC HAFTALIK:-770.61000000000011,81
+PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.1, ROA=-0.06, Net Marj=-0.19 → Zayıf
