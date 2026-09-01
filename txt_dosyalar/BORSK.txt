@@ -1,60 +1,59 @@
-# Son Güncelleme: 28.08.2026 20:16:18
+# Son Güncelleme: 01.09.2026 19:33:35
 ===BORSK===
-Analiz Tarihi: 28.08.2026
+Analiz Tarihi: 01.09.2026
 ===GÜNLÜK TEKNİK VERİ===
 ACILIS:6,15
-KAPANIS:6,18
-GUN.F%:0,49
-G.DUSUK:6,13
-G.YUKSEK:6,24
-G.HACIM:19.565.609,00
-PGC8:314,00
+KAPANIS:6,38
+GUN.F%:3,91
+G.DUSUK:6,15
+G.YUKSEK:6,56
+G.HACIM:86.656.160,00
+PGC8:1,94
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:6.18
-UST BANT:6.4159
-ALT BANT:6.0976
-FIYAT/BANT ORANI:25.89
-TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:6.38
+UST BANT:6.4200
+ALT BANT:6.0650
+FIYAT/BANT ORANI:88.73
+TREND YONU:Yükseliş
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:6.18
-WT1:25.64
-WT2:32.47
-WT1-WT2:-6.83
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:6.38
+WT1:27.95
+WT2:26.78
+WT1-WT2:1.18
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:6.13
-S4:6.07
-S3:6.02
-S2:5.91
-S1:5.80
-P:6.18
-R1:6.24
-R2:6.29
-R3:6.35
-R4:6.46
-R5:6.57
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):6.24
-0,236:6.21
-0,382:6.20
-0,500:6.19
-0,618:6.17
-0,786:6.15
-1,0(DIP):6.13
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+S5:6.17
+S4:5.95
+S3:5.76
+S2:5.35
+S1:4.94
+P:6.36
+R1:6.58
+R2:6.77
+R3:6.99
+R4:7.40
+R5:7.81
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
+0,0(TEPE):6.56
+0,236:6.46
+0,382:6.40
+0,500:6.36
+0,618:6.31
+0,786:6.24
+1,0(DIP):6.15
+SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:6,136.51
-PGC HAFTALIK:767.51
-PGC GUNLUK:314,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+PGC AYLIK:4,142.45
+PGC HAFTALIK:282.490000000000071,94
+PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=0.0, ROA=0.0, Net Marj=0.0 → Zayıf
