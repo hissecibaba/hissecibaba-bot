@@ -1,51 +1,51 @@
-# Son Güncelleme: 31.08.2026 20:25:10
+# Son Güncelleme: 01.09.2026 19:32:54
 ===ATPAYF2===
-Analiz Tarihi: 31.08.2026
+Analiz Tarihi: 01.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:0,39
-KAPANIS:0,41
-GUN.F%:5,13
-G.DUSUK:0,39
-G.YUKSEK:0,42
-G.HACIM:2.813.149,00
+ACILIS:0,43
+KAPANIS:0,43
+GUN.F%:4,88
+G.DUSUK:0,42
+G.YUKSEK:0,45
+G.HACIM:2.890.650,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:0.41
-UST BANT:0.4095
-ALT BANT:0.3398
-FIYAT/BANT ORANI:100.68
+SINYAL:AL
+KAPANIS:0.43
+UST BANT:0.4358
+ALT BANT:0.3386
+FIYAT/BANT ORANI:94.00
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
-SINYAL:0.41
-KAPANIS:-34.3
-WT1:-43.62
-WT2:9.33
+SINYAL:0.43
+KAPANIS:-23.02
+WT1:-37.16
+WT2:14.14
 WT1-WT2:Yükseliş
 KESİSİM YONU:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:0.39
-S5:0.38
-S4:0.36
-S3:0.33
-S2:0.30
-S1:0.41
-P:0.42
-R1:0.44
-R2:0.45
-R3:0.48
-R4:0.51
-R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:0.42
-0,0(TEPE):0.41
-0,236:0.41
-0,382:0.41
-0,500:0.40
-0,618:0.40
-0,786:0.39
-1,0(DIP):Güçlü direnç aşıldı. Pozisyonunu koru.
+S5:0.40
+S4:0.39
+S3:0.36
+S2:0.33
+S1:0.43
+P:0.45
+R1:0.46
+R2:0.48
+R3:0.51
+R4:0.54
+R5:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:0.45
+0,0(TEPE):0.44
+0,236:0.44
+0,382:0.43
+0,500:0.43
+0,618:0.43
+0,786:0.42
+1,0(DIP):Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
