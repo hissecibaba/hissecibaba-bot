@@ -1,60 +1,58 @@
-# Son Güncelleme: 02.09.2026 20:00:07
+# Son Güncelleme: 03.09.2026 20:42:04
 ===VESTL===
-Analiz Tarihi: 02.09.2026
+Analiz Tarihi: 03.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:22,76
-KAPANIS:24,86
-GUN.F%:10,00
-G.DUSUK:22,40
-G.YUKSEK:24,86
-G.HACIM:484.166.332,00
-PGC8:14,85
+ACILIS:25,76
+KAPANIS:24,06
+GUN.F%:-3,22
+G.DUSUK:24,00
+G.YUKSEK:26,44
+G.HACIM:939.778.048,00
+PGC8:-5,19
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:24.86
-UST BANT:24.4503
-ALT BANT:21.3500
-FIYAT/BANT ORANI:113.22
+SINYAL:AL
+KAPANIS:24.06
+UST BANT:25.1565
+ALT BANT:21.2950
+FIYAT/BANT ORANI:71.60
 TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:24.86
-WT1:10.13
-WT2:-11.31
-WT1-WT2:21.44
+KAPANIS:24.06
+WT1:23.42
+WT2:2.86
+WT1-WT2:20.56
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:23.22
-S4:21.58
-S3:20.76
-S2:18.30
-S1:15.84
-P:24.04
-R1:25.68
-R2:26.50
-R3:28.14
-R4:30.60
-R5:33.06
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:23.23
+S4:22.39
+S3:20.79
+S2:18.35
+S1:15.91
+P:24.83
+R1:25.67
+R2:27.27
+R3:28.11
+R4:30.55
+R5:32.99
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):24.86
-0,236:24.28
-0,382:23.92
-0,500:23.63
-0,618:23.34
-0,786:22.93
-1,0(DIP):22.40
-SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+0,0(TEPE):26.44
+0,236:25.86
+0,382:25.51
+0,500:25.22
+0,618:24.93
+0,786:24.52
+1,0(DIP):24.00
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-6,183.46
-PGC HAFTALIK:246.67
-PGC GUNLUK:14,85
-SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-6,433.650000000001391.47999999999996-5,19
+PGC HAFTALIK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.89, ROA=-0.1, Net Marj=-0.21 → Zayıf
