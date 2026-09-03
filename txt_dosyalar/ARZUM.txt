@@ -1,59 +1,60 @@
-# Son Güncelleme: 02.09.2026 19:51:57
+# Son Güncelleme: 03.09.2026 20:33:26
 ===ARZUM===
-Analiz Tarihi: 02.09.2026
+Analiz Tarihi: 03.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,63
-KAPANIS:1,54
-GUN.F%:-5,52
-G.DUSUK:1,54
-G.YUKSEK:1,64
-G.HACIM:20.601.683,00
-PGC8:-812,00
+ACILIS:1,56
+KAPANIS:1,52
+GUN.F%:-1,30
+G.DUSUK:1,50
+G.YUKSEK:1,56
+G.HACIM:11.508.791,00
+PGC8:-1,19
 ===NADARAYA WATSON===
-SINYAL:BELİRSİZ
-KAPANIS:1.54
-UST BANT:1.6875
-ALT BANT:1.5631
-FIYAT/BANT ORANI:-18.61
+SINYAL:SAT
+KAPANIS:1.52
+UST BANT:1.7025
+ALT BANT:1.4998
+FIYAT/BANT ORANI:9.95
 TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.54
-WT1:-36.26
-WT2:-27.61
-WT1-WT2:-8.66
+KAPANIS:1.52
+WT1:-45.87
+WT2:-32.68
+WT1-WT2:-13.19
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:1.51
+S5:1.49
 S4:1.47
-S3:1.41
-S2:1.31
-S1:1.21
-P:1.57
-R1:1.61
-R2:1.67
-R3:1.71
-R4:1.81
-R5:1.91
+S3:1.43
+S2:1.37
+S1:1.31
+P:1.53
+R1:1.55
+R2:1.59
+R3:1.61
+R4:1.67
+R5:1.73
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.64
-0,236:1.62
-0,382:1.60
-0,500:1.59
-0,618:1.58
-0,786:1.56
-1,0(DIP):1.54
-SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
+0,0(TEPE):1.56
+0,236:1.55
+0,382:1.54
+0,500:1.53
+0,618:1.52
+0,786:1.51
+1,0(DIP):1.50
+SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:701,578.34
-PGC HAFTALIK:697,467.5399999999-812,00
-PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
+PGC AYLIK:702,342.15
+PGC HAFTALIK:697,959.35
+PGC GUNLUK:-1,19
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.0, ROA=-0.1, Net Marj=-0.07 → Zayıf
