@@ -1,59 +1,59 @@
-# Son Güncelleme: 02.09.2026 19:59:44
+# Son Güncelleme: 03.09.2026 20:41:38
 ===TSPOR===
-Analiz Tarihi: 02.09.2026
+Analiz Tarihi: 03.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,05
+ACILIS:1,02
 KAPANIS:1,02
-GUN.F%:-3,77
+GUN.F%:0,00
 G.DUSUK:1,01
-G.YUKSEK:1,05
-G.HACIM:293.804.327,00
-PGC8:-7,67
+G.YUKSEK:1,03
+G.HACIM:192.704.733,00
+PGC8:1,74
 ===NADARAYA WATSON===
 SINYAL:SAT
 KAPANIS:1.02
-UST BANT:1.2584
-ALT BANT:0.9751
-FIYAT/BANT ORANI:15.85
+UST BANT:1.2423
+ALT BANT:0.9370
+FIYAT/BANT ORANI:27.20
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
 KAPANIS:1.02
-WT1:36.51
-WT2:54.21
-WT1-WT2:-17.71
+WT1:26.75
+WT2:43.04
+WT1-WT2:-16.29
 KESİSİM YONU:Düşüş
 SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:1.00
-S4:0.99
-S3:0.96
-S2:0.92
-S1:0.88
-P:1.03
-R1:1.04
-R2:1.07
-R3:1.08
-R4:1.12
-R5:1.16
+S5:1.01
+S4:1.00
+S3:0.99
+S2:0.97
+S1:0.95
+P:1.02
+R1:1.03
+R2:1.04
+R3:1.05
+R4:1.07
+R5:1.09
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):1.05
-0,236:1.04
-0,382:1.03
-0,500:1.03
-0,618:1.03
-0,786:1.02
+0,0(TEPE):1.03
+0,236:1.03
+0,382:1.02
+0,500:1.02
+0,618:1.02
+0,786:1.01
 1,0(DIP):1.01
-SINYAL ACIKLAMASI:Fiyat çok önemli bir bölgede. Yükseliş trendi başlayabilir.
+SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:SAT
-PGC AYLIK:19,687.91
-PGC HAFTALIK:-3.0200000000000014-7,67
-PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+SINYAL:AL
+PGC AYLIK:22,165.65
+PGC HAFTALIK:-19.6500000000000021,74
+PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 25/12
 Karlılık 	: ROE=-0.16, ROA=-0.08, Net Marj=-0.5 → Zayıf
