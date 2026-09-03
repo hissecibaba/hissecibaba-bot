@@ -1,59 +1,59 @@
-# Son Güncelleme: 02.09.2026 19:57:21
+# Son Güncelleme: 03.09.2026 20:39:10
 ===MSGYO===
-Analiz Tarihi: 02.09.2026
+Analiz Tarihi: 03.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:5,75
-KAPANIS:5,78
-GUN.F%:1,76
-G.DUSUK:5,63
+ACILIS:5,79
+KAPANIS:5,50
+GUN.F%:-4,84
+G.DUSUK:5,50
 G.YUKSEK:5,81
-G.HACIM:7.954.306,00
-PGC8:312.000,00
+G.HACIM:9.354.940,00
+PGC8:134,00
 ===NADARAYA WATSON===
-SINYAL:TUT
-KAPANIS:5.78
-UST BANT:5.7745
-ALT BANT:5.6482
-FIYAT/BANT ORANI:104.38
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Üst bandın üstünde; aşırı alım sinyali. Trend aşağı dönerse satış düşün.
+SINYAL:BELİRSİZ
+KAPANIS:5.50
+UST BANT:5.7775
+ALT BANT:5.5667
+FIYAT/BANT ORANI:-31.67
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:5.78
-WT1:-50.66
-WT2:-53.26
-WT1-WT2:2.6
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:5.5
+WT1:-53.57
+WT2:-52.85
+WT1-WT2:-0.72
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:5.67
-S4:5.56
-S3:5.49
-S2:5.31
-S1:5.13
-P:5.74
-R1:5.85
-R2:5.92
-R3:6.03
-R4:6.21
-R5:6.39
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
+S5:5.40
+S4:5.29
+S3:5.09
+S2:4.78
+S1:4.47
+P:5.60
+R1:5.71
+R2:5.91
+R3:6.02
+R4:6.33
+R5:6.64
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
 0,0(TEPE):5.81
-0,236:5.77
-0,382:5.74
-0,500:5.72
-0,618:5.70
-0,786:5.67
-1,0(DIP):5.63
-SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
+0,236:5.74
+0,382:5.69
+0,500:5.65
+0,618:5.62
+0,786:5.57
+1,0(DIP):5.50
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:978,396.0
-PGC HAFTALIK:982,515.0
-PGC GUNLUK:312.000,00
+PGC AYLIK:979,821.0
+PGC HAFTALIK:982,478.0
+PGC GUNLUK:134,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
