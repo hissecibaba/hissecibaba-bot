@@ -1,59 +1,60 @@
-# Son Güncelleme: 02.09.2026 20:00:34
+# Son Güncelleme: 04.09.2026 20:33:57
 ===ZERGY===
-Analiz Tarihi: 02.09.2026
+Analiz Tarihi: 04.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:9,75
-KAPANIS:9,79
-GUN.F%:0,31
-G.DUSUK:9,55
-G.YUKSEK:9,91
-G.HACIM:111.413.322,00
-PGC8:2,92
+ACILIS:9,58
+KAPANIS:9,50
+GUN.F%:0,00
+G.DUSUK:9,11
+G.YUKSEK:9,58
+G.HACIM:95.195.647,00
+PGC8:1,00
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:9.79
-UST BANT:10.2672
-ALT BANT:9.1622
-FIYAT/BANT ORANI:56.81
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:SAT
+KAPANIS:9.50
+UST BANT:10.1522
+ALT BANT:9.1272
+FIYAT/BANT ORANI:36.37
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:9.79
-WT1:16.88
-WT2:15.24
-WT1-WT2:1.64
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:9.5
+WT1:11.65
+WT2:14.74
+WT1-WT2:-3.09
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
-S5:9.59
-S4:9.39
-S3:9.23
-S2:8.87
-S1:8.51
-P:9.75
-R1:9.95
-R2:10.11
-R3:10.31
-R4:10.67
-R5:11.03
+S5:9.21
+S4:8.93
+S3:8.74
+S2:8.27
+S1:7.80
+P:9.40
+R1:9.68
+R2:9.87
+R3:10.15
+R4:10.62
+R5:11.09
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):9.91
-0,236:9.83
-0,382:9.77
-0,500:9.73
-0,618:9.69
-0,786:9.63
-1,0(DIP):9.55
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+0,0(TEPE):9.58
+0,236:9.47
+0,382:9.40
+0,500:9.34
+0,618:9.29
+0,786:9.21
+1,0(DIP):9.11
+SINYAL ACIKLAMASI:Fiyat çok güçlü dirençlerin arasında. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:AL
-PGC AYLIK:8,797.58
-PGC HAFTALIK:-1,232.34000000000012,92
-PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+PGC AYLIK:8,290.91
+PGC HAFTALIK:-503.86
+PGC GUNLUK:1,00
+SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.1, ROA=0.03, Net Marj=6.56 → Zayıf
