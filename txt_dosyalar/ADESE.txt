@@ -1,60 +1,59 @@
-# Son Güncelleme: 04.09.2026 20:25:16
+# Son Güncelleme: 07.09.2026 20:16:51
 ===ADESE===
-Analiz Tarihi: 04.09.2026
+Analiz Tarihi: 07.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:0,84
+ACILIS:0,85
 KAPANIS:0,85
-GUN.F%:2,41
-G.DUSUK:0,83
+GUN.F%:0,00
+G.DUSUK:0,84
 G.YUKSEK:0,85
-G.HACIM:46.431.600,00
-PGC8:724,00
+G.HACIM:54.424.858,00
+PGC8:-587,00
 ===NADARAYA WATSON===
 SINYAL:AL
 KAPANIS:0.85
-UST BANT:0.8655
-ALT BANT:0.8327
-FIYAT/BANT ORANI:52.82
+UST BANT:0.8634
+ALT BANT:0.8332
+FIYAT/BANT ORANI:55.72
 TREND YONU:Yükseliş
 SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
 ===WAVETREND===
 SINYAL:TUT
 KAPANIS:0.85
-WT1:-44.04
-WT2:-37.75
-WT1-WT2:-6.29
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+WT1:-43.84
+WT2:-41.31
+WT1-WT2:-2.53
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
 SINYAL:SAT
 S5:0.84
-S4:0.82
-S3:0.82
-S2:0.80
-S1:0.78
-P:0.84
-R1:0.86
+S4:0.84
+S3:0.83
+S2:0.82
+S1:0.81
+P:0.85
+R1:0.85
 R2:0.86
-R3:0.88
-R4:0.90
-R5:0.92
+R3:0.86
+R4:0.87
+R5:0.88
 SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
 0,0(TEPE):0.85
 0,236:0.85
-0,382:0.84
+0,382:0.85
 0,500:0.84
 0,618:0.84
-0,786:0.83
-1,0(DIP):0.83
+0,786:0.84
+1,0(DIP):0.84
 SINYAL ACIKLAMASI:Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:1,673.46
-PGC HAFTALIK:730.51
-PGC GUNLUK:724,00
-SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:11,354.46
+PGC HAFTALIK:140.72000000000003-587,00
+PGC GUNLUK:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=-0.04, ROA=-0.02, Net Marj=-0.3 → Zayıf
