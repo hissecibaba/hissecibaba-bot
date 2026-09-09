@@ -1,59 +1,59 @@
-# Son Güncelleme: 03.09.2026 20:39:41
+# Son Güncelleme: 09.09.2026 21:33:51
 ===OYLUM===
-Analiz Tarihi: 03.09.2026
+Analiz Tarihi: 09.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:7,10
-KAPANIS:7,12
-GUN.F%:0,28
+ACILIS:7,05
+KAPANIS:7,02
+GUN.F%:-1,27
 G.DUSUK:7,00
-G.YUKSEK:7,20
-G.HACIM:2.512.171,00
-PGC8:-88,00
+G.YUKSEK:7,11
+G.HACIM:2.997.382,00
+PGC8:-134,00
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:7.12
-UST BANT:7.3126
-ALT BANT:7.0177
-FIYAT/BANT ORANI:34.68
+SINYAL:BELİRSİZ
+KAPANIS:7.02
+UST BANT:7.1663
+ALT BANT:7.0388
+FIYAT/BANT ORANI:-14.71
 TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:7.12
-WT1:-51.73
-WT2:-48.68
-WT1-WT2:-3.04
-KESİSİM YONU:Düşüş
-SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
+KAPANIS:7.02
+WT1:-53.62
+WT2:-52.21
+WT1-WT2:-1.4
+KESİSİM YONU:Yatay
+SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:7.01
-S4:6.91
-S3:6.81
-S2:6.61
-S1:6.41
-P:7.11
-R1:7.21
-R2:7.31
-R3:7.41
-R4:7.61
-R5:7.81
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
-===FİBO NOKTALARI===
 SINYAL:AL
-0,0(TEPE):7.20
-0,236:7.15
-0,382:7.12
-0,500:7.10
-0,618:7.08
-0,786:7.04
+S5:6.98
+S4:6.93
+S3:6.87
+S2:6.76
+S1:6.65
+P:7.04
+R1:7.09
+R2:7.15
+R3:7.20
+R4:7.31
+R5:7.42
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
+===FİBO NOKTALARI===
+SINYAL:SAT
+0,0(TEPE):7.11
+0,236:7.08
+0,382:7.07
+0,500:7.05
+0,618:7.04
+0,786:7.02
 1,0(DIP):7.00
-SINYAL ACIKLAMASI:Yükseliş trendi onaylandı. Alım fırsatı olabilir.
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:10,259.0
-PGC HAFTALIK:11,543.0
-PGC GUNLUK:-88,00
+PGC AYLIK:9,985.0
+PGC HAFTALIK:11,373.0
+PGC GUNLUK:-134,00
 SINYAL ACIKLAMA:AYLIK:Giriş var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
