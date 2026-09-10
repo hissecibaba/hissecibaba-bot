@@ -1,51 +1,52 @@
-# Son Güncelleme: 08.09.2026 21:20:54
+# Son Güncelleme: 10.09.2026 20:22:21
 ===APLIBF===
-Analiz Tarihi: 08.09.2026
+Analiz Tarihi: 10.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:46,79
-KAPANIS:48,60
-GUN.F%:4,45
-G.DUSUK:46,48
-G.YUKSEK:48,60
-G.HACIM:2.840.666,00
+ACILIS:51,82
+KAPANIS:46,80
+GUN.F%:-1,43
+G.DUSUK:46,36
+G.YUKSEK:51,82
+G.HACIM:1.458.728,00
 PGC8:0,00
 ===NADARAYA WATSON===
-SINYAL:0.0000
-KAPANIS:BELİRSİZ
-UST BANT:0.0000
-ALT BANT:0.00
-FIYAT/BANT ORANI:Yatay
-TREND YONU:Trend belirsiz; bekle ve trend netleşince pozisyon al.
+SINYAL:SAT
+KAPANIS:46.80
+UST BANT:48.6914
+ALT BANT:45.1925
+FIYAT/BANT ORANI:45.94
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:48.6
-WT1:52.78
-WT2:46.59
-WT1-WT2:6.19
+KAPANIS:46.8
+WT1:60.67
+WT2:53.9
+WT1-WT2:6.77
 KESİSİM YONU:Yükseliş
 SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:47.19
-S5:45.77
-S4:45.07
-S3:42.95
-S2:40.83
-S1:47.89
-P:49.31
-R1:50.01
-R2:51.43
-R3:53.55
-R4:55.67
-R5:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:44.83
+S5:42.87
+S4:39.37
+S3:33.91
+S2:28.45
+S1:48.33
+P:50.29
+R1:53.79
+R2:55.75
+R3:61.21
+R4:66.67
+R5:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:48.60
-0,0(TEPE):48.10
-0,236:47.79
-0,382:47.54
-0,500:47.29
-0,618:46.93
-0,786:46.48
-1,0(DIP):Fiyat en güçlü dirence çok yakın/üstünde. Risk yüksek.
+SINYAL:51.82
+0,0(TEPE):50.53
+0,236:49.73
+0,382:49.09
+0,500:48.45
+0,618:47.53
+0,786:46.36
+1,0(DIP):Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:TUT
 PGC AYLIK:0.0
