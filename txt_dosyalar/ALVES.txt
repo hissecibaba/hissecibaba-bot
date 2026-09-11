@@ -1,17 +1,17 @@
-# Son Güncelleme: 10.09.2026 20:22:17
+# Son Güncelleme: 11.09.2026 20:58:35
 ===ALVES===
-Analiz Tarihi: 10.09.2026
+Analiz Tarihi: 11.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:1,20
-KAPANIS:1,20
-GUN.F%:-9,77
-G.DUSUK:1,20
-G.YUKSEK:1,20
-G.HACIM:6.548.494,00
-PGC8:-341,00
+ACILIS:1,08
+KAPANIS:1,08
+GUN.F%:-10,00
+G.DUSUK:1,08
+G.YUKSEK:1,08
+G.HACIM:6.523.597,00
+PGC8:-385,00
 ===NADARAYA WATSON===
 SINYAL:BELİRSİZ
-KAPANIS:1.20
+KAPANIS:1.08
 UST BANT:nan
 ALT BANT:nan
 FIYAT/BANT ORANI:nan
@@ -19,40 +19,41 @@ TREND YONU:Yatay
 SINYAL ACIKLAMASI:Trend belirsiz; bekle ve trend netleşince pozisyon al.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:1.2
-WT1:-70.85
-WT2:-72.39
-WT1-WT2:1.54
+KAPANIS:1.08
+WT1:-71.88
+WT2:-71.57
+WT1-WT2:-0.31
 KESİSİM YONU:Yatay
 SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
 ===PİVOT NOKTALARI===
-SINYAL:1.20
-S5:1.20
-S4:1.20
-S3:1.20
-S2:1.20
-S1:1.20
-P:1.20
-R1:1.20
-R2:1.20
-R3:1.20
-R4:1.20
+SINYAL:1.08
+S5:1.08
+S4:1.08
+S3:1.08
+S2:1.08
+S1:1.08
+P:1.08
+R1:1.08
+R2:1.08
+R3:1.08
+R4:1.08
 R5:Pivot analizi tutarlı bir sonuç vermemektedir.
 ===FİBO NOKTALARI===
 SINYAL:TUT
-0,0(TEPE):1.20
-0,236:1.20
-0,382:1.20
-0,500:1.20
-0,618:1.20
-0,786:1.20
-1,0(DIP):1.20
+0,0(TEPE):1.08
+0,236:1.08
+0,382:1.08
+0,500:1.08
+0,618:1.08
+0,786:1.08
+1,0(DIP):1.08
 SINYAL ACIKLAMASI:Tepe ve dip eşit/yakın. Yatay piyasa: TUT.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-23,427.97
-PGC HAFTALIK:-300.05999999999995-341,00
-PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
+PGC AYLIK:-19,571.97
+PGC HAFTALIK:-688.03
+PGC GUNLUK:-385,00
+SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
 Karlılık 	: ROE=0.02, ROA=0.01, Net Marj=0.0 → Zayıf
@@ -60,6 +61,6 @@ Büyüme		: Net Satış Değ%=49.37, Net Kar Değ%=-53.31 → Çok yüksek
 Borçluluk	: KV.Borç/Top.Borç=0.96 → Orta risk
 Nakit Durumu	: Cari Oran=1.17 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=-0.43 → Belirsiz
+Ucuz mu?	: PEG=-0.39 → Belirsiz
 Karar   	: Uzak dur.
-Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-0.43 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=-0.39 → Belirsiz, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
