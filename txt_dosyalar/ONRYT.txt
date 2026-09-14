@@ -1,59 +1,58 @@
-# Son Güncelleme: 10.09.2026 20:28:05
+# Son Güncelleme: 14.09.2026 20:44:05
 ===ONRYT===
-Analiz Tarihi: 10.09.2026
+Analiz Tarihi: 14.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:60,50
-KAPANIS:62,00
-GUN.F%:2,48
-G.DUSUK:60,20
-G.YUKSEK:62,75
-G.HACIM:68.064.143,00
-PGC8:802,00
+ACILIS:15,21
+KAPANIS:14,49
+GUN.F%:-4,73
+G.DUSUK:14,24
+G.YUKSEK:15,41
+G.HACIM:59.867.949,00
+PGC8:-1,39
 ===NADARAYA WATSON===
-SINYAL:AL
-KAPANIS:62.00
-UST BANT:63.0282
-ALT BANT:56.4594
-FIYAT/BANT ORANI:84.35
-TREND YONU:Yükseliş
-SINYAL ACIKLAMASI:Yükseliş trendi devam ediyor; mevcut pozisyonlar için TUT önerisi.
+SINYAL:BELİRSİZ
+KAPANIS:14.49
+UST BANT:75.0238
+ALT BANT:28.1410
+FIYAT/BANT ORANI:-29.12
+TREND YONU:Düşüş
+SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
 ===WAVETREND===
 SINYAL:SAT
-KAPANIS:62.0
-WT1:4.89
-WT2:-9.02
-WT1-WT2:13.92
-KESİSİM YONU:Yükseliş
-SINYAL ACIKLAMASI:Fiyat yükseliş yönlü. Yükseliş teyit edildi.
+KAPANIS:14.49
+WT1:-21.6
+WT2:-3.07
+WT1-WT2:-18.53
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:SAT
-S5:60.55
-S4:59.10
-S3:58.00
-S2:55.45
-S1:52.90
-P:61.65
-R1:63.10
-R2:64.20
-R3:65.65
-R4:68.20
-R5:70.75
-SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+SINYAL:AL
+S5:14.02
+S4:13.54
+S3:12.85
+S2:11.68
+S1:10.51
+P:14.71
+R1:15.19
+R2:15.88
+R3:16.36
+R4:17.53
+R5:18.70
+SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
-SINYAL:AL
-0,0(TEPE):62.75
-0,236:62.15
-0,382:61.78
-0,500:61.48
-0,618:61.17
-0,786:60.75
-1,0(DIP):60.20
-SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
+SINYAL:SAT
+0,0(TEPE):15.41
+0,236:15.13
+0,382:14.96
+0,500:14.82
+0,618:14.69
+0,786:14.49
+1,0(DIP):14.24
+SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
-SINYAL:AL
-PGC AYLIK:-4,164.43
-PGC HAFTALIK:-340.5899999999999802,00
-PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Giriş var.
+SINYAL:SAT
+PGC AYLIK:-7,271.820000000001147.0200000000001 -1,39
+PGC HAFTALIK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/03
 Karlılık 	: ROE=-0.06, ROA=-0.05, Net Marj=-0.26 → Zayıf
