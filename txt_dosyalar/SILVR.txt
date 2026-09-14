@@ -1,46 +1,46 @@
-# Son Güncelleme: 11.09.2026 21:05:24
+# Son Güncelleme: 14.09.2026 20:45:18
 ===SILVR===
-Analiz Tarihi: 11.09.2026
+Analiz Tarihi: 14.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:2,18
-KAPANIS:2,16
-GUN.F%:-0,92
+ACILIS:2,17
+KAPANIS:2,18
+GUN.F%:0,93
 G.DUSUK:2,13
 G.YUKSEK:2,20
-G.HACIM:2.361.179,00
-PGC8:-290,00
+G.HACIM:3.339.930,00
+PGC8:-8,00
 ===NADARAYA WATSON===
 SINYAL:SAT
-KAPANIS:2.16
-UST BANT:2.2131
-ALT BANT:2.1577
-FIYAT/BANT ORANI:4.18
+KAPANIS:2.18
+UST BANT:2.2101
+ALT BANT:2.1575
+FIYAT/BANT ORANI:42.81
 TREND YONU:Düşüş
 SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:2.16
-WT1:-51.43
-WT2:-50.07
-WT1-WT2:-1.36
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:2.18
+WT1:-51.91
+WT2:-49.52
+WT1-WT2:-2.39
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
-SINYAL:AL
-S5:2.13
-S4:2.09
-S3:2.06
-S2:1.99
-S1:1.92
-P:2.16
-R1:2.20
-R2:2.23
-R3:2.27
-R4:2.34
-R5:2.41
-SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
-===FİBO NOKTALARI===
 SINYAL:SAT
+S5:2.14
+S4:2.10
+S3:2.07
+S2:2.00
+S1:1.93
+P:2.17
+R1:2.21
+R2:2.24
+R3:2.28
+R4:2.35
+R5:2.42
+SINYAL ACIKLAMASI:Fiyat direnç bölgesinde. Satış baskısı artabilir.
+===FİBO NOKTALARI===
+SINYAL:AL
 0,0(TEPE):2.20
 0,236:2.18
 0,382:2.17
@@ -48,12 +48,12 @@ SINYAL:SAT
 0,618:2.16
 0,786:2.14
 1,0(DIP):2.13
-SINYAL ACIKLAMASI:Fiyat önemli bir bölgede. Hacim/Kırılım takibi önerilir.
+SINYAL ACIKLAMASI:Güçlü direnç aşıldı. Pozisyonunu koru.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-954.0
-PGC HAFTALIK:-693.0
-PGC GUNLUK:-290,00
+PGC AYLIK:-1,022.0
+PGC HAFTALIK:-770.0
+PGC GUNLUK:-8,00
 SINYAL ACIKLAMA:AYLIK:Çıkış var. HAFTALIK:Çıkış var, alım önerilmez. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
