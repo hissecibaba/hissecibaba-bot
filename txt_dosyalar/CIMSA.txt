@@ -1,58 +1,58 @@
-# Son Güncelleme: 14.09.2026 20:40:01
+# Son Güncelleme: 15.09.2026 20:18:14
 ===CIMSA===
-Analiz Tarihi: 14.09.2026
+Analiz Tarihi: 15.09.2026
 ===GÜNLÜK TEKNİK VERİ===
-ACILIS:45,38
-KAPANIS:44,84
-GUN.F%:-1,80
-G.DUSUK:44,70
-G.YUKSEK:45,66
-G.HACIM:174.389.666,00
-PGC8:-5,29
+ACILIS:44,84
+KAPANIS:43,02
+GUN.F%:-4,06
+G.DUSUK:43,02
+G.YUKSEK:44,92
+G.HACIM:285.548.054,00
+PGC8:-9,90
 ===NADARAYA WATSON===
-SINYAL:SAT
-KAPANIS:44.84
-UST BANT:46.6959
-ALT BANT:43.7859
-FIYAT/BANT ORANI:36.22
+SINYAL:BELİRSİZ
+KAPANIS:43.02
+UST BANT:46.4713
+ALT BANT:43.2938
+FIYAT/BANT ORANI:-8.62
 TREND YONU:Düşüş
-SINYAL ACIKLAMASI:Düşüş trendi devam ediyor; pozisyon varsa satış düşün.
+SINYAL ACIKLAMASI:Alt bandın altında; dönüş ihtimali var — trend yukarıysa AL.
 ===WAVETREND===
 SINYAL:TUT
-KAPANIS:44.84
-WT1:-6.03
-WT2:-8.09
-WT1-WT2:2.06
-KESİSİM YONU:Yatay
-SINYAL ACIKLAMASI:Fiyat yatay seyirde. Kararsız bölge, pozisyon TUT.
+KAPANIS:43.02
+WT1:-16.87
+WT2:-9.24
+WT1-WT2:-7.63
+KESİSİM YONU:Düşüş
+SINYAL ACIKLAMASI:Fiyat düşüş yönlü. Düşüş teyit edildi.
 ===PİVOT NOKTALARI===
 SINYAL:AL
-S5:44.47
-S4:44.11
-S3:43.51
-S2:42.55
-S1:41.59
-P:45.07
-R1:45.43
-R2:46.03
-R3:46.39
-R4:47.35
-R5:48.31
+S5:42.39
+S4:41.75
+S3:40.49
+S2:38.59
+S1:36.69
+P:43.65
+R1:44.29
+R2:45.55
+R3:46.19
+R4:48.09
+R5:49.99
 SINYAL ACIKLAMASI:Fiyat destek bölgesinde. Alım fırsatı olabilir.
 ===FİBO NOKTALARI===
 SINYAL:SAT
-0,0(TEPE):45.66
-0,236:45.43
-0,382:45.29
-0,500:45.18
-0,618:45.07
-0,786:44.91
-1,0(DIP):44.70
+0,0(TEPE):44.92
+0,236:44.47
+0,382:44.19
+0,500:43.97
+0,618:43.75
+0,786:43.43
+1,0(DIP):43.02
 SINYAL ACIKLAMASI:Dip/Toplama bölgesi. Tepki alımları görülebilir.
 ===PARA GİRİŞ ÇIKIŞI===
 SINYAL:SAT
-PGC AYLIK:-24,698.4
-PGC HAFTALIK:31.000000000000227-5,29
+PGC AYLIK:-10,688.3
+PGC HAFTALIK:12.250000000000231-9,90
 PGC GUNLUK:AYLIK:Çıkış var. HAFTALIK:Giriş var, alım önerilir. GÜNLÜK:Çıkış var.
 ==TEMEL ANALİZ VERİSİ==
 Dönem		: 26/06
@@ -61,6 +61,6 @@ Büyüme		: Net Satış Değ%=-5.27, Net Kar Değ%=51.78 → Çok yüksek
 Borçluluk	: KV.Borç/Top.Borç=0.53 → Orta risk
 Nakit Durumu	: Cari Oran=0.88 → Borç durumu riskli
 Genel Risk	: Döviz Pozisyonu düşük, büyüme istikrarı düşük
-Ucuz mu?	: PEG=0.19 → Bedava
+Ucuz mu?	: PEG=0.18 → Bedava
 Karar   	: İzlemeye al.
-Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=0.19 → Bedava, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
+Temel Veri Özeti: Karlılık zayıf, Büyüme çok yüksek, Borçluluk orta riskli, Nakit Durumu borç durumu riskli, PEG=0.18 → Bedava, Genel Risk Döviz Pozisyonu düşük, büyüme istikrarı düşük.
